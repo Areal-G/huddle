@@ -47,7 +47,7 @@ const Support: React.VoidFunctionComponent = () => {
                   i18nKey="canHuddleDoAnswer"
                   components={{
                     a: (
-                      <a href="https://github.com/areal/Huddle/discussions" />
+                      <a href="https://github.com/areal/huddle/discussions" />
                     ),
                   }}
                 />
@@ -114,7 +114,7 @@ const Support: React.VoidFunctionComponent = () => {
                   t={t}
                   i18nKey="selfHostAnswer"
                   components={{
-                    a: <a href="https://github.com/areal/Huddle" />,
+                    a: <a href="https://github.com/areal/huddle" />,
                   }}
                 />
               </Disclosure.Panel>
@@ -132,7 +132,7 @@ const Support: React.VoidFunctionComponent = () => {
                   i18nKey="canYouHelpMeSetUpHuddleAnswer"
                   components={{
                     a: (
-                      <a href="https://github.com/areal/Huddle/discussions" />
+                      <a href="https://github.com/areal/huddle/discussions" />
                     ),
                   }}
                 />

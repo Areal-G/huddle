@@ -26,7 +26,7 @@ const Bonus: React.VoidFunctionComponent = () => {
           <h3 className="heading-sm">Open-source</h3>
           <div className="text text-base leading-relaxed">
             The codebase is fully open-source and{" "}
-            <a href="https://github.com/areal/Huddle">
+            <a href="https://github.com/areal/huddle">
               available on github
             </a>
             .
