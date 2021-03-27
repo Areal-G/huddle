@@ -34,6 +34,7 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
     <PlausibleProvider
       domain="huddle.dev"
       customDomain={process.env.PLAUSIBLE_DOMAIN}
+      trackOutboundLinks={true}
       selfHosted={true}
       enabled={!!process.env.PLAUSIBLE_DOMAIN}
     >
