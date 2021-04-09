@@ -26,6 +26,16 @@ const moduleExports = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/support",
+        destination: "https://support.huddle.dev",
+        permanent: true,
+      },
+    ];
+  },
+
   async rewrites() {
     return [
       {

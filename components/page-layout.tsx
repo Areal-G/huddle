@@ -47,19 +47,12 @@ const Menu: React.VoidFunctionComponent<{ className: string }> = ({
           Blog
         </a>
       </Link>
-      <Link href="/support">
-        <a
-          className={clsx(
-            "text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2",
-            {
-              "pointer-events-none font-bold text-gray-600":
-                pathname === "/support",
-            },
-          )}
-        >
-          Support
-        </a>
-      </Link>
+      <a
+        href="https://support.huddle.dev"
+        className="text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2"
+      >
+        Support
+      </a>
       <Link href="https://github.com/areal/huddle">
         <a className="text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2">
           <Github className="w-6" />
