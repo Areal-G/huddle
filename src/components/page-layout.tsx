@@ -28,7 +28,7 @@ const Menu: React.VoidFunctionComponent<{ className: string }> = ({
       <Link href="/">
         <a
           className={clsx(
-            "text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2",
+            "hover:text-primary-500 text-gray-400 transition-colors hover:no-underline hover:underline-offset-2",
             {
               "pointer-events-none font-bold text-gray-600":
                 pathname === "/home",
@@ -41,7 +41,7 @@ const Menu: React.VoidFunctionComponent<{ className: string }> = ({
       <Link href="https://blog.huddle.dev">
         <a
           className={clsx(
-            "text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2",
+            "hover:text-primary-500 text-gray-400 transition-colors hover:no-underline hover:underline-offset-2",
           )}
         >
           Blog
@@ -49,12 +49,12 @@ const Menu: React.VoidFunctionComponent<{ className: string }> = ({
       </Link>
       <a
         href="https://support.huddle.dev"
-        className="text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2"
+        className="hover:text-primary-500 text-gray-400 transition-colors hover:no-underline hover:underline-offset-2"
       >
         Support
       </a>
       <Link href="https://github.com/areal/huddle">
-        <a className="text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2">
+        <a className="hover:text-primary-500 text-gray-400 transition-colors hover:no-underline hover:underline-offset-2">
           <Github className="w-6" />
         </a>
       </Link>
@@ -76,7 +76,7 @@ const PageLayout: React.VoidFunctionComponent<PageLayoutProps> = ({
           <div className="relative inline-block">
             <Link href="/">
               <a>
-                <Logo className="w-40 text-indigo-500" alt="Huddle" />
+                <Logo className="text-primary-500 w-40" alt="Huddle" />
               </a>
             </Link>
             <span className="absolute -bottom-6 right-0 text-sm text-slate-400 transition-colors">
@@ -89,7 +89,7 @@ const PageLayout: React.VoidFunctionComponent<PageLayoutProps> = ({
           <Popover
             placement="left-start"
             trigger={
-              <button className="text-gray-400 transition-colors hover:text-indigo-500 hover:no-underline hover:underline-offset-2">
+              <button className="hover:text-primary-500 text-gray-400 transition-colors hover:no-underline hover:underline-offset-2">
                 <DotsVertical className="w-5" />
               </button>
             }
