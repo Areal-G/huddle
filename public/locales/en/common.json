@@ -1,3 +1,13 @@
 {
-  "appName": "Huddle"
+  "language": "Language",
+  "english": "English",
+  "german": "German",
+  "home": "Home",
+  "blog": "Blog",
+  "support": "Support",
+  "donate": "Donate",
+  "volunteerTranslator": "Help translate this site",
+  "starOnGithub": "Star us on Github",
+  "footerCredit": "Made by <a>@imareal</a>",
+  "footerSponsor": "This project is user-funded. Please consider supporting it by <a>donating</a>."
 }
