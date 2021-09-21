@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.9"
 services:
   huddle_db:
     image: postgres:14.2
@@ -7,15 +7,20 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   huddle:
     build:
       context: .
-      args:
-        - DATABASE_URL=postgres://postgres:postgres@huddle_db:5432/db?pgbouncer=true
     restart: always
     depends_on:
-      - huddle_db
+      huddle_db:
+        condition: service_healthy
     ports:
       - 3000:3000
     environment:
