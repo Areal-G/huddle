@@ -15,8 +15,7 @@ services:
       retries: 5
 
   huddle:
-    build:
-      context: .
+    image: areal/huddle:latest
     restart: always
     depends_on:
       huddle_db:
