@@ -36,9 +36,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
       enabled={!!process.env.PLAUSIBLE_DOMAIN}
     >
       <DefaultSeo
-        canonical={absoluteUrl()}
         openGraph={{
           siteName: "Huddle",
+          type: "website",
           url: absoluteUrl(),
           images: [
             {
@@ -49,6 +49,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
               type: "image/png",
             },
           ],
+        }}
+        facebook={{
+          appId: "920386682263077",
         }}
       />
       <Head>
