@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   huddle_db:
     image: postgres:14.2
