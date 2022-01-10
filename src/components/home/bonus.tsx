@@ -33,7 +33,12 @@ const Bonus: React.VoidFunctionComponent = () => {
               t={t}
               i18nKey={"openSourceDescription"}
               components={{
-                a: <a href="https://github.com/areal/huddle" />,
+                a: (
+                  <a
+                    className="text-link"
+                    href="https://github.com/areal/huddle"
+                  />
+                ),
               }}
             />
           </div>
