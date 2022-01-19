@@ -1,5 +1,25 @@
 # Changelog
 
+<a name="2.1.1"></a>
+
+## 2.1.1 (2023-02-08)
+
+### Changed
+
+- 💄 Increase participant page max width [[4811fbe](https://github.com/areal/Huddle/commit/4811fbe1ddd0250a74074404309fb01cdca0f2d4)]
+- 💄 Bring back showing the day of the week for date options ([#499](https://github.com/areal/Huddle/issues/499)) [[0d805c8](https://github.com/areal/Huddle/commit/0d805c8316a08cc5a85f9dd88f5606fb09738399)]
+
+### Fixed
+
+- ✏️ Fix typo in release workflow [[3d8a8e8](https://github.com/areal/Huddle/commit/3d8a8e868a616297dfbe6d11c697dc794bf30ace)]
+
+### Miscellaneous
+
+- 👷 Update CI badge to show status of main branch [[f965d14](https://github.com/areal/Huddle/commit/f965d14ee044c6771406bbc2bc99d61d3de8af6e)]
+- 👷 Trigger CI when we push to main [[13726f4](https://github.com/areal/Huddle/commit/13726f46d69bf7dedc85b357f8b60e7257e8a5fb)]
+- 👷 Add trigger to deploy on version release [[e0dfb52](https://github.com/areal/Huddle/commit/e0dfb527ab81385ca05ed6e7dd0acdca0ead9b7e)]
+- 📦 Bump tailwind dependencies ([#497](https://github.com/areal/Huddle/issues/497)) [[fc7a2b8](https://github.com/areal/Huddle/commit/fc7a2b8390c7980cb01dd699269f678f701c7489)]
+
 <a name="2.1.0"></a>
 
 ## 2.1.0 (2023-02-08)
