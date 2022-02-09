@@ -16,6 +16,7 @@ services:
   huddle:
     build:
       context: .
+      dockerfile: ./apps/web/Dockerfile
     restart: always
     depends_on:
       huddle_db:

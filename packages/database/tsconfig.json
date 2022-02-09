@@ -1,0 +1,4 @@
+{
+  "extends": "@huddle/tsconfig/base.json",
+  "includes": ["**/*.ts"]
+}
