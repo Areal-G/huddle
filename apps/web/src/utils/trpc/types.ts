@@ -1,4 +1,4 @@
-import { Option, User } from "@prisma/client";
+import { Option, User } from "@huddle/database";
 
 export type GetPollApiResponse = {
   id: string;

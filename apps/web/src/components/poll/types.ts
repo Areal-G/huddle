@@ -1,4 +1,4 @@
-import { VoteType } from "@prisma/client";
+import { VoteType } from "@huddle/database";
 
 export interface ParticipantForm {
   votes: Array<
