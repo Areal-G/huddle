@@ -1,13 +1,12 @@
 # Changelog
 
-<a name="2.2.0"></a>
+<a name="2.2.1"></a>
 
-## 2.2.0 (2023-03-06)
-
-In this release, participants can now enter their email address to receive an edit link. This allows participants to edit their response from multiple devices without being tied to a single guest session and without having to register or log in.
+## 2.2.1 (2023-03-06)
 
 ### Added
 
+- 👷‍♂️ Fix docker image build workflow [[c31c5ab](https://github.com/areal/Huddle/commit/c31c5abe769231378d9ba72a189e43ea166958e6)]
 - ✨ Allow participant to enter email to receive edit link ([#534](https://github.com/areal/Huddle/issues/534)) [[0ac3c95](https://github.com/areal/Huddle/commit/0ac3c95755f9eda53b5af09259b710f6f231910e)]
 - ✨ Updated workflow for adding and updating participants ([#500](https://github.com/areal/Huddle/issues/500)) [[5d7db84](https://github.com/areal/Huddle/commit/5d7db848b81996ba98763979fe0bd7e13997e29b)]
 
