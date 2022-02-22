@@ -1,5 +1,18 @@
 # Changelog
 
+<a name="2.3.1"></a>
+
+## 2.3.1 (2023-03-14)
+
+### Added
+
+- 📈 Include pollId when capturing events ([#555](https://github.com/areal/Huddle/issues/555)) [[d14a88e](https://github.com/areal/Huddle/commit/d14a88e9ebcf825769dfe97968e3b25479b1f931)]
+
+### Miscellaneous
+
+- 🌐 Update translations ([#554](https://github.com/areal/Huddle/issues/554)) [[b06341a](https://github.com/areal/Huddle/commit/b06341a9de660cdc0bd3c76d499d0370db78d511)]
+- 🔓 Allow SMTP server to be configured without auth ([#556](https://github.com/areal/Huddle/issues/556)) [[c6e68c4](https://github.com/areal/Huddle/commit/c6e68c407c50c96ad9b8d1461cd7468cfa3c6192)]
+
 <a name="2.3.0"></a>
 
 ## 2.3.0 (2023-03-13)
