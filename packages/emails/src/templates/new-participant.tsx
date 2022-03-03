@@ -12,14 +12,14 @@ export const NewParticipantEmail = ({
   title = "Untitled Poll",
   participantName = "Someone",
   pollUrl = "https://huddle.dev",
-  unsubscribeUrl = "https://huddle.dev",
+  disableNotificationsUrl = "https://huddle.dev",
 }: NewParticipantEmailProps) => {
   return (
     <NotificationEmail
       name={name}
       title={title}
       pollUrl={pollUrl}
-      unsubscribeUrl={unsubscribeUrl}
+      disableNotificationsUrl={disableNotificationsUrl}
       preview={`${participantName} has responded`}
     >
       <Text>

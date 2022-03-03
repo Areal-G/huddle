@@ -1,4 +1,4 @@
-import { absoluteUrl, preventWidows } from "@huddle/utils";
+import { absoluteUrl } from "@huddle/utils";
 
 import { EmailLayout } from "./components/email-layout";
 import {
@@ -6,7 +6,6 @@ import {
   Card,
   Heading,
   Link,
-  Section,
   SubHeadingText,
   Text,
 } from "./components/styled-components";

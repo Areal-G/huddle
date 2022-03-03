@@ -6,7 +6,7 @@
     "dev": "dotenv -- turbo dev",
     "start": "turbo run start --filter=@huddle/web...",
     "build": "turbo run build --filter=@huddle/web...",
-    "db:deploy": "turbo db:deploy",
+    "db:deploy": "prisma migrate deploy",
     "db:generate": "turbo db:generate",
     "db:migrate": "prisma migrate dev",
     "test": "yarn workspace @huddle/web test",
