@@ -1,7 +1,7 @@
 {
   "name": "huddle",
   "private": true,
-  "version": "2.6.0",
+  "version": "2.7.0",
   "scripts": {
     "dev": "dotenv -- turbo dev",
     "start": "turbo run start --filter=@huddle/web...",
@@ -19,9 +19,9 @@
     "packages/*"
   ],
   "devDependencies": {
+    "dotenv-cli": "^7.1.0",
     "prettier": "^2.8.4",
-    "turbo": "^1.8.3",
-    "dotenv-cli": "^7.1.0"
+    "turbo": "^1.8.5"
   },
   "engines": {
     "node": "16.x"
