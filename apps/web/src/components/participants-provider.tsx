@@ -1,8 +1,8 @@
+import { trpc } from "@huddle/backend";
 import { Participant, Vote, VoteType } from "@huddle/database";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 
-import { trpc } from "../utils/trpc";
 import FullPageLoader from "./full-page-loader";
 import { useRequiredContext } from "./use-required-context";
 

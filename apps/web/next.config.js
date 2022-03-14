@@ -13,7 +13,7 @@ const nextConfig = {
   i18n: i18n,
   productionBrowserSourceMaps: true,
   output: "standalone",
-  transpilePackages: ["@huddle/emails", "@huddle/database"],
+  transpilePackages: ["@huddle/backend"],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

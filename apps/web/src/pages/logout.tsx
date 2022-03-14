@@ -1,6 +1,5 @@
+import { withSessionSsr } from "@huddle/backend/next";
 import { NextPage } from "next";
-
-import { withSessionSsr } from "../utils/auth";
 
 const Page: NextPage = () => {
   return null;

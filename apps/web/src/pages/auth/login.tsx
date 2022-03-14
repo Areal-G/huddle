@@ -1,3 +1,9 @@
+import { LoginTokenPayload } from "@huddle/backend";
+import {
+  composeGetServerSideProps,
+  withSessionSsr,
+} from "@huddle/backend/next";
+import { decryptToken } from "@huddle/backend/session";
 import { prisma } from "@huddle/database";
 import clsx from "clsx";
 import { GetServerSideProps } from "next";
@@ -9,12 +15,6 @@ import React from "react";
 import CheckCircle from "@/components/icons/check-circle.svg";
 import { AuthLayout } from "@/components/layouts/auth-layout";
 import { Spinner } from "@/components/spinner";
-import {
-  composeGetServerSideProps,
-  decryptToken,
-  LoginTokenPayload,
-  withSessionSsr,
-} from "@/utils/auth";
 import { withPageTranslations } from "@/utils/with-page-translations";
 
 const defaultRedirectPath = "/profile";

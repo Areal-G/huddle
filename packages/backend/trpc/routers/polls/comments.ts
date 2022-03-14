@@ -1,11 +1,11 @@
 import { prisma } from "@huddle/database";
 import { sendEmail } from "@huddle/emails";
+import { absoluteUrl } from "@huddle/utils";
 import { z } from "zod";
 
-import { absoluteUrl } from "@/utils/absolute-url";
-import { createToken, DisableNotificationsPayload } from "@/utils/auth";
-
+import { createToken } from "../../../session";
 import { publicProcedure, router } from "../../trpc";
+import { DisableNotificationsPayload } from "../../types";
 
 export const comments = router({
   list: publicProcedure

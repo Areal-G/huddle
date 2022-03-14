@@ -1,10 +1,10 @@
 import { prisma } from "@huddle/database";
 import { sendEmail } from "@huddle/emails";
+import { absoluteUrl } from "@huddle/utils";
 import { TRPCError } from "@trpc/server";
 import dayjs from "dayjs";
 import { z } from "zod";
 
-import { absoluteUrl } from "../../utils/absolute-url";
 import { nanoid } from "../../utils/nanoid";
 import { possiblyPublicProcedure, publicProcedure, router } from "../trpc";
 import { comments } from "./polls/comments";

@@ -1,6 +1,5 @@
+import { trpc } from "@huddle/backend";
 import { useRouter } from "next/router";
-
-import { trpc } from "@/utils/trpc";
 
 export const usePollByAdmin = () => {
   const router = useRouter();
