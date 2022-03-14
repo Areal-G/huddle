@@ -1,5 +1,5 @@
 const path = require("path");
-const languages = require("./languages.json");
+const languages = require("@huddle/languages/languages.json");
 
 module.exports = {
   i18n: {

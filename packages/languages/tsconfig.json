@@ -1,0 +1,5 @@
+{
+  "extends": "@huddle/tsconfig/package.json",
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
