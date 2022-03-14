@@ -1,11 +1,11 @@
 import { trpc } from "@huddle/backend";
+import Exclamation from "@huddle/icons/exclamation.svg";
 import clsx from "clsx";
 import { Trans, useTranslation } from "next-i18next";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/button";
-import Exclamation from "@/components/icons/exclamation.svg";
 import { usePostHog } from "@/utils/posthog";
 
 const confirmText = "delete-me";

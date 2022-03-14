@@ -5,6 +5,7 @@ import {
 } from "@huddle/backend/next";
 import { decryptToken } from "@huddle/backend/session";
 import { prisma } from "@huddle/database";
+import Bell from "@huddle/icons/bell-crossed.svg";
 import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -12,7 +13,6 @@ import { Trans, useTranslation } from "next-i18next";
 import React from "react";
 import { useMount } from "react-use";
 
-import Bell from "@/components/icons/bell-crossed.svg";
 import { AuthLayout } from "@/components/layouts/auth-layout";
 import { Spinner } from "@/components/spinner";
 import { usePostHog } from "@/utils/posthog";

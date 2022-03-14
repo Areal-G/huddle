@@ -1,6 +1,5 @@
+import Chat from "@huddle/icons/chat.svg";
 import * as React from "react";
-
-import Chat from "@/components/icons/chat.svg";
 
 import { Button } from "./button";
 

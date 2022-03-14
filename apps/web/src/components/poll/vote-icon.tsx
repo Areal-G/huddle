@@ -1,11 +1,10 @@
 import { VoteType } from "@huddle/database";
+import CheckCircle from "@huddle/icons/check-circle.svg";
+import IfNeedBe from "@huddle/icons/if-need-be.svg";
+import QuestionMark from "@huddle/icons/question-mark.svg";
+import X from "@huddle/icons/x-circle.svg";
 import clsx from "clsx";
 import * as React from "react";
-
-import CheckCircle from "@/components/icons/check-circle.svg";
-import IfNeedBe from "@/components/icons/if-need-be.svg";
-import QuestionMark from "@/components/icons/question-mark.svg";
-import X from "@/components/icons/x-circle.svg";
 
 const VoteIcon: React.FunctionComponent<{
   type?: VoteType;

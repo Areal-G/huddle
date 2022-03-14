@@ -5,6 +5,7 @@ import {
 } from "@huddle/backend/next";
 import { decryptToken } from "@huddle/backend/session";
 import { prisma } from "@huddle/database";
+import CheckCircle from "@huddle/icons/check-circle.svg";
 import clsx from "clsx";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
@@ -12,7 +13,6 @@ import { useRouter } from "next/router";
 import { Trans, useTranslation } from "next-i18next";
 import React from "react";
 
-import CheckCircle from "@/components/icons/check-circle.svg";
 import { AuthLayout } from "@/components/layouts/auth-layout";
 import { Spinner } from "@/components/spinner";
 import { withPageTranslations } from "@/utils/with-page-translations";

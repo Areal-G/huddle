@@ -1,8 +1,7 @@
+import ChevronLeft from "@huddle/icons/chevron-left.svg";
+import ChevronRight from "@huddle/icons/chevron-right.svg";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
-
-import ChevronLeft from "../../icons/chevron-left.svg";
-import ChevronRight from "../../icons/chevron-right.svg";
 
 export interface DateNavigationToolbarProps {
   year: number;

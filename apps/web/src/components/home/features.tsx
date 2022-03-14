@@ -1,10 +1,9 @@
+import Bell from "@huddle/icons/bell.svg";
+import Chat from "@huddle/icons/chat.svg";
+import Clock from "@huddle/icons/clock.svg";
+import DeviceMobile from "@huddle/icons/device-mobile.svg";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
-
-import Bell from "@/components/icons/bell.svg";
-import Chat from "@/components/icons/chat.svg";
-import Clock from "@/components/icons/clock.svg";
-import DeviceMobile from "@/components/icons/device-mobile.svg";
 
 const Features: React.FunctionComponent = () => {
   const { t } = useTranslation("homepage");

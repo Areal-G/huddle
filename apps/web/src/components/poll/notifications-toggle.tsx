@@ -1,11 +1,11 @@
 import { trpc } from "@huddle/backend";
+import Bell from "@huddle/icons/bell.svg";
+import BellCrossed from "@huddle/icons/bell-crossed.svg";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 
 import { useLoginModal } from "@/components/auth/login-modal";
 import { Button } from "@/components/button";
-import Bell from "@/components/icons/bell.svg";
-import BellCrossed from "@/components/icons/bell-crossed.svg";
 import { useUser } from "@/components/user-provider";
 import { usePostHog } from "@/utils/posthog";
 import { usePollByAdmin } from "@/utils/trpc/hooks";

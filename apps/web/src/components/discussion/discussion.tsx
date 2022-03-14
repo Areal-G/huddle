@@ -1,4 +1,6 @@
 import { trpc } from "@huddle/backend";
+import DotsHorizontal from "@huddle/icons/dots-horizontal.svg";
+import Trash from "@huddle/icons/trash.svg";
 import clsx from "clsx";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
@@ -11,8 +13,6 @@ import { requiredString } from "../../utils/form-validation";
 import { Button } from "../button";
 import CompactButton from "../compact-button";
 import Dropdown, { DropdownItem } from "../dropdown";
-import DotsHorizontal from "../icons/dots-horizontal.svg";
-import Trash from "../icons/trash.svg";
 import NameInput from "../name-input";
 import TruncatedLinkify from "../poll/truncated-linkify";
 import UserAvatar from "../poll/user-avatar";
