@@ -1,4 +1,4 @@
-import ChevronDown from "@huddle/icons/chevron-down.svg";
+import { ChevronDownIcon } from "@huddle/icons";
 import languages from "@huddle/languages";
 import clsx from "clsx";
 import Cookies from "js-cookie";
@@ -28,7 +28,7 @@ export const LanguageSelect: React.FunctionComponent<{
         ))}
       </select>
       <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center">
-        <ChevronDown className="w-5" />
+        <ChevronDownIcon className="w-5" />
       </div>
     </div>
   );

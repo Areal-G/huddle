@@ -1,6 +1,5 @@
 import { trpc } from "@huddle/backend";
-import Bell from "@huddle/icons/bell.svg";
-import BellCrossed from "@huddle/icons/bell-crossed.svg";
+import { BellCrossedIcon, BellIcon } from "@huddle/icons";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 
@@ -62,7 +61,7 @@ const NotificationsToggle: React.FunctionComponent = () => {
         data-testid="notifications-toggle"
         loading={isUpdating}
         disabled={poll.demo}
-        icon={isWatching ? <Bell /> : <BellCrossed />}
+        icon={isWatching ? <BellIcon /> : <BellCrossedIcon />}
         onClick={async () => {
           if (user.isGuest) {
             // ask to log in

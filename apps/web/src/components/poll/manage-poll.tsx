@@ -1,11 +1,13 @@
 import { Placement } from "@floating-ui/react-dom-interactions";
-import Cog from "@huddle/icons/cog.svg";
-import LockClosed from "@huddle/icons/lock-closed.svg";
-import LockOpen from "@huddle/icons/lock-open.svg";
-import Pencil from "@huddle/icons/pencil-alt.svg";
-import Save from "@huddle/icons/save.svg";
-import Table from "@huddle/icons/table.svg";
-import Trash from "@huddle/icons/trash.svg";
+import {
+  CogIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+  PencilIcon,
+  SaveIcon,
+  TableIcon,
+  TrashIcon,
+} from "@huddle/icons";
 import dayjs from "dayjs";
 import { Trans, useTranslation } from "next-i18next";
 import * as React from "react";
@@ -192,38 +194,38 @@ const ManagePoll: React.FunctionComponent<{
       {changePollDetailsModalContextHolder}
       <Dropdown
         placement={placement}
-        trigger={<Button icon={<Cog />}>{t("manage")}</Button>}
+        trigger={<Button icon={<CogIcon />}>{t("manage")}</Button>}
       >
         <DropdownItem
-          icon={Pencil}
+          icon={PencilIcon}
           label={t("editDetails")}
           onClick={openChangePollDetailsModa}
         />
         <DropdownItem
-          icon={Table}
+          icon={TableIcon}
           label={t("editOptions")}
           onClick={handleChangeOptions}
         />
         <DropdownItem
-          icon={Save}
+          icon={SaveIcon}
           label={t("exportToCsv")}
           onClick={exportToCsv}
         />
         {poll.closed ? (
           <DropdownItem
-            icon={LockOpen}
+            icon={LockOpenIcon}
             label={t("unlockPoll")}
             onClick={() => updatePollMutation({ urlId, closed: false })}
           />
         ) : (
           <DropdownItem
-            icon={LockClosed}
+            icon={LockClosedIcon}
             label={t("lockPoll")}
             onClick={() => updatePollMutation({ urlId, closed: true })}
           />
         )}
         <DropdownItem
-          icon={Trash}
+          icon={TrashIcon}
           label={t("deletePoll")}
           onClick={() => {
             modalContext.render({

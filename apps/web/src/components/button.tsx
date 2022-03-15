@@ -1,4 +1,4 @@
-import SpinnerIcon from "@huddle/icons/spinner.svg";
+import { SpinnerIcon } from "@huddle/icons";
 import clsx from "clsx";
 import * as React from "react";
 

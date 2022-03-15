@@ -1,9 +1,9 @@
-import SpinnerSvg from "@huddle/icons/spinner.svg";
+import { SpinnerIcon } from "@huddle/icons";
 import clsx from "clsx";
 
 export const Spinner = (props: { className?: string }) => {
   return (
-    <SpinnerSvg
+    <SpinnerIcon
       className={clsx("inline-block h-5 animate-spin", props.className)}
     />
   );

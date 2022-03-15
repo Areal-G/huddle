@@ -1,4 +1,4 @@
-import Share from "@huddle/icons/share.svg";
+import { ShareIcon } from "@huddle/icons";
 import { AnimatePresence, m } from "framer-motion";
 import { useTranslation } from "next-i18next";
 import React from "react";
@@ -27,7 +27,7 @@ export const AdminControls = (props: { children?: React.ReactNode }) => {
           <ManagePoll placement="bottom-end" />
           <Button
             type="primary"
-            icon={<Share />}
+            icon={<ShareIcon />}
             onClick={() => {
               setIsSharingVisible(!isSharingVisible);
             }}

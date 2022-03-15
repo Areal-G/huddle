@@ -1,8 +1,5 @@
 import { VoteType } from "@huddle/database";
-import CheckCircle from "@huddle/icons/check-circle.svg";
-import IfNeedBe from "@huddle/icons/if-need-be.svg";
-import QuestionMark from "@huddle/icons/question-mark.svg";
-import X from "@huddle/icons/x-circle.svg";
+import { IfNeedBeIcon, NoIcon, PendingIcon, YesIcon } from "@huddle/icons";
 import clsx from "clsx";
 import * as React from "react";
 
@@ -14,7 +11,7 @@ const VoteIcon: React.FunctionComponent<{
   switch (type) {
     case "yes":
       return (
-        <CheckCircle
+        <YesIcon
           className={clsx("text-green-400", className, {
             "h-5": size === "md",
             "h-3": size === "sm",
@@ -24,7 +21,7 @@ const VoteIcon: React.FunctionComponent<{
 
     case "ifNeedBe":
       return (
-        <IfNeedBe
+        <IfNeedBeIcon
           className={clsx("text-amber-400", className, {
             "h-5": size === "md",
             "h-3": size === "sm",
@@ -34,7 +31,7 @@ const VoteIcon: React.FunctionComponent<{
 
     case "no":
       return (
-        <X
+        <NoIcon
           className={clsx("text-slate-400", className, {
             "h-5": size === "md",
             "h-3": size === "sm",
@@ -44,7 +41,7 @@ const VoteIcon: React.FunctionComponent<{
 
     default:
       return (
-        <QuestionMark
+        <PendingIcon
           className={clsx("text-slate-300", className, {
             "h-5": size === "md",
             "h-3": size === "sm",

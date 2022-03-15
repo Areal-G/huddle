@@ -1,6 +1,5 @@
 import { trpc } from "@huddle/backend";
-import CheckCircle from "@huddle/icons/check-circle.svg";
-import Speakerphone from "@huddle/icons/speakerphone.svg";
+import { CheckCircleIcon, SpeakerphoneIcon } from "@huddle/icons";
 import Link from "next/link";
 import { Trans, useTranslation } from "next-i18next";
 import { useForm } from "react-hook-form";
@@ -25,7 +24,7 @@ const FeedbackForm = (props: { onClose: () => void }) => {
       {formState.isSubmitted ? (
         <div className="absolute inset-0 flex h-full w-full items-center justify-center bg-white">
           <div className="space-y-3 text-center">
-            <CheckCircle className="inline-block h-14 text-green-500" />
+            <CheckCircleIcon className="inline-block h-14 text-green-500" />
             <div>{t("feedbackSent")}</div>
             <div>
               <button onClick={props.onClose} className="text-link">
@@ -99,7 +98,7 @@ const FeedbackButton = () => {
         onClick={show}
         className="shadow-huge inline-flex h-14 w-14 items-center justify-center rounded-full bg-slate-800"
       >
-        <Speakerphone className="h-7 text-white" />
+        <SpeakerphoneIcon className="h-7 text-white" />
       </button>
     </Tooltip>
   );
