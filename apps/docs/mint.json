@@ -73,5 +73,9 @@
     "github": "https://github.com/areal/huddle",
     "discord": "https://discord.com/invite/uzg4ZcHbuM",
     "website": "https://huddle.dev/"
+  },
+  "feedback": {
+    "suggestEdit": true,
+    "raiseIssue": true
   }
 }
