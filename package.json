@@ -3,7 +3,8 @@
   "private": true,
   "version": "2.11.1",
   "scripts": {
-    "dev": "dotenv -- turbo dev --filter=@huddle/web...",
+    "dev:app": "dotenv -- turbo dev --filter=@huddle/web...",
+    "dev": "dotenv -- turbo dev",
     "start": "turbo run start --filter=@huddle/web...",
     "build": "turbo run build --filter=@huddle/web...",
     "docs:dev": "turbo dev --filter=@huddle/docs...",

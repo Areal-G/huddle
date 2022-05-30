@@ -13,7 +13,12 @@ const nextConfig = {
   i18n: i18n,
   productionBrowserSourceMaps: true,
   output: "standalone",
-  transpilePackages: ["@huddle/backend", "@huddle/icons"],
+  transpilePackages: [
+    "@huddle/backend",
+    "@huddle/icons",
+    "@huddle/ui",
+    "@huddle/tailwind-config",
+  ],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -33,14 +38,15 @@ const nextConfig = {
         destination: "https://support.huddle.dev",
         permanent: true,
       },
-    ];
-  },
-
-  async rewrites() {
-    return [
+      {
+        source: "/profile",
+        destination: "/settings/profile",
+        permanent: true,
+      },
       {
         source: "/",
-        destination: "/home",
+        destination: "/polls",
+        permanent: false,
       },
     ];
   },
