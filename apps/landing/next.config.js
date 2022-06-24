@@ -8,6 +8,13 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
+const appBaseUrl = process.env.NEXT_PUBLIC_APP_BASE_URL;
+
+function createAppUrl(subpath) {
+  const url = new URL(subpath, appBaseUrl);
+  return url.href;
+}
+
 const nextConfig = {
   i18n: i18n,
   productionBrowserSourceMaps: true,
@@ -39,32 +46,37 @@ const nextConfig = {
       },
       {
         source: "/p/:path*",
-        destination: "http://app.huddle.dev/p/:path*",
+        destination: createAppUrl("/p/:path*"),
+        permanent: true,
+      },
+      {
+        source: "/invite/:path*",
+        destination: createAppUrl("/invite/:path*"),
         permanent: true,
       },
       {
         source: "/admin/:path*",
-        destination: "http://app.huddle.dev/admin/:path*",
+        destination: createAppUrl("/admin/:path*"),
         permanent: true,
       },
       {
         source: "/profile",
-        destination: "http://app.huddle.dev",
+        destination: createAppUrl(),
         permanent: true,
       },
       {
         source: "/login",
-        destination: "http://app.huddle.dev/login",
+        destination: createAppUrl("/login"),
         permanent: true,
       },
       {
         source: "/new",
-        destination: "http://app.huddle.dev/new",
+        destination: createAppUrl("/new"),
         permanent: true,
       },
       {
         source: "/register",
-        destination: "http://app.huddle.dev/register",
+        destination: createAppUrl("/register"),
         permanent: true,
       },
     ];
