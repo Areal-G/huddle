@@ -1,6 +1,6 @@
 import { prisma } from "@huddle/database";
 import { sendEmail } from "@huddle/emails";
-import { absoluteUrl } from "@huddle/utils";
+import { absoluteUrl, shortUrl } from "@huddle/utils";
 import { TRPCError } from "@trpc/server";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
@@ -140,7 +140,7 @@ export const polls = router({
         ? absoluteUrl(`/admin/${adminToken}`)
         : absoluteUrl(`/poll/${pollId}`);
 
-      const participantLink = absoluteUrl(`/invite/${pollId}`);
+      const participantLink = shortUrl(`/invite/${pollId}`);
 
       if (email && name) {
         await sendEmail("NewPollEmail", {
