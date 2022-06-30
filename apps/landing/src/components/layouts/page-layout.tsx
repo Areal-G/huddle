@@ -14,7 +14,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { absoluteUrl } from "@huddle/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
