@@ -29,7 +29,7 @@ const FeedbackButton = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link
-            href={`https://huddle.featurebase.app/?b=feedback`}
+            href={`https://feedback.huddle.dev/?b=feedback`}
             target={"_blank"}
           >
             <SmileIcon className="mr-2 h-4 w-4" />
@@ -38,7 +38,7 @@ const FeedbackButton = () => {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link
-            href={`https://huddle.featurebase.app/?b=feature-request`}
+            href={`https://feedback.huddle.dev/?b=feature-request`}
             target={"_blank"}
           >
             <LightbulbIcon className="mr-2 h-4 w-4" />
@@ -47,7 +47,7 @@ const FeedbackButton = () => {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link
-            href={`https://huddle.featurebase.app/?b=bug-reports`}
+            href={`https://feedback.huddle.dev/?b=bug-reports`}
             target={"_blank"}
           >
             <BugIcon className="mr-2 h-4 w-4" />
