@@ -1,6 +1,5 @@
 import { EyeIcon, MessageCircleIcon, VoteIcon } from "@huddle/icons";
 import { cn } from "@huddle/ui";
-import { Badge } from "@huddle/ui/badge";
 import {
   Card,
   CardContent,
@@ -16,6 +15,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Trans } from "react-i18next";
 
+import { ProBadge } from "@/components/pro-badge";
 import { usePlan } from "@/contexts/plan";
 
 export type PollSettingsFormData = {
@@ -58,9 +58,7 @@ export const PollSettingsForm = ({ children }: React.PropsWithChildren) => {
               <CardTitle>
                 <Trans i18nKey="settings" />
               </CardTitle>
-              <Badge>
-                <Trans i18nKey="planPro" />
-              </Badge>
+              <ProBadge />
             </div>
             <CardDescription>
               <Trans
