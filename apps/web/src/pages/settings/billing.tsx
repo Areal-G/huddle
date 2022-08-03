@@ -1,5 +1,6 @@
 import { trpc } from "@huddle/backend";
-import { CreditCardIcon } from "@huddle/icons";
+import { ArrowUpRight, CreditCardIcon } from "@huddle/icons";
+import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { Card } from "@huddle/ui/card";
 import { Label } from "@huddle/ui/label";
@@ -13,7 +14,6 @@ import { getProfileLayout } from "@/components/layouts/profile-layout";
 import { SettingsSection } from "@/components/settings/settings-section";
 import { Trans } from "@/components/trans";
 import { useUser } from "@/components/user-provider";
-import { usePlan } from "@/contexts/plan";
 
 import { NextPageWithLayout } from "../../types";
 import { getStaticTranslations } from "../../utils/with-page-translations";
@@ -25,6 +25,38 @@ declare global {
   }
 }
 
+const BillingPortal = () => {
+  return (
+    <div>
+      <div className="mb-4 flex items-center justify-between">
+        <Badge>
+          <Trans i18nKey="planPro" />
+        </Badge>
+      </div>
+      <p>
+        <Trans
+          i18nKey="activeSubscription"
+          defaults="Thank you for subscribing to Huddle Pro. You can manage your subscription and billing details from the billing portal."
+        />
+      </p>
+      <div className="mt-6">
+        <Button asChild>
+          <Link
+            href={`/api/stripe/portal?return_path=${encodeURIComponent(
+              window.location.pathname,
+            )}`}
+          >
+            <span>
+              <Trans i18nKey="billingPortal" defaults="Billing Portal" />
+            </span>
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 export const proPlanIdMonthly = process.env
   .NEXT_PUBLIC_PRO_PLAN_ID_MONTHLY as string;
 
@@ -34,25 +66,31 @@ export const proPlanIdYearly = process.env
 const SubscriptionStatus = () => {
   const { user } = useUser();
 
-  const plan = usePlan();
-  const isPlus = plan === "paid";
+  const { data } = trpc.user.subscription.useQuery();
+
+  if (!data) {
+    return null;
+  }
 
   if (user.isGuest) {
     return <>You need to be logged in.</>;
   }
 
-  if (isPlus) {
-    return <BillingStatus />;
+  if (data.legacy) {
+    // User is on the old billing system
+    return <LegacyBilling />;
+  } else if (data.active) {
+    return <BillingPortal />;
   } else {
     return <BillingPlans />;
   }
 };
 
-const BillingStatus = () => {
+const LegacyBilling = () => {
   const { data: userPaymentData } = trpc.user.getBilling.useQuery();
 
   if (!userPaymentData) {
-    return <p>Something when wrong. Missing user payment data.</p>;
+    return null;
   }
 
   const { status, endDate, planId } = userPaymentData;
@@ -180,6 +218,29 @@ const Page: NextPageWithLayout = () => {
         }
       >
         <SubscriptionStatus />
+      </SettingsSection>
+      <SettingsSection
+        title={<Trans i18nKey="support" defaults="Support" />}
+        description={
+          <Trans
+            i18nKey="supportDescription"
+            defaults="Need help with anything?"
+          />
+        }
+      >
+        <div className="space-y-6">
+          <p>
+            <Trans
+              i18nKey="supportBilling"
+              defaults="Please reach out if you need any assistance."
+            />
+          </p>
+          <Button asChild>
+            <Link href="mailto:support@huddle.dev">
+              <Trans i18nKey="contactSupport" defaults="Contact Support" />
+            </Link>
+          </Button>
+        </div>
       </SettingsSection>
     </div>
   );
