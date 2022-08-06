@@ -1,4 +1,4 @@
-import { Participant, Vote, VoteType } from "@huddle/database";
+import { Participant, VoteType } from "@huddle/database";
 import { TrashIcon } from "@huddle/icons";
 import { keyBy } from "lodash";
 import { useTranslation } from "next-i18next";
@@ -10,7 +10,7 @@ import {
   ParsedTimeSlotOption,
 } from "@/utils/date-time-utils";
 import { useDayjs } from "@/utils/dayjs";
-import { GetPollApiResponse } from "@/utils/trpc/types";
+import { GetPollApiResponse, Vote } from "@/utils/trpc/types";
 
 import ErrorPage from "./error-page";
 import { useParticipants } from "./participants-provider";

@@ -1,4 +1,4 @@
-import { Participant, Vote, VoteType } from "@huddle/database";
+import { Participant, VoteType } from "@huddle/database";
 import { MoreHorizontalIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import clsx from "clsx";
@@ -8,6 +8,7 @@ import { ParticipantDropdown } from "@/components/participant-dropdown";
 import { usePoll } from "@/components/poll-context";
 import { useUser } from "@/components/user-provider";
 import { usePermissions } from "@/contexts/permissions";
+import { Vote } from "@/utils/trpc/types";
 
 import UserAvatar from "../user-avatar";
 import VoteIcon from "../vote-icon";

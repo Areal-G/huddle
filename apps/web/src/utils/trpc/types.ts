@@ -1,4 +1,4 @@
-import { User } from "@huddle/database";
+import { User, VoteType } from "@huddle/database";
 
 export type GetPollApiResponse = {
   id: string;
@@ -15,4 +15,9 @@ export type GetPollApiResponse = {
   demo: boolean;
   createdAt: Date;
   deleted: boolean;
+};
+
+export type Vote = {
+  optionId: string;
+  type: VoteType;
 };
