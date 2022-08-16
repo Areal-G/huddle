@@ -2,11 +2,10 @@ import { trpc } from "@huddle/backend";
 import { HelpCircleIcon } from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
-import { TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 import Script from "next/script";
 import React from "react";
 
-import Tooltip from "@/components/tooltip";
 import { Trans } from "@/components/trans";
 import { isFeedbackEnabled } from "@/utils/constants";
 
