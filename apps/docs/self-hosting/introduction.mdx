@@ -1,13 +1,29 @@
 ---
+icon: server
 title: Introduction
-description: How to run your own instance of Huddle.
+description: How to Self-Host Huddle
 ---
 
-## What is Self-Hosting?
+Huddle is 100% open-source and available under the [GNU Affero General Public License v3.0 (AGPL-3.0)](https://github.com/areal/huddle/blob/main/LICENSE)
+which allows you to run your own instance of Huddle for free for both personal and commercial use.
 
-Self-hosting refers to the practice of running your own instance of Huddle on your own server.
+## Official Docker Image
 
-The main advantage of self-hosting is the autonomy it affords, but it also requires more technical knowledge and maintenance, as well as the potential security risks of managing your own infrastructure.
+The best way to self-host Huddle is using the [official Docker image](https://hub.docker.com/r/areal/huddle).
+This image contains a build that is specifically intended for self-hosting.
+It is updated regularly but it is _not_ guaranteed to be up-to-date with the latest version of Huddle.
+If you want to have access to the latest features and bug fixes, you should consider using the [official managed service](https://huddle.dev).
+
+<Note>
+  Though it is technically possible to build and run Huddle from its
+  [source-code](https://github.com/areal/huddle), it is not recommended and
+  we do not provide support for this.
+</Note>
+
+## Pricing
+
+Huddle is **completely free** to self-host but for users who wish to contribute to the project,
+please check out the [pricing](/self-hosting/pricing) page.
 
 ## Get Started
 
@@ -22,7 +38,7 @@ Depending on how comfortable you are with technical things, you can either run H
     Host your own instance of Huddle on your own server using Docker.
   </Card>
   <Card
-    icon="server"
+    icon="cloud"
     title="Using a hosting provider"
     href="/self-hosting/managed-hosting"
   >
