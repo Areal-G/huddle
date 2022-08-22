@@ -1,7 +1,7 @@
 {
   "name": "huddle",
   "private": true,
-  "version": "2.11.1",
+  "version": "3.0.0-rc1",
   "scripts": {
     "dev:app": "dotenv -- turbo dev --filter=@huddle/web...",
     "dev": "dotenv -- turbo dev",
