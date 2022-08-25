@@ -34,8 +34,7 @@
   "freeSchedulingPollTitle": "Ser du etter en gratis planleggingsavstemning?",
   "freeSchedulingPollDescription": "Huddle lar deg opprette fine planleggingsavstemninger som er enkle å bruke, slik at du kan finne frem til det beste tidspunktet for ditt neste arrangement.",
   "new": "Nytt",
-  "julyRecap": "Juli-oppsummering",
-  "pricingUpdates": "Prisoppdateringer",
   "metaTitle": "Huddle - Planlegg gruppemøter",
-  "metaDescription": "Opprett avstemninger og stem for å finne den beste dagen eller tidspunktet. Et gratis Doodle-alternativ."
+  "metaDescription": "Opprett avstemninger og stem for å finne den beste dagen eller tidspunktet. Et gratis Doodle-alternativ.",
+  "selfHostingBlog": "Huddle 3.0 på egen infrastruktur"
 }
