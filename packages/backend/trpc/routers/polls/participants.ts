@@ -1,10 +1,10 @@
 import { prisma } from "@huddle/database";
+import { sendEmail } from "@huddle/emails";
 import { absoluteUrl } from "@huddle/utils";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { createToken } from "../../../session";
-import { emailClient } from "../../../utils/email-client";
 import { publicProcedure, router } from "../../trpc";
 import { DisableNotificationsPayload } from "../../types";
 
@@ -107,7 +107,7 @@ export const participants = router({
         );
 
         emailsToSend.push(
-          emailClient.sendTemplate("NewParticipantConfirmationEmail", {
+          sendEmail("NewParticipantConfirmationEmail", {
             to: email,
             subject: `Thanks for responding to ${poll.title}`,
             props: {
@@ -144,7 +144,7 @@ export const participants = router({
           { ttl: 0 },
         );
         emailsToSend.push(
-          emailClient.sendTemplate("NewParticipantEmail", {
+          sendEmail("NewParticipantEmail", {
             to: email,
             subject: `${participant.name} has responded to ${poll.title}`,
             props: {
