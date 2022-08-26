@@ -1,5 +1,4 @@
 import { prisma } from "@huddle/database";
-import { sendEmail } from "@huddle/emails";
 import { absoluteUrl } from "@huddle/utils";
 import { z } from "zod";
 
@@ -82,7 +81,7 @@ export const comments = router({
           { ttl: 0 },
         );
         emailsToSend.push(
-          sendEmail("NewCommentEmail", {
+          ctx.emailClient.sendTemplate("NewCommentEmail", {
             to: email,
             subject: `${authorName} has commented on ${poll.title}`,
             props: {
