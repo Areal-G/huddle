@@ -1,9 +1,10 @@
 import { getSession } from "@huddle/backend/next/session";
 import { stripe } from "@huddle/backend/stripe";
 import { prisma } from "@huddle/database";
-import { absoluteUrl } from "@huddle/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
+
+import { absoluteUrl } from "@/utils/absolute-url";
 
 const inputSchema = z.object({
   session_id: z.string().optional(),

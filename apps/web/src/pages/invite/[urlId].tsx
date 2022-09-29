@@ -2,7 +2,6 @@ import { trpc } from "@huddle/backend";
 import { prisma } from "@huddle/database";
 import { ArrowUpLeftIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
-import { absoluteUrl } from "@huddle/utils";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
@@ -19,6 +18,7 @@ import { UserProvider, useUser } from "@/components/user-provider";
 import { VisibilityProvider } from "@/components/visibility";
 import { PermissionsContext } from "@/contexts/permissions";
 import { usePoll } from "@/contexts/poll";
+import { absoluteUrl } from "@/utils/absolute-url";
 import { ConnectedDayjsProvider } from "@/utils/dayjs";
 import { getStaticTranslations } from "@/utils/with-page-translations";
 
