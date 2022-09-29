@@ -2,7 +2,7 @@ import { trpc } from "@huddle/backend";
 import { BellOffIcon, BellRingIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
-import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 
@@ -31,7 +31,6 @@ const NotificationsToggle: React.FunctionComponent = () => {
 
   const posthog = usePostHog();
 
-  const router = useRouter();
   const watch = trpc.polls.watch.useMutation({
     onSuccess: () => {
       // TODO (Areal) [2023-04-08]: We should have a separate query for getting watchers
@@ -70,8 +69,7 @@ const NotificationsToggle: React.FunctionComponent = () => {
           className="flex items-center gap-2 px-2.5"
           onClick={async () => {
             if (user.isGuest) {
-              // TODO (Areal) [2023-06-06]: Open Login Modal
-              router.push("/login");
+              signIn();
               return;
             }
             // toggle
