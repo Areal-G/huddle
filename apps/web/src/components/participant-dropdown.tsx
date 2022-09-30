@@ -1,4 +1,3 @@
-import { trpc } from "@huddle/backend";
 import { PencilIcon, TagIcon, TrashIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import {
@@ -37,6 +36,7 @@ import { useDeleteParticipantMutation } from "@/components/poll/mutations";
 import { Trans } from "@/components/trans";
 import { useFormValidation } from "@/utils/form-validation";
 import { usePostHog } from "@/utils/posthog";
+import { trpc } from "@/utils/trpc/client";
 
 import { Participant } from ".prisma/client";
 

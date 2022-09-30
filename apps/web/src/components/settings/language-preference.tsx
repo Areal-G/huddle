@@ -1,4 +1,3 @@
-import { trpc } from "@huddle/backend";
 import { ArrowUpRight } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import { Form, FormField, FormItem, FormLabel } from "@huddle/ui/form";
@@ -12,6 +11,7 @@ import { z } from "zod";
 import { LanguageSelect } from "@/components/poll/language-selector";
 import { Trans } from "@/components/trans";
 import { useUser } from "@/components/user-provider";
+import { trpc } from "@/utils/trpc/client";
 
 const formSchema = z.object({
   language: z.string(),

@@ -1,4 +1,3 @@
-import { trpc } from "@huddle/backend";
 import { prisma } from "@huddle/database";
 import { ArrowUpLeftIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
@@ -20,6 +19,7 @@ import { PermissionsContext } from "@/contexts/permissions";
 import { usePoll } from "@/contexts/poll";
 import { absoluteUrl } from "@/utils/absolute-url";
 import { ConnectedDayjsProvider } from "@/utils/dayjs";
+import { trpc } from "@/utils/trpc/client";
 import { getStaticTranslations } from "@/utils/with-page-translations";
 
 import Error404 from "../404";

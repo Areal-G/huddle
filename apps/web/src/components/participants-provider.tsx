@@ -1,9 +1,9 @@
-import { trpc } from "@huddle/backend";
 import { Participant, VoteType } from "@huddle/database";
 import * as React from "react";
 
 import { useVisibility } from "@/components/visibility";
 import { usePermissions } from "@/contexts/permissions";
+import { trpc } from "@/utils/trpc/client";
 import { Vote } from "@/utils/trpc/types";
 
 import { useRequiredContext } from "./use-required-context";

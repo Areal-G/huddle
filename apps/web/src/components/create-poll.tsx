@@ -1,4 +1,3 @@
-import { trpc } from "@huddle/backend";
 import { Button } from "@huddle/ui/button";
 import {
   Card,
@@ -17,6 +16,7 @@ import { useUnmount } from "react-use";
 import { PollSettingsForm } from "@/components/forms/poll-settings";
 import { Trans } from "@/components/trans";
 import { usePostHog } from "@/utils/posthog";
+import { trpc } from "@/utils/trpc/client";
 
 import { NewEventData, PollDetailsForm, PollOptionsForm } from "./forms";
 

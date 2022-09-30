@@ -1,4 +1,3 @@
-import { trpc } from "@huddle/backend";
 import { BellOffIcon, BellRingIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
@@ -10,6 +9,7 @@ import { Skeleton } from "@/components/skeleton";
 import { Trans } from "@/components/trans";
 import { useUser } from "@/components/user-provider";
 import { usePostHog } from "@/utils/posthog";
+import { trpc } from "@/utils/trpc/client";
 
 import { usePoll } from "../poll-context";
 

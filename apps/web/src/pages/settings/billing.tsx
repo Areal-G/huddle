@@ -1,4 +1,3 @@
-import { trpc } from "@huddle/backend";
 import { ArrowUpRight, CreditCardIcon, SendIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import { Card } from "@huddle/ui/card";
@@ -20,6 +19,7 @@ import {
 import { Trans } from "@/components/trans";
 import { useSubscription } from "@/contexts/plan";
 import { isSelfHosted } from "@/utils/constants";
+import { trpc } from "@/utils/trpc/client";
 
 import { NextPageWithLayout } from "../../types";
 import { getStaticTranslations } from "../../utils/with-page-translations";
