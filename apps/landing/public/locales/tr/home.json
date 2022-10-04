@@ -15,7 +15,11 @@
   "statsLanguagesSupported": "10+ desteklenen diller",
   "hint": "Ücretsiz! Hesap gerekli değil.",
   "doodleAlternative": "En iyi Doodle Alternatifi",
+  "createAPoll": "Buluşma Anketi oluştur",
+  "doodleAlternativeMetaTitle": "En iyi ücretsiz Doodle alternatifi | Huddle",
+  "doodleAlternativeMetaDescription": "Doodle alternatifi mi arıyorsun? Huddle i dene! Ücretsiz, kullanımı kolay ve hesap gerektirmiyor.",
   "findATimeMetaTitle": "Buluşmak İçin Bir Zaman Bul | Huddle",
+  "findATimeTitle": "Buluşmak için bir zaman bul",
   "new": "Yeni",
   "metaTitle": "Huddle - Grup Toplantıları Planlayın",
   "metaDescription": "Anketler oluşturun ve en iyi günü veya saati bulmak için oy verin. Doodle'a ücretsiz bir alternatif."
