@@ -1,3 +1,4 @@
+"use client";
 import { Badge } from "@huddle/ui/badge";
 import React from "react";
 

@@ -1,4 +1,3 @@
-import { PencilIcon, TagIcon, TrashIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -27,6 +26,7 @@ import {
   FormMessage,
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
+import { PencilIcon, TagIcon, TrashIcon } from "lucide-react";
 import { useTranslation } from "next-i18next";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

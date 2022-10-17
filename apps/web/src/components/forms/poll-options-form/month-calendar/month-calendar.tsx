@@ -1,12 +1,3 @@
-import {
-  CalendarIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-  PlusIcon,
-  SparklesIcon,
-  XIcon,
-} from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -20,6 +11,15 @@ import {
 import { Switch } from "@huddle/ui/switch";
 import clsx from "clsx";
 import dayjs from "dayjs";
+import {
+  CalendarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MoreHorizontalIcon,
+  PlusIcon,
+  SparklesIcon,
+  XIcon,
+} from "lucide-react";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 

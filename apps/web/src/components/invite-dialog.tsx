@@ -1,4 +1,3 @@
-import { ArrowUpRightIcon, Share2Icon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -8,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@huddle/ui/dialog";
+import { ArrowUpRightIcon, Share2Icon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useCopyToClipboard } from "react-use";

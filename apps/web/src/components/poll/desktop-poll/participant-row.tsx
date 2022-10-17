@@ -1,7 +1,7 @@
 import { Participant, VoteType } from "@huddle/database";
-import { MoreHorizontalIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import clsx from "clsx";
+import { MoreHorizontalIcon } from "lucide-react";
 import * as React from "react";
 
 import { ParticipantDropdown } from "@/components/participant-dropdown";

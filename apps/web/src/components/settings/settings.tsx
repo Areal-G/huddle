@@ -1,6 +1,6 @@
-import { InfoIcon } from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+import { InfoIcon } from "lucide-react";
 
 export const Settings = ({ children }: React.PropsWithChildren) => {
   return <div className="px-4 py-3 md:p-6">{children}</div>;

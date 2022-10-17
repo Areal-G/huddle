@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@huddle/ui/dialog";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import { Trans } from "@/components/trans";

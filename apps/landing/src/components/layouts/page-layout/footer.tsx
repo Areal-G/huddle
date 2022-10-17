@@ -1,10 +1,4 @@
-import {
-  DiscordIcon,
-  GithubIcon,
-  LanguagesIcon,
-  LinkedinIcon,
-  TwitterIcon,
-} from "@huddle/icons";
+import { DiscordIcon } from "@huddle/icons";
 import languages from "@huddle/languages";
 import {
   Select,
@@ -13,6 +7,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@huddle/ui/select";
+import {
+  GithubIcon,
+  LanguagesIcon,
+  LinkedinIcon,
+  TwitterIcon,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";

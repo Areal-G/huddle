@@ -1,6 +1,6 @@
-import { BellOffIcon, BellRingIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+import { BellOffIcon, BellRingIcon } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { useTranslation } from "next-i18next";
 import * as React from "react";

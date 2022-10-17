@@ -1,10 +1,3 @@
-import {
-  AtSignIcon,
-  EyeIcon,
-  InfoIcon,
-  MessageCircleIcon,
-  VoteIcon,
-} from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import {
   Card,
@@ -16,6 +9,13 @@ import {
 import { FormField } from "@huddle/ui/form";
 import { Switch } from "@huddle/ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+import {
+  AtSignIcon,
+  EyeIcon,
+  InfoIcon,
+  MessageCircleIcon,
+  VoteIcon,
+} from "lucide-react";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { Trans } from "react-i18next";

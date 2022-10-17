@@ -1,5 +1,8 @@
 {
   "name": "@huddle/docs",
   "version": "0.0.0",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@huddle/tsconfig": "*"
+  }
 }

@@ -1,6 +1,5 @@
 {
-  "extends": "@huddle/tsconfig/react-library.json",
-  "include": ["**/*.ts", "**/*.tsx", "iron-session.d.t.s"],
-
+  "extends": "@huddle/tsconfig/react.json",
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
   "exclude": ["node_modules"]
 }

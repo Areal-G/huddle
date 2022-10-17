@@ -1,5 +1,5 @@
-import { UserIcon } from "@huddle/icons";
 import clsx from "clsx";
+import { UserIcon } from "lucide-react";
 
 import { useUser } from "@/components/user-provider";
 import { getRandomAvatarColor } from "@/utils/color-hash";

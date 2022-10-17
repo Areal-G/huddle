@@ -1,5 +1,5 @@
-import { Loader2Icon } from "@huddle/icons";
 import clsx from "clsx";
+import { Loader2Icon } from "lucide-react";
 
 export const Spinner = (props: { className?: string }) => {
   return (

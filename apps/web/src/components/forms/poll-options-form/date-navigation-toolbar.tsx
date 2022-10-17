@@ -1,5 +1,5 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@huddle/icons";
 import { Button } from "@huddle/ui/button";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { useTranslation } from "next-i18next";
 import * as React from "react";
 

@@ -1,3 +1,6 @@
+import { cn } from "@huddle/ui";
+import { Button } from "@huddle/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -5,10 +8,7 @@ import {
   PlusIcon,
   ShrinkIcon,
   Users2Icon,
-} from "@huddle/icons";
-import { cn } from "@huddle/ui";
-import { Button } from "@huddle/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+} from "lucide-react";
 import { Trans, useTranslation } from "next-i18next";
 import * as React from "react";
 import { RemoveScroll } from "react-remove-scroll";

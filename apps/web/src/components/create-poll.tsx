@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@huddle/ui/button";
 import {
   Card,
@@ -7,7 +8,7 @@ import {
   CardTitle,
 } from "@huddle/ui/card";
 import { Form } from "@huddle/ui/form";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";

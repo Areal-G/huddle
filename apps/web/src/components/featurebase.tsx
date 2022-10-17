@@ -1,7 +1,7 @@
-import { HelpCircleIcon } from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+import { HelpCircleIcon } from "lucide-react";
 import Script from "next/script";
 import React from "react";
 

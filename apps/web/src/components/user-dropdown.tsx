@@ -1,3 +1,12 @@
+import { Button } from "@huddle/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@huddle/ui/dropdown-menu";
 import {
   ChevronDown,
   CreditCardIcon,
@@ -11,16 +20,7 @@ import {
   Settings2Icon,
   UserIcon,
   UserPlusIcon,
-} from "@huddle/icons";
-import { Button } from "@huddle/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@huddle/ui/dropdown-menu";
+} from "lucide-react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 
@@ -38,7 +38,11 @@ export const UserDropdown = () => {
   const { user } = useUser();
   return (
     <DropdownMenu modal={false}>
-      <DropdownMenuTrigger data-testid="user-dropdown" asChild className="group">
+      <DropdownMenuTrigger
+        data-testid="user-dropdown"
+        asChild
+        className="group"
+      >
         <Button variant="ghost" className="rounded-full">
           <CurrentUserAvatar size="sm" className="-ml-1" />
           <ChevronDown className="h-4 w-4" />

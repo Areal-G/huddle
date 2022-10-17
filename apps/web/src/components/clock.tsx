@@ -1,4 +1,3 @@
-import { GlobeIcon } from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import {
   Dialog,
@@ -10,6 +9,7 @@ import {
 } from "@huddle/ui/dialog";
 import { Label } from "@huddle/ui/label";
 import dayjs from "dayjs";
+import { GlobeIcon } from "lucide-react";
 import React from "react";
 import { useInterval } from "react-use";
 import spacetime from "spacetime";

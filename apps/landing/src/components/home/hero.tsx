@@ -1,8 +1,8 @@
-import { ChevronRightIcon } from "@huddle/icons";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { preventWidows } from "@huddle/utils";
 import { m } from "framer-motion";
+import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";

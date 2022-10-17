@@ -1,4 +1,3 @@
-import { ChevronRightIcon, MenuIcon } from "@huddle/icons";
 import { cn } from "@huddle/ui";
 import {
   DropdownMenu,
@@ -7,6 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
+import { ChevronRightIcon, MenuIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";

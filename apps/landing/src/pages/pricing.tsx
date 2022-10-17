@@ -1,4 +1,3 @@
-import { TrendingUpIcon } from "@huddle/icons";
 import {
   BillingPlan,
   BillingPlanDescription,
@@ -11,6 +10,7 @@ import {
 } from "@huddle/ui/billing-plan";
 import { Button } from "@huddle/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@huddle/ui/tabs";
+import { TrendingUpIcon } from "lucide-react";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 import { NextSeo } from "next-seo";
