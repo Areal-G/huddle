@@ -1,5 +1,5 @@
 {
-  "extends": "@huddle/tsconfig/react-library",
+  "extends": "@huddle/tsconfig/react.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
