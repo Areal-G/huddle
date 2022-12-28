@@ -13,9 +13,11 @@ export const NewCommentEmail = ({
   authorName = "Someone",
   pollUrl = "https://huddle.dev",
   disableNotificationsUrl = "https://huddle.dev",
+  ctx,
 }: NewCommentEmailProps) => {
   return (
     <NotificationEmail
+      ctx={ctx}
       name={name}
       title={title}
       pollUrl={pollUrl}
