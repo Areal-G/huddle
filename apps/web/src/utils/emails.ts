@@ -12,7 +12,9 @@ export const emailClient = new EmailClient({
   },
   mail: {
     from: {
-      name: "Huddle",
+      name:
+       (process.env.NOREPLY_EMAIL_NAME as string) ||
+       "Huddle",
       address:
         (process.env.NOREPLY_EMAIL as string) ||
         (process.env.SUPPORT_EMAIL as string),
