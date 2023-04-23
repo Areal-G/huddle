@@ -1,5 +1,6 @@
 import { DiscordIcon } from "@huddle/icons";
 import languages from "@huddle/languages";
+import { Button } from "@huddle/ui/button";
 import {
   Select,
   SelectContent,
@@ -36,8 +37,10 @@ export const LanguageSelect = () => {
         });
       }}
     >
-      <SelectTrigger>
-        <SelectValue />
+      <SelectTrigger asChild>
+        <Button className="w-full">
+          <SelectValue />
+        </Button>
       </SelectTrigger>
       <SelectContent>
         {Object.entries(languages).map(([code, name]) => (

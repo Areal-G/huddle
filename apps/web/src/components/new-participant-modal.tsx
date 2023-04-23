@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VoteType } from "@huddle/database";
+import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { Input } from "@huddle/ui/input";
 import clsx from "clsx";
@@ -66,15 +67,13 @@ const VoteSummary = ({
         return (
           <div
             key={voteType}
-            className="flex h-8 select-none divide-x rounded border bg-gray-50 text-sm"
+            className="flex h-8 select-none gap-2.5 rounded-lg border bg-gray-50 p-1 text-sm"
           >
-            <div className="flex items-center gap-2 pl-2 pr-3">
+            <div className="flex items-center gap-2">
               <VoteIcon type={voteType} />
-              <div>{t(voteType)}</div>
+              <div className="text-muted-foreground">{t(voteType)}</div>
             </div>
-            <div className="flex h-full items-center justify-center px-2 text-sm font-semibold text-gray-800">
-              {voteByType[voteType].length}
-            </div>
+            <Badge>{voteByType[voteType].length}</Badge>
           </div>
         );
       })}
