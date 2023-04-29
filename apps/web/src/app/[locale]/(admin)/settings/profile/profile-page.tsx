@@ -1,12 +1,16 @@
 "use client";
 import { Alert, AlertDescription, AlertTitle } from "@huddle/ui/alert";
+import { Button } from "@huddle/ui/button";
+import { DialogTrigger } from "@huddle/ui/dialog";
+import { Icon } from "@huddle/ui/icon";
 import { Input } from "@huddle/ui/input";
 import { Label } from "@huddle/ui/label";
-import { InfoIcon, LogOutIcon, UserXIcon } from "lucide-react";
+import { InfoIcon, LogOutIcon, TrashIcon, UserXIcon } from "lucide-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useTranslation } from "next-i18next";
 
+import { DeleteAccountDialog } from "@/app/[locale]/(admin)/settings/profile/delete-account-dialog";
 import { LogoutButton } from "@/app/components/logout-button";
 import { ProfileSettings } from "@/components/settings/profile-settings";
 import {
@@ -91,6 +95,29 @@ export const ProfilePage = () => {
               <Trans i18nKey="logout" defaults="Logout" />
             </LogoutButton>
           </SettingsSection>
+          {user.email ? (
+            <>
+              <hr />
+              <SettingsSection
+                title="Danger Zone"
+                description="Delete your account permanently. This action cannot be undone."
+              >
+                <DeleteAccountDialog email={user.email}>
+                  <DialogTrigger asChild>
+                    <Button variant="destructive">
+                      <Icon>
+                        <TrashIcon />
+                      </Icon>
+                      <Trans
+                        i18nKey="deleteAccount"
+                        defaults="Delete Account"
+                      />
+                    </Button>
+                  </DialogTrigger>
+                </DeleteAccountDialog>
+              </SettingsSection>
+            </>
+          ) : null}
         </SettingsContent>
       )}
     </Settings>
