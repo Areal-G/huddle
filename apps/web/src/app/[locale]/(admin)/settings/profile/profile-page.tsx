@@ -2,7 +2,6 @@
 import { Alert, AlertDescription, AlertTitle } from "@huddle/ui/alert";
 import { Button } from "@huddle/ui/button";
 import { DialogTrigger } from "@huddle/ui/dialog";
-import { Icon } from "@huddle/ui/icon";
 import { Input } from "@huddle/ui/input";
 import { Label } from "@huddle/ui/label";
 import { InfoIcon, LogOutIcon, TrashIcon, UserXIcon } from "lucide-react";
@@ -109,10 +108,8 @@ export const ProfilePage = () => {
               >
                 <DeleteAccountDialog email={user.email}>
                   <DialogTrigger asChild>
-                    <Button variant="destructive">
-                      <Icon>
-                        <TrashIcon />
-                      </Icon>
+                    <Button className="text-destructive">
+                      <TrashIcon className="size-4" />
                       <Trans
                         i18nKey="deleteAccount"
                         defaults="Delete Account"
