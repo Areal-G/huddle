@@ -1,7 +1,7 @@
 import { cn } from "@huddle/ui";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 
-import { ColoredAvatar } from "@/components/poll/participant-avatar";
+import { ColoredAvatar } from "@/components/poll/user-avatar";
 
 interface ParticipantAvatarBarProps {
   participants: { name: string }[];
