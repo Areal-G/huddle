@@ -8,7 +8,7 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=db
+      - POSTGRES_DB=huddle
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -28,7 +28,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@huddle_db:5450/db
+      - DATABASE_URL=postgres://postgres:postgres@huddle_db:5450/huddle
     env_file:
       - .env
 
