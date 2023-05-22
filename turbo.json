@@ -28,6 +28,7 @@
       "cache": true
     },
     "test:integration": {
+      "dependsOn": ["@huddle/database#db:generate"],
       "cache": true
     },
     "db:generate": {
