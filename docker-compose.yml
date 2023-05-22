@@ -28,7 +28,7 @@ services:
     ports:
       - 3000:3000
     environment:
-      - DATABASE_URL=postgres://postgres:postgres@huddle_db:5450/huddle
+      - DATABASE_URL=postgres://postgres:postgres@huddle_db/huddle
     env_file:
       - .env
 
