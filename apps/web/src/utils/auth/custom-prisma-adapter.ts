@@ -10,12 +10,12 @@
  * See: https://github.com/areal/huddle/issues/949
  */
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@huddle/database";
+import { ExtendedPrismaClient, PrismaClient } from "@huddle/database";
 import { Adapter, AdapterAccount } from "next-auth/adapters";
 
-export function CustomPrismaAdapter(client: PrismaClient): Adapter {
+export function CustomPrismaAdapter(client: ExtendedPrismaClient): Adapter {
   return {
-    ...PrismaAdapter(client),
+    ...PrismaAdapter(client as PrismaClient),
     linkAccount: (data) => {
       return client.account.create({
         data: {

@@ -2,9 +2,6 @@
   "extends": "@huddle/tsconfig/next.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@huddle/ui/*": ["./src/*"],
-    },
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
