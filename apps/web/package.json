@@ -27,6 +27,7 @@
     "@huddle/backend": "*",
     "@huddle/database": "*",
     "@huddle/icons": "*",
+    "@huddle/billing": "*",
     "@huddle/languages": "*",
     "@huddle/tailwind-config": "*",
     "@huddle/ui": "*",
