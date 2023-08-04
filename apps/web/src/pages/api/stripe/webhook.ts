@@ -1,5 +1,5 @@
-import type { Stripe } from "@huddle/backend/stripe";
-import { stripe } from "@huddle/backend/stripe";
+import type { Stripe } from "@huddle/billing";
+import { stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
 import * as Sentry from "@sentry/node";
 import { buffer } from "micro";
