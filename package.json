@@ -3,7 +3,6 @@
   "private": true,
   "version": "3.9.0",
   "scripts": {
-    "postinstall": "yarn db:generate",
     "dev": "turbo dev --filter=@huddle/web",
     "dev:emails": "turbo dev --filter=@huddle/emails",
     "dev:landing": "dotenv -c development turbo dev --filter=@huddle/landing",
@@ -36,7 +35,7 @@
     "@prisma/client": "^5.17.0",
     "@sentry/nextjs": "^8.10.0",
     "framer-motion": "^10.16.4",
-    "next": "^14.2.4",
+    "next": "^14.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
