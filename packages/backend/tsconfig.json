@@ -1,5 +1,5 @@
 {
-  "extends": "@huddle/tsconfig/react.json",
+  "extends": "@huddle/tsconfig/next.json",
   "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
   "exclude": ["node_modules"],
 }

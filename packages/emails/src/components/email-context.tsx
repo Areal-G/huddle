@@ -1,0 +1,16 @@
+import { i18nDefaultConfig, i18nInstance } from "../i18n";
+import { EmailContext } from "../types";
+
+i18nInstance.init({
+  ...i18nDefaultConfig,
+  initImmediate: true,
+});
+
+export const previewEmailContext: EmailContext = {
+  logoUrl: "https://huddle-public.s3.amazonaws.com/images/huddle-logo-mark.png",
+  baseUrl: "https://huddle.dev",
+  domain: "huddle.dev",
+  supportEmail: "support@huddle.dev",
+  i18n: i18nInstance,
+  t: i18nInstance.getFixedT("en"),
+};

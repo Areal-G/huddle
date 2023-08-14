@@ -1,1 +1,1 @@
-export { cn } from "@huddle/ui";
+export { cn } from "./lib/utils";
