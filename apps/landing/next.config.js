@@ -19,12 +19,7 @@ const nextConfig = {
   i18n: i18n,
   productionBrowserSourceMaps: true,
   output: "standalone",
-  transpilePackages: [
-    "@huddle/backend",
-    "@huddle/icons",
-    "@huddle/ui",
-    "@huddle/tailwind-config",
-  ],
+  transpilePackages: ["@huddle/icons", "@huddle/ui", "@huddle/tailwind-config"],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

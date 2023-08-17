@@ -1,9 +1,9 @@
-import { DisableNotificationsPayload } from "@huddle/backend";
-import { decryptToken } from "@huddle/backend/session";
 import { prisma } from "@huddle/database";
 import { GetServerSideProps } from "next";
 
+import type { DisableNotificationsPayload } from "@/trpc/types";
 import { getServerSession } from "@/utils/auth";
+import { decryptToken } from "@/utils/session";
 
 const Page = () => {
   return null;

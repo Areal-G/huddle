@@ -18,7 +18,6 @@ const nextConfig = {
     process.env.NEXT_PUBLIC_SELF_HOSTED === "true" ? "standalone" : undefined,
   productionBrowserSourceMaps: true,
   transpilePackages: [
-    "@huddle/backend",
     "@huddle/database",
     "@huddle/icons",
     "@huddle/ui",
