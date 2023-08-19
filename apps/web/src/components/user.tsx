@@ -3,23 +3,7 @@ import { cn } from "@huddle/ui";
 import { Icon } from "@huddle/ui/icon";
 import { User2Icon } from "lucide-react";
 
-import { useUser } from "@/components/user-provider";
 import { getRandomAvatarColor } from "@/utils/color-hash";
-
-export const CurrentUserAvatar = ({
-  size = "md",
-  className,
-}: Omit<UserAvatarProps, "name">) => {
-  const { user } = useUser();
-
-  return (
-    <UserAvatar
-      className={className}
-      name={user.isGuest ? undefined : user.name}
-      size={size}
-    />
-  );
-};
 
 interface UserAvatarProps {
   name?: string;
