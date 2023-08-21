@@ -16,6 +16,13 @@ require("dotenv").config({
 const nextConfig = {
   output:
     process.env.NEXT_PUBLIC_SELF_HOSTED === "true" ? "standalone" : undefined,
+  images: {
+    remotePatterns: [
+      {
+        hostname: "app.huddle.dev",
+      },
+    ],
+  },
   productionBrowserSourceMaps: true,
   transpilePackages: [
     "@huddle/database",
