@@ -20,6 +20,7 @@ const nextConfig = {
     remotePatterns: [
       {
         hostname: "app.huddle.dev",
+        pathname: "/api/storage/**",
       },
     ],
   },
