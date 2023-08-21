@@ -23,7 +23,7 @@ const nextConfig = {
         pathname: "/api/storage/**",
       },
       {
-        hostname: "huddle-public.s3.amazonaws.com",
+        hostname: "d39ixtfgglw55o.cloudfront.net",
       },
     ],
   },
