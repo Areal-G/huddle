@@ -22,6 +22,9 @@ const nextConfig = {
         hostname: "app.huddle.dev",
         pathname: "/api/storage/**",
       },
+      {
+        hostname: "huddle-public.s3.amazonaws.com",
+      },
     ],
   },
   productionBrowserSourceMaps: true,
