@@ -3,7 +3,6 @@
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
-const i18n = require("./i18n.config.js");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -16,10 +15,14 @@ function createAppUrl(subpath) {
 }
 
 const nextConfig = {
-  i18n: i18n,
   productionBrowserSourceMaps: true,
   output: "standalone",
-  transpilePackages: ["@huddle/icons", "@huddle/ui", "@huddle/tailwind-config"],
+  transpilePackages: [
+    "@huddle/icons",
+    "@huddle/ui",
+    "@huddle/tailwind-config",
+    "next-mdx-remote",
+  ],
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
