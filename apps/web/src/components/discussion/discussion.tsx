@@ -15,7 +15,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { useToast } from "@huddle/ui/hooks/use-toast";
 import { Icon } from "@huddle/ui/icon";
 import { Input } from "@huddle/ui/input";
 import { Textarea } from "@huddle/ui/textarea";
@@ -78,6 +77,13 @@ function NewCommentForm({
 
   const queryClient = trpc.useUtils();
 
+  const addComment = trpc.polls.comments.add.useMutation({
+    onSuccess: () => {
+      queryClient.polls.comments.invalidate();
+      posthog?.capture("created comment");
+    },
+  });
+
   const session = useUser();
 
   const { register, reset, control, handleSubmit, formState } =
@@ -87,20 +93,7 @@ function NewCommentForm({
         content: "",
       },
     });
-  const { toast } = useToast();
 
-  const addComment = trpc.polls.comments.add.useMutation({
-    onSuccess: () => {
-      queryClient.polls.comments.invalidate();
-      posthog?.capture("created comment");
-    },
-    onError: (error) => {
-      toast({
-        title: "Error",
-        description: error.message,
-      });
-    },
-  });
   return (
     <form
       className="w-full space-y-2.5"
