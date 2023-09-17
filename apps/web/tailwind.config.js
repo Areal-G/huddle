@@ -1,8 +1,3 @@
-const sharedConfig = require("@huddle/tailwind-config/tailwind.config");
+const sharedConfig = require("@huddle/tailwind-config");
 
-module.exports = {
-  ...sharedConfig,
-  theme: {
-    ...sharedConfig.theme,
-  },
-};
+module.exports = sharedConfig;
