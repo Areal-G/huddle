@@ -4,5 +4,7 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "cSpell.words": ["Huddle", "Vella"]
+  "cSpell.words": ["Huddle", "Vella"],
+  "jestrunner.codeLensSelector": "",
+  "vitest.filesWatcherInclude": "**/*.test.ts"
 }
