@@ -1,7 +1,6 @@
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { Card, CardFooter, CardHeader, CardTitle } from "@huddle/ui/card";
-import { Flex } from "@huddle/ui/flex";
 import { Icon } from "@huddle/ui/icon";
 import {
   Select,
@@ -102,7 +101,7 @@ const MobilePoll: React.FunctionComponent = () => {
                 </SelectItem>
                 {visibleParticipants.map((participant) => (
                   <SelectItem key={participant.id} value={participant.id}>
-                    <Flex gap="sm">
+                    <Participant>
                       <OptimizedAvatarImage name={participant.name} size="xs" />
                       <ParticipantName>{participant.name}</ParticipantName>
                       {session.ownsObject(participant) && (
@@ -110,7 +109,7 @@ const MobilePoll: React.FunctionComponent = () => {
                           <Trans i18nKey="you" />
                         </Badge>
                       )}
-                    </Flex>
+                    </Participant>
                   </SelectItem>
                 ))}
               </SelectContent>
