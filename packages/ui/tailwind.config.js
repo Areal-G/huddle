@@ -1,3 +1,1 @@
-const sharedConfig = require("@huddle/tailwind-config/tailwind.config");
-
-module.exports = sharedConfig;
+module.exports = require("@huddle/tailwind-config/tailwind.config");

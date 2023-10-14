@@ -21,6 +21,7 @@ const nextConfig = {
     "@huddle/icons",
     "@huddle/ui",
     "@huddle/tailwind-config",
+    "@huddle/utils",
     "next-mdx-remote",
   ],
   webpack(config) {

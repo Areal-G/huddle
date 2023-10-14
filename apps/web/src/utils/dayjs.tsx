@@ -1,4 +1,4 @@
-import { TimeFormat } from "@huddle/database";
+import type { TimeFormat } from "@huddle/database";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import duration from "dayjs/plugin/duration";

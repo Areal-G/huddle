@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from "@huddle/ui/button";
+import type { ButtonProps } from "@huddle/ui/button";
+import { Button } from "@huddle/ui/button";
 import {
   Dialog,
   DialogClose,

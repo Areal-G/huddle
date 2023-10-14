@@ -1,5 +1,7 @@
 "use client";
 import { Button } from "@huddle/ui/button";
+import type {
+  DialogProps} from "@huddle/ui/dialog";
 import {
   Dialog,
   DialogClose,
@@ -7,7 +9,6 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogProps,
   DialogTitle,
 } from "@huddle/ui/dialog";
 import { useRouter } from "next/navigation";

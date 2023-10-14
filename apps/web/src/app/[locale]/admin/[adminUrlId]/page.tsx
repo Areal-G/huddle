@@ -1,10 +1,10 @@
 import { prisma } from "@huddle/database";
+import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { notFound } from "next/navigation";
 
 import { Redirect } from "@/app/components/redirect";
-import { absoluteUrl } from "@/utils/absolute-url";
 
-import { PParams } from "./types";
+import type { PParams } from "./types";
 
 export default async function Page({ params }: { params: PParams }) {
   const { adminUrlId } = params;

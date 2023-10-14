@@ -1,5 +1,5 @@
 "use client";
-import { Participant, VoteType } from "@huddle/database";
+import type { Participant, VoteType } from "@huddle/database";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import { Icon } from "@huddle/ui/icon";

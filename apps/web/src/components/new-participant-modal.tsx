@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { VoteType } from "@huddle/database";
+import type { VoteType } from "@huddle/database";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { FormMessage } from "@huddle/ui/form";

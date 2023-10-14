@@ -1,5 +1,5 @@
 import { prisma } from "@huddle/database";
-import { TFunction } from "i18next";
+import type { TFunction } from "i18next";
 import {
   CalendarCheck2Icon,
   LanguagesIcon,

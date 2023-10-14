@@ -1,4 +1,4 @@
-import { TimeFormat } from "@huddle/database";
+import type { TimeFormat } from "@huddle/database";
 import React from "react";
 import { useSetState } from "react-use";
 

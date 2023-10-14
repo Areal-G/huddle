@@ -1,4 +1,4 @@
-import { PollStatus } from "@huddle/database";
+import type { PollStatus } from "@huddle/database";
 import { cn } from "@huddle/ui";
 
 import { Trans } from "@/components/trans";

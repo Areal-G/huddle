@@ -1,8 +1,9 @@
-import { EmailClient, SupportedEmailProviders } from "@huddle/emails";
+import type { SupportedEmailProviders } from "@huddle/emails";
+import { EmailClient } from "@huddle/emails";
+import { absoluteUrl } from "@huddle/utils/absolute-url";
 import * as Sentry from "@sentry/nextjs";
 
 import { env } from "@/env";
-import { absoluteUrl } from "@/utils/absolute-url";
 import { isSelfHosted } from "@/utils/constants";
 
 export const getEmailClient = (locale?: string) => {

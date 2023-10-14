@@ -3,7 +3,7 @@ import { stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
 import * as Sentry from "@sentry/node";
 import { buffer } from "micro";
-import { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
 import { posthog, posthogApiHandler } from "@/app/posthog";

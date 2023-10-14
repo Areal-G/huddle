@@ -1,4 +1,4 @@
-import { PollStatus, User, VoteType } from "@huddle/database";
+import type { PollStatus, User, VoteType } from "@huddle/database";
 
 export type GetPollApiResponse = {
   id: string;

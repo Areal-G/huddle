@@ -1,4 +1,4 @@
-import { EmailClient } from "@huddle/emails";
+import type { EmailClient } from "@huddle/emails";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export type TRPCContext = {

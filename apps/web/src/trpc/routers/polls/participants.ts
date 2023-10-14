@@ -1,12 +1,12 @@
 import { prisma } from "@huddle/database";
+import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
-import { absoluteUrl } from "@/utils/absolute-url";
 import { createToken } from "@/utils/session";
 
 import { publicProcedure, rateLimitMiddleware, router } from "../../trpc";
-import { DisableNotificationsPayload } from "../../types";
+import type { DisableNotificationsPayload } from "../../types";
 
 export const participants = router({
   list: publicProcedure

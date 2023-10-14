@@ -2,10 +2,11 @@
 
 import { pricingData } from "@huddle/billing/pricing";
 import { Badge } from "@huddle/ui/badge";
+import type {
+  DialogProps} from "@huddle/ui/dialog";
 import {
   Dialog,
   DialogContent,
-  DialogProps,
   useDialog,
 } from "@huddle/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@huddle/ui/radio-group";

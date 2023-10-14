@@ -9,8 +9,9 @@ import {
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
+import type {
+  CalendarEvent} from "calendar-link";
 import {
-  CalendarEvent,
   google,
   ics,
   office365,

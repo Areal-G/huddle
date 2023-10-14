@@ -1,6 +1,6 @@
 "use client";
 
-import { SelectProps } from "@radix-ui/react-select";
+import type { SelectProps } from "@radix-ui/react-select";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import {

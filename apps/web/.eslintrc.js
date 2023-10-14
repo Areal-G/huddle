@@ -1,4 +1,4 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  ...require("@huddle/eslint-config")(__dirname),
+  ...require("@huddle/eslint-config/next")(__dirname),
 };

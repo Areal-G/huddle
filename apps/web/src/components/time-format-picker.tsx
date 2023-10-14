@@ -1,4 +1,4 @@
-import { TimeFormat } from "@huddle/database";
+import type { TimeFormat } from "@huddle/database";
 import { RadioGroup, RadioGroupItem } from "@huddle/ui/radio-group";
 
 import { Trans } from "@/components/trans";

@@ -1,4 +1,4 @@
-import { VoteType } from "@huddle/database";
+import type { VoteType } from "@huddle/database";
 import { cn } from "@huddle/ui";
 import * as React from "react";
 

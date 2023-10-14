@@ -1,5 +1,5 @@
 "use client";
-import { PollStatus } from "@huddle/database";
+import type { PollStatus } from "@huddle/database";
 import { cn } from "@huddle/ui";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";

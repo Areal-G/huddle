@@ -1,4 +1,4 @@
-import { VoteType } from "@huddle/database";
+import type { VoteType } from "@huddle/database";
 import { IfNeedBeIcon, NoIcon, PendingIcon, YesIcon } from "@huddle/icons";
 import clsx from "clsx";
 import * as React from "react";

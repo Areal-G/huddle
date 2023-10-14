@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+  },
   "extends": "@huddle/tsconfig/react.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }
