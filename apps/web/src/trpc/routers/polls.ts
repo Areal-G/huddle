@@ -1,6 +1,7 @@
 import type { PollStatus } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { absoluteUrl, shortUrl } from "@huddle/utils/absolute-url";
+import { nanoid } from "@huddle/utils/nanoid";
 import { TRPCError } from "@trpc/server";
 import dayjs from "dayjs";
 import * as ics from "ics";
@@ -10,7 +11,6 @@ import { posthog } from "@/app/posthog";
 import { getEmailClient } from "@/utils/emails";
 
 import { getTimeZoneAbbreviation } from "../../utils/date";
-import { nanoid } from "../../utils/nanoid";
 import {
   possiblyPublicProcedure,
   proProcedure,

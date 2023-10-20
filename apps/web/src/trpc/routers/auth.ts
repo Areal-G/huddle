@@ -1,9 +1,9 @@
 import { prisma } from "@huddle/database";
+import { generateOtp } from "@huddle/utils/nanoid";
 import { z } from "zod";
 
 import { posthog } from "@/app/posthog";
 import { isEmailBlocked } from "@/auth";
-import { generateOtp } from "@/utils/nanoid";
 import { createToken, decryptToken } from "@/utils/session";
 
 import { publicProcedure, rateLimitMiddleware, router } from "../trpc";

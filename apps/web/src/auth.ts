@@ -1,5 +1,6 @@
 import { prisma } from "@huddle/database";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
+import { generateOtp, randomid } from "@huddle/utils/nanoid";
 import type {
   GetServerSidePropsContext,
   NextApiRequest,
@@ -22,7 +23,6 @@ import { env } from "@/env";
 import type { RegistrationTokenPayload } from "@/trpc/types";
 import { getEmailClient } from "@/utils/emails";
 import { getValueByPath } from "@/utils/get-value-by-path";
-import { generateOtp, randomid } from "@/utils/nanoid";
 import { decryptToken } from "@/utils/session";
 
 const providers: Provider[] = [

@@ -2,6 +2,6 @@
   "compilerOptions": {
     "types": ["vitest/globals"],
   },
-  "extends": "@huddle/tsconfig/react.json",
+  "extends": "@huddle/tsconfig/base.json",
   "include": ["**/*.ts", "**/*.tsx"],
 }
