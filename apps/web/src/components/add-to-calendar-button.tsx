@@ -9,15 +9,8 @@ import {
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
-import type {
-  CalendarEvent} from "calendar-link";
-import {
-  google,
-  ics,
-  office365,
-  outlook,
-  yahoo,
-} from "calendar-link";
+import type { CalendarEvent } from "calendar-link";
+import { google, ics, office365, outlook, yahoo } from "calendar-link";
 import { DownloadIcon, PlusIcon } from "lucide-react";
 import Image from "next/image";
 

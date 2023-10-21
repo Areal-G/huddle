@@ -1,7 +1,6 @@
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
-import type {
-  DialogProps} from "@huddle/ui/dialog";
+import type { DialogProps } from "@huddle/ui/dialog";
 import {
   Dialog,
   DialogClose,
