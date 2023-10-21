@@ -1,12 +1,12 @@
 import type { Stripe } from "@huddle/billing";
 import { stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
+import { posthog, posthogApiHandler } from "@huddle/posthog/server";
 import * as Sentry from "@sentry/node";
 import { buffer } from "micro";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
 
-import { posthog, posthogApiHandler } from "@/app/posthog";
 import { composeApiHandlers } from "@/utils/next";
 
 export const config = {

@@ -1,6 +1,6 @@
+import { posthogApiHandler } from "@huddle/posthog/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { posthogApiHandler } from "@/app/posthog";
 import { AuthApiRoute } from "@/auth";
 import { composeApiHandlers } from "@/utils/next";
 

@@ -1,4 +1,5 @@
 "use client";
+import { usePostHog } from "@huddle/posthog/client";
 import { Alert, AlertDescription, AlertTitle } from "@huddle/ui/alert";
 import { Button } from "@huddle/ui/button";
 import { Input } from "@huddle/ui/input";
@@ -16,7 +17,6 @@ import { VerifyCode, verifyCode } from "@/components/auth/auth-forms";
 import { Spinner } from "@/components/spinner";
 import { isSelfHosted } from "@/utils/constants";
 import { validEmail } from "@/utils/form-validation";
-import { usePostHog } from "@/utils/posthog";
 
 const allowGuestAccess = !isSelfHosted;
 

@@ -1,9 +1,8 @@
+import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import Link from "next/link";
 import { Trans } from "next-i18next";
 import React from "react";
-
-import { usePostHog } from "@/utils/posthog";
 
 export const UpgradeButton = ({
   children,

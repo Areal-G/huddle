@@ -22,6 +22,8 @@ const nextConfig = {
     "@huddle/icons",
     "@huddle/ui",
     "@huddle/tailwind-config",
+    "@huddle/posthog",
+    "@huddle/emails",
   ],
   webpack(config) {
     config.module.rules.push({

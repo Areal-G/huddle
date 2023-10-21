@@ -1,5 +1,6 @@
 "use client";
 
+import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -8,7 +9,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@huddle/ui/dialog";
-import { usePostHog } from "posthog-js/react";
 import React, { useState } from "react";
 
 import { Trans } from "@/components/trans";

@@ -1,5 +1,6 @@
 "use client";
 
+import { usePostHog } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import { DialogTrigger } from "@huddle/ui/dialog";
@@ -26,7 +27,6 @@ import { Trans } from "@/components/trans";
 import { IfGuest, useUser } from "@/components/user-provider";
 import { IfFreeUser } from "@/contexts/plan";
 import type { IconComponent } from "@/types";
-import { usePostHog } from "@/utils/posthog";
 
 function NavItem({
   href,
