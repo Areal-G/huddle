@@ -126,7 +126,6 @@ async function main() {
       id: "pro-user",
       name: "Pro User",
       email: "dev+pro@huddle.dev",
-      customerId: "cus_123",
       subscription: {
         create: {
           id: "sub_123",
