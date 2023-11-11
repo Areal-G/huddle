@@ -6,5 +6,6 @@
   "typescript.preferences.importModuleSpecifier": "shortest",
   "cSpell.words": ["Huddle", "Vella"],
   "jestrunner.codeLensSelector": "",
-  "vitest.filesWatcherInclude": "**/*.test.ts"
+  "vitest.filesWatcherInclude": "**/*.test.ts",
+  "editor.formatOnSave": true
 }
