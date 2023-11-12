@@ -1,10 +1,5 @@
 {
   "extends": "@huddle/tsconfig/next.json",
-  "compilerOptions": {
-    "strict": true,
-    "strictNullChecks": true,
-    "resolveJsonModule": true
-  },
   "files": ["i18next.d.ts"],
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", ".react-email"]
