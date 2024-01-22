@@ -20,7 +20,7 @@ export const getEmailClient = (locale?: string) => {
     config: {
       logoUrl: isSelfHosted
         ? absoluteUrl("/images/huddle-logo-mark.png")
-        : "https://huddle-public.s3.amazonaws.com/images/huddle-logo-mark.png",
+        : "https://d39ixtfgglw55o.cloudfront.net/images/huddle-logo-mark.png",
       baseUrl: absoluteUrl(),
       domain: absoluteUrl().replace(/(^\w+:|^)\/\//, ""),
       supportEmail: env.SUPPORT_EMAIL,

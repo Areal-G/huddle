@@ -7,7 +7,7 @@ i18nInstance.init({
 });
 
 export const previewEmailContext: EmailContext = {
-  logoUrl: "https://huddle-public.s3.amazonaws.com/images/huddle-logo-mark.png",
+  logoUrl: "https://d39ixtfgglw55o.cloudfront.net/images/huddle-logo-mark.png",
   baseUrl: "https://huddle.dev",
   domain: "huddle.dev",
   supportEmail: "support@huddle.dev",
