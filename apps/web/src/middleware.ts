@@ -1,8 +1,8 @@
 import languages from "@huddle/languages";
+import { getPreferredLocale } from "@huddle/languages/get-preferred-locale";
 import { withPostHog } from "@huddle/posthog/next/middleware";
 import { NextResponse } from "next/server";
 
-import { getLocaleFromHeader } from "@/app/guest";
 import { withAuth } from "@/auth/edge";
 
 const supportedLocales = Object.keys(languages);
@@ -25,7 +25,7 @@ export const middleware = withAuth(async (req) => {
     newUrl.pathname = `/${locale}${newUrl.pathname}`;
   } else {
     // Check if locale is specified in header
-    locale = await getLocaleFromHeader(req);
+    locale = await getPreferredLocale(req);
     newUrl.pathname = `/${locale}${newUrl.pathname}`;
   }
 
