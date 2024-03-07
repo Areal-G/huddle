@@ -1,3 +1,4 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
@@ -118,6 +119,7 @@ export const FinalizePollForm = ({
       selectedOptionId: options[0].id,
       notify: "all",
     },
+    resolver: zodResolver(formSchema),
   });
 
   return (
