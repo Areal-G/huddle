@@ -5,8 +5,8 @@ import { Badge } from "@huddle/ui/badge";
 import type { DialogProps } from "@huddle/ui/dialog";
 import { Dialog, DialogContent, useDialog } from "@huddle/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@huddle/ui/radio-group";
-import { m } from "framer-motion";
 import { CheckIcon } from "lucide-react";
+import * as m from "motion/react-m";
 import Link from "next/link";
 import React from "react";
 
