@@ -1,6 +1,6 @@
 import type { PollStatus } from "@huddle/database";
 import { Button } from "@huddle/ui/button";
-import { shortUrl } from "@huddle/utils/absolute-url";
+import { absoluteUrl, shortUrl } from "@huddle/utils/absolute-url";
 import { InboxIcon } from "lucide-react";
 import Link from "next/link";
 import { z } from "zod";
@@ -186,6 +186,7 @@ export default async function Page({
                       title={poll.title}
                       status={poll.status}
                       participants={poll.participants}
+                      pollLink={absoluteUrl(`/poll/${poll.id}`)}
                       inviteLink={shortUrl(`/invite/${poll.id}`)}
                     />
                   ))}
