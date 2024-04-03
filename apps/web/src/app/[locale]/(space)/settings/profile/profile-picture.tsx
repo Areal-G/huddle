@@ -1,3 +1,5 @@
+"use client";
+
 import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import { useToast } from "@huddle/ui/hooks/use-toast";
