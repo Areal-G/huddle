@@ -15,11 +15,12 @@
   },
   "dependencies": {
     "@radix-ui/react-radio-group": "^1.2.3",
-    "@huddle/ui": "*",
-    "next": "*",
+    "@huddle/database": "workspace:*",
+    "@huddle/ui": "workspace:*",
     "stripe": "^13.2.0"
   },
   "devDependencies": {
-    "@huddle/eslint-config": "*"
+    "@huddle/eslint-config": "workspace:*",
+    "@huddle/tsconfig": "workspace:*"
   }
 }

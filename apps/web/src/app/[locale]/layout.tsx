@@ -1,8 +1,7 @@
-import "tailwindcss/tailwind.css";
 import "../../style.css";
 
 import { defaultLocale, supportedLngs } from "@huddle/languages";
-import { PostHogProvider } from "@huddle/posthog/client";
+import { posthog, PostHogProvider } from "@huddle/posthog/client";
 import { Toaster } from "@huddle/ui/toaster";
 import { TooltipProvider } from "@huddle/ui/tooltip";
 import { domAnimation, LazyMotion } from "motion/react";
@@ -61,7 +60,7 @@ export default async function Root({
         <I18nProvider locale={locale}>
           <TRPCProvider>
             <LazyMotion features={domAnimation}>
-              <PostHogProvider>
+              <PostHogProvider client={posthog}>
                 <PostHogPageView />
                 <TooltipProvider>
                   <UserProvider
