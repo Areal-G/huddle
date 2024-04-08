@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "@huddle/eslint-config": "workspace:*",
     "@huddle/tsconfig": "workspace:*",
     "@types/node": "^18.19.41",
     "prisma": "^6.4.1",

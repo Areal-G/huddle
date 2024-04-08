@@ -1,13 +1,13 @@
 import "../../style.css";
 
 import { defaultLocale, supportedLngs } from "@huddle/languages";
-import { posthog, PostHogProvider } from "@huddle/posthog/client";
+import { PostHogProvider, posthog } from "@huddle/posthog/client";
 import { Toaster } from "@huddle/ui/toaster";
 import { TooltipProvider } from "@huddle/ui/tooltip";
-import { domAnimation, LazyMotion } from "motion/react";
+import { LazyMotion, domAnimation } from "motion/react";
 import type { Viewport } from "next";
 import { Inter } from "next/font/google";
-import React from "react";
+import type React from "react";
 
 import { TimeZoneChangeDetector } from "@/app/[locale]/timezone-change-detector";
 import { UserProvider } from "@/components/user-provider";

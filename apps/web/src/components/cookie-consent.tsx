@@ -48,6 +48,7 @@ const CookieConsentPopover = () => {
                   Privacy Policy
                 </Link>
                 <button
+                  type="button"
                   onClick={() => {
                     Cookies.set("huddle_cookie_consent", "1", { expires: 365 });
                     setVisible(false);

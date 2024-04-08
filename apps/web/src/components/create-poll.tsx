@@ -11,7 +11,7 @@ import {
 import { Form } from "@huddle/ui/form";
 import { useToast } from "@huddle/ui/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import React from "react";
+import type React from "react";
 import { useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 import { useUnmount } from "react-use";

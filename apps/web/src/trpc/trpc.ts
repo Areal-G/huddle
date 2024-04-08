@@ -1,6 +1,6 @@
 import { prisma } from "@huddle/database";
 import { posthog } from "@huddle/posthog/server";
-import { initTRPC, TRPCError } from "@trpc/server";
+import { TRPCError, initTRPC } from "@trpc/server";
 import { Ratelimit } from "@upstash/ratelimit";
 import { kv } from "@vercel/kv";
 import superjson from "superjson";

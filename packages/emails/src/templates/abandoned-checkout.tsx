@@ -133,14 +133,11 @@ AbandonedCheckoutEmail.getSubject = (
   props: AbandonedCheckoutEmailProps,
   ctx: EmailContext,
 ) => {
-  return (
-    "🎉 " +
-    ctx.t("abandoned_checkout_subject", {
-      defaultValue: "Get {{discount}}% off your first year of Huddle Pro",
-      discount: props.discount,
-      ns: "emails",
-    })
-  );
+  return `🎉 ${ctx.t("abandoned_checkout_subject", {
+    defaultValue: "Get {{discount}}% off your first year of Huddle Pro",
+    discount: props.discount,
+    ns: "emails",
+  })}`;
 };
 
 export default AbandonedCheckoutEmail;

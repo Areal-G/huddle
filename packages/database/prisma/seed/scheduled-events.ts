@@ -1,7 +1,7 @@
-import { ScheduledEventInviteStatus } from "@prisma/client";
-import { Prisma, ScheduledEventStatus } from "@prisma/client"; // Ensure Prisma is imported
-import dayjs from "dayjs";
 import { faker } from "@faker-js/faker";
+import type { ScheduledEventInviteStatus } from "@prisma/client";
+import { type Prisma, ScheduledEventStatus } from "@prisma/client"; // Ensure Prisma is imported
+import dayjs from "dayjs";
 
 import { prisma } from "@huddle/database";
 import { randInt } from "./utils";

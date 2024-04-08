@@ -10,8 +10,8 @@ import {
   FormMessage,
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

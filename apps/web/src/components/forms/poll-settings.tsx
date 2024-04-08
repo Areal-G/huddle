@@ -11,7 +11,7 @@ import { useDialog } from "@huddle/ui/dialog";
 import { FormField } from "@huddle/ui/form";
 import { Switch } from "@huddle/ui/switch";
 import { AtSignIcon, EyeIcon, MessageCircleIcon, VoteIcon } from "lucide-react";
-import React from "react";
+import type React from "react";
 import { useFormContext } from "react-hook-form";
 import { Trans } from "react-i18next";
 
@@ -52,6 +52,7 @@ const SettingTitle = ({
 
 const Setting = ({ children }: React.PropsWithChildren) => {
   return (
+    // biome-ignore lint/a11y/noLabelWithoutControl: Fix this later
     <label
       className={cn(
         "cursor-pointer bg-white hover:bg-gray-50 active:bg-gray-100",
