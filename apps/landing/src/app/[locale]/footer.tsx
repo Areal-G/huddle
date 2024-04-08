@@ -1,6 +1,5 @@
 "use client";
 
-import { DiscordIcon } from "@huddle/icons";
 import languages, { supportedLngs } from "@huddle/languages";
 import { Button } from "@huddle/ui/button";
 import {
@@ -10,17 +9,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@huddle/ui/select";
-import {
-  GithubIcon,
-  LanguagesIcon,
-  LinkedinIcon,
-  TwitterIcon,
-} from "lucide-react";
+import { LanguagesIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import * as React from "react";
 
+import DiscordIcon from "@/assets/discord.svg";
+import GithubIcon from "@/assets/github.svg";
+import LinkedinIcon from "@/assets/linkedin.svg";
+import TwitterIcon from "@/assets/twitter.svg";
 import { Trans } from "@/i18n/client/trans";
 import { useTranslation } from "@/i18n/client/use-translation";
 

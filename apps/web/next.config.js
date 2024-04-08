@@ -15,7 +15,6 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   transpilePackages: [
     "@huddle/database",
-    "@huddle/icons",
     "@huddle/ui",
     "@huddle/tailwind-config",
     "@huddle/posthog",

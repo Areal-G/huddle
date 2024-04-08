@@ -13,7 +13,6 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   output: "standalone",
   transpilePackages: [
-    "@huddle/icons",
     "@huddle/ui",
     "@huddle/tailwind-config",
     "@huddle/utils",

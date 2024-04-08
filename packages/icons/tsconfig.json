@@ -1,5 +1,0 @@
-{
-  "extends": "@huddle/tsconfig/next.json",
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
-}

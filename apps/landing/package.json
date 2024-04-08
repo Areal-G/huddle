@@ -15,7 +15,6 @@
     "@prisma/client": "^6.4.1",
     "@huddle/billing": "workspace:*",
     "@huddle/database": "workspace:*",
-    "@huddle/icons": "workspace:*",
     "@huddle/languages": "workspace:*",
     "@huddle/tailwind-config": "workspace:*",
     "@huddle/ui": "workspace:*",

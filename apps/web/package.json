@@ -33,7 +33,6 @@
     "@huddle/billing": "workspace:*",
     "@huddle/database": "workspace:*",
     "@huddle/emails": "workspace:*",
-    "@huddle/icons": "workspace:*",
     "@huddle/languages": "workspace:*",
     "@huddle/posthog": "workspace:*",
     "@huddle/tailwind-config": "workspace:*",
