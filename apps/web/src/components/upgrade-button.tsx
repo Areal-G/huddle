@@ -1,7 +1,6 @@
 "use client";
 import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
-import Link from "next/link";
 import React from "react";
 
 import { Trans } from "@/components/trans";
