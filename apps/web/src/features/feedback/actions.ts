@@ -20,7 +20,6 @@ export const submitFeedback = async (formData: Feedback) => {
     const { content } = feedbackSchema.parse(formData);
     getEmailClient().sendEmail({
       to: "feedback@huddle.dev",
-      replyTo: user.email,
       subject: "Feedback",
       text: `User: ${user.name} (${user.email})\n\n${content}`,
     });
