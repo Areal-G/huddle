@@ -63,6 +63,7 @@ export async function GET(request: NextRequest) {
       success_url: "https://huddle.dev/licensing/thank-you",
       metadata: {
         licenseType: type,
+        version: 4,
         seats,
       } satisfies LicenseCheckoutMetadata,
     });
