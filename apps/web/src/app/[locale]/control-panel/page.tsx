@@ -11,7 +11,7 @@ import { getLicense } from "@/features/licensing/queries";
 import { prisma } from "@huddle/database";
 import { cn } from "@huddle/ui";
 import { Tile, TileGrid, TileTitle } from "@huddle/ui/tile";
-import { HomeIcon, KeySquareIcon, UsersIcon } from "lucide-react";
+import { GaugeIcon, KeySquareIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 
 async function loadData() {
@@ -36,9 +36,9 @@ export default async function AdminPage() {
       <PageHeader>
         <PageTitle>
           <PageIcon color="indigo">
-            <HomeIcon />
+            <GaugeIcon />
           </PageIcon>
-          <Trans i18nKey="home" defaults="Home" />
+          <Trans i18nKey="controlPanel" defaults="Control Panel" />
         </PageTitle>
       </PageHeader>
       <PageContent className="space-y-8">
