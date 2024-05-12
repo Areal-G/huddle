@@ -41,7 +41,7 @@ export default function LicensingThankYouPage() {
             <li>
               <Link
                 className="text-link"
-                href="https://support.huddle.dev/self-hosted/installation"
+                href="https://support.huddle.dev/self-hosting/installation/docker"
               >
                 <Trans
                   i18nKey="licensingThankYouNextStepsInstallation"
@@ -52,7 +52,7 @@ export default function LicensingThankYouPage() {
             <li>
               <Link
                 className="text-link"
-                href="https://support.huddle.dev/self-hosted/licensing"
+                href="https://support.huddle.dev/self-hosting/licensing#activating-your-license"
               >
                 <Trans
                   i18nKey="licensingThankYouNextStepsApplyLicense"
