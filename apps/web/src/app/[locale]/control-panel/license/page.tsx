@@ -139,7 +139,7 @@ export default async function LicensePage() {
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href="https://support.huddle.dev/self-hosting/pricing"
+                  href="https://support.huddle.dev/self-hosting/licensing"
                 >
                   <Icon>
                     <ShoppingBagIcon />
