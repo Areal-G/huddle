@@ -1,4 +1,3 @@
-import { ActionBar } from "@huddle/ui/action-bar";
 import { Button } from "@huddle/ui/button";
 import { SidebarInset, SidebarTrigger } from "@huddle/ui/sidebar";
 import Link from "next/link";
@@ -51,7 +50,6 @@ export default async function Layout({
           <div className="flex flex-1 flex-col">
             <div className="flex flex-1 flex-col">{children}</div>
           </div>
-          <ActionBar />
         </SidebarInset>
       </AppSidebarProvider>
     </TimezoneProvider>
