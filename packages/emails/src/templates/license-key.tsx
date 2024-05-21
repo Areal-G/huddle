@@ -110,7 +110,7 @@ export const LicenseKeyEmail = ({
             a: (
               <Link
                 className="text-link"
-                href="https://docs.huddle.dev/self-hosted"
+                href="https://support.huddle.dev/self-hosting/licensing#activating-your-license"
               />
             ),
           }}
