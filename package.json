@@ -1,7 +1,7 @@
 {
   "name": "huddle",
   "private": true,
-  "version": "4.1.1",
+  "version": "4.1.2",
   "scripts": {
     "dev": "turbo dev --filter=@huddle/web",
     "dev:emails": "turbo dev --filter=@huddle/emails",
