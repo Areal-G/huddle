@@ -2,11 +2,6 @@ import type { Stripe } from "@huddle/billing";
 import { stripe } from "@huddle/billing";
 import type { Prisma } from "@huddle/database";
 import { prisma } from "@huddle/database";
-import { z } from "zod";
-
-export const subscriptionMetadataSchema = z.object({
-  userId: z.string(),
-});
 
 export function toDate(date: number) {
   return new Date(date * 1000);
