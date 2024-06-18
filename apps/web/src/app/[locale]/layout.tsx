@@ -2,6 +2,7 @@ import "../../style.css";
 
 import { supportedLngs } from "@huddle/languages";
 import { PostHogProvider, posthog } from "@huddle/posthog/client";
+import { Toaster as SonnerToast } from "@huddle/ui/sonner";
 import { Toaster } from "@huddle/ui/toaster";
 import { TooltipProvider } from "@huddle/ui/tooltip";
 import { LazyMotion, domAnimation } from "motion/react";
@@ -71,6 +72,7 @@ export default async function Root({
       <body>
         <FeatureFlagsProvider value={{ storage: isStorageEnabled }}>
           <Toaster />
+          <SonnerToast />
           <I18nProvider locale={locale}>
             <TRPCProvider>
               <LazyMotion features={domAnimation}>
