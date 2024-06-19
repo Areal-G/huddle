@@ -16,7 +16,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { useToast } from "@huddle/ui/hooks/use-toast";
 import { Icon } from "@huddle/ui/icon";
 import { Input } from "@huddle/ui/input";
 import { Textarea } from "@huddle/ui/textarea";
@@ -38,6 +37,7 @@ import { useRole } from "@/contexts/role";
 import { useTranslation } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
 
+import { toast } from "@huddle/ui/sonner";
 import { requiredString } from "../../utils/form-validation";
 import TruncatedLinkify from "../poll/truncated-linkify";
 import { useUser } from "../user-provider";
@@ -79,17 +79,13 @@ function NewCommentForm({
         content: "",
       },
     });
-  const { toast } = useToast();
 
   const addComment = trpc.polls.comments.add.useMutation({
     onSuccess: () => {
       posthog?.capture("created comment");
     },
     onError: (error) => {
-      toast({
-        title: "Error",
-        description: error.message,
-      });
+      toast.error(error.message);
     },
   });
   return (
