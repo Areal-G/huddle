@@ -1,7 +1,7 @@
 import "../../style.css";
 
 import { supportedLngs } from "@huddle/languages";
-import { PostHogProvider, posthog } from "@huddle/posthog/client";
+import { PostHogProvider } from "@huddle/posthog/client";
 import { Toaster } from "@huddle/ui/sonner";
 import { TooltipProvider } from "@huddle/ui/tooltip";
 import { LazyMotion, domAnimation } from "motion/react";
@@ -74,7 +74,7 @@ export default async function Root({
           <I18nProvider locale={locale}>
             <TRPCProvider>
               <LazyMotion features={domAnimation}>
-                <PostHogProvider client={posthog}>
+                <PostHogProvider>
                   <PostHogPageView />
                   <TooltipProvider>
                     <UserProvider

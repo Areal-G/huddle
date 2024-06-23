@@ -15,6 +15,7 @@
     "@huddle/billing": "workspace:*",
     "@huddle/database": "workspace:*",
     "@huddle/languages": "workspace:*",
+    "@huddle/posthog": "workspace:*",
     "@huddle/tailwind-config": "workspace:*",
     "@huddle/ui": "workspace:*",
     "@huddle/utils": "workspace:*",
