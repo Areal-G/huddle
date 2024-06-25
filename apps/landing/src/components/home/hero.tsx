@@ -1,4 +1,5 @@
 "use client";
+import { usePostHog } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
@@ -7,11 +8,9 @@ import * as m from "motion/react-m";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
-
 import { handwritten } from "@/fonts/handwritten";
 import { Trans } from "@/i18n/client/trans";
 import { linkToApp } from "@/lib/linkToApp";
-import { usePostHog } from "@huddle/posthog/client";
 
 const Screenshot = () => {
   const [isLoaded, setIsLoaded] = React.useState(false);

@@ -3,10 +3,9 @@ import { DialogTrigger } from "@huddle/ui/dialog";
 import { TrashIcon } from "lucide-react";
 
 import type { Params } from "@/app/[locale]/types";
+import { requireUser } from "@/auth/queries";
 import { Trans } from "@/components/trans";
 import { getTranslation } from "@/i18n/server";
-
-import { requireUser } from "@/auth/queries";
 import {
   SettingsContent,
   SettingsSection,

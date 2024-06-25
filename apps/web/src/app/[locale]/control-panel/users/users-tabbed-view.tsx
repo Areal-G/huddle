@@ -1,11 +1,10 @@
 "use client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@huddle/ui/page-tabs";
-import { useRouter, useSearchParams } from "next/navigation";
-
-import { Trans } from "@/components/trans";
 
 import { cn } from "@huddle/ui";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@huddle/ui/page-tabs";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import { Trans } from "@/components/trans";
 
 export function UsersTabbedView({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();

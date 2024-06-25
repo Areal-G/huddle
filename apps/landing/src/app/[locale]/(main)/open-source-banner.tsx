@@ -1,11 +1,10 @@
 "use client";
 
+import { cn } from "@huddle/ui";
 import { ArrowUpRightIcon } from "lucide-react";
-
+import React from "react";
 import GithubIcon from "@/assets/github.svg";
 import { Trans } from "@/i18n/client/trans";
-import { cn } from "@huddle/ui";
-import React from "react";
 
 export function OpenSourceBanner() {
   const [visible, setVisible] = React.useState(true);

@@ -1,6 +1,6 @@
 import { prisma } from "@huddle/database";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
-import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 
 import { InvitePage } from "@/app/[locale]/invite/[urlId]/invite-page";

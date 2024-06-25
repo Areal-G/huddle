@@ -1,6 +1,6 @@
-import { getActiveSpace } from "@/auth/queries";
 import type { PollStatus, Prisma } from "@huddle/database";
 import { prisma } from "@huddle/database";
+import { getActiveSpace } from "@/auth/queries";
 
 type PollFilters = {
   status?: PollStatus;

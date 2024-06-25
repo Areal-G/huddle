@@ -1,5 +1,5 @@
 import type { Page } from "@playwright/test";
-import { type UserRole, prisma } from "@huddle/database";
+import { prisma, type UserRole } from "@huddle/database";
 import { LoginPage } from "./login-page";
 
 export async function createUserInDb({

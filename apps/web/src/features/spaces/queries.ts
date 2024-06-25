@@ -1,8 +1,8 @@
-import { requireUserAbility } from "@/auth/queries";
 import { accessibleBy } from "@casl/prisma";
-import { type SpaceMemberRole, prisma } from "@huddle/database";
+import { prisma, type SpaceMemberRole } from "@huddle/database";
 import { redirect } from "next/navigation";
 import { cache } from "react";
+import { requireUserAbility } from "@/auth/queries";
 
 export type SpaceDTO = {
   id: string;

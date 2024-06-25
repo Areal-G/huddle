@@ -1,11 +1,11 @@
 "use client";
 
-import { Trans } from "@/components/trans";
 import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import { Icon } from "@huddle/ui/icon";
 import { LogOutIcon } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { Trans } from "@/components/trans";
 
 export const SignOutButton = () => {
   const posthog = usePostHog();

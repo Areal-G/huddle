@@ -13,17 +13,16 @@ import {
   FormMessage,
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
+import { toast } from "@huddle/ui/sonner";
 import Cookies from "js-cookie";
 import { InfoIcon } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
-
 import { Trans } from "@/components/trans";
 import { useUser } from "@/components/user-provider";
 import { trpc } from "@/trpc/client";
-import { toast } from "@huddle/ui/sonner";
 
 const emailChangeFormData = z.object({
   email: z.string().email(),

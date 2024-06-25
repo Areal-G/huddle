@@ -9,10 +9,11 @@
  *
  * See: https://github.com/areal/huddle/issues/949
  */
-import { createUser } from "@/features/user/mutations";
+
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@huddle/database";
 import type { Adapter } from "next-auth/adapters";
+import { createUser } from "@/features/user/mutations";
 
 export function CustomPrismaAdapter(options: {
   migrateData: (userId: string) => Promise<void>;

@@ -2,8 +2,8 @@
 import { Button } from "@huddle/ui/button";
 import { Icon } from "@huddle/ui/icon";
 import { UserIcon } from "lucide-react";
-import { signIn } from "next-auth/react";
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 import { Trans } from "@/components/trans";
 import { useTranslation } from "@/i18n/client";

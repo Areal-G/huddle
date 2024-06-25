@@ -2,9 +2,9 @@ import { cn } from "@huddle/ui";
 import { DotPattern } from "@huddle/ui/dot-pattern";
 
 import {
+  isQuickCreateEnabled,
   QuickCreateButton,
   QuickCreateWidget,
-  isQuickCreateEnabled,
 } from "@/features/quick-create";
 
 export default async function Layout({
