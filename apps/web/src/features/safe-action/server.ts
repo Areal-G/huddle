@@ -1,4 +1,5 @@
-"server-only";
+import "server-only";
+
 import { posthog } from "@huddle/posthog/server";
 import { waitUntil } from "@vercel/functions";
 import { revalidatePath } from "next/cache";
