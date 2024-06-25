@@ -1,4 +1,5 @@
-import { prisma, type TimeFormat } from "@huddle/database";
+import type { TimeFormat } from "@huddle/database";
+import { prisma } from "@huddle/database";
 
 export async function createUser({
   name,

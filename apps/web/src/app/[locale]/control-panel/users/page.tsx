@@ -1,4 +1,5 @@
-import { type Prisma, prisma } from "@huddle/database";
+import type { Prisma } from "@huddle/database";
+import { prisma } from "@huddle/database";
 import { UsersIcon } from "lucide-react";
 import z from "zod";
 import { PageIcon } from "@/app/components/page-icons";

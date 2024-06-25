@@ -1,13 +1,13 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@huddle/ui/button";
+import type { DialogProps } from "@huddle/ui/dialog";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  type DialogProps,
   DialogTitle,
 } from "@huddle/ui/dialog";
 import {

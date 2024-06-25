@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@huddle/ui";
-import { Avatar, AvatarFallback, type AvatarProps } from "@huddle/ui/avatar";
+import type { AvatarProps } from "@huddle/ui/avatar";
+import { Avatar, AvatarFallback } from "@huddle/ui/avatar";
 
 type SpaceIconProps = {
   name: string;
