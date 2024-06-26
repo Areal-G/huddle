@@ -1,6 +1,7 @@
 import { prisma } from "@huddle/database";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { InvitePage } from "@/app/[locale]/invite/[urlId]/invite-page";
@@ -60,7 +61,7 @@ export async function generateMetadata(props: {
     urlId: string;
     locale: string;
   }>;
-}) {
+}): Promise<Metadata> {
   const params = await props.params;
 
   const { urlId } = params;
