@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@huddle/database";
-import { rateLimit } from "@/features/rate-limit";
+import { rateLimit } from "@/lib/rate-limit";
 import { licenseManager } from "../server";
 
 export async function validateLicenseKey(key: string) {
