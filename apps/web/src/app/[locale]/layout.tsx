@@ -1,7 +1,7 @@
 import "../../style.css";
 
 import { supportedLngs } from "@huddle/languages";
-import { PostHogProvider } from "@huddle/posthog/client";
+import { PostHogIdentify, PostHogProvider } from "@huddle/posthog/client";
 import { Toaster } from "@huddle/ui/sonner";
 import { TooltipProvider } from "@huddle/ui/tooltip";
 import { domAnimation, LazyMotion } from "motion/react";
@@ -12,7 +12,8 @@ import type React from "react";
 import { TimeZoneChangeDetector } from "@/app/[locale]/timezone-change-detector";
 import { UserProvider } from "@/components/user-provider";
 import { PreferencesProvider } from "@/contexts/preferences";
-import { getUser } from "@/features/user/queries";
+import { getUser } from "@/features/user/data";
+import type { UserDTO } from "@/features/user/schema";
 import { I18nProvider } from "@/i18n/client";
 import { getLocale } from "@/i18n/server/get-locale";
 import { FeatureFlagsProvider } from "@/lib/feature-flags/client";
@@ -37,9 +38,21 @@ export const viewport: Viewport = {
 async function loadData() {
   const [session, locale] = await Promise.all([auth(), getLocale()]);
 
-  const userId = session?.user?.email ? session.user.id : undefined;
-
-  const user = userId ? await getUser(userId) : null;
+  const user = session?.user
+    ? session.user.email
+      ? await getUser(session.user.id)
+      : ({
+          id: session.user.id,
+          name: "Guest",
+          isGuest: true,
+          email: `${session.user.id}@huddle.dev`,
+          role: "user",
+          locale: session.user.locale ?? undefined,
+          timeZone: session.user.timeZone ?? undefined,
+          timeFormat: session.user.timeFormat ?? undefined,
+          weekStart: session.user.weekStart ?? undefined,
+        } satisfies UserDTO)
+    : null;
 
   return {
     session,
@@ -53,7 +66,7 @@ export default async function Root({
 }: {
   children: React.ReactNode;
 }) {
-  const { session, locale: fallbackLocale, user } = await loadData();
+  const { locale: fallbackLocale, user } = await loadData();
 
   let locale = fallbackLocale;
 
@@ -74,32 +87,10 @@ export default async function Root({
             <TRPCProvider>
               <LazyMotion features={domAnimation}>
                 <PostHogProvider>
+                  <PostHogIdentify distinctId={user?.id} />
                   <PostHogPageView />
                   <TooltipProvider>
-                    <UserProvider
-                      user={
-                        user
-                          ? {
-                              id: user.id,
-                              name: user.name,
-                              email: user.email,
-                              tier: user
-                                ? user.isPro
-                                  ? "pro"
-                                  : "hobby"
-                                : "guest",
-                              image: user.image,
-                              role: user.role,
-                            }
-                          : session?.user
-                            ? {
-                                id: session.user.id,
-                                tier: "guest",
-                                role: "guest",
-                              }
-                            : undefined
-                      }
-                    >
+                    <UserProvider user={user ?? undefined}>
                       <PreferencesProvider
                         initialValue={{
                           timeFormat: user?.timeFormat,

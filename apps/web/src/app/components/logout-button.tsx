@@ -2,19 +2,18 @@
 import type { ButtonProps } from "@huddle/ui/button";
 import { Button } from "@huddle/ui/button";
 
-import { useUser } from "@/components/user-provider";
+import { signOut } from "next-auth/react";
 
 export function LogoutButton({
   children,
   onClick,
   ...rest
 }: React.PropsWithChildren<ButtonProps>) {
-  const { logout } = useUser();
   return (
     <Button
       {...rest}
       onClick={async (e) => {
-        await logout();
+        await signOut();
         onClick?.(e);
       }}
     >
