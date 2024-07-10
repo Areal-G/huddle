@@ -5,7 +5,7 @@ import { accessibleBy } from "@casl/prisma";
 import { prisma } from "@huddle/database";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { z } from "zod";
-import { increaseSpaceSeatCount } from "@/features/billing/mutations";
+import { updateSeatCount } from "@/features/billing/mutations";
 import { memberRoleSchema } from "@/features/space/schema";
 import { toDBRole } from "@/features/space/utils";
 import { setActiveSpace } from "@/features/user/mutations";
@@ -280,7 +280,7 @@ export const acceptInviteAction = authActionClient
       });
 
       if (isFeatureEnabled("billing")) {
-        await increaseSpaceSeatCount(spaceMemberInvite.spaceId);
+        await updateSeatCount(spaceMemberInvite.spaceId, 1);
       }
     });
 
