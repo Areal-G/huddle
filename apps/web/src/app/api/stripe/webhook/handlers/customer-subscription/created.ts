@@ -1,6 +1,5 @@
 import type { Stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
-
 import { subscriptionMetadataSchema } from "@/features/subscription/schema";
 import {
   getExpandedSubscription,
