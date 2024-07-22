@@ -1,6 +1,6 @@
 "use client";
 
-import { pricingData } from "@huddle/billing/pricing";
+import { PLAN_NAMES, pricingData } from "@huddle/billing";
 import { Badge } from "@huddle/ui/badge";
 import {
   BillingPlan,
@@ -49,9 +49,7 @@ export function PriceTables() {
       <div className="mx-auto grid gap-4 sm:gap-6 md:grid-cols-2">
         <BillingPlan>
           <BillingPlanHeader>
-            <BillingPlanTitle>
-              <Trans t={t} ns="pricing" i18nKey="planFree" defaults="Free" />
-            </BillingPlanTitle>
+            <BillingPlanTitle>{PLAN_NAMES.HOBBY}</BillingPlanTitle>
             <BillingPlanDescription>
               <Trans
                 t={t}
@@ -104,9 +102,7 @@ export function PriceTables() {
         </BillingPlan>
         <BillingPlan className="relative">
           <BillingPlanHeader>
-            <BillingPlanTitle>
-              <Trans t={t} ns="pricing" i18nKey="planPro" defaults="Pro" />
-            </BillingPlanTitle>
+            <BillingPlanTitle>{PLAN_NAMES.PRO}</BillingPlanTitle>
             <BillingPlanDescription>
               <Trans
                 t={t}
