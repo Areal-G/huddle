@@ -1,5 +1,4 @@
 "use client";
-import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -24,7 +23,6 @@ export function DuplicateDialog({
   ...props
 }: DialogProps & { pollId: string; pollTitle: string }) {
   const duplicate = trpc.polls.duplicate.useMutation();
-  const posthog = usePostHog();
   const router = useRouter();
   return (
     <Dialog {...props}>
@@ -47,10 +45,6 @@ export function DuplicateDialog({
               { pollId, newTitle: data.title },
               {
                 onSuccess: async (res) => {
-                  posthog?.capture("duplicate poll", {
-                    pollId,
-                    newPollId: res.id,
-                  });
                   router.push(`/poll/${res.id}`);
                 },
               },
