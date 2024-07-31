@@ -1,4 +1,5 @@
 import { prisma } from "@huddle/database";
+import { posthog } from "@huddle/posthog/server";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
@@ -136,6 +137,15 @@ export const user = router({
           ),
           fromEmail: currentUser.email,
           toEmail: input.email,
+        },
+      });
+
+      posthog?.capture({
+        event: "account_email_change_request",
+        distinctId: ctx.user.id,
+        properties: {
+          toEmail: input.email,
+          fromEmail: currentUser.email,
         },
       });
 

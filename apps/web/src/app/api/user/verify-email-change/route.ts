@@ -1,10 +1,11 @@
 import { stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
+import { posthog } from "@huddle/posthog/server";
 import * as Sentry from "@sentry/nextjs";
+import { waitUntil } from "@vercel/functions";
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-
 import { auth } from "@/next-auth";
 import { decryptToken } from "@/utils/session";
 
@@ -40,6 +41,16 @@ const handleEmailChange = async (token: string) => {
     },
   });
 
+  posthog?.capture({
+    event: "account_email_change_complete",
+    distinctId: payload.userId,
+    properties: {
+      $set: {
+        email: payload.toEmail,
+      },
+    },
+  });
+
   try {
     if (user.customerId) {
       await stripe.customers.update(user.customerId, {
@@ -51,6 +62,10 @@ const handleEmailChange = async (token: string) => {
   }
 
   await setEmailChangeCookie("success");
+
+  if (posthog) {
+    waitUntil(posthog.flush());
+  }
 
   return true;
 };
