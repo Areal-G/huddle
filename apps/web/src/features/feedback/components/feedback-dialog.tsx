@@ -2,24 +2,17 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@huddle/ui/button";
+import type { DialogProps } from "@huddle/ui/dialog";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@huddle/ui/dialog";
 import { Form, FormField, FormItem, FormMessage } from "@huddle/ui/form";
-import { Icon } from "@huddle/ui/icon";
 import { Textarea } from "@huddle/ui/textarea";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipPortal,
-  TooltipTrigger,
-} from "@huddle/ui/tooltip";
-import { CheckCircle2Icon, MegaphoneIcon } from "lucide-react";
+import { CheckCircle2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { Trans } from "@/components/trans";
@@ -30,7 +23,7 @@ import { submitFeedbackAction } from "../actions";
 import type { Feedback } from "../schema";
 import { feedbackSchema } from "../schema";
 
-export function FeedbackToggle() {
+export function FeedbackDialog(props: DialogProps) {
   const submitFeedback = useSafeAction(submitFeedbackAction);
   const form = useForm<Feedback>({
     resolver: zodResolver(feedbackSchema),
@@ -41,23 +34,7 @@ export function FeedbackToggle() {
   }
 
   return (
-    <Dialog>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <DialogTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <Icon>
-                <MegaphoneIcon />
-              </Icon>
-            </Button>
-          </DialogTrigger>
-        </TooltipTrigger>
-        <TooltipPortal>
-          <TooltipContent>
-            <Trans i18nKey="feedback" defaults="Feedback" />
-          </TooltipContent>
-        </TooltipPortal>
-      </Tooltip>
+    <Dialog {...props}>
       <DialogContent>
         {!form.formState.isSubmitSuccessful ? (
           <>
