@@ -1,4 +1,5 @@
 "use client";
+import { usePostHog } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -30,6 +31,7 @@ import { useAuthenticatedUser } from "./user-provider";
 
 export const UserDropdown = ({ className }: { className?: string }) => {
   const { user } = useAuthenticatedUser();
+  const posthog = usePostHog();
   if (!user) return null;
   return (
     <DropdownMenu modal={false}>
@@ -123,6 +125,7 @@ export const UserDropdown = ({ className }: { className?: string }) => {
         <DropdownMenuItem
           onClick={async () => {
             await signOut();
+            posthog?.reset();
           }}
           className="flex items-center gap-x-2"
         >

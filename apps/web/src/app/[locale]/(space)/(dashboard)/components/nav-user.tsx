@@ -1,5 +1,6 @@
 "use client";
 
+import { usePostHog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import {
   DropdownMenu,
@@ -33,6 +34,7 @@ export function NavUser({
   email: string;
 }) {
   const [isPending, setIsPending] = React.useState(false);
+  const posthog = usePostHog();
   return (
     <>
       {isPending && <RouterLoadingIndicator />}
@@ -80,6 +82,7 @@ export function NavUser({
             onClick={async () => {
               setIsPending(true);
               await signOut();
+              posthog?.reset();
             }}
           >
             <Icon>
