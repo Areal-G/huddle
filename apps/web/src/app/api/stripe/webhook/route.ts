@@ -1,6 +1,8 @@
 import type { Stripe } from "@huddle/billing";
 import { stripe } from "@huddle/billing";
+import { posthog } from "@huddle/posthog/server";
 import * as Sentry from "@sentry/nextjs";
+import { waitUntil } from "@vercel/functions";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { isSelfHosted } from "@/utils/constants";
@@ -51,6 +53,10 @@ export const POST = withPosthog(async (request: NextRequest) => {
     }
 
     await handler(event);
+
+    if (posthog) {
+      waitUntil(posthog.flush());
+    }
 
     return NextResponse.json({ received: true });
   } catch (err) {
