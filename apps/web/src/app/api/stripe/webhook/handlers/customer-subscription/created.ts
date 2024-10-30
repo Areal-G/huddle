@@ -1,7 +1,7 @@
 import type { Stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
-import { posthog } from "@huddle/posthog/server";
-import { updateSpaceGroup } from "@/features/space/analytics";
+import { waitUntil } from "@vercel/functions";
+import { PostHogClient } from "@/features/analytics/posthog";
 import { subscriptionMetadataSchema } from "@/features/subscription/schema";
 import {
   getExpandedSubscription,
@@ -91,8 +91,11 @@ export async function onCustomerSubscriptionCreated(event: Stripe.Event) {
     });
   });
 
-  updateSpaceGroup({
-    spaceId,
+  const posthog = PostHogClient();
+
+  posthog?.groupIdentify({
+    groupType: "space",
+    groupKey: spaceId,
     properties: {
       seatCount: quantity,
       tier,
@@ -102,7 +105,7 @@ export async function onCustomerSubscriptionCreated(event: Stripe.Event) {
   posthog?.capture({
     distinctId: userId,
     uuid: event.id,
-    event: "upgrade",
+    event: "subscription_create",
     properties: {
       interval,
       $set: {
@@ -113,4 +116,8 @@ export async function onCustomerSubscriptionCreated(event: Stripe.Event) {
       space: spaceId,
     },
   });
+
+  if (posthog) {
+    waitUntil(posthog.shutdown());
+  }
 }
