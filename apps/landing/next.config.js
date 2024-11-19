@@ -9,9 +9,9 @@ function createAppUrl(subpath) {
   return url.href;
 }
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   productionBrowserSourceMaps: true,
-  output: "standalone",
   transpilePackages: [
     "@huddle/ui",
     "@huddle/tailwind-config",
