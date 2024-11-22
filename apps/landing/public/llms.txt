@@ -1,4 +1,4 @@
-# Huddle
+# Huddle: Open-source scheduling for groups
 
 ## Overview
 
