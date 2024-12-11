@@ -17,7 +17,6 @@ import {
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
-import { useTheme } from "@huddle/ui/theme-provider";
 import {
   ArrowUpRight,
   ChevronDownIcon,
@@ -34,6 +33,7 @@ import {
 import Link from "next/link";
 import { OptimizedAvatarImage } from "@/components/optimized-avatar-image";
 import { Trans } from "@/components/trans";
+import { useTheme } from "@/features/theme/client";
 import { signOut } from "@/lib/auth-client";
 
 export const UserDropdown = ({

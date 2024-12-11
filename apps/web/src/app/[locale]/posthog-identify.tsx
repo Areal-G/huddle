@@ -1,7 +1,7 @@
 "use client";
 import { usePostHog } from "@huddle/posthog/client";
-import { useTheme } from "@huddle/ui/theme-provider";
 import useMount from "react-use/lib/useMount";
+import { useTheme } from "@/features/theme/client";
 
 export function PostHogIdentify({ distinctId }: { distinctId?: string }) {
   const posthog = usePostHog();

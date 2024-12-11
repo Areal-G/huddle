@@ -1,11 +1,10 @@
 "use client";
 
 import { RadioGroup, RadioGroupItem } from "@huddle/ui/radio-group";
-import { useTheme } from "@huddle/ui/theme-provider";
 import { MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import React from "react";
-
 import { Trans } from "@/components/trans";
+import { useTheme } from "@/features/theme/client";
 
 const themes = [
   { value: "system", icon: MonitorIcon },
