@@ -13,4 +13,5 @@ export const previewEmailContext: EmailContext = {
   supportEmail: "support@huddle.dev",
   i18n: i18nInstance,
   t: i18nInstance.getFixedT("en"),
+  appName: "Huddle",
 };

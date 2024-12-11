@@ -42,12 +42,11 @@ export const EmailLayout = ({
         <Container style={containerStyles}>
           <Img
             src={logoUrl}
-            width="32"
-            height="32"
+            height="42"
             style={{
               marginBottom: 32,
             }}
-            alt="Huddle Logo"
+            alt={ctx.appName}
           />
           {children}
           {poweredBy ? (
@@ -62,7 +61,10 @@ export const EmailLayout = ({
                   values={{ domain: "huddle.dev" }}
                   components={{
                     a: (
-                      <Link href="https://huddle.dev?utm_source=email&utm_medium=transactional" />
+                      <Link
+                        color={ctx.primaryColor}
+                        href="https://huddle.dev?utm_source=email&utm_medium=transactional"
+                      />
                     ),
                   }}
                 />
