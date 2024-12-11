@@ -1,4 +1,4 @@
-import "../../style.css";
+import "./globals.css";
 
 import languages from "@huddle/languages";
 import { PostHogProvider } from "@huddle/posthog/client";

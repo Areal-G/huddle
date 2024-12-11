@@ -1,4 +1,4 @@
-import "../../style.css";
+import "./globals.css";
 
 import { PostHogIdentify, PostHogProvider } from "@huddle/posthog/client";
 import { Toaster } from "@huddle/ui/sonner";
