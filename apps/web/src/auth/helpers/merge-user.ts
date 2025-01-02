@@ -1,7 +1,10 @@
 import { prisma } from "@huddle/database";
+import { createLogger } from "@huddle/logger";
 import * as Sentry from "@sentry/nextjs";
 import { waitUntil } from "@vercel/functions";
 import { PostHogClient } from "@/features/analytics/posthog";
+
+const logger = createLogger("auth/merge-user");
 
 const getActiveSpaceForUser = async ({ userId }: { userId: string }) => {
   const spaceMember = await prisma.spaceMember.findFirst({
@@ -81,7 +84,7 @@ export const linkAnonymousUser = async (
   const spaceId = await getActiveSpaceForUser({ userId: authenticatedUserId });
 
   if (!spaceId) {
-    console.error(`User ${authenticatedUserId} has no active space`);
+    logger.error({ userId: authenticatedUserId }, "User has no active space");
     return;
   }
 

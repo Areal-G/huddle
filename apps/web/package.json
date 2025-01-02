@@ -40,6 +40,7 @@
     "@huddle/database": "workspace:*",
     "@huddle/emails": "workspace:*",
     "@huddle/languages": "workspace:*",
+    "@huddle/logger": "workspace:*",
     "@huddle/posthog": "workspace:*",
     "@huddle/tailwind-config": "workspace:*",
     "@huddle/ui": "workspace:*",
