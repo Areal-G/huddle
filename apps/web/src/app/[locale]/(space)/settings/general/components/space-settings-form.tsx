@@ -14,7 +14,7 @@ import { Input } from "@huddle/ui/input";
 import { toast } from "@huddle/ui/sonner";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod";
 import {
   ImageUpload,
   ImageUploadControl,

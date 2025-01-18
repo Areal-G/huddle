@@ -3,7 +3,7 @@ import { prisma } from "@huddle/database";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import * as z from "zod";
 import { requireSpace, requireUser } from "@/auth/data";
 import type { CustomerMetadata } from "@/features/billing/schema";
 import type {

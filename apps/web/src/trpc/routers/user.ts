@@ -1,7 +1,7 @@
 import { prisma } from "@huddle/database";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { TRPCError } from "@trpc/server";
-import { z } from "zod";
+import * as z from "zod";
 import {
   deleteImageFromS3,
   getImageUploadUrl,

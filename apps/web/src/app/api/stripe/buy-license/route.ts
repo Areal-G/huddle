@@ -3,7 +3,7 @@ import type { LicenseType } from "@huddle/database";
 import { createLogger } from "@huddle/logger";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { z } from "zod";
+import * as z from "zod";
 import type { LicenseCheckoutMetadata } from "@/features/licensing/schema";
 
 const logger = createLogger("api/stripe/buy-license");

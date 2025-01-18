@@ -21,7 +21,7 @@ import {
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import * as z from "zod";
 import { Trans } from "@/components/trans";
 import { deleteUserAction } from "@/features/user/actions";
 import { useTranslation } from "@/i18n/client";
