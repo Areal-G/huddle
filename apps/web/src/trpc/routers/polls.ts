@@ -3,7 +3,6 @@ import { prisma } from "@huddle/database";
 import { absoluteUrl, shortUrl } from "@huddle/utils/absolute-url";
 import { nanoid } from "@huddle/utils/nanoid";
 import { TRPCError } from "@trpc/server";
-import dayjs from "dayjs";
 import { revalidatePath } from "next/cache";
 import * as z from "zod";
 import { getCurrentUserSpace } from "@/auth/data";
@@ -12,6 +11,7 @@ import { getPolls } from "@/features/poll/data";
 import { canUserManagePoll } from "@/features/poll/helpers";
 import { hasPollAdminAccess } from "@/features/poll/query";
 import { formatEventDateTime } from "@/features/scheduled-event/utils";
+import { dayjs } from "@/lib/dayjs";
 import { getEmailClient } from "@/utils/emails";
 import { createIcsEvent } from "@/utils/ics";
 import {

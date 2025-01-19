@@ -5,9 +5,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@huddle/ui/select";
-import dayjs from "dayjs";
 import * as React from "react";
 
+import { dayjs } from "@/lib/dayjs";
 import { getDuration } from "@/utils/date-time-utils";
 
 export interface TimePickerProps {
