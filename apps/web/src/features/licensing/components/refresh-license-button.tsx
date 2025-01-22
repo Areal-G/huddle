@@ -4,7 +4,7 @@ import { Button } from "@huddle/ui/button";
 import { Icon } from "@huddle/ui/icon";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 import { RefreshCwIcon } from "lucide-react";
-import { Trans } from "@/components/trans";
+import { Trans } from "@/i18n/client";
 import { useSafeAction } from "@/lib/safe-action/client";
 import { refreshInstanceLicenseAction } from "../actions";
 

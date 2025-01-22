@@ -1,8 +1,7 @@
 import type { PollStatus } from "@huddle/database";
 import { cn } from "@huddle/ui";
-
-import { Trans } from "@/components/trans";
 import { PollStatusIcon } from "@/features/poll/components/poll-status-icon";
+import { Trans } from "@/i18n/client";
 
 const PollStatusLabel = ({ status }: { status: PollStatus }) => {
   switch (status) {

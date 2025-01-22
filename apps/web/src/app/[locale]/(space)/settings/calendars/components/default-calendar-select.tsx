@@ -10,8 +10,7 @@ import {
   SelectValue,
 } from "@huddle/ui/select";
 import { toast } from "@huddle/ui/sonner";
-import { Trans } from "@/components/trans";
-import { useTranslation } from "@/i18n/client";
+import { Trans, useTranslation } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
 
 const NONE_VALUE = "none";

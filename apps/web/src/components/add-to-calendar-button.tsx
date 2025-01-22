@@ -12,7 +12,7 @@ import { Icon } from "@huddle/ui/icon";
 import { DownloadIcon, PlusIcon } from "lucide-react";
 import Image from "next/image";
 
-import { Trans } from "@/components/trans";
+import { Trans } from "@/i18n/client";
 
 export function AddToCalendarButton({ eventId }: { eventId: string }) {
   return (

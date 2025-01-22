@@ -4,7 +4,7 @@ import { Button } from "@huddle/ui/button";
 import { toast } from "@huddle/ui/sonner";
 import { MailWarningIcon } from "lucide-react";
 import React from "react";
-import { Trans } from "@/components/trans";
+import { Trans } from "@/i18n/client";
 import { authClient } from "@/lib/auth-client";
 
 export function SetupPasswordForm({ email }: { email: string }) {

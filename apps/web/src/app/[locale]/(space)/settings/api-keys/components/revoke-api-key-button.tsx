@@ -20,8 +20,7 @@ import {
 import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
 import { BanIcon, MoreHorizontalIcon } from "lucide-react";
-import { Trans } from "@/components/trans";
-import { useTranslation } from "@/i18n/client";
+import { Trans, useTranslation } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
 
 export function RevokeApiKeyButton({

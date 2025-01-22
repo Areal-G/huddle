@@ -5,8 +5,8 @@ import { useDialog } from "@huddle/ui/dialog";
 import { Icon } from "@huddle/ui/icon";
 import { SidebarMenuButton, SidebarMenuItem } from "@huddle/ui/sidebar";
 import { MegaphoneIcon } from "lucide-react";
-import { Trans } from "@/components/trans";
 import { FeedbackDialog } from "@/features/feedback/components/feedback-dialog";
+import { Trans } from "@/i18n/client";
 
 export function FeedbackMenuItem() {
   const dialog = useDialog();

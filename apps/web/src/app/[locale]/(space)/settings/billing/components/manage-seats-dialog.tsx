@@ -16,8 +16,8 @@ import { Input } from "@huddle/ui/input";
 import { Label } from "@huddle/ui/label";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { useCallback, useState } from "react";
-import { Trans } from "@/components/trans";
 import { updateSeatsAction } from "@/features/billing/actions";
+import { Trans } from "@/i18n/client";
 import { useSafeAction } from "@/lib/safe-action/client";
 
 interface ManageSeatsButtonProps {

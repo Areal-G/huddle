@@ -22,9 +22,8 @@ import { Input } from "@huddle/ui/input";
 import { toast } from "@huddle/ui/sonner";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Trans } from "@/components/trans";
 import { createSpaceAction } from "@/features/space/actions";
-import { useTranslation } from "@/i18n/client";
+import { Trans, useTranslation } from "@/i18n/client";
 import { useSafeAction } from "@/lib/safe-action/client";
 
 const createSpaceFormSchema = z.object({

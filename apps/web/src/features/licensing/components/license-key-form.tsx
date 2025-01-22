@@ -14,9 +14,8 @@ import { Input } from "@huddle/ui/input";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Trans } from "@/components/trans";
 import { validateLicenseKeyAction } from "@/features/licensing/actions";
-import { useTranslation } from "@/i18n/client";
+import { Trans, useTranslation } from "@/i18n/client";
 import { useSafeAction } from "@/lib/safe-action/client";
 import { checkLicenseKey } from "../helpers/check-license-key";
 

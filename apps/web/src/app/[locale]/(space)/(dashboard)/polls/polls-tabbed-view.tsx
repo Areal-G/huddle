@@ -4,7 +4,7 @@ import { cn } from "@huddle/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@huddle/ui/page-tabs";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
-import { Trans } from "@/components/trans";
+import { Trans } from "@/i18n/client";
 import { statusSchema } from "./schema";
 
 export function PollsTabbedView({ children }: { children: React.ReactNode }) {

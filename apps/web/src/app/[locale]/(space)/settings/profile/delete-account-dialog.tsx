@@ -14,8 +14,7 @@ import { Form, FormField, FormItem, FormMessage } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
 import { useForm } from "react-hook-form";
 
-import { Trans } from "@/components/trans";
-import { useTranslation } from "@/i18n/client";
+import { Trans, useTranslation } from "@/i18n/client";
 import { useSafeAction } from "@/lib/safe-action/client";
 import { deleteCurrentUserAction } from "./actions";
 
