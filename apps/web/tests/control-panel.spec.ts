@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 
-import { deleteAllMessages } from "./mailpit/mailpit";
+import { deleteAllMessages } from "@huddle/test-helpers";
 import { createUserInDb, loginWithEmail } from "./test-utils";
 
 const CONTROL_PANEL_NON_ADMIN_EMAIL = "cp-non-admin@huddle.dev";

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
-import { deleteAllMessages } from "./mailpit/mailpit";
+import { deleteAllMessages } from "@huddle/test-helpers";
 import { createUserInDb, loginWithEmail } from "./test-utils";
 
 const INITIAL_ADMIN_TEST_EMAIL = "initial.admin@huddle.dev";

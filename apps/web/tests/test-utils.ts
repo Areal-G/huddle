@@ -1,8 +1,8 @@
-import type { Page } from "@playwright/test";
 import type { SpaceTier, UserRole } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import dayjs from "dayjs";
-import { LoginPage } from "./login-page";
+
+export { loginWithEmail } from "@huddle/test-helpers";
 
 export async function createUserInDb({
   email,
@@ -107,17 +107,5 @@ export async function createTestPoll({
 
   return await prisma.poll.create({
     data: pollData,
-  });
-}
-
-export async function loginWithEmail(
-  page: Page,
-  { email, password }: { email: string; password?: string },
-) {
-  const loginPage = new LoginPage(page);
-  await loginPage.goto();
-  await loginPage.login({
-    email,
-    password,
   });
 }

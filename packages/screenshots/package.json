@@ -1,0 +1,16 @@
+{
+  "name": "@huddle/screenshots",
+  "private": true,
+  "scripts": {
+    "capture": "playwright test"
+  },
+  "dependencies": {
+    "@huddle/database": "workspace:*",
+    "@huddle/test-helpers": "workspace:*",
+    "dayjs": "^1.11.13",
+    "dotenv": "^17.2.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
+  }
+}
