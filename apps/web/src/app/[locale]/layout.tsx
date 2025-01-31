@@ -1,11 +1,13 @@
 import "./globals.css";
 
+import { supportedLngs } from "@huddle/languages";
 import { PostHogProvider } from "@huddle/posthog/client";
 import { Toaster } from "@huddle/ui/sonner";
 import { TooltipProvider } from "@huddle/ui/tooltip";
 import { domAnimation, LazyMotion } from "motion/react";
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { notFound } from "next/navigation";
 import type React from "react";
 import { TimeZoneChangeDetector } from "@/app/[locale]/timezone-change-detector";
 import type { Params } from "@/app/[locale]/types";
@@ -79,6 +81,11 @@ export default async function Root({
   params: Promise<Params>;
 }) {
   const { locale } = await params;
+
+  if (!supportedLngs.includes(locale)) {
+    notFound();
+  }
+
   const { user, brandingConfig, resources } = await loadData(locale);
 
   const brandingStyles = {
