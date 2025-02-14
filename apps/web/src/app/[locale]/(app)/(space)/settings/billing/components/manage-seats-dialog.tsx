@@ -11,7 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@huddle/ui/dialog";
-import { Icon } from "@huddle/ui/icon";
+
 import { Input } from "@huddle/ui/input";
 import { Label } from "@huddle/ui/label";
 import { MinusIcon, PlusIcon } from "lucide-react";
@@ -85,9 +85,7 @@ function SeatCountSelector({
           onClick={handleDecrement}
           disabled={!canDecrement}
         >
-          <Icon>
-            <MinusIcon />
-          </Icon>
+          <MinusIcon data-icon="inline-start" />
           <span className="sr-only">
             <Trans i18nKey="decreaseSeats" defaults="Decrease seats" />
           </span>
@@ -108,9 +106,7 @@ function SeatCountSelector({
           onClick={handleIncrement}
           disabled={!canIncrement}
         >
-          <Icon>
-            <PlusIcon />
-          </Icon>
+          <PlusIcon data-icon="inline-start" />
           <span className="sr-only">
             <Trans i18nKey="increaseSeats" defaults="Increase seats" />
           </span>

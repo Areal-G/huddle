@@ -12,7 +12,7 @@ import {
   DialogTrigger,
   useDialog,
 } from "@huddle/ui/dialog";
-import { Icon } from "@huddle/ui/icon";
+
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 import { XIcon } from "lucide-react";
 import { useTransition } from "react";
@@ -30,9 +30,7 @@ export function RemoveLicenseButton() {
         <TooltipTrigger asChild>
           <DialogTrigger asChild>
             <Button variant="ghost" onClick={() => dialog.trigger()}>
-              <Icon>
-                <XIcon />
-              </Icon>
+              <XIcon data-icon="inline-start" />
               <span className="sr-only">
                 <Trans i18nKey="removeLicense" defaults="Remove License" />
               </span>

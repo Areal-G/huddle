@@ -20,7 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@huddle/ui/form";
-import { Icon } from "@huddle/ui/icon";
+
 import { Input } from "@huddle/ui/input";
 import { toast } from "@huddle/ui/sonner";
 import { LogOutIcon } from "lucide-react";
@@ -153,9 +153,7 @@ export function LeaveSpaceButton({
     <LeaveSpaceDialog spaceName={spaceName} spaceId={spaceId}>
       <DialogTrigger asChild>
         <Button>
-          <Icon>
-            <LogOutIcon />
-          </Icon>
+          <LogOutIcon data-icon="inline-start" />
           <Trans i18nKey="leaveSpace" defaults="Leave Space" />
         </Button>
       </DialogTrigger>

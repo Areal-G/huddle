@@ -1,5 +1,4 @@
 import { buttonVariants } from "@huddle/ui";
-import { Icon } from "@huddle/ui/icon";
 import { CheckIcon, PlusIcon, ZapIcon } from "lucide-react";
 import Link from "next/link";
 import { Trans } from "react-i18next/TransWithoutContext";
@@ -70,11 +69,9 @@ export async function QuickCreateWidget() {
         <div>
           <Link
             href="/new"
-            className={buttonVariants({ size: "lg", className: "w-full" })}
+            className={buttonVariants({ size: "xl", className: "w-full" })}
           >
-            <Icon size="lg">
-              <PlusIcon />
-            </Icon>
+            <PlusIcon data-icon="inline-start" />
             <Trans
               t={t}
               ns="app"
