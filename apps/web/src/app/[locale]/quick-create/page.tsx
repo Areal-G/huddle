@@ -1,4 +1,4 @@
-import { Button } from "@huddle/ui/button";
+import { buttonVariants } from "@huddle/ui";
 import { Card } from "@huddle/ui/card";
 import { Icon } from "@huddle/ui/icon";
 import { LogInIcon } from "lucide-react";
@@ -28,14 +28,15 @@ export default async function QuickCreatePage() {
           </div>
         </div>
         <div className="flex justify-center gap-4">
-          <Button className="rounded-full" asChild>
-            <Link href="/login" className="flex items-center gap-2">
-              <Icon>
-                <LogInIcon />
-              </Icon>
-              {t("login")}
-            </Link>
-          </Button>
+          <Link
+            href="/login"
+            className={buttonVariants({ className: "rounded-full" })}
+          >
+            <Icon>
+              <LogInIcon />
+            </Icon>
+            {t("login")}
+          </Link>
         </div>
       </Card>
     </div>

@@ -1,4 +1,4 @@
-import { Button } from "@huddle/ui/button";
+import { buttonVariants } from "@huddle/ui";
 import { CrownIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -44,11 +44,9 @@ export default async function AdminSetupPage() {
           />
         </EmptyStateDescription>
         <EmptyStateFooter className="flex gap-2">
-          <Button asChild>
-            <Link href="/">
-              <Trans i18nKey="cancel" defaults="Cancel" />
-            </Link>
-          </Button>
+          <Link href="/" className={buttonVariants()}>
+            <Trans i18nKey="cancel" defaults="Cancel" />
+          </Link>
           <MakeMeAdminButton />
         </EmptyStateFooter>
       </EmptyState>

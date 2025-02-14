@@ -1,6 +1,6 @@
 "use client";
 import { usePostHog } from "@huddle/posthog/client";
-import { cn } from "@huddle/ui";
+import { buttonVariants, cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
   DropdownMenu,
@@ -48,17 +48,19 @@ export const UserDropdown = ({ className }: { className?: string }) => {
   if (!user) {
     return (
       <div className="flex items-center gap-x-2">
-        <Button variant="ghost" asChild>
-          <Link href={`/login?redirectTo=${encodeURIComponent("/new")}`}>
-            <Trans i18nKey="login" defaults="Login" />
-          </Link>
-        </Button>
+        <Link
+          href={`/login?redirectTo=${encodeURIComponent("/new")}`}
+          className={buttonVariants({ variant: "ghost" })}
+        >
+          <Trans i18nKey="login" defaults="Login" />
+        </Link>
         {isRegistrationEnabled ? (
-          <Button variant="primary" asChild>
-            <Link href={`/register?redirectTo=${encodeURIComponent("/new")}`}>
-              <Trans i18nKey="signUp" defaults="Sign up" />
-            </Link>
-          </Button>
+          <Link
+            href={`/register?redirectTo=${encodeURIComponent("/new")}`}
+            className={buttonVariants({ variant: "primary" })}
+          >
+            <Trans i18nKey="signUp" defaults="Sign up" />
+          </Link>
         ) : null}
       </div>
     );

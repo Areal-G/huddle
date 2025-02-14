@@ -1,6 +1,7 @@
 "use client";
 
 import { usePostHog } from "@huddle/posthog/client";
+import { buttonVariants } from "@huddle/ui";
 import { Alert, AlertDescription, AlertTitle } from "@huddle/ui/alert";
 import { Button } from "@huddle/ui/button";
 import { DialogTrigger } from "@huddle/ui/dialog";
@@ -127,24 +128,23 @@ function BillingPageContent({ tier }: { tier: SpaceTier }) {
               <div>
                 {subscription ? (
                   <div className="flex justify-between gap-2">
-                    <Button
+                    <a
+                      href="/api/stripe/portal"
+                      className={buttonVariants()}
                       onClick={() => {
                         posthog?.capture(
                           "space_billing:billing_portal_button_click",
                         );
                       }}
-                      asChild
                     >
-                      <a href="/api/stripe/portal">
-                        <Icon>
-                          <CreditCardIcon />
-                        </Icon>
-                        <Trans
-                          i18nKey="manageSubscription"
-                          defaults="Manage Subscription"
-                        />
-                      </a>
-                    </Button>
+                      <Icon>
+                        <CreditCardIcon />
+                      </Icon>
+                      <Trans
+                        i18nKey="manageSubscription"
+                        defaults="Manage Subscription"
+                      />
+                    </a>
                     <ManageSeatsDialog
                       usedSeats={seats.used}
                       currentSeats={seats.total}
@@ -213,19 +213,18 @@ function BillingPageContent({ tier }: { tier: SpaceTier }) {
               </PageSectionDescription>
             </PageSectionHeader>
             <PageSectionContent>
-              <Button
+              <a
+                href="mailto:support@huddle.dev"
+                className={buttonVariants()}
                 onClick={() => {
                   posthog?.capture("space_billing:support_button_click");
                 }}
-                asChild
               >
-                <a href="mailto:support@huddle.dev">
-                  <Icon>
-                    <SendIcon />
-                  </Icon>
-                  <Trans i18nKey="contactSupport" defaults="Contact Support" />
-                </a>
-              </Button>
+                <Icon>
+                  <SendIcon />
+                </Icon>
+                <Trans i18nKey="contactSupport" defaults="Contact Support" />
+              </a>
             </PageSectionContent>
           </PageSection>
         </PageSectionGroup>

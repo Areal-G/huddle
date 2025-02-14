@@ -1,3 +1,4 @@
+import { buttonVariants } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -86,11 +87,13 @@ export const InviteDialog = () => {
           <div className="flex gap-2">
             <CopyInviteLinkButton />
             <div className="shrink-0">
-              <Button asChild>
-                <Link target="_blank" href={`/invite/${poll.id}`}>
-                  <ArrowUpRightIcon className="size-4" />
-                </Link>
-              </Button>
+              <Link
+                target="_blank"
+                href={`/invite/${poll.id}`}
+                className={buttonVariants()}
+              >
+                <ArrowUpRightIcon className="size-4" />
+              </Link>
             </div>
           </div>
         </div>

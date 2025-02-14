@@ -1,7 +1,6 @@
 "use client";
 
-import { cn } from "@huddle/ui";
-import { Button } from "@huddle/ui/button";
+import { buttonVariants, cn } from "@huddle/ui";
 import { usePathname } from "next/navigation";
 import { LinkBase } from "@/i18n/client/link";
 
@@ -12,12 +11,13 @@ export const NavLink = ({
   const pathname = usePathname();
   const isActive = pathname === props.href;
   return (
-    <Button
-      className={cn(isActive ? "bg-gray-200 text-foreground" : "", className)}
-      asChild
-      variant="ghost"
-    >
-      <LinkBase {...props} />
-    </Button>
+    <LinkBase
+      className={cn(
+        buttonVariants({ variant: "ghost" }),
+        isActive ? "bg-gray-200 text-foreground" : "",
+        className,
+      )}
+      {...props}
+    />
   );
 };
