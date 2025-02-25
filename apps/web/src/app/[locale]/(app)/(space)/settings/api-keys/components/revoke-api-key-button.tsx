@@ -19,7 +19,7 @@ import {
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
-import { BanIcon, MoreHorizontalIcon } from "lucide-react";
+import { BanIcon, MoreVerticalIcon } from "lucide-react";
 import { Trans, useTranslation } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
 
@@ -41,7 +41,7 @@ export function RevokeApiKeyButton({
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon">
             <Icon>
-              <MoreHorizontalIcon />
+              <MoreVerticalIcon />
             </Icon>
           </Button>
         </DropdownMenuTrigger>

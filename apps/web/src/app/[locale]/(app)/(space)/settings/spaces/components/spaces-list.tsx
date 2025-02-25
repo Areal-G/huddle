@@ -11,7 +11,7 @@ import {
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
-import { CrownIcon, LayersIcon, MoreHorizontalIcon } from "lucide-react";
+import { CrownIcon, LayersIcon, MoreVerticalIcon } from "lucide-react";
 import { useState } from "react";
 import {
   EmptyState,
@@ -100,7 +100,7 @@ export function SpacesList({ spaces, currentUserId }: SpacesListProps) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon">
                     <Icon>
-                      <MoreHorizontalIcon />
+                      <MoreVerticalIcon />
                     </Icon>
                   </Button>
                 </DropdownMenuTrigger>

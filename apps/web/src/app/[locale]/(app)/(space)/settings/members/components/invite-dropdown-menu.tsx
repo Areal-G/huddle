@@ -20,7 +20,7 @@ import {
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
-import { MoreHorizontalIcon, XIcon } from "lucide-react";
+import { MoreVerticalIcon, XIcon } from "lucide-react";
 import { useSpace } from "@/features/space/client";
 import { Trans, useTranslation } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
@@ -47,7 +47,7 @@ export function InviteDropdownMenu({ invite }: { invite: SpaceMemberInvite }) {
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon">
             <Icon>
-              <MoreHorizontalIcon />
+              <MoreVerticalIcon />
             </Icon>
           </Button>
         </DropdownMenuTrigger>

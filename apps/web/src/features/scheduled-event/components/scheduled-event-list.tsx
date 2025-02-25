@@ -22,7 +22,7 @@ import {
 } from "@huddle/ui/dropdown-menu";
 import { Icon } from "@huddle/ui/icon";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
-import { MoreHorizontalIcon } from "lucide-react";
+import { MoreVerticalIcon } from "lucide-react";
 import { OptimizedAvatarImage } from "@/components/optimized-avatar-image";
 import { StackedList } from "@/components/stacked-list";
 import { Trans } from "@/i18n/client";
@@ -160,7 +160,7 @@ export function ScheduledEventListItem({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Icon>
-                  <MoreHorizontalIcon />
+                  <MoreVerticalIcon />
                 </Icon>
               </Button>
             </DropdownMenuTrigger>
