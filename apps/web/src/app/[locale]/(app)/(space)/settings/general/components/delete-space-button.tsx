@@ -15,7 +15,6 @@ import {
 import { Form, FormField, FormItem, FormMessage } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
 import { toast } from "@huddle/ui/sonner";
-import { TrashIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -44,7 +43,7 @@ function DeleteSpaceDialog({
           defaultValue: "Space has been permanently deleted",
         }),
       );
-      router.push("/");
+      router.refresh();
     },
   });
 
@@ -141,8 +140,7 @@ export function DeleteSpaceButton({ spaceName }: DeleteSpaceButtonProps) {
   return (
     <DeleteSpaceDialog spaceName={spaceName}>
       <DialogTrigger asChild>
-        <Button variant="destructive">
-          <TrashIcon data-icon="inline-start" />
+        <Button className="text-destructive">
           <Trans i18nKey="deleteSpace" defaults="Delete Space" />
         </Button>
       </DialogTrigger>
