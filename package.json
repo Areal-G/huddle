@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "turbo dev --filter=@huddle/web",
     "dev:emails": "turbo dev --filter=@huddle/emails",
-    "dev:landing": "dotenv -c development turbo dev --filter=@huddle/landing",
+    "dev:landing": "turbo dev --filter=@huddle/landing",
     "start": "turbo run start --filter=@huddle/web",
     "build": "dotenv -c -- turbo run build --filter=@huddle/web",
     "build:web": "NEXT_PUBLIC_APP_VERSION=$(node scripts/inject-version.js) turbo run build --filter=@huddle/web",
@@ -39,6 +39,7 @@
     "dotenv-cli": "^8.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "portless": "^0.7.2",
     "prettier": "^3.5.3",
     "prisma": "^7.3.0",
     "turbo": "^2.6.3",
