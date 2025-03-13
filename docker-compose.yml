@@ -30,7 +30,7 @@ services:
     environment:
       - DATABASE_URL=postgres://postgres:postgres@huddle_db/huddle
     env_file:
-      - path: .env
+      - path: apps/web/.env
         required: false
 
 volumes:
