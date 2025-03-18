@@ -1,12 +1,6 @@
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@huddle/ui/card";
+import { Card, CardContent, CardFooter } from "@huddle/ui/card";
 import { Icon } from "@huddle/ui/icon";
 import {
   Select,
@@ -68,15 +62,6 @@ const MobilePoll: React.FunctionComponent = () => {
 
   return (
     <Card>
-      <CardHeader>
-        <div className="flex items-center gap-x-2.5">
-          <CardTitle>
-            <Trans i18nKey="participants" />
-          </CardTitle>
-          <Badge>{visibleParticipants.length}</Badge>
-        </div>
-      </CardHeader>
-
       <div className="flex flex-col space-y-2 border-b p-2">
         <div className="flex gap-x-2.5">
           {selectedParticipantId || !isEditing ? (
