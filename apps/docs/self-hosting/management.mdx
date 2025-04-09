@@ -1,0 +1,122 @@
+---
+icon: terminal
+title: Management
+description: Operate a self-hosted Huddle instance with the huddle.sh CLI.
+---
+
+The `huddle.sh` script bundled with the [self-hosted stack](https://github.com/areal/huddle-selfhosted) is the single entry point for day-to-day operations. Run it from the stack directory (e.g. `/opt/huddle` for installer-based setups).
+
+## Commands
+
+```sh
+./huddle.sh start          # Start all services
+./huddle.sh stop           # Stop all services
+./huddle.sh restart        # Restart all services
+./huddle.sh status         # Show service status
+./huddle.sh logs           # Stream logs for all services
+./huddle.sh logs web       # Stream logs for a specific service
+./huddle.sh update         # Pull latest images and recreate containers
+./huddle.sh backup         # Back up the database to ./backups/
+```
+
+## Applying configuration changes
+
+After editing `.env`, apply changes with:
+
+```sh
+./huddle.sh restart
+```
+
+## Updating
+
+```sh
+./huddle.sh update
+```
+
+This pulls the latest Docker images and recreates containers. Your data and configuration are preserved.
+
+By default the stack tracks the `areal/huddle:4` tag, so `update` will bring you the latest compatible `4.x` release. To pin to a specific version or follow a different major, set `HUDDLE_IMAGE` in `.env` (see [Configuration](/self-hosting/configuration#advanced)).
+
+<Warning>
+  Do not edit `docker-compose.yml` or other stack files. `./huddle.sh update` expects these files unchanged and will overwrite local edits. Only `.env` is safe to modify.
+</Warning>
+
+## Backup and restore
+
+### Backup
+
+```sh
+./huddle.sh backup
+```
+
+Database backups are written to `./backups/` as timestamped `.sql.gz` files. Copy these off the server regularly — they are your main recovery artifact.
+
+<Note>
+  The backup captures the PostgreSQL database. Uploaded files (avatars, etc.) are stored in the `garage-data` Docker volume; back that up separately if you rely on uploads.
+</Note>
+
+### Restore
+
+Stop the app first so it releases its database connections, drop and recreate an empty `huddle` database, stream in the dump, then restart:
+
+```sh
+# Stop the app (leave the db service running)
+docker compose stop web
+
+# Drop and recreate the database — connect to the "postgres" db so we can drop "huddle"
+docker compose exec -T db psql -U postgres -d postgres -c "DROP DATABASE IF EXISTS huddle;"
+docker compose exec -T db psql -U postgres -d postgres -c "CREATE DATABASE huddle;"
+
+# Restore — ON_ERROR_STOP=1 fails fast on the first error instead of continuing silently
+gunzip < backups/huddle_20260101_120000.sql.gz | docker compose exec -T db psql -v ON_ERROR_STOP=1 -U postgres huddle
+
+# Bring the app back up
+./huddle.sh start
+```
+
+## Logs
+
+Stream all services:
+
+```sh
+./huddle.sh logs
+```
+
+Or a single service (`web`, `db`, `garage`, `traefik`):
+
+```sh
+./huddle.sh logs web
+./huddle.sh logs traefik
+```
+
+## Troubleshooting
+
+### SSL certificate is not being issued
+
+Let's Encrypt can take up to a minute on first start. Check:
+
+- The domain's DNS `A` record resolves to the server's public IP.
+- Ports 80 and 443 are open in the server's firewall.
+- `./huddle.sh logs traefik` for ACME errors.
+
+### Port 80 or 443 already in use
+
+Another service (nginx, apache, another Docker stack) is bound to the port. Stop it or reconfigure it to leave 80/443 free — Traefik needs both.
+
+### Containers keep restarting
+
+Check the failing service's logs:
+
+```sh
+./huddle.sh logs web
+./huddle.sh logs db
+```
+
+Common causes:
+
+- Missing or invalid `.env` values (e.g. empty `SECRET_PASSWORD`, unreachable SMTP).
+- Database is still initialising on first boot — usually resolves within a few retries.
+
+### Database connection errors on first boot
+
+PostgreSQL takes a few seconds to initialise. The app retries automatically. If errors persist, inspect `./huddle.sh logs db`.
