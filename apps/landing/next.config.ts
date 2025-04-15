@@ -13,7 +13,7 @@ function createAppUrl(subpath: string) {
 }
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["landing.huddle.localhost"],
+  allowedDevOrigins: ["landing.huddle.dev"],
   productionBrowserSourceMaps: true,
   transpilePackages: [
     "@huddle/ui",
