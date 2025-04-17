@@ -1,0 +1,22 @@
+{
+  "name": "@huddle/api-core",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test:unit": "vitest run",
+    "type-check": "tsc --noEmit"
+  },
+  "exports": {
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@huddle/database": "workspace:*",
+    "@huddle/logger": "workspace:*",
+    "@huddle/utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@huddle/tsconfig": "workspace:*",
+    "@types/node": "^24.1.0",
+    "vitest": "^4.0.16"
+  }
+}

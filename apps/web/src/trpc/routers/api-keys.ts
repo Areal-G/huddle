@@ -1,8 +1,8 @@
+import { createApiKey } from "@huddle/api-core/auth/api-key";
 import { prisma } from "@huddle/database";
 import { TRPCError } from "@trpc/server";
 import * as z from "zod";
 import { isApiAccessEnabled } from "@/features/developer/data";
-import { createApiKey } from "@/features/developer/utils";
 import { router, spaceOwnerProcedure } from "../trpc";
 
 const apiAccessProcedure = spaceOwnerProcedure.use(async ({ ctx, next }) => {

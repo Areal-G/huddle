@@ -1,3 +1,4 @@
+import { getPolls } from "@huddle/api-core/polls/data";
 import type { PollStatus } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { absoluteUrl, shortUrl } from "@huddle/utils/absolute-url";
@@ -7,7 +8,6 @@ import { after } from "next/server";
 import * as z from "zod";
 import { posthog } from "@/features/analytics/posthog";
 import { moderateContent } from "@/features/moderation";
-import { getPolls } from "@/features/poll/data";
 import { canUserManagePoll } from "@/features/poll/helpers";
 import { hasPollAdminAccess } from "@/features/poll/query";
 import { formatEventDateTime } from "@/features/scheduled-event/utils";
@@ -62,7 +62,10 @@ export const polls = router({
       }
 
       return {
-        polls: result.polls,
+        polls: result.polls.map((poll) => ({
+          ...poll,
+          inviteLink: shortUrl(`/invite/${poll.id}`),
+        })),
         nextCursor,
         hasNextPage: result.hasNextPage,
         total: result.total,
