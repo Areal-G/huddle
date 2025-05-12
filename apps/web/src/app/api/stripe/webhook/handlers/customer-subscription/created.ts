@@ -1,10 +1,10 @@
 import type { Stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
+import { sendRawEmail } from "@huddle/emails";
 import { after } from "next/server";
 import { env } from "@/env";
 import { posthog } from "@/features/analytics/posthog";
 import { subscriptionMetadataSchema } from "@/features/subscription/schema";
-import { getEmailClient } from "@/utils/emails";
 import {
   getExpandedSubscription,
   getSubscriptionDetails,
@@ -124,13 +124,9 @@ export async function onCustomerSubscriptionCreated(event: Stripe.Event) {
       });
 
       if (user) {
-        const emailClient = await getEmailClient();
-        await emailClient.sendEmail({
+        await sendRawEmail({
           to: user.email,
-          from: {
-            name: "Luke from Huddle",
-            address: env.SUPPORT_EMAIL,
-          },
+          from: { name: "Luke from Huddle", address: env.SUPPORT_EMAIL },
           subject: "Thanks for subscribing to Huddle Pro",
           text: [
             "Hey there,",
