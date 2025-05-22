@@ -1,3 +1,5 @@
+"use client";
+
 import type { VoteType } from "@huddle/database";
 import { cn } from "@huddle/ui";
 import { Badge } from "@huddle/ui/badge";
@@ -63,7 +65,7 @@ export const ParticipantRowView: React.FunctionComponent<{
         <div className="flex max-w-full items-center justify-between gap-x-1">
           <Participant>
             <OptimizedAvatarImage
-              size="md"
+              size="sm"
               name={name}
               email={email}
               src={image ?? undefined}

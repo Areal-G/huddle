@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@huddle/ui";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
