@@ -1,7 +1,7 @@
-import { createApiKey } from "@huddle/api-core/auth/api-key";
 import { prisma } from "@huddle/database";
 import { TRPCError } from "@trpc/server";
 import * as z from "zod";
+import { createApiKey } from "@/features/api-keys/api-key";
 import { isApiAccessEnabled } from "@/features/developer/data";
 import { router, spaceOwnerProcedure } from "../trpc";
 
