@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import Image from "next/image";
@@ -16,7 +16,6 @@ export function CustomBrandingPrompt() {
   const { t } = useTranslation();
   const { data: space } = useSpace();
   const { user } = useUser();
-  const posthog = usePostHog();
 
   const [isDismissed, setIsDismissed] = useLocalStorage(
     "custom-branding-prompt-dismissed",

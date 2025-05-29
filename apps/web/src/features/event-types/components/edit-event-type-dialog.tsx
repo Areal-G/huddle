@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -34,7 +34,6 @@ export function EditEventTypeDialog({
   eventType: EventTypeDTO;
 }) {
   const { t } = useTranslation();
-  const posthog = usePostHog();
   const updateEventType = trpc.eventTypes.update.useMutation();
 
   const initialValues = React.useMemo(

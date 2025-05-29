@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -26,7 +26,6 @@ export function DeleteEventTypeDialog({
   eventTypeName: string;
 }) {
   const { t } = useTranslation();
-  const posthog = usePostHog();
   const softDelete = trpc.eventTypes.softDelete.useMutation();
 
   const handleDelete = async () => {

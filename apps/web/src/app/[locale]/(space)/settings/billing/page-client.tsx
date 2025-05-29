@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { buttonVariants } from "@huddle/ui";
 import { Alert, AlertDescription, AlertTitle } from "@huddle/ui/alert";
 import { Button } from "@huddle/ui/button";
@@ -73,7 +73,6 @@ export function BillingPageClient() {
 }
 
 function BillingPageContent({ tier }: { tier: SpaceTier }) {
-  const posthog = usePostHog();
   const searchParams = useSearchParams();
 
   const [subscription] = trpc.billing.getSubscription.useSuspenseQuery();

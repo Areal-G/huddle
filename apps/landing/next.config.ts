@@ -20,6 +20,7 @@ const nextConfig: NextConfig = {
     "@huddle/ui",
     "@huddle/tailwind-config",
     "@huddle/utils",
+    "@huddle/posthog",
     "next-mdx-remote",
   ],
   webpack(config) {

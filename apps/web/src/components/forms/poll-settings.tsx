@@ -1,4 +1,4 @@
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import {
   Card,
   CardContent,
@@ -37,7 +37,6 @@ const PollSetting = ({
   description: React.ReactNode;
 }) => {
   const form = useFormContext<PollSettingsFormData>();
-  const posthog = usePostHog();
   const isFree = useIsFree();
 
   return (

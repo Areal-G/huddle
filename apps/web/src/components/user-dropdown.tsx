@@ -1,5 +1,5 @@
 "use client";
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { buttonVariants, cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -39,7 +39,6 @@ import { useFeatureFlag } from "@/lib/feature-flags/client";
 
 export const UserDropdown = ({ className }: { className?: string }) => {
   const { user } = useUser();
-  const posthog = usePostHog();
   const { theme, setTheme } = useTheme();
 
   const isRegistrationEnabled = useFeatureFlag("registration");

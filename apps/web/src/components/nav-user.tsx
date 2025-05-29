@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import {
   DropdownMenu,
@@ -39,7 +39,6 @@ import { trpc } from "@/trpc/client";
 export function NavUser() {
   const { data: user } = trpc.user.getAuthed.useQuery();
   const [isPending, setIsPending] = React.useState(false);
-  const posthog = usePostHog();
   const { theme, setTheme } = useTheme();
 
   if (!user) {

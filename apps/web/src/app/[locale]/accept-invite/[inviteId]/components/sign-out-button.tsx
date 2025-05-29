@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import React from "react";
 import { Trans } from "@/i18n/client";
@@ -8,7 +8,6 @@ import { signOut } from "@/lib/auth-client";
 
 export function SignOutButton() {
   const [isPending, setIsPending] = React.useState(false);
-  const posthog = usePostHog();
   return (
     <Button
       variant="link"

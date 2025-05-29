@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import { ColorPicker, parseColor } from "@huddle/ui/color-picker";
 import { Field, FieldGroup, FieldLabel } from "@huddle/ui/field";
@@ -31,7 +31,6 @@ export function CustomBrandingSection({
   const isFree = useIsFree();
   const toastProgress = useToastProgress();
   const utils = trpc.useUtils();
-  const posthog = usePostHog();
 
   const currentColor = space.primaryColor ?? DEFAULT_PRIMARY_COLOR;
   const [color, setColor] = React.useState(() => parseColor(currentColor));

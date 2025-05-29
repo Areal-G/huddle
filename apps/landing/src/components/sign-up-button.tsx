@@ -1,13 +1,12 @@
 "use client";
 
-import { usePostHog } from "@huddle/posthog/client";
+import { posthog } from "@huddle/posthog/client";
 import { buttonVariants } from "@huddle/ui";
 import Link from "next/link";
 import { Trans } from "@/i18n/client/trans";
 import { linkToApp } from "@/lib/linkToApp";
 
 export function SignUpButton() {
-  const posthog = usePostHog();
   return (
     <Link
       href={linkToApp("/register")}
