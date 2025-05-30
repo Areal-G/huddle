@@ -1,3 +1,4 @@
+import { posthog } from "@huddle/posthog/client";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import {
   anonymousClient,
@@ -22,5 +23,5 @@ export const authClient = createAuthClient({
 
 export async function signOut() {
   await authClient.signOut();
-  window.location.href = "/login";
+  posthog?.reset();
 }
