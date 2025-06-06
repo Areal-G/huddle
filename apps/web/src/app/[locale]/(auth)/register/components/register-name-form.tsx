@@ -12,12 +12,12 @@ import {
   FormMessage,
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
-import { PasswordInput } from "@huddle/ui/password-input";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { setVerificationEmail } from "@/app/[locale]/(auth)/login/actions";
+import { PasswordInput } from "@/components/password-input";
 import { PasswordStrengthMeter } from "@/features/password/components/password-strength-meter";
 import { Trans, useTranslation } from "@/i18n/client";
 import { authClient } from "@/lib/auth-client";

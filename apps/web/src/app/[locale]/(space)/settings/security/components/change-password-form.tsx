@@ -9,10 +9,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@huddle/ui/form";
-import { PasswordInput } from "@huddle/ui/password-input";
 import { toast } from "@huddle/ui/sonner";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { PasswordInput } from "@/components/password-input";
 import { PasswordStrengthMeter } from "@/features/password/components/password-strength-meter";
 import { usePasswordValidationSchema } from "@/features/password/schema";
 import { Trans, useTranslation } from "@/i18n/client";
