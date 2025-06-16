@@ -1,4 +1,4 @@
-import type { TimeFormat } from "@huddle/database";
+import type { TimeFormat } from "@/lib/datetime/schema";
 
 type LocaleDefaults = {
   weekStart: number;

@@ -1,6 +1,5 @@
 "use client";
 
-import type { TimeFormat } from "@huddle/database";
 import { defaultLocale } from "@huddle/languages";
 import React from "react";
 import type { DateInput, DateTimePreset } from "@/lib/datetime/format";
@@ -10,6 +9,7 @@ import {
   formatRelativeTime,
 } from "@/lib/datetime/format";
 import { getLocaleDefaults, getWeekdayNames } from "@/lib/datetime/locales";
+import type { TimeFormat } from "@/lib/datetime/schema";
 import { normalizeTimeZone } from "@/lib/datetime/utils";
 import { getBrowserTimeZone } from "@/utils/date-time-utils";
 
