@@ -49,3 +49,5 @@ next-env.d.ts
 
 # Claude worktrees
 .workspace/
+# Radix -> Base UI migration reports (local skill state)
+.migration/
