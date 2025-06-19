@@ -1,10 +1,9 @@
 {
   "extends": "@huddle/tsconfig/next.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "~/*": ["public/*"]
+      "@/*": ["./src/*"],
+      "~/*": ["./public/*"]
     },
     "checkJs": false,
     "strictNullChecks": true,
