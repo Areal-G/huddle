@@ -1,7 +1,7 @@
 import type { SpaceTier } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { createSpaceDTO } from "@/features/space/data";
-import { isSelfHosted } from "@/utils/constants";
+import { isSelfHosted } from "@/lib/constants";
 
 export async function createSpace({
   name = "Personal",
