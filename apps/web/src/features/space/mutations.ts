@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { SpaceTier } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { createSpaceDTO } from "@/features/space/data";

@@ -3,8 +3,7 @@
 import { posthog } from "@huddle/posthog/client";
 import { SidebarMenuButton, SidebarMenuItem } from "@huddle/ui/sidebar";
 import { SparklesIcon } from "lucide-react";
-import { useIsFree } from "@/features/billing/client";
-import { showPayWall } from "@/features/billing/paywall-store";
+import { showPayWall, useIsFree } from "@/features/billing/client";
 import { Trans } from "@/i18n/client";
 
 export function UpgradeMenuItem() {

@@ -4,7 +4,7 @@ import { getProPricing, stripe } from "@huddle/billing";
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import { redirect } from "next/navigation";
 import * as z from "zod";
-import { createStripePortalSession } from "@/features/billing/portal";
+import { createStripePortalSession } from "@/features/billing/mutations";
 import type { CustomerMetadata } from "@/features/billing/schema";
 import { getActiveSpaceForUser } from "@/features/space/data";
 import type {

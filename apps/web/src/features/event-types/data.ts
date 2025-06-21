@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { EventType, User } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { createLogger } from "@huddle/logger";

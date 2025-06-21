@@ -5,7 +5,7 @@ import { useDialog } from "@huddle/ui/dialog";
 import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
 import { UserPlusIcon } from "lucide-react";
-import { showPayWall } from "@/features/billing/paywall-store";
+import { showPayWall } from "@/features/billing/client";
 import { useSpace } from "@/features/space/client";
 import { Trans, useTranslation } from "@/i18n/client";
 import { InviteMemberDialog } from "./invite-member-dialog";

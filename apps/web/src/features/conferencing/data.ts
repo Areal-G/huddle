@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { Prisma } from "@huddle/database";
 import { createLogger } from "@huddle/logger";
 import type { Conferencing } from "./schema";

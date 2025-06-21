@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { ScheduledEventInviteStatus } from "@huddle/database";
 import { Prisma, prisma } from "@huddle/database";
 import { nanoid } from "@huddle/utils/nanoid";

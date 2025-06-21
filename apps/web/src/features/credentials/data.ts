@@ -1,3 +1,5 @@
+import "server-only";
+
 import { prisma } from "@huddle/database";
 import { decrypt } from "@huddle/utils/encryption";
 import { env } from "@/env";

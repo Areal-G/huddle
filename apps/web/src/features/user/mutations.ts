@@ -1,3 +1,5 @@
+import "server-only";
+
 import type { TimeFormat } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { revalidateTag } from "next/cache";

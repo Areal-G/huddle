@@ -1,3 +1,5 @@
+import "server-only";
+
 import { prisma } from "@huddle/database";
 
 export const getCalendars = async (userId: string) => {

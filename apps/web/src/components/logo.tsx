@@ -1,6 +1,6 @@
 import { cn } from "@huddle/ui";
 import { env } from "@/env";
-import { getInstanceBrandingConfig } from "@/features/branding/queries";
+import { getInstanceBrandingConfig } from "@/features/branding/data";
 
 const sizes = {
   sm: {

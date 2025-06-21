@@ -1,3 +1,5 @@
+import "server-only";
+
 import { prisma } from "@huddle/database";
 
 import { getSession } from "@/lib/auth";
