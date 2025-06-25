@@ -12,7 +12,7 @@ const withBundleAnalyzer = createBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["web.huddle.test"],
+  allowedDevOrigins: [process.env.DEV_DOMAIN ?? "web.huddle.test"],
   experimental: {
     staleTimes: {
       dynamic: 60,
