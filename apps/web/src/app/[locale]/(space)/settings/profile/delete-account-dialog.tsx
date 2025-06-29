@@ -14,11 +14,12 @@ import { Form, FormField, FormItem, FormMessage } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
 import { useForm } from "react-hook-form";
 
+import { useAuthedUser } from "@/features/user/components/user-provider";
 import { Trans, useTranslation } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
 
 export function DeleteAccountDialog({ children, ...rest }: DialogProps & {}) {
-  const [user] = trpc.user.getAuthed.useSuspenseQuery();
+  const user = useAuthedUser();
   const form = useForm<{ email: string }>({
     defaultValues: {
       email: "",
