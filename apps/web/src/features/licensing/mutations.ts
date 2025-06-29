@@ -1,6 +1,6 @@
 import "server-only";
 
-import { stripe } from "@huddle/billing";
+import type { Stripe } from "@huddle/billing";
 import { prisma } from "@huddle/database";
 import { createLogger } from "@huddle/logger";
 import { env } from "@/env";
@@ -138,8 +138,10 @@ const licenseCheckoutProducts: Record<
 
 export async function createLicenseCheckoutSession({
   product,
+  stripe,
 }: {
   product: LicenseCheckoutProduct;
+  stripe: Stripe;
 }): Promise<{ url: string } | { error: string }> {
   const { lookupKey, type, seats } = licenseCheckoutProducts[product];
 
