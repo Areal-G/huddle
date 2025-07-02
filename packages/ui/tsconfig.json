@@ -1,5 +1,8 @@
 {
   "extends": "@huddle/tsconfig/next.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
