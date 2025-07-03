@@ -8,7 +8,7 @@ import {
   CommandItem,
   CommandList,
 } from "@huddle/ui/command";
-import { DialogDescription, DialogTitle, useDialog } from "@huddle/ui/dialog";
+import { useDialog } from "@huddle/ui/dialog";
 import { Icon } from "@huddle/ui/icon";
 import { PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -49,13 +49,13 @@ export function CommandMenu() {
   return (
     <>
       <CommandGlobalShortcut trigger={trigger} />
-      <CommandDialog {...dialogProps}>
-        <DialogTitle className="sr-only">
-          <Trans i18nKey="commandMenu" defaults="Command Menu" />
-        </DialogTitle>
-        <DialogDescription className="sr-only">
+      <CommandDialog
+        {...dialogProps}
+        title={<Trans i18nKey="commandMenu" defaults="Command Menu" />}
+        description={
           <Trans i18nKey="commandMenuDescription" defaults="Select a command" />
-        </DialogDescription>
+        }
+      >
         <CommandInput
           autoFocus={true}
           placeholder={t("commandMenuSearchPlaceholder", {
