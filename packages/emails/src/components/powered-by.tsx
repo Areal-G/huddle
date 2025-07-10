@@ -30,7 +30,7 @@ export async function PoweredBy({
           a: (
             <Link
               color={chrome.primaryColor}
-              href="https://huddle.dev?utm_source=email&utm_medium=transactional"
+              href="https://huddle.dev?utm_source=huddle&utm_medium=email&utm_campaign=powered_by"
             />
           ),
         }}
