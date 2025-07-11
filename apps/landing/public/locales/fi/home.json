@@ -28,8 +28,8 @@
   "statsUsersRegistered": "{count, number, ::compact-short}+ rekisteröitynyttä käyttäjää",
   "subheading": "Järjestä ryhmätapaamisia ilman edestakaisin viestittelyä",
   "viaTrustpilot": "Trustpilotissa",
-  "when2meetAlternative": "Käytätkö yhä When2Meetiä?",
-  "when2meetAlternativeDescription": "Luo ammattimaisia, mainoksettomia kokouskyselyitä ilmaiseksi Huddlen avulla.",
-  "when2meetAlternativeMetaDescription": "Löydä parempi tapa aikatauluttaa kokouksia Huddlen avulla, joka on paras ilmainen vaihtoehto When2Meetille. Helppokäyttöinen ja ilmainen.",
-  "when2meetAlternativeMetaTitle": "Paras vaihtoehto When2Meetille: Huddle"
+  "when2meetAlternative": "Moderni vaihtoehto When2Meetille",
+  "when2meetAlternativeDescription": "Huddle hoitaa kaiken mitä When2Meetikin, mutta ilman kömpelyyksiä. Luo siistejä ja hienosti mobiililaitteilla toimivia aikataulukyselyjä, saa ilmoitukset osallistujien vastattua ja hallitse kaikkia kyselyitäsi yhdessä paikassa. Ilmainen, ei mainoksia eikä äänestämiseen tarvitse tiliä. Vaihdatko When2Meetistä tai WhenIsGoodista? Huddle tuntuu heti tutulta.",
+  "when2meetAlternativeMetaDescription": "Huddle on ilmainen vaihtoehto When2Meetille. Siinä on selkeä käyttöliittymä, erinomainen mobiilituki, ilmoitukset vastauksista eikä lainkaan mainoksia. Äänestämiseen ei tarvitse tiliä.",
+  "when2meetAlternativeMetaTitle": "Paras ilmainen vaihtoehto When2Meetille | Huddle"
 }
