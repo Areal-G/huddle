@@ -46,13 +46,13 @@ export async function generateMetadata(props: {
   const { t } = await getTranslation(locale, "home");
   return {
     title: t("metaTitle", {
-      defaultValue: "Huddle: Group Scheduling Tool",
+      defaultValue: "Huddle: Free Group Meeting Scheduling Tool",
       ns: "home",
     }),
     description: t("metaDescription", {
       ns: "home",
       defaultValue:
-        "Create polls and vote to find the best day or time. A free alternative to Doodle.",
+        "Huddle is the fastest and easiest scheduling and collaboration tool. Create a meeting poll in seconds, no login required.",
     }),
   };
 }
