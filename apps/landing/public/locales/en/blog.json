@@ -1,5 +1,7 @@
 {
   "blogDescription": "News, updates and announcements about Huddle.",
+  "blogFilterAll": "All",
+  "blogPublishedOn": "Published on",
   "blogTitle": "Huddle - Blog",
-  "recentPosts": "Recent posts"
+  "blogWrittenBy": "Written by"
 }
