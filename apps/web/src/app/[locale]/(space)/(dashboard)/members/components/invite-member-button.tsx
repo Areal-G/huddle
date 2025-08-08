@@ -2,7 +2,6 @@
 
 import { Button } from "@huddle/ui/button";
 import { useDialog } from "@huddle/ui/dialog";
-import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
 import { UserPlusIcon } from "lucide-react";
 import { Trans, useTranslation } from "@/i18n/client";
@@ -34,9 +33,7 @@ export function InviteMemberButton({
           }
         }}
       >
-        <Icon>
-          <UserPlusIcon />
-        </Icon>
+        <UserPlusIcon data-icon="inline-start" />
         <Trans i18nKey="inviteMember" defaults="Invite member" />
       </Button>
       <InviteMemberDialog {...inviteMemberDialog.dialogProps} />
