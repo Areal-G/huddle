@@ -1,5 +1,7 @@
 {
   "blogDescription": "Hírek, frissítések és bejelentések a Huddle-ról.",
+  "blogFilterAll": "Összes",
+  "blogPublishedOn": "Közzétéve:",
   "blogTitle": "Huddle - Blog",
-  "recentPosts": "Legutóbbi bejegyzések"
+  "blogWrittenBy": "Írta: "
 }
