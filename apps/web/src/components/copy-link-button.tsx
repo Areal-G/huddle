@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@huddle/ui/button";
-import { Icon } from "@huddle/ui/icon";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { useState } from "react";
@@ -34,9 +33,7 @@ export function CopyLinkButton({
               setTimeout(() => setDidCopy(false), 1000);
             }}
           >
-            <Icon>
-              <CopyIcon />
-            </Icon>
+            <CopyIcon className="text-muted-foreground" />
           </Button>
         }
       />

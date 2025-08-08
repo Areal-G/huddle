@@ -2,7 +2,6 @@
 
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
-import { Icon } from "@huddle/ui/icon";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -68,9 +67,7 @@ export function Pagination({
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
         >
-          <Icon>
-            <ChevronLeftIcon />
-          </Icon>
+          <ChevronLeftIcon className="text-muted-foreground" />
           <span className="sr-only">
             <Trans i18nKey="paginationPrevious" defaults="Previous" />
           </span>
@@ -94,9 +91,7 @@ export function Pagination({
           <span className="sr-only">
             <Trans i18nKey="paginationNext" defaults="Next" />
           </span>
-          <Icon>
-            <ChevronRightIcon />
-          </Icon>
+          <ChevronRightIcon className="text-muted-foreground" />
         </Button>
       </div>
     </div>

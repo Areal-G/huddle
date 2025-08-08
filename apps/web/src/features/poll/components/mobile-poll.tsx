@@ -2,7 +2,6 @@ import { cn } from "@huddle/ui";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { Card } from "@huddle/ui/card";
-import { Icon } from "@huddle/ui/icon";
 import {
   Select,
   SelectContent,
@@ -89,9 +88,7 @@ const MobilePoll: React.FunctionComponent = () => {
       label: (
         <div className="flex items-center gap-x-2.5">
           <div>
-            <Icon>
-              <UsersIcon />
-            </Icon>
+            <UsersIcon className="size-4 shrink-0 text-muted-foreground" />
           </div>
           <span>
             {t("allParticipants", {

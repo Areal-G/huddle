@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
 import { Switch } from "@huddle/ui/switch";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
@@ -94,9 +93,7 @@ export function CalendarConnectionList() {
                         );
                       }}
                     >
-                      <Icon>
-                        <RefreshCcwIcon />
-                      </Icon>
+                      <RefreshCcwIcon className="text-muted-foreground" />
                     </Button>
                   }
                 />
@@ -116,9 +113,7 @@ export function CalendarConnectionList() {
                     />
                   }
                 >
-                  <Icon>
-                    <MoreVerticalIcon />
-                  </Icon>
+                  <MoreVerticalIcon className="text-muted-foreground" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem

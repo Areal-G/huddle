@@ -1,6 +1,5 @@
 import { cn } from "@huddle/ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@huddle/ui/avatar";
-import { Icon } from "@huddle/ui/icon";
 import { UserIcon } from "lucide-react";
 import { resolveStorageUrl } from "@/lib/storage/resolve-storage-url";
 
@@ -31,9 +30,7 @@ export function OptimizedAvatarImage({
         {/^\p{L}+$/u.test(initials) ? (
           initials
         ) : (
-          <Icon>
-            <UserIcon />
-          </Icon>
+          <UserIcon className="size-4 shrink-0 text-muted-foreground" />
         )}
       </AvatarFallback>
     </Avatar>

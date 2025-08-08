@@ -24,7 +24,6 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { Icon } from "@huddle/ui/icon";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 import { shortUrl } from "@huddle/utils/absolute-url";
 import { CalendarPlusIcon, MoreVerticalIcon } from "lucide-react";
@@ -175,16 +174,12 @@ export function ScheduledEventListItem({
               />
             }
           >
-            <Icon>
-              <MoreVerticalIcon />
-            </Icon>
+            <MoreVerticalIcon className="text-muted-foreground" />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>
-                <Icon>
-                  <CalendarPlusIcon />
-                </Icon>
+                <CalendarPlusIcon />
                 <Trans i18nKey="addToCalendar" defaults="Add to calendar" />
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent>

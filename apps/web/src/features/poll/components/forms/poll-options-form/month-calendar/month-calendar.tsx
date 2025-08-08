@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { Icon } from "@huddle/ui/icon";
 import { RadioCards, RadioCardsItem } from "@huddle/ui/radio-pills";
 import {
   CalendarIcon,
@@ -530,9 +529,7 @@ const MonthCalendar: React.FunctionComponent<DateTimePickerProps> = ({
                                     onChange(newOptions);
                                   }}
                                 >
-                                  <Icon>
-                                    <SparklesIcon />
-                                  </Icon>
+                                  <SparklesIcon />
                                   <Trans
                                     i18nKey="applyToAllDates"
                                     defaults="Apply to all dates"
@@ -548,9 +545,7 @@ const MonthCalendar: React.FunctionComponent<DateTimePickerProps> = ({
                                     );
                                   }}
                                 >
-                                  <Icon>
-                                    <CalendarXIcon />
-                                  </Icon>
+                                  <CalendarXIcon />
                                   <Trans
                                     i18nKey="deleteDate"
                                     defaults="Delete date"

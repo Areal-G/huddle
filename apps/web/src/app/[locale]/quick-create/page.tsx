@@ -1,6 +1,5 @@
 import { buttonVariants } from "@huddle/ui";
 import { Card } from "@huddle/ui/card";
-import { Icon } from "@huddle/ui/icon";
 import { LogInIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -43,9 +42,7 @@ export default async function QuickCreatePage() {
               href="/login"
               className={buttonVariants({ className: "rounded-full" })}
             >
-              <Icon>
-                <LogInIcon />
-              </Icon>
+              <LogInIcon className="text-muted-foreground" />
               {t("login")}
             </Link>
           </div>

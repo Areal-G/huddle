@@ -17,7 +17,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
-import { Icon } from "@huddle/ui/icon";
 import { toast } from "@huddle/ui/sonner";
 import { BanIcon, MoreVerticalIcon } from "lucide-react";
 import { revokeApiKeyAction } from "@/features/api-keys/actions";
@@ -54,9 +53,7 @@ export function RevokeApiKeyButton({
             />
           }
         >
-          <Icon>
-            <MoreVerticalIcon />
-          </Icon>
+          <MoreVerticalIcon className="text-muted-foreground" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem
