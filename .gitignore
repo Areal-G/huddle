@@ -47,7 +47,7 @@ packages/screenshots/screenshots
 # Next
 next-env.d.ts
 
-# Claude worktrees
+# workspace state
 .workspace/
 # Radix -> Base UI migration reports (local skill state)
 .migration/
