@@ -1,4 +1,7 @@
 {
   "blogDescription": "Uutisia, päivityksiä ja tiedotteita Huddlesta.",
-  "blogTitle": "Huddle - Blogi"
+  "blogFilterAll": "Kaikki",
+  "blogPublishedOn": "Julkaistu",
+  "blogTitle": "Huddle - Blogi",
+  "blogWrittenBy": "Kirjoittanut"
 }
