@@ -7,6 +7,7 @@ const baseProps = {
   title: "Team Meeting",
   participantName: "Jane Doe",
   pollUrl: "https://huddle.dev/poll/abc",
+  unsubscribeUrl: "https://huddle.dev/unsubscribe/token",
   disableNotificationsUrl: "https://huddle.dev/settings",
   chrome: previewChrome,
 };
@@ -33,6 +34,12 @@ describe("NewParticipantEmail", () => {
   it("renders no quote block without a note", async () => {
     const html = await renderEmail();
     expect(html).not.toContain("border-left");
+  });
+
+  it("links both footer actions", async () => {
+    const html = await renderEmail();
+    expect(html).toContain('href="https://huddle.dev/unsubscribe/token"');
+    expect(html).toContain('href="https://huddle.dev/settings"');
   });
 
   it("shows reply guidance only when a reply address exists", async () => {
