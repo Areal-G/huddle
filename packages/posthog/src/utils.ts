@@ -1,59 +1,5 @@
 import type { CaptureResult } from "posthog-js";
 
-export function getPostHogCookieName(apiKey: string) {
-  return `ph_${apiKey}_posthog`;
-}
-
-/**
- * Extract the client's distinct_id from the posthog-js persistence cookie
- * (`persistence: "cookie"` in client.ts). The raw cookie value is URL-encoded
- * JSON, but some runtimes hand it over already decoded — handle both. Returns
- * null for a missing or malformed value.
- */
-export function parsePostHogCookieDistinctId(
-  cookieValue: string | undefined,
-): string | null {
-  if (!cookieValue) {
-    return null;
-  }
-
-  let json = cookieValue;
-  try {
-    json = decodeURIComponent(cookieValue);
-  } catch {
-    // Not URL-encoded — parse as-is
-  }
-
-  try {
-    const parsed: unknown = JSON.parse(json);
-    if (
-      typeof parsed === "object" &&
-      parsed !== null &&
-      "distinct_id" in parsed
-    ) {
-      const distinctId = (parsed as { distinct_id: unknown }).distinct_id;
-      if (typeof distinctId === "string" && distinctId.length > 0) {
-        return distinctId;
-      }
-    }
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-type NavigatorWithGlobalPrivacyControl = Navigator & {
-  globalPrivacyControl?: boolean;
-};
-
-export function isGlobalPrivacyControlEnabled() {
-  return (
-    typeof navigator !== "undefined" &&
-    (navigator as NavigatorWithGlobalPrivacyControl).globalPrivacyControl ===
-      true
-  );
-}
-
 /**
  * Stack-frame function names that only ever appear in password-manager browser
  * extension content scripts (1Password/Dashlane-style form scanners), never in
@@ -85,4 +31,101 @@ export function isInjectedExtensionException(event: CaptureResult) {
         EXTENSION_NOISE_FRAME_PATTERN.test(frame.function),
     ),
   );
+}
+
+/**
+ * A request that is aborted (React Query cancels an in-flight query on unmount
+ * or navigation) surfaces as an `AbortError`. When it wraps a tRPC request, the
+ * `$exception_list` holds a `TRPCClientError` ("The operation was aborted.")
+ * chained to a `DOMException` whose value starts with "AbortError:". Nothing
+ * broke for the user, so this is autocapture noise, not a real error.
+ */
+const ABORT_NOISE_VALUE_PATTERN =
+  /^AbortError\b|operation was aborted|user aborted a request/i;
+
+export function isAbortError(event: CaptureResult) {
+  const exceptionList = event.properties?.$exception_list as
+    | Array<{ type?: string; value?: string }>
+    | undefined;
+
+  if (!Array.isArray(exceptionList)) {
+    return false;
+  }
+
+  return exceptionList.some(
+    (exception) =>
+      exception?.type === "AbortError" ||
+      (typeof exception?.value === "string" &&
+        ABORT_NOISE_VALUE_PATTERN.test(exception.value)),
+  );
+}
+
+/**
+ * The browser fires `ResizeObserver loop completed with undelivered
+ * notifications.` on `window.onerror` when a ResizeObserver callback changes
+ * layout and the browser cannot deliver every notification inside one animation
+ * frame. Nothing breaks — it is a notice, not a crash — so autocapture must not
+ * report it as a real error.
+ */
+const RESIZE_OBSERVER_LOOP_VALUE_PATTERN =
+  /^ResizeObserver loop (limit exceeded|completed with undelivered notifications)/i;
+
+export function isResizeObserverLoopError(event: CaptureResult) {
+  const exceptionList = event.properties?.$exception_list as
+    | Array<{ value?: string }>
+    | undefined;
+
+  if (!Array.isArray(exceptionList)) {
+    return false;
+  }
+
+  return exceptionList.some(
+    (exception) =>
+      typeof exception?.value === "string" &&
+      RESIZE_OBSERVER_LOOP_VALUE_PATTERN.test(exception.value),
+  );
+}
+
+/**
+ * An iOS-only throw reaches error tracking with a bare minified identifier as
+ * its message (`fa`, `ga`, `Ba`, `Ca`, ...) and a stack whose every frame
+ * resolves to the HTML document (`filename: https://app.huddle.dev/`,
+ * `function: "?"`) instead of a `/_next/static` chunk. Only chunk files ship
+ * source maps (`productionBrowserSourceMaps` in next.config.ts), so an inline
+ * document script can never be symbolicated and the stack stays useless. The
+ * minifier renames the symbol on each release, so the message is part of the
+ * fingerprint and every deploy opens a fresh, uninvestigable issue.
+ *
+ * Match a short minified identifier value together with a stack that carries no
+ * `/_next/static` frame. This drops the whole class and covers the next rename.
+ */
+const MINIFIED_IDENTIFIER_VALUE_PATTERN = /^[A-Za-z$_][\w$]{0,2}$/;
+
+export function isUnsymbolicatedMinifiedException(event: CaptureResult) {
+  const exceptionList = event.properties?.$exception_list as
+    | Array<{
+        value?: string;
+        stacktrace?: { frames?: Array<{ filename?: string }> };
+      }>
+    | undefined;
+
+  if (!Array.isArray(exceptionList)) {
+    return false;
+  }
+
+  return exceptionList.some((exception) => {
+    if (
+      typeof exception?.value !== "string" ||
+      !MINIFIED_IDENTIFIER_VALUE_PATTERN.test(exception.value)
+    ) {
+      return false;
+    }
+
+    const frames = exception.stacktrace?.frames;
+    if (!Array.isArray(frames) || frames.length === 0) {
+      return false;
+    }
+
+    return !frames.some((frame) => frame?.filename?.includes("/_next/static"));
+  });
 }

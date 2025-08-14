@@ -1,66 +1,178 @@
+import type { CaptureResult } from "posthog-js";
 import { describe, expect, it } from "vitest";
-import { getPostHogCookieName, parsePostHogCookieDistinctId } from "./utils";
+import {
+  isAbortError,
+  isResizeObserverLoopError,
+  isUnsymbolicatedMinifiedException,
+} from "./utils";
 
-describe("getPostHogCookieName", () => {
-  it("builds the posthog-js persistence cookie name", () => {
-    expect(getPostHogCookieName("phc_abc123")).toBe("ph_phc_abc123_posthog");
+describe("isAbortError", () => {
+  const event = (exceptionList: unknown) =>
+    ({
+      properties: { $exception_list: exceptionList },
+    }) as unknown as CaptureResult;
+
+  it("matches an aborted tRPC request", () => {
+    expect(
+      isAbortError(
+        event([
+          { type: "TRPCClientError", value: "The operation was aborted. " },
+          {
+            type: "DOMException",
+            value: "AbortError: The operation was aborted. ",
+          },
+        ]),
+      ),
+    ).toBe(true);
+  });
+
+  it("matches a bare AbortError DOMException", () => {
+    expect(
+      isAbortError(
+        event([
+          {
+            type: "DOMException",
+            value: "AbortError: The user aborted a request.",
+          },
+        ]),
+      ),
+    ).toBe(true);
+  });
+
+  it("does not match an unrelated exception", () => {
+    expect(
+      isAbortError(
+        event([{ type: "TypeError", value: "x is not a function" }]),
+      ),
+    ).toBe(false);
+  });
+
+  it("does not match when the exception list is missing", () => {
+    expect(isAbortError({ properties: {} } as unknown as CaptureResult)).toBe(
+      false,
+    );
   });
 });
 
-describe("parsePostHogCookieDistinctId", () => {
-  it("parses a URL-encoded JSON cookie value", () => {
-    const value = encodeURIComponent(
-      JSON.stringify({ distinct_id: "0198c0de-anon", $sesid: [123, "abc"] }),
-    );
-    expect(parsePostHogCookieDistinctId(value)).toBe("0198c0de-anon");
-  });
+describe("isResizeObserverLoopError", () => {
+  const event = (exceptionList: unknown) =>
+    ({
+      properties: { $exception_list: exceptionList },
+    }) as unknown as CaptureResult;
 
-  it("parses an already-decoded JSON cookie value", () => {
-    const value = JSON.stringify({ distinct_id: "anon-id" });
-    expect(parsePostHogCookieDistinctId(value)).toBe("anon-id");
-  });
-
-  it("parses a decoded value containing a literal percent sign", () => {
-    const value = JSON.stringify({
-      distinct_id: "anon-id",
-      $initial_referrer: "https://example.com/?q=100%",
-    });
-    expect(parsePostHogCookieDistinctId(value)).toBe("anon-id");
-  });
-
-  it("returns null for undefined", () => {
-    expect(parsePostHogCookieDistinctId(undefined)).toBeNull();
-  });
-
-  it("returns null for an empty string", () => {
-    expect(parsePostHogCookieDistinctId("")).toBeNull();
-  });
-
-  it("returns null for malformed JSON", () => {
-    expect(parsePostHogCookieDistinctId("not-json")).toBeNull();
-    expect(parsePostHogCookieDistinctId("%7Bbroken")).toBeNull();
-  });
-
-  it("returns null for JSON without a distinct_id", () => {
+  it("matches the undelivered notifications notice", () => {
     expect(
-      parsePostHogCookieDistinctId(JSON.stringify({ $sesid: [1, "a"] })),
-    ).toBeNull();
+      isResizeObserverLoopError(
+        event([
+          {
+            type: "Error",
+            value:
+              "ResizeObserver loop completed with undelivered notifications.",
+          },
+        ]),
+      ),
+    ).toBe(true);
   });
 
-  it("returns null for a non-string distinct_id", () => {
+  it("matches the loop limit exceeded notice", () => {
     expect(
-      parsePostHogCookieDistinctId(JSON.stringify({ distinct_id: 42 })),
-    ).toBeNull();
+      isResizeObserverLoopError(
+        event([{ type: "Error", value: "ResizeObserver loop limit exceeded" }]),
+      ),
+    ).toBe(true);
   });
 
-  it("returns null for an empty distinct_id", () => {
+  it("does not match an unrelated exception", () => {
     expect(
-      parsePostHogCookieDistinctId(JSON.stringify({ distinct_id: "" })),
-    ).toBeNull();
+      isResizeObserverLoopError(
+        event([{ type: "TypeError", value: "x is not a function" }]),
+      ),
+    ).toBe(false);
   });
 
-  it("returns null for non-object JSON", () => {
-    expect(parsePostHogCookieDistinctId('"a string"')).toBeNull();
-    expect(parsePostHogCookieDistinctId("null")).toBeNull();
+  it("does not match when the exception list is missing", () => {
+    expect(
+      isResizeObserverLoopError({
+        properties: {},
+      } as unknown as CaptureResult),
+    ).toBe(false);
+  });
+});
+
+describe("isUnsymbolicatedMinifiedException", () => {
+  const event = (exceptionList: unknown) =>
+    ({
+      properties: { $exception_list: exceptionList },
+    }) as unknown as CaptureResult;
+
+  const documentFrames = [
+    { filename: "https://app.huddle.dev/", function: "?" },
+    { filename: "https://app.huddle.dev/", function: "?" },
+  ];
+
+  it("matches a minified identifier with no /_next/static frame", () => {
+    for (const value of ["fa", "ga", "Ba", "Ca"]) {
+      expect(
+        isUnsymbolicatedMinifiedException(
+          event([
+            { type: "Error", value, stacktrace: { frames: documentFrames } },
+          ]),
+        ),
+      ).toBe(true);
+    }
+  });
+
+  it("does not match when a frame resolves to a /_next/static chunk", () => {
+    expect(
+      isUnsymbolicatedMinifiedException(
+        event([
+          {
+            type: "Error",
+            value: "Ca",
+            stacktrace: {
+              frames: [
+                ...documentFrames,
+                { filename: "https://app.huddle.dev/_next/static/chunk.js" },
+              ],
+            },
+          },
+        ]),
+      ),
+    ).toBe(false);
+  });
+
+  it("does not match a readable error message", () => {
+    expect(
+      isUnsymbolicatedMinifiedException(
+        event([
+          {
+            type: "TypeError",
+            value: "x is not a function",
+            stacktrace: { frames: documentFrames },
+          },
+        ]),
+      ),
+    ).toBe(false);
+  });
+
+  it("does not match a minified value without a stack", () => {
+    expect(
+      isUnsymbolicatedMinifiedException(
+        event([{ type: "Error", value: "Ca", stacktrace: { frames: [] } }]),
+      ),
+    ).toBe(false);
+    expect(
+      isUnsymbolicatedMinifiedException(
+        event([{ type: "Error", value: "Ca" }]),
+      ),
+    ).toBe(false);
+  });
+
+  it("does not match when the exception list is missing", () => {
+    expect(
+      isUnsymbolicatedMinifiedException({
+        properties: {},
+      } as unknown as CaptureResult),
+    ).toBe(false);
   });
 });
