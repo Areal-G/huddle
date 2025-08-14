@@ -1,4 +1,7 @@
 {
   "blogDescription": "Новости, обновления и анонсы о Huddle.",
-  "blogTitle": "Huddle - Блог"
+  "blogFilterAll": "Все",
+  "blogPublishedOn": "Опубликовано",
+  "blogTitle": "Huddle - Блог",
+  "blogWrittenBy": "Автор"
 }
