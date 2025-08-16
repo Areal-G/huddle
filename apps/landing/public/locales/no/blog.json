@@ -1,3 +1,7 @@
 {
-  "blogDescription": "Nyheter, oppdateringer og kunngjøringer om Huddle."
+  "blogDescription": "Nyheter, oppdateringer og kunngjøringer om Huddle.",
+  "blogFilterAll": "Alle",
+  "blogPublishedOn": "Publisert",
+  "blogTitle": "Blogg",
+  "blogWrittenBy": "Skrevet av"
 }

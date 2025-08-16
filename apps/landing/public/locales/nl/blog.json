@@ -1,3 +1,7 @@
 {
-  "blogDescription": "Nieuws, updates en aankondigingen over Huddle."
+  "blogDescription": "Nieuws, updates en aankondigingen over Huddle.",
+  "blogFilterAll": "Alle",
+  "blogPublishedOn": "Gepubliceerd op",
+  "blogTitle": "Blog",
+  "blogWrittenBy": "Geschreven door"
 }
