@@ -224,7 +224,7 @@ export default async function PrivacyPolicy() {
 export async function generateMetadata() {
   cacheLife("max");
   return {
-    title: "Huddle: Privacy Policy",
+    title: "Privacy Policy",
     description: "The privacy policy for Huddle.",
   };
 }
