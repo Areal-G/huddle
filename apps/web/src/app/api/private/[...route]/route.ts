@@ -27,6 +27,14 @@ import {
 } from "@/lib/datetime/slot-generator";
 import { isMaintenanceModeEnabled } from "@/lib/maintenance";
 import { flushPostHog, identifyGroup, track } from "@/lib/posthog";
+import { apiError } from "../../middleware/api-error";
+import { spaceApiKeyAuth } from "../../middleware/api-key";
+import {
+  RATE_LIMIT_PER_DAY,
+  RATE_LIMIT_PER_MINUTE,
+  rateLimit,
+} from "../../middleware/rate-limit";
+import { wideEvent } from "../../middleware/wide-event";
 import {
   createPollRequestExamples,
   patchPollRequestExamples,
@@ -44,14 +52,6 @@ import {
   patchPollInputSchema,
   patchPollSuccessResponseSchema,
 } from "../schemas";
-import { spaceApiKeyAuth } from "../utils/api-key";
-import { apiError } from "../utils/poll";
-import {
-  RATE_LIMIT_PER_DAY,
-  RATE_LIMIT_PER_MINUTE,
-  rateLimit,
-} from "../utils/rate-limit";
-import { wideEvent } from "../utils/wide-event";
 
 type Env = {
   Variables: {
@@ -103,7 +103,7 @@ function toPollResponseBody(poll: {
   };
 }
 
-app.use("*", wideEvent);
+app.use("*", wideEvent({ service: "api-private" }));
 
 app.use("*", async (c, next) => {
   if (isMaintenanceModeEnabled()) {

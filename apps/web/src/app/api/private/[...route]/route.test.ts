@@ -62,7 +62,7 @@ vi.mock("@/lib/feature-flags/server", () => ({
 }));
 
 vi.mock("@/lib/kv", async () => ({
-  redis: (await import("../utils/fake-redis")).createFakeRedis(),
+  redis: (await import("../../middleware/fake-redis")).createFakeRedis(),
 }));
 
 vi.mock("@/lib/posthog", () => ({
@@ -76,6 +76,8 @@ import { after } from "next/server";
 import { hashApiKey, verifyApiKey } from "@/features/api-keys/utils";
 import { MAX_SLOT_GENERATION_DAYS } from "@/lib/datetime/slot-generator";
 import { redis } from "@/lib/kv";
+import type { FakeRedis } from "../../middleware/fake-redis";
+import { RATE_LIMIT_PER_MINUTE } from "../../middleware/rate-limit";
 import {
   createPollRequestExamples,
   patchPollRequestExamples,
@@ -90,8 +92,6 @@ import {
   listPollsSuccessResponseSchema,
   patchPollSuccessResponseSchema,
 } from "../schemas";
-import type { FakeRedis } from "../utils/fake-redis";
-import { RATE_LIMIT_PER_MINUTE } from "../utils/rate-limit";
 import { app } from "./route";
 
 const expectMatchesContract = (
