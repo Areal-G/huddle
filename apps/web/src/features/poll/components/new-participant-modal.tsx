@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { VoteType } from "@huddle/database";
 import { posthog } from "@huddle/posthog/client";
-import { buttonVariants, cn } from "@huddle/ui";
+import { buttonVariants, cn, passwordManagerIgnoreProps } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
   DialogDescription,
@@ -291,7 +291,7 @@ export const NewParticipantForm = (props: NewParticipantModalProps) => {
                 <FormControl>
                   <Input
                     className="w-full"
-                    data-1p-ignore="true"
+                    {...passwordManagerIgnoreProps}
                     autoFocus={true}
                     disabled={formState.isSubmitting}
                     placeholder={t("namePlaceholder")}

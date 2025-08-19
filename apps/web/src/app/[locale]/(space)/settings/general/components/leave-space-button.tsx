@@ -1,5 +1,6 @@
 "use client";
 
+import { passwordManagerIgnoreProps } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -108,7 +109,7 @@ function LeaveSpaceDialog({
                   <FormControl>
                     <Input
                       autoComplete="off"
-                      data-1p-ignore
+                      {...passwordManagerIgnoreProps}
                       placeholder={spaceName}
                       {...field}
                     />

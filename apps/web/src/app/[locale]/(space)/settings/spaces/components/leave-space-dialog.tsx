@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { passwordManagerIgnoreProps } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -97,7 +98,7 @@ export function LeaveSpaceDialog({
                   <FormControl>
                     <Input
                       autoComplete="off"
-                      data-1p-ignore
+                      {...passwordManagerIgnoreProps}
                       placeholder={spaceName}
                       {...field}
                     />
