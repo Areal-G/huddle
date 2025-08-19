@@ -8,10 +8,11 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
-import { useState } from "react";
+import React from "react";
 import superjson from "superjson";
 import { useTranslation } from "@/i18n/client";
 import { signOut } from "@/lib/auth-client";
+import { registerBrowserQueryClient } from "@/lib/query-client";
 import { trpc } from "../client";
 import type { AppRouter } from "../routers";
 
@@ -19,11 +20,25 @@ function isTRPCClientError(error: Error): error is TRPCClientError<AppRouter> {
   return error instanceof TRPCClientError;
 }
 
+// A request cancelled on unmount or navigation surfaces as an aborted tRPC
+// request with no server response. Nothing broke, so it must not raise a
+// "Unable to reach the server" toast.
+function isAbortError(error: TRPCClientError<AppRouter>) {
+  return (
+    error.cause instanceof DOMException && error.cause.name === "AbortError"
+  );
+}
+
 export function TRPCProvider(props: { children: React.ReactNode }) {
   const { t } = useTranslation();
-  const [queryClient] = useState(() => {
+  const [queryClient] = React.useState(() => {
     function handleError(error: Error) {
       if (!isTRPCClientError(error)) {
+        return;
+      }
+
+      // A cancelled request is not a failure — never warn about connectivity
+      if (isAbortError(error)) {
         return;
       }
 
@@ -126,7 +141,7 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
       }
     }
 
-    return new QueryClient({
+    const client = new QueryClient({
       defaultOptions: {
         queries: {
           retry: false,
@@ -136,8 +151,12 @@ export function TRPCProvider(props: { children: React.ReactNode }) {
       queryCache: new QueryCache({ onError: handleError }),
       mutationCache: new MutationCache({ onError: handleError }),
     });
+    // Sign-out refreshes the router but keeps this provider mounted, so
+    // signOut() clears the cache through this registration.
+    registerBrowserQueryClient(client);
+    return client;
   });
-  const [trpcClient] = useState(() =>
+  const [trpcClient] = React.useState(() =>
     trpc.createClient({
       links: [
         httpBatchLink({
