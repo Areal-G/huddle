@@ -1,7 +1,7 @@
 {
   "name": "huddle",
   "private": true,
-  "version": "4.14.0",
+  "version": "4.15.0",
   "scripts": {
     "dev": "turbo dev --filter=@huddle/web",
     "dev:emails": "turbo dev --filter=@huddle/emails",
@@ -50,7 +50,7 @@
     "prisma": "^7.8.0",
     "turbo": "^2.6.3",
     "typescript": "^6.0.3",
-    "vitest": "^4.0.16"
+    "vitest": "^4.1.11"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,json,css}": "biome check --write --no-errors-on-unmatched"
