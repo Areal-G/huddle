@@ -3,7 +3,7 @@ import { prisma } from "@huddle/database";
 import { sendNewParticipantEmail } from "@huddle/emails/templates/new-participant";
 import { sendNewParticipantConfirmationEmail } from "@huddle/emails/templates/new-participant-confirmation";
 import { createLogger } from "@huddle/logger";
-import { absoluteUrl } from "@huddle/utils/absolute-url";
+import { absoluteUrl, shortUrl } from "@huddle/utils/absolute-url";
 import { TRPCError } from "@trpc/server";
 import { after } from "next/server";
 import * as z from "zod";
@@ -180,7 +180,7 @@ export const participants = router({
       const participants = rawParticipants.map((participant) => {
         const dto = createParticipantFullDTO(participant);
         const editUrl = isAdmin
-          ? absoluteUrl(getPollInvitePath({ pollId, token: participant.token }))
+          ? shortUrl(getPollInvitePath({ pollId, token: participant.token }))
           : null;
         if (isAdmin || isOwn(participant)) {
           return { ...dto, editUrl };
@@ -459,7 +459,7 @@ export const participants = router({
                 : await getInstanceBranding(),
               props: {
                 title: participant.poll.title,
-                editSubmissionUrl: absoluteUrl(
+                editSubmissionUrl: shortUrl(
                   `/invite/${participant.poll.id}?token=${editToken}`,
                 ),
               },
