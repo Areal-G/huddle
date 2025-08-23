@@ -1,8 +1,8 @@
 "use client";
 
 import { SidebarMenuButton, SidebarMenuItem } from "@huddle/ui/sidebar";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Link } from "@/components/link";
 
 export function NavItem({
   href,

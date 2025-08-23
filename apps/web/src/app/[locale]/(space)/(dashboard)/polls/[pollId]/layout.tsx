@@ -1,9 +1,9 @@
 import { buttonVariants } from "@huddle/ui";
 import { Skeleton } from "@huddle/ui/skeleton";
 import { ArrowLeftIcon } from "lucide-react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { Link } from "@/components/link";
 import {
   PageContainer,
   PageContent,
