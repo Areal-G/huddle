@@ -11,6 +11,7 @@
     "type-check": "tsc --pretty --noEmit",
     "i18n:scan": "i18next-cli extract",
     "i18n:sync": "i18next-cli extract --sync-primary",
+    "openapi:generate": "tsx scripts/generate-openapi.ts",
     "test:integration": "playwright test",
     "test:unit": "vitest run",
     "test:codegen": "playwright codegen http://localhost:3000",
@@ -66,7 +67,7 @@
     "dayjs": "^1.11.13",
     "es-toolkit": "^1.39.9",
     "googleapis": "^169.0.0",
-    "hono": "^4.11.1",
+    "hono": "^4.13.5",
     "hono-openapi": "^1.1.2",
     "hono-rate-limiter": "^0.2.1",
     "i18next": "^26.3.0",
@@ -127,6 +128,7 @@
     "dotenv": "^17.2.4",
     "i18next-cli": "^1.58.1",
     "jsdom": "^26.1.0",
-    "vitest": "^4.0.16"
+    "tsx": "^4.6.2",
+    "vitest": "^4.1.11"
   }
 }
