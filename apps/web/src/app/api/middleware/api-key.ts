@@ -17,7 +17,18 @@ import { apiError } from "./api-error";
 
 const LAST_USED_AT_WRITE_INTERVAL_MS = 60_000;
 
-const verifyKey = bearerAuth({
+type ApiKeyAuthEnv = {
+  Variables: {
+    apiAuth: {
+      spaceId: AuthorizedSpaceId;
+      spaceOwnerId: string;
+      spaceTier: SpaceTier;
+      apiKeyId: string;
+    };
+  };
+};
+
+const verifyKey = bearerAuth<ApiKeyAuthEnv>({
   verifyToken: async (rawKey, c) => {
     const prefix = extractApiKeyPrefix(rawKey);
     const prefixBuffer = Buffer.from(prefix);
@@ -45,6 +56,11 @@ const verifyKey = bearerAuth({
           select: {
             ownerId: true,
             tier: true,
+            owner: {
+              select: {
+                banned: true,
+              },
+            },
           },
         },
       },
@@ -65,7 +81,9 @@ const verifyKey = bearerAuth({
       ) {
         // Verify the full key hash
         const isValid = await verifyApiKey(rawKey, candidate.hashedKey);
-        if (isValid) {
+        // A banned owner's keys stay in the table but must not authenticate:
+        // the ban is the only thing standing between a scammer and the API.
+        if (isValid && !candidate.space.owner.banned) {
           apiKeyId = candidate.id;
           spaceId = candidate.spaceId;
           spaceOwnerId = candidate.space.ownerId;
@@ -137,9 +155,7 @@ const verifyKey = bearerAuth({
 
 // hono/bearer-auth can only turn a failed verifyToken into a 401, so the
 // tier check runs as a follow-up middleware to respond with a 403 instead.
-const requireProSpace = createMiddleware<{
-  Variables: { apiAuth: { spaceTier: SpaceTier } };
-}>(async (c, next) => {
+const requireProSpace = createMiddleware<ApiKeyAuthEnv>(async (c, next) => {
   if (c.get("apiAuth").spaceTier !== "pro") {
     return c.json(
       apiError(
