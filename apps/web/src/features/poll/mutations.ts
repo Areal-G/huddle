@@ -3,6 +3,7 @@ import "server-only";
 import type { Prisma } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { nanoid } from "@huddle/utils/nanoid";
+import { revalidatePath } from "next/cache";
 import { recordPollActivities } from "@/features/poll/activity/mutations";
 import type { AuthorizedSpaceId } from "@/features/space/types";
 
@@ -399,4 +400,14 @@ export async function removeDeletedPolls() {
   }
 
   return totalDeletedPolls;
+}
+
+/**
+ * The two pages that render a poll's responses and comments. Nothing they
+ * read is cached, so this only makes the action response carry a fresh
+ * render of the page that called it and drops the router's copy of both.
+ */
+export function revalidatePollPages() {
+  revalidatePath("/[locale]/invite/[urlId]", "page");
+  revalidatePath("/[locale]/(optional-space)/poll/[urlId]", "layout");
 }

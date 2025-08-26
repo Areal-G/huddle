@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
 
-import { useParticipants } from "@/features/poll/components/participants-provider";
+import { useParticipants } from "@/features/poll/client";
 
 const ListNames = ({ participantIds }: { participantIds: string[] }) => {
   const { participants } = useParticipants();
