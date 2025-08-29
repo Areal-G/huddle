@@ -12,9 +12,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@huddle/ui/dialog";
+import { NumberTicker } from "@huddle/ui/number-ticker";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import * as React from "react";
-import { NumberTicker } from "@/components/number-ticker";
 import { Trans } from "@/i18n/client";
 import { trpc } from "@/trpc/client";
 
