@@ -6,6 +6,7 @@ import type { APIRequestContext } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { encrypt } from "@huddle/utils/encryption";
+import { WEBHOOK_VERSION } from "@/features/webhook/constants";
 import { createUserInDb } from "./test-utils";
 
 /**
@@ -178,11 +179,13 @@ test.describe("Webhook delivery", () => {
     const [received] = receiver.requests;
     expect(received?.headers["x-huddle-event"]).toBe("poll.closed");
     expect(received?.headers["content-type"]).toBe("application/json");
+    expect(received?.headers["x-huddle-webhook-version"]).toBe(WEBHOOK_VERSION);
     const signature = received?.headers["x-huddle-signature"] as string;
     expect(verifySignature(signature, received?.body ?? "")).toBe(true);
 
     const body = JSON.parse(received?.body ?? "{}");
     expect(body).toMatchObject({
+      version: WEBHOOK_VERSION,
       id: activity.id,
       type: "poll.closed",
       createdAt: activity.createdAt.toISOString(),
@@ -447,6 +450,30 @@ test.describe("Webhook delivery", () => {
     });
     expect(updated.consecutiveFailures).toBe(20);
     expect(updated.enabled).toBe(false);
+  });
+
+  test("keeps a retry's header on the version its frozen body carries", async ({
+    request,
+  }) => {
+    // The body is frozen at fan-out, so a delivery written before the
+    // version existed must not be advertised as the current one.
+    const webhook = await createWebhook();
+    await prisma.webhookDelivery.create({
+      data: {
+        webhookId: webhook.id,
+        activityId: `webhook-delivery-legacy-${Date.now()}`,
+        eventType: "poll.closed",
+        payload: { id: "legacy", type: "poll.closed" },
+        nextAttemptAt: secondsAgo(1),
+      },
+    });
+
+    await runCron(request);
+
+    expect(receiver.requests).toHaveLength(1);
+    expect(
+      receiver.requests[0]?.headers["x-huddle-webhook-version"],
+    ).toBeUndefined();
   });
 
   test("a success resets the consecutive failure count", async ({
