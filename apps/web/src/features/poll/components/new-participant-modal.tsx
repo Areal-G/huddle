@@ -21,8 +21,9 @@ import {
 import { Input } from "@huddle/ui/input";
 import { Label } from "@huddle/ui/label";
 import { MaxCharLength } from "@huddle/ui/max-char-length";
+import { SuccessCheck, SuccessCheckIcon } from "@huddle/ui/success-check";
 import { Textarea } from "@huddle/ui/textarea";
-import { CircleCheckIcon, PlusIcon } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -184,10 +185,9 @@ export const NewParticipantForm = (props: NewParticipantModalProps) => {
     return (
       <>
         <div className="flex flex-col items-center gap-4 py-4 text-center">
-          <CircleCheckIcon
-            aria-hidden="true"
-            className="size-10 text-green-500"
-          />
+          <SuccessCheck state="in">
+            <SuccessCheckIcon />
+          </SuccessCheck>
           <DialogHeader>
             <DialogTitle>
               <Trans
