@@ -1,5 +1,6 @@
 "use client";
 
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { passwordManagerIgnoreProps } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
@@ -24,12 +25,12 @@ import {
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
 import { toast } from "@huddle/ui/sonner";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { deleteSpaceAction } from "@/features/space/actions";
 import { Trans, useTranslation } from "@/i18n/client";
-import { useSafeAction } from "@/lib/safe-action/client";
 
 interface DeleteSpaceDialogProps extends DialogProps {
   spaceName: string;
@@ -49,16 +50,18 @@ function DeleteSpaceDialog({
   const router = useRouter();
   const { t } = useTranslation();
 
-  const deleteSpace = useSafeAction(deleteSpaceAction, {
-    onSuccess: () => {
-      toast.success(
-        t("deletedSpaceSuccess", {
-          defaultValue: "Space has been permanently deleted",
-        }),
-      );
-      router.push("/");
-    },
-  });
+  const deleteSpace = useMutation(
+    mutationOptions(deleteSpaceAction, {
+      onSuccess: () => {
+        toast.success(
+          t("deletedSpaceSuccess", {
+            defaultValue: "Space has been permanently deleted",
+          }),
+        );
+        router.push("/");
+      },
+    }),
+  );
 
   return (
     <Form {...form}>
@@ -67,7 +70,7 @@ function DeleteSpaceDialog({
         <DialogContent>
           <form
             onSubmit={form.handleSubmit(() => {
-              deleteSpace.execute();
+              deleteSpace.mutate();
             })}
           >
             <DialogHeader>
@@ -132,7 +135,7 @@ function DeleteSpaceDialog({
               </DialogClose>
               <Button
                 type="submit"
-                loading={deleteSpace.isExecuting}
+                loading={deleteSpace.isPending}
                 variant="destructive"
               >
                 <Trans
