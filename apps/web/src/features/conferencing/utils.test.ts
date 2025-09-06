@@ -4,6 +4,7 @@ import { conferencingSchema } from "./schema";
 import {
   createZoomUrlValidationResponse,
   getConferencingUri,
+  isEmailAllowlisted,
   meetSpaceResponseSchema,
   meetSpaceToConferencing,
   verifyZoomWebhookSignature,
@@ -153,5 +154,28 @@ describe("createZoomUrlValidationResponse", () => {
         .update("qgg8vlvZRS6UYooatFL8Aw")
         .digest("hex"),
     });
+  });
+});
+
+describe("isEmailAllowlisted", () => {
+  const allowlist = "reviewer@zoom.example, Team@Huddle.co";
+
+  it("matches a listed address regardless of case and spacing", () => {
+    expect(isEmailAllowlisted({ email: "team@huddle.dev", allowlist })).toBe(
+      true,
+    );
+    expect(
+      isEmailAllowlisted({ email: "Reviewer@Zoom.example", allowlist }),
+    ).toBe(true);
+  });
+
+  it("rejects an address that is not listed", () => {
+    expect(
+      isEmailAllowlisted({ email: "someone@example.com", allowlist }),
+    ).toBe(false);
+  });
+
+  it("rejects a missing address", () => {
+    expect(isEmailAllowlisted({ email: null, allowlist })).toBe(false);
   });
 });
