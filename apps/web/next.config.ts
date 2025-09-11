@@ -13,7 +13,7 @@ const withBundleAnalyzer = createBundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: [process.env.DEV_DOMAIN ?? "web.huddle.test"],
+  allowedDevOrigins: [process.env.DEV_DOMAIN ?? "web.huddle.localhost"],
   experimental: {
     staleTimes: {
       dynamic: 60,
@@ -76,6 +76,12 @@ const nextConfig: NextConfig = {
       {
         source: "/profile",
         destination: "/settings/profile",
+        permanent: true,
+      },
+      // Details, dates and settings used to be edited on separate pages.
+      {
+        source: "/poll/:urlId/:page(edit-details|edit-options|edit-settings)",
+        destination: "/poll/:urlId/edit",
         permanent: true,
       },
       // Login and registration are a single flow on /login: entering an
