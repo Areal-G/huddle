@@ -57,7 +57,7 @@
   "ericJobTitle": "Executive Assistant at MIT",
   "ericQuote": "“If your scheduling workflow lives in emails, I strongly encourage you to try and let Huddle simplify your scheduling tasks for a more organized and less stressful workday.”",
   "faqAfterVoting": "What happens after everyone votes?",
-  "faqAfterVotingAnswer": "The results show which times work for the most people. With Huddle Pro you can finalize the poll, which notifies participants of the chosen time by email.",
+  "faqAfterVotingAnswer": "The results show which times work for the most people. Finalize the poll to lock in the chosen time and notify participants by email with a calendar invite.",
   "faqDoodleDifference": "How is Huddle different from Doodle?",
   "faqDoodleDifferenceAnswer": "Huddle gives you professional, ad-free meeting polls in a clean and easy to use interface. Participants can vote without creating an account, and if you want full control of your data you can even host Huddle on your own server.",
   "faqIsFree": "Is Huddle free?",
@@ -279,6 +279,5 @@
   "when2meetComparisonNoAccount": "Vote without creating an account",
   "when2meetComparisonNotifications": "Email notifications when people respond",
   "when2meetComparisonOpenSource": "Open-source and self-hostable",
-  "when2meetComparisonTitle": "When2meet vs Huddle",
-  "when2meetComparisonWithPro": "With Huddle Pro"
+  "when2meetComparisonTitle": "When2meet vs Huddle"
 }

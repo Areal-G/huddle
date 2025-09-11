@@ -23,7 +23,6 @@ import { Switch } from "@huddle/ui/switch";
 import { Tabs, TabsContent } from "@huddle/ui/tabs";
 import {
   BadgePercentIcon,
-  CalendarCheckIcon,
   CalendarSearchIcon,
   ClockIcon,
   EyeOffIcon,
@@ -142,17 +141,6 @@ const proBenefitsList = [
       <Trans
         i18nKey="removeAttributionBenefitDescription"
         defaults='Hide "Powered by Huddle" from your participants'
-      />
-    ),
-  },
-  {
-    key: "schedulePoll",
-    icon: <CalendarCheckIcon />,
-    title: <Trans i18nKey="featureNameSchedule" defaults="Schedule poll" />,
-    description: (
-      <Trans
-        i18nKey="schedulePollDescription"
-        defaults="Select a final date for your event."
       />
     ),
   },
