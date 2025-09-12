@@ -57,7 +57,6 @@
   "ericJobTitle": "Johdon assistentti MIT:ssä",
   "ericQuote": "”Jos tapasi sopia aikatauluista kulkee sähköpostitse, suosittelen vahvasti kokeilemaan Huddlea ja antaa sen helpottaa aikataulujasi, jotta työpäiväsi olisi selkeämpi ja rennompi.”",
   "faqAfterVoting": "Mitä tapahtuu, kun kaikki ovat äänestäneet?",
-  "faqAfterVotingAnswer": "Tulokset näyttävät, mitkä ajat sopivat useimmille. Huddle Prolla voit vahvistaa kyselyn, jolloin osallistujille ilmoitetaan valitusta ajasta sähköpostitse.",
   "faqDoodleDifference": "Miten Huddle eroaa Doodlesta?",
   "faqDoodleDifferenceAnswer": "Huddle tarjoaa ammattimaiset, mainoksettomat kokouskyselyt selkeässä ja helppokäyttöisessä käyttöliittymässä. Osallistujat voivat äänestää ilman tiliä, ja jos haluat täydellisen kontrollin tietoihisi, voit jopa isännöidä Huddlea omalla palvelimellasi.",
   "faqIsFree": "Onko Huddle ilmainen?",
@@ -276,6 +275,5 @@
   "when2meetComparisonNoAccount": "Äänestä ilman tilin luomista",
   "when2meetComparisonNotifications": "Sähköposti-ilmoitukset, kun ihmiset vastaavat",
   "when2meetComparisonOpenSource": "Avoin lähdekoodi ja itse isännöitävissä",
-  "when2meetComparisonTitle": "When2meet vs. Huddle",
-  "when2meetComparisonWithPro": "Huddle Pro -tilauksella"
+  "when2meetComparisonTitle": "When2meet vs. Huddle"
 }
