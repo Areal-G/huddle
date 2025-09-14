@@ -715,6 +715,9 @@ importers:
       '@huddle/test-helpers':
         specifier: workspace:*
         version: link:../test-helpers
+      '@huddle/utils':
+        specifier: workspace:*
+        version: link:../utils
       dayjs:
         specifier: ^1.11.13
         version: 1.11.19
