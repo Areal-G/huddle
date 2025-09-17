@@ -1,7 +1,7 @@
 "use client";
 
 import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
-import { yearlySavingsPercent } from "@huddle/billing";
+import { yearlySavingsPercent } from "@huddle/billing/pricing";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {

@@ -1,7 +1,7 @@
 "use client";
 
 import type { PricesByCurrency } from "@huddle/billing";
-import { CURRENCY_COOKIE_NAME } from "@huddle/billing";
+import { CURRENCY_COOKIE_NAME } from "@huddle/billing/pricing";
 import { posthog } from "@huddle/posthog/client";
 import Cookies from "js-cookie";
 import React from "react";
