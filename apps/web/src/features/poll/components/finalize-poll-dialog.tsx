@@ -2,6 +2,7 @@
 
 import { posthog } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
+import { Alert, AlertDescription } from "@huddle/ui/alert";
 import { Button } from "@huddle/ui/button";
 import { Checkbox } from "@huddle/ui/checkbox";
 import type { DialogProps } from "@huddle/ui/dialog";
@@ -17,7 +18,13 @@ import {
 import { Label } from "@huddle/ui/label";
 import { toast } from "@huddle/ui/sonner";
 import { SuccessCheck, SuccessCheckIcon } from "@huddle/ui/success-check";
-import { CalendarIcon, MapPinIcon, StarIcon, VideoIcon } from "lucide-react";
+import {
+  AlertTriangleIcon,
+  CalendarIcon,
+  MapPinIcon,
+  StarIcon,
+  VideoIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import {
@@ -577,10 +584,12 @@ function FinalizeWizard({ onClose }: { onClose: () => void }) {
   );
   const option = options.find((o) => o.id === optionId);
   const [reviewSite, setReviewSite] = React.useState<ReviewSite | null>(null);
+  const [skippedNotifications, setSkippedNotifications] = React.useState(0);
 
   const finalize = trpc.polls.book.useMutation({
     onSuccess: (data) => {
       setReviewSite(data?.reviewSite ?? null);
+      setSkippedNotifications(data?.skippedNotifications ?? 0);
       setStep("done");
       // The page behind the dialog picks up the scheduled status.
       router.refresh();
@@ -641,6 +650,18 @@ function FinalizeWizard({ onClose }: { onClose: () => void }) {
             </DialogDescription>
           </DialogHeader>
         </div>
+        {skippedNotifications > 0 ? (
+          <Alert variant="warning">
+            <AlertTriangleIcon />
+            <AlertDescription>
+              <Trans
+                i18nKey="finalizeNotifyBudgetSkipped"
+                defaults="{count, plural, one {# participant wasn't emailed} other {# participants weren't emailed}} because this account reached its daily email limit. Share the poll link with them instead."
+                values={{ count: skippedNotifications }}
+              />
+            </AlertDescription>
+          </Alert>
+        ) : null}
         {reviewSite ? <ReviewRequestCard site={reviewSite} /> : null}
         <Button className="w-full" onClick={onClose}>
           <Trans i18nKey="backToPoll" defaults="Back to poll" />
