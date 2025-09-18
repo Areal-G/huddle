@@ -15,8 +15,11 @@ function createAppUrl(subpath: string) {
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
-  allowedDevOrigins: ["landing.huddle.test"],
+  allowedDevOrigins: [process.env.DEV_DOMAIN ?? "landing.huddle.localhost"],
   productionBrowserSourceMaps: true,
+  // Serves /_next/static from a CDN-cached host to keep the immutable
+  // bundles off Vercel's bandwidth bill. Unset outside production.
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
   transpilePackages: [
     "@huddle/ui",
     "@huddle/tailwind-config",
