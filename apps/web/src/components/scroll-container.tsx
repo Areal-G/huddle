@@ -4,18 +4,37 @@ import * as React from "react";
 
 const useIsOverflowing = <E extends Element | null>(
   ref: React.RefObject<E>,
+  onChange?: (isOverflowing: boolean) => void,
 ) => {
   const [isOverflowing, setIsOverflowing] = React.useState(false);
+  const notifyChange = React.useEffectEvent((next: boolean) => {
+    onChange?.(next);
+  });
 
   React.useEffect(() => {
+    // Defer the state update to the next frame so it lands outside the
+    // ResizeObserver callback's frame. Updating layout state inline can resize
+    // the observed element again in the same frame, which makes the browser fire
+    // "ResizeObserver loop completed with undelivered notifications." on
+    // window.onerror.
+    let frame = 0;
+    let last: boolean | undefined;
     const checkOverflow = () => {
-      if (ref.current) {
-        const element = ref.current;
-        const overflowX = element.scrollWidth > element.clientWidth;
-        const overflowY = element.scrollHeight > element.clientHeight;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (ref.current) {
+          const element = ref.current;
+          const overflowX = element.scrollWidth > element.clientWidth;
+          const overflowY = element.scrollHeight > element.clientHeight;
 
-        setIsOverflowing(overflowX || overflowY);
-      }
+          const next = overflowX || overflowY;
+          setIsOverflowing(next);
+          if (next !== last) {
+            last = next;
+            notifyChange(next);
+          }
+        }
+      });
     };
 
     if (ref.current) {
@@ -31,6 +50,7 @@ const useIsOverflowing = <E extends Element | null>(
       checkOverflow();
 
       return () => {
+        cancelAnimationFrame(frame);
         resizeObserver.disconnect();
         mutationObserver.disconnect();
       };
@@ -57,13 +77,7 @@ export function ScrollContainer({
   const [isDragging, setIsDragging] = React.useState(false);
   const [isPointerDown, setIsPointerDown] = React.useState(false);
   const animation = React.useRef<{ stop: () => void } | null>(null);
-  const isOverflowing = useIsOverflowing(ref);
-
-  React.useEffect(() => {
-    if (onOverflowChange) {
-      onOverflowChange(isOverflowing);
-    }
-  }, [isOverflowing, onOverflowChange]);
+  const isOverflowing = useIsOverflowing(ref, onOverflowChange);
 
   return (
     <div
