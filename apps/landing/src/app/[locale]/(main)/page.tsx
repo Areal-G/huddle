@@ -1,5 +1,6 @@
 "use cache";
 
+import { absoluteUrl } from "@huddle/utils/absolute-url";
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { Trans } from "react-i18next/TransWithoutContext";
@@ -11,6 +12,7 @@ import { HeroDemo } from "@/components/home/hero-demo/hero-demo";
 import { HowItWorks } from "@/components/home/how-it-works/how-it-works";
 import { SocialProof } from "@/components/home/social-proof";
 import { Stats } from "@/components/home/stats";
+import { JsonLd } from "@/components/json-ld";
 import { Section } from "@/components/section";
 import { LinkBase } from "@/i18n/client/link";
 import { getTranslation } from "@/i18n/server";
@@ -29,6 +31,44 @@ export default async function Page(props: {
   ]);
   return (
     <div className="divide-y">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": absoluteUrl("/#organization"),
+              name: "Huddle",
+              legalName: "Stack Snap Ltd",
+              url: absoluteUrl(),
+              logo: absoluteUrl("/logo.png"),
+              sameAs: [
+                "https://github.com/areal/huddle",
+                "https://x.com/huddleco",
+                "https://www.linkedin.com/company/huddle",
+              ],
+            },
+            {
+              "@type": "SoftwareApplication",
+              name: "Huddle",
+              url: "https://app.huddle.dev",
+              applicationCategory: "BusinessApplication",
+              operatingSystem: "Web",
+              description: t("subheading", {
+                defaultValue:
+                  "Huddle is the meeting poll tool for scheduling groups. Propose a few times, share a link, and everyone votes on when they can make it.",
+                ns: "home",
+              }),
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+              publisher: { "@id": absoluteUrl("/#organization") },
+            },
+          ],
+        }}
+      />
       <Section>
         <Hero
           title={t("headline", {
