@@ -48,7 +48,7 @@
   "doodleComparisonPaidPlansOnly": "Nur kostenpflichtige Pläne",
   "doodleComparisonPolls": "Gruppenabstimmungen",
   "doodleComparisonPollsDoodle": "1 im kostenlosen Plan",
-  "doodleComparisonPollsHuddle": "Unbegrenzt, höchstens {count} gleichzeitig offen},{",
+  "doodleComparisonPollsHuddle": "Unbegrenzt, höchstens {count} gleichzeitig offen",
   "doodleComparisonSelfHosting": "Selfhosting möglich",
   "doodleComparisonTimeZones": "Automatische Zeitzonen-Konvertierung",
   "doodleComparisonTitle": "Wie Huddle im Vergleich zu Doodle abschneidet",
