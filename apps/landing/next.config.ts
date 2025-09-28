@@ -15,6 +15,7 @@ function createAppUrl(subpath: string) {
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  partialPrefetching: true,
   allowedDevOrigins: [process.env.DEV_DOMAIN ?? "landing.huddle.localhost"],
   productionBrowserSourceMaps: true,
   // Serves /_next/static from a CDN-cached host to keep the immutable
