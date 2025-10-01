@@ -1,6 +1,7 @@
 "use client";
 
 import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
+import { formatMinorUnitAmount } from "@huddle/billing/pricing";
 import { posthog } from "@huddle/posthog/client";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
@@ -19,7 +20,6 @@ import type {
   BillingInterval,
   SubscriptionStatus,
 } from "@/features/billing/schema";
-import { formatMinorUnitAmount } from "@/features/billing/utils";
 import { SpaceTierLabel } from "@/features/space/components/space-tier";
 import { Trans, useTranslation } from "@/i18n/client";
 import { useDateTime, useDateTimeConfig } from "@/lib/datetime/client";

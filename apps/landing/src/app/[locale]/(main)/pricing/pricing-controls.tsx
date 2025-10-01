@@ -1,6 +1,7 @@
 "use client";
 
 import type { PricesByCurrency } from "@huddle/billing";
+import { formatMinorUnitAmount } from "@huddle/billing/pricing";
 import { cn } from "@huddle/ui";
 import { NumberTicker } from "@huddle/ui/number-ticker";
 import {
@@ -199,12 +200,7 @@ export function PlanPrice() {
   // price like 8.33 would render as 8.
   const format = React.useCallback(
     (minorUnits: number) =>
-      new Intl.NumberFormat(locale, {
-        style: "currency",
-        currency: currency.toUpperCase(),
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 2,
-      }).format(minorUnits / 100),
+      formatMinorUnitAmount({ amount: minorUnits, currency, locale }),
     [locale, currency],
   );
 
