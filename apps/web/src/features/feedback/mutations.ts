@@ -1,26 +1,22 @@
 import "server-only";
 
 import { sendRawEmail } from "@huddle/emails";
-import { track } from "@/lib/posthog";
+import { env } from "@/env";
 
 export async function submitFeedback({
-  userId,
   userName,
   userEmail,
   content,
 }: {
-  userId: string;
   userName: string;
   userEmail: string;
   content: string;
 }) {
   await sendRawEmail({
-    to: "feedback@huddle.dev",
+    // Feedback goes to this instance's own support address.
+    to: env.SUPPORT_EMAIL,
     replyTo: userEmail,
     subject: "Feedback",
     text: `User: ${userName} (${userEmail})\n\n${content}`,
   });
-
-  // Feedback is only reachable through authActionClient, which rejects guests.
-  track({ id: userId, isGuest: false }, { event: "feedback_send" });
 }

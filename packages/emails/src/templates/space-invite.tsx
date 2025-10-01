@@ -83,7 +83,7 @@ SpaceInviteEmail.PreviewProps = {
   spaceName: "Marketing Team",
   inviterName: "John Smith",
   spaceRole: "member",
-  inviteUrl: "https://huddle.dev/invite/abc123",
+  inviteUrl: "https://huddle.example/invite/abc123",
   locale: "en",
   chrome: previewChrome,
 } as SpaceInviteEmailProps;

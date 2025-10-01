@@ -14,6 +14,7 @@ import {
   SettingsPageHeader,
   SettingsPageTitle,
 } from "@/components/settings-layout";
+import { env } from "@/env";
 import { BillingFlashAlert } from "@/features/billing/components/billing-flash-alert";
 import {
   loadPaymentMethods,
@@ -111,7 +112,7 @@ export default async function BillingSettingsPage() {
           {overview && billingUser?.customerId ? (
             <PaymentAndBillingCard paymentMethods={paymentMethods} />
           ) : null}
-          <SupportCard />
+          <SupportCard supportEmail={env.SUPPORT_EMAIL} />
         </div>
       </SettingsPageContent>
     </SettingsPage>

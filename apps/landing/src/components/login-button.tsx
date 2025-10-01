@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { buttonVariants } from "@huddle/ui";
 import Link from "next/link";
 import { Trans } from "@/i18n/client/trans";
@@ -13,9 +12,6 @@ export const LoginButton = ({ cta = "header_login" }: { cta?: string }) => {
     <Link
       href={linkToApp("/login", { ref, cta })}
       className={buttonVariants({ variant: "ghost" })}
-      onClick={() => {
-        posthog.capture("landing:login_click", { cta, ref });
-      }}
     >
       <Trans i18nKey="login" defaults="Login" />
     </Link>

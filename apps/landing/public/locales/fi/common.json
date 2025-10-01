@@ -29,7 +29,7 @@
   "licensingThankYouNextStepsActivateLicense": "Näin aktivoit lisenssisi",
   "licensingThankYouNextStepsInstallation": "Asennusopas",
   "licensingThankYouSubtitle": "Huddlen self-hosted -lisenssisi on vahvistettu. Mahtavaa, että olet mukana!",
-  "licensingThankYouSupportPrompt": "Tarvitsetko apua tai onko sinulla kysyttävää? Tutustu <0>itseisännöityyn dokumentaatioon</0> tai lähetä sähköpostia osoitteeseen <1>support@huddle.dev</1>.",
+  "licensingThankYouSupportPrompt": "Tarvitsetko apua tai onko sinulla kysyttävää? Tutustu <0>itseisännöityyn dokumentaatioon</0> tai lähetä sähköpostia osoitteeseen <1>support@huddle.example</1>.",
   "licensingThankYouTitle": "Kiitos ostoksestasi!",
   "login": "Kirjaudu sisään",
   "menu": "Valikko",

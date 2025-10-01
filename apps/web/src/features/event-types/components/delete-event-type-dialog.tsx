@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -39,7 +38,6 @@ export function DeleteEventTypeDialog({
       );
       return;
     }
-    posthog?.capture("event_type_deletion:confirm");
     onOpenChange?.(false);
   };
 

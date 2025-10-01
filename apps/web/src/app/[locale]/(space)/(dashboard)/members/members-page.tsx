@@ -155,7 +155,7 @@ export async function MembersPageContent() {
                         <Link
                           className="underline hover:text-foreground"
                           prefetch={false}
-                          href="https://support.huddle.dev/self-hosting/licensing"
+                          href="https://support.huddle.example/self-hosting/licensing"
                         />
                       ),
                     }}

@@ -12,7 +12,6 @@ import {
   sendPollInviteSchema,
 } from "@/features/poll/invite/schema";
 import { AppError } from "@/lib/errors/app-error";
-import { track } from "@/lib/posthog";
 import {
   actionClient,
   authActionClient,
@@ -40,19 +39,6 @@ export const sendPollInviteAction = authActionClient
       });
     }
 
-    track(
-      { id: ctx.user.id, isGuest: false },
-      {
-        event: "poll_share:invite_send",
-        properties: {
-          poll_id: pollId,
-          ok: result.ok,
-          reason: result.ok ? undefined : result.reason,
-        },
-        groups: { poll: pollId },
-      },
-    );
-
     return result;
   });
 
@@ -71,19 +57,6 @@ export const revokePollInviteAction = authActionClient
       inviteId,
       userId: ctx.user.id,
     });
-
-    track(
-      { id: ctx.user.id, isGuest: false },
-      {
-        event: "poll_share:invite_revoke",
-        properties: {
-          poll_id: pollId,
-          ok: result.ok,
-          reason: result.ok ? undefined : result.reason,
-        },
-        groups: { poll: pollId },
-      },
-    );
 
     return result;
   });

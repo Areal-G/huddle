@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -18,6 +17,7 @@ import {
   FormItem,
   FormMessage,
 } from "@huddle/ui/form";
+import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -129,9 +129,8 @@ export function RsvpVerifyEmail({
     }
 
     dialog.dismiss();
-    // A full reload, not router.refresh(): the PostHog client settles its
-    // identity at page load, so only a new document identifies the guest who
-    // opened this page as the signed-in user.
+    // A full reload, not router.refresh(): every client cache restarts as
+    // the signed-in user instead of the guest who opened this page.
     window.location.reload();
   });
 

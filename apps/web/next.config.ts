@@ -1,11 +1,7 @@
-// This file sets a custom webpack configuration to use your Next.js app
-// with Sentry.
 // https://nextjs.org/docs/api-reference/next.config.js/introduction
-// https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import path from "node:path";
 import createBundleAnalyzer from "@next/bundle-analyzer";
-import { withSentryConfig } from "@sentry/nextjs/config";
 import type { NextConfig } from "next";
 
 const withBundleAnalyzer = createBundleAnalyzer({
@@ -26,13 +22,19 @@ const nextConfig: NextConfig = {
     "@huddle/database",
     "@huddle/ui",
     "@huddle/tailwind-config",
-    "@huddle/posthog",
     "@huddle/emails",
   ],
   // Cloud serves /_next/static from a CDN-cached host to keep the immutable
   // bundles off Vercel's bandwidth bill. Unset everywhere else.
   assetPrefix:
     process.env.NEXT_PUBLIC_ASSET_PREFIX ?? process.env.NEXT_PUBLIC_BASE_URL,
+  // Loads chunks from that host as CORS requests instead of opaque no-cors
+  // ones. Since the move, WebKit has kept broken cached copies of the opaque
+  // chunks, which stops the page from hydrating. The asset host must send
+  // Access-Control-Allow-Origin on every response, or no browser will run
+  // the scripts. Without a prefix the chunks come from the base URL, which
+  // sends no such header, so an instance opened on another host would break.
+  crossOrigin: process.env.NEXT_PUBLIC_ASSET_PREFIX ? "anonymous" : undefined,
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -53,7 +55,7 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // The public API host (https://api.huddle.dev) serves the versioned API
+  // The public API host (https://api.huddle.example) serves the versioned API
   // without the app's `/api` prefix. Only `/v1` is exposed there: the rest of
   // `/api` stays app-host only, so a standalone API project can take over the
   // host later without inheriting them.
@@ -73,7 +75,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/support",
-        destination: "https://support.huddle.dev",
+        destination: "https://support.huddle.example",
         permanent: true,
       },
       {
@@ -177,32 +179,4 @@ const nextConfig: NextConfig = {
         },
 };
 
-const sentryWebpackPluginOptions = {
-  // For all available options, see:
-  // https://github.com/getsentry/sentry-webpack-plugin#options
-
-  org: process.env.SENTRY_ORG,
-  project: process.env.SENTRY_PROJECT,
-
-  // Only print logs for uploading source maps in CI
-  silent: !process.env.CI,
-
-  // For all available options, see:
-  // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
-
-  // Upload a larger set of source maps for prettier stack traces (increases build time)
-  widenClientFileUpload: true,
-
-  // Routes browser events through a same-origin rewrite so ad blockers don't
-  // drop them. A fixed path rather than `true` because the proxy matcher in
-  // src/proxy.ts must exclude it, and `true` picks a new path every build.
-  tunnelRoute: "/z1tk88rw",
-};
-
-const withBundleAnalyzerConfig = withBundleAnalyzer(nextConfig);
-
-// Make sure adding Sentry options is the last code to run before exporting, to
-// ensure that your source maps include changes from all other Webpack plugins
-export default process.env.NEXT_PUBLIC_SELF_HOSTED === "true"
-  ? withBundleAnalyzerConfig
-  : withSentryConfig(withBundleAnalyzerConfig, sentryWebpackPluginOptions);
+export default withBundleAnalyzer(nextConfig);

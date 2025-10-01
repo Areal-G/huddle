@@ -11,8 +11,6 @@ const mockGetPollParticipant = vi.fn();
 const mockListPolls = vi.fn();
 const mockGetPollWithOptions = vi.fn();
 const mockGetSpaceMemberByEmail = vi.fn();
-const mockTrack = vi.fn();
-const mockIdentifyGroup = vi.fn();
 
 const mockGetAvailableConferencingProviders = vi.fn(() => [] as string[]);
 const mockGetConnectedConferencingProviders = vi.fn(
@@ -87,12 +85,6 @@ vi.mock("@/lib/feature-flags/server", () => ({
 
 vi.mock("@/lib/kv", async () => ({
   redis: (await import("../../middleware/fake-redis")).createFakeRedis(),
-}));
-
-vi.mock("@/lib/posthog", () => ({
-  track: (...args: unknown[]) => mockTrack(...args),
-  identifyGroup: (...args: unknown[]) => mockIdentifyGroup(...args),
-  flushPostHog: vi.fn(),
 }));
 
 import { logger } from "@huddle/logger";
@@ -729,42 +721,6 @@ describe("API v1 - /polls", () => {
       );
     });
 
-    it("should track poll creation with source api and kind date", async () => {
-      const res = await app.request("/v1/polls", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${testApiKey}`,
-        },
-        body: JSON.stringify({
-          title: "Team offsite",
-          kind: "date",
-          options: [{ date: "2025-01-15" }],
-        }),
-      });
-
-      expect(res.status).toBe(201);
-      expect(mockTrack).toHaveBeenCalledWith(
-        { id: "test-user-id", isGuest: false },
-        expect.objectContaining({
-          event: "poll_create",
-          properties: expect.objectContaining({
-            kind: "date",
-            source: "api",
-            apiVersion: "v1",
-          }),
-          groups: { poll: "test-poll-id", space: "test-space-id" },
-        }),
-      );
-      expect(mockIdentifyGroup).toHaveBeenCalledWith(
-        expect.objectContaining({
-          groupType: "poll",
-          groupKey: "test-poll-id",
-          properties: expect.objectContaining({ kind: "date" }),
-        }),
-      );
-    });
-
     it("should save location when provided", async () => {
       const res = await app.request("/v1/polls", {
         method: "POST",
@@ -1020,72 +976,6 @@ describe("API v1 - /polls", () => {
         expect.objectContaining({
           title: "Team sync",
           timeZone: "Europe/London",
-        }),
-      );
-    });
-
-    it("should track poll creation with source api and kind time", async () => {
-      mockCreatePoll.mockResolvedValueOnce({
-        id: "test-poll-id",
-        title: "Team sync",
-        description: null,
-        location: null,
-        timeZone: "Europe/London",
-        status: "open",
-        kind: "time",
-        createdAt: new Date("2025-01-10T12:00:00Z"),
-        updatedAt: new Date("2025-01-10T12:00:00Z"),
-        requireParticipantEmail: false,
-        hideParticipants: false,
-        hideScores: false,
-        disableComments: true,
-        allowTentativeVotes: true,
-        participantCount: 0,
-        user: {
-          id: "test-user-id",
-          name: "Test User",
-          email: "test@example.com",
-          image: null,
-        },
-        options: [
-          {
-            id: "opt-1",
-            startTime: new Date("2025-01-15T09:00:00Z"),
-            duration: 30,
-          },
-        ],
-      });
-
-      const res = await app.request("/v1/polls", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${testApiKey}`,
-        },
-        body: JSON.stringify({
-          title: "Team sync",
-          kind: "time",
-          duration: 30,
-          timeZone: "Europe/London",
-          options: [{ startTime: "2025-01-15T09:00:00Z" }],
-        }),
-      });
-
-      expect(res.status).toBe(201);
-      expect(mockTrack).toHaveBeenCalledWith(
-        { id: "test-user-id", isGuest: false },
-        expect.objectContaining({
-          event: "poll_create",
-          properties: expect.objectContaining({
-            kind: "time",
-            source: "api",
-            apiVersion: "v1",
-          }),
-        }),
-      );
-      expect(mockIdentifyGroup).toHaveBeenCalledWith(
-        expect.objectContaining({
-          properties: expect.objectContaining({ kind: "time" }),
         }),
       );
     });

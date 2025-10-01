@@ -5,10 +5,10 @@ import type { EmailChrome } from "../types";
  * Real sends build `chrome` from the caller's branding + env via `resolveChrome`.
  */
 export const previewChrome: EmailChrome = {
-  logoUrl: "https://d39ixtfgglw55o.cloudfront.net/images/huddle-logo-mark.png",
-  baseUrl: "https://huddle.dev",
-  domain: "huddle.dev",
-  supportEmail: "support@huddle.dev",
+  logoUrl: "http://localhost:3707/images/huddle-logo-mark.png",
+  baseUrl: "https://huddle.example",
+  domain: "huddle.example",
+  supportEmail: "support@example.com",
   appName: "Huddle",
   primaryColor: "#4f46e5",
   hideAttribution: false,

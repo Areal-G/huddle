@@ -1,6 +1,5 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { Alert, AlertDescription } from "@huddle/ui/alert";
 import { parseColor } from "@huddle/ui/color-picker";
 import {
@@ -13,6 +12,7 @@ import {
 } from "@huddle/ui/field";
 import { toast } from "@huddle/ui/sonner";
 import { Switch } from "@huddle/ui/switch";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { LockIcon } from "lucide-react";
 import React from "react";

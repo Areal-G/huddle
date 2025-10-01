@@ -19,7 +19,6 @@ import { getLocale } from "@/i18n/server/get-locale";
 import { isSelfHosted } from "@/lib/constants";
 import { formatDateTime } from "@/lib/datetime/format";
 import { AppError } from "@/lib/errors/app-error";
-import { deletePostHogPerson, track, trackSystemEvent } from "@/lib/posthog";
 import {
   authActionClient,
   createRateLimitMiddleware,
@@ -53,22 +52,14 @@ export const scheduleAccountDeletionAction = authActionClient
 
     const deletedAt = await scheduleAccountDeletion({ userId: ctx.user.id });
 
-    let stoppedRenewals: number;
     try {
-      stoppedRenewals = await stopUserSubscriptionRenewals({
+      await stopUserSubscriptionRenewals({
         userId: ctx.user.id,
       });
     } catch (error) {
       await cancelAccountDeletion({ userId: ctx.user.id });
       throw error;
     }
-
-    track(ctx.user, {
-      event: "account_deletion_schedule",
-      properties: {
-        hadActiveSubscription: stoppedRenewals > 0,
-      },
-    });
 
     const locale = ctx.user.locale ?? (await getLocale());
     const branding = await getInstanceBranding();
@@ -112,11 +103,9 @@ export const deleteAccountAction = authActionClient
       });
     }
 
-    await deletePostHogPerson({ distinctId: ctx.user.id });
     await hardDeleteUser({ userId: ctx.user.id });
 
     // Personless by design — the person this event is about was just erased.
-    trackSystemEvent({ event: "account_deletion_complete" });
   });
 
 export const cancelAccountDeletionAction = authActionClient
@@ -125,8 +114,6 @@ export const cancelAccountDeletionAction = authActionClient
   .action(async ({ ctx }) => {
     await cancelAccountDeletion({ userId: ctx.user.id });
     await resumeUserSubscriptionRenewals({ userId: ctx.user.id });
-
-    track(ctx.user, { event: "account_deletion_cancel" });
 
     refresh();
   });

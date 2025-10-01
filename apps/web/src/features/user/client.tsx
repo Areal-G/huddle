@@ -1,5 +1,4 @@
 "use client";
-import { posthog } from "@huddle/posthog/client";
 import { useRouter } from "next/navigation";
 import React from "react";
 import type { UserAbility } from "@/features/user/ability";
@@ -8,7 +7,6 @@ import type { UserDTO } from "@/features/user/schema";
 import type { GuestSessionResult } from "@/features/user/utils";
 import { toGuestSessionResult } from "@/features/user/utils";
 import { authClient } from "@/lib/auth-client";
-import { useLocale } from "@/lib/locale/client";
 import { isOwner } from "@/lib/utils/permissions";
 
 const UserContext = React.createContext<UserDTO | null | undefined>(undefined);
@@ -20,25 +18,6 @@ export function UserProvider({
   user: UserDTO | null;
   children: React.ReactNode;
 }) {
-  const userId = user?.id;
-  const isGuest = user?.isGuest;
-  const { locale } = useLocale();
-
-  const name = user?.name;
-  const email = user?.email;
-
-  // The client is already identified as this user from init (initPostHog in
-  // packages/posthog/src/client.ts), so no identify() here. Name and
-  // email ride along so a profile PostHog has to recreate for an existing
-  // account is never empty. Changing the language refreshes the router with
-  // a new [locale] param, so this re-runs; posthog-js drops a repeat $set
-  // with unchanged properties.
-  React.useEffect(() => {
-    if (userId && !isGuest) {
-      posthog.setPersonProperties({ name, email, locale });
-    }
-  }, [userId, isGuest, name, email, locale]);
-
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
 

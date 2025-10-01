@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import { useDialog } from "@huddle/ui/dialog";
 import { Field, FieldDescription, FieldLabel } from "@huddle/ui/field";
@@ -45,11 +44,6 @@ export function RemoveAttributionPopover({ pollId }: { pollId: string }) {
             })}
           />
         }
-        onClick={() => {
-          posthog?.capture("poll_admin:remove_attribution_click", {
-            poll_id: pollId,
-          });
-        }}
       >
         <XIcon className="size-3" />
       </PopoverTrigger>

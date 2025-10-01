@@ -6,10 +6,6 @@ import { PollSettingsForm } from "@/features/poll/components/forms/poll-settings
 import type { PollSettingsFormData } from "@/features/poll/components/forms/types";
 import { render, screen } from "@/test/test-utils";
 
-vi.mock("@huddle/posthog/client", () => ({
-  posthog: { capture: vi.fn() },
-}));
-
 vi.mock("@/features/billing/client", () => ({
   useIsFree: () => false,
   showPayWall: vi.fn(),

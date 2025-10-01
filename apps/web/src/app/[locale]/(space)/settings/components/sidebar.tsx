@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import {
   SidebarGroup,
   SidebarGroupContent,
@@ -147,9 +146,6 @@ export function SpaceSidebarMenu() {
             icon: <UsersIcon />,
             href: "/members",
             suffix: <ArrowUpRightIcon className="ml-auto" />,
-            onClick: () => {
-              posthog?.capture("space_settings:members_link_click");
-            },
           },
         ]
       : []),

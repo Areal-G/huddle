@@ -2,19 +2,17 @@ import "server-only";
 
 import type { WideEvent } from "@huddle/logger";
 import { createWideEvent, logger } from "@huddle/logger";
-import * as Sentry from "@sentry/nextjs";
 import { APIError } from "better-auth/api";
 import { headers } from "next/headers";
-import { after } from "next/server";
 import { createMiddleware, createSafeActionClient } from "next-safe-action";
 import * as z from "zod";
 import { defineAbilityFor } from "@/features/user/ability";
 import { loadOptionalActor, loadOptionalUser } from "@/features/user/loaders";
 import { signOut } from "@/lib/auth";
+import * as errorReporting from "@/lib/error-reporting";
 import { AppError } from "@/lib/errors/app-error";
 import { InvalidSessionError } from "@/lib/errors/invalid-session-error";
 import { assertAppAvailable } from "@/lib/maintenance-server";
-import { flushPostHog } from "@/lib/posthog";
 import type { Duration } from "@/lib/rate-limit";
 import { createRateLimitGuard } from "@/lib/rate-limit";
 
@@ -70,12 +68,18 @@ export const actionClient = createSafeActionClient({
       return "UNAUTHORIZED" as const;
     }
 
-    if (error instanceof AppError && error.code === "SERVICE_UNAVAILABLE") {
-      // Maintenance mode — expected, not reported to Sentry
+    if (
+      error instanceof AppError &&
+      // Maintenance mode, a signed out user, or a record deleted
+      // concurrently: expected, not reported to Sentry
+      (error.code === "SERVICE_UNAVAILABLE" ||
+        error.code === "UNAUTHORIZED" ||
+        error.code === "NOT_FOUND")
+    ) {
       return error.code;
     }
 
-    Sentry.captureException(error, {
+    errorReporting.captureException(error, {
       tags: {
         errorHandler: "safe-action",
       },
@@ -139,17 +143,6 @@ export const actionClient = createSafeActionClient({
       } else {
         logger.info(event);
       }
-    }
-  })
-  // The PostHog client only enqueues; a serverless function freezes once the
-  // action response is sent, so the buffer must be flushed here. Route
-  // handlers get the same through withPostHog. Runs in finally so a failed
-  // action's events still flush.
-  .use(async ({ next }) => {
-    try {
-      return await next();
-    } finally {
-      after(() => flushPostHog());
     }
   })
   .use(async ({ next }) => {

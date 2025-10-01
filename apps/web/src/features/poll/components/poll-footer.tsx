@@ -1,5 +1,4 @@
 "use client";
-import { posthog } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
 import type React from "react";
 import { InstanceFooterLinks } from "@/components/instance-footer-links";
@@ -61,23 +60,10 @@ const pillClassName =
   "inline-flex h-9 items-center gap-2 rounded-full border border-border bg-background px-4 font-normal text-foreground text-xs shadow-xs dark:bg-muted";
 
 function PoweredByLink({ className }: { className: string }) {
-  const poll = usePoll();
-
   return (
     <Link
       className={className}
-      href="https://huddle.dev?utm_source=huddle&utm_medium=poll&utm_campaign=powered_by"
-      onClick={() => {
-        posthog?.capture("poll_footer:powered_by_link_click", {
-          pollId: poll.id,
-          spaceId: poll.spaceId,
-          tier: poll.space?.tier,
-          $groups: {
-            poll: poll.id,
-            ...(poll.spaceId ? { space: poll.spaceId } : {}),
-          },
-        });
-      }}
+      href="https://huddle.example?utm_source=huddle&utm_medium=poll&utm_campaign=powered_by"
     >
       <Trans i18nKey="poweredBy" defaults="Powered by" />
       <LogoWordmark aria-hidden="true" className="h-3.5 w-auto" />

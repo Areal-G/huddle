@@ -8,6 +8,7 @@ import { isQuickCreateEnabled } from "@/features/quick-create/constants";
 import { getLocale } from "@/i18n/server/get-locale";
 import { DeviceDateTimeProvider } from "@/lib/datetime/device";
 import { getDeviceDateTimeConfig } from "@/lib/datetime/server";
+import { ProductShowcase } from "./components/product-showcase";
 
 export default async function Layout({
   children,
@@ -60,7 +61,9 @@ export default async function Layout({
                 <QuickCreateWidget />
               </div>
             </div>
-          ) : null}
+          ) : (
+            <ProductShowcase />
+          )}
         </div>
       </div>
     </DeviceDateTimeProvider>

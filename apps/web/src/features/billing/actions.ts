@@ -33,7 +33,6 @@ import {
 import { getActiveSpaceForUser } from "@/features/space/data";
 import { defineAbilityForMember } from "@/features/space/member/ability";
 import { AppError } from "@/lib/errors/app-error";
-import { track } from "@/lib/posthog";
 import { authActionClient } from "@/lib/safe-action/server";
 import { validateRedirectUrl } from "@/lib/utils/redirect";
 
@@ -187,18 +186,6 @@ export const upgradeToProAction = authActionClient
       });
     }
 
-    track(ctx.user, {
-      event: "billing:checkout_start",
-      properties: {
-        interval: period === "yearly" ? "year" : "month",
-        currency: checkoutSession.currency ?? currency,
-        nonprofit_discount: Boolean(nonprofitGrantedAt),
-      },
-      groups: {
-        space: space.id,
-      },
-    });
-
     redirect(checkoutSession.url);
   });
 
@@ -255,8 +242,9 @@ async function requireManagedSubscription(
 export const switchToYearlyAction = authActionClient
   .metadata({ actionName: "switch_to_yearly" })
   .action(async ({ ctx }) => {
-    const { space, subscription, customerId } =
-      await requireManagedSubscription(ctx.user);
+    const { subscription, customerId } = await requireManagedSubscription(
+      ctx.user,
+    );
 
     // The card only offers monthly to yearly, but the action is callable
     // directly, so the same rule is enforced here. Yearly to monthly would
@@ -275,11 +263,6 @@ export const switchToYearlyAction = authActionClient
         pricing,
       }),
       pricing,
-    });
-
-    track(ctx.user, {
-      event: "space_billing:switch_to_yearly_submit",
-      groups: { space: space.id },
     });
 
     redirect(
@@ -311,22 +294,12 @@ export const cancelPlanAction = authActionClient
     }),
   )
   .action(async ({ ctx, parsedInput }) => {
-    const { space, subscription } = await requireManagedSubscription(ctx.user);
+    const { subscription } = await requireManagedSubscription(ctx.user);
 
     await scheduleSubscriptionCancellation({
       subscriptionId: subscription.id,
       reason: parsedInput.reason,
       comment: parsedInput.comment || undefined,
-    });
-
-    track(ctx.user, {
-      event: "space_billing:cancel_plan_submit",
-      properties: {
-        interval: subscription.interval,
-        reason: parsedInput.reason,
-        has_comment: Boolean(parsedInput.comment),
-      },
-      groups: { space: space.id },
     });
 
     refresh();
@@ -344,15 +317,9 @@ export const resumePlanAction = authActionClient
       });
     }
 
-    const { space, subscription } = await requireManagedSubscription(ctx.user);
+    const { subscription } = await requireManagedSubscription(ctx.user);
 
     await resumeSubscriptionRenewal({ subscriptionId: subscription.id });
-
-    track(ctx.user, {
-      event: "space_billing:resume_plan_click",
-      properties: { interval: subscription.interval },
-      groups: { space: space.id },
-    });
 
     refresh();
   });
@@ -361,13 +328,8 @@ export const openBillingDetailsAction = authActionClient
   .metadata({ actionName: "open_billing_details" })
   .action(async ({ ctx }) => {
     // Invoices stay reachable after the subscription ends.
-    const { space, customerId } = await requireManagedSubscription(ctx.user, {
+    const { customerId } = await requireManagedSubscription(ctx.user, {
       allowInactive: true,
-    });
-
-    track(ctx.user, {
-      event: "space_billing:billing_details_click",
-      groups: { space: space.id },
     });
 
     redirect(await createAccountPortalSession({ customerId }));
@@ -376,12 +338,7 @@ export const openBillingDetailsAction = authActionClient
 export const openPaymentMethodUpdateAction = authActionClient
   .metadata({ actionName: "open_payment_method_update" })
   .action(async ({ ctx }) => {
-    const { space, customerId } = await requireManagedSubscription(ctx.user);
-
-    track(ctx.user, {
-      event: "space_billing:payment_method_click",
-      groups: { space: space.id },
-    });
+    const { customerId } = await requireManagedSubscription(ctx.user);
 
     redirect(await createPaymentMethodUpdateSession({ customerId }));
   });

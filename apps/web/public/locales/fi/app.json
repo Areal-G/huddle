@@ -198,7 +198,7 @@
   "connectGoogleCalendar": "Google-kalenteri",
   "connectMicrosoftCalendar": "Microsoft-kalenteri",
   "contactSupport": "Ota yhteyttä tukeen",
-  "contactSupportEmail": "Tai lähetä meille sähköpostia osoitteeseen <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Tai lähetä meille sähköpostia osoitteeseen <0>{email}</0>",
   "content": "Sisältö",
   "continue": "Jatka",
   "continueToCheckout": "Siirry kassalle",

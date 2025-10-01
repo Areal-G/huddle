@@ -1,6 +1,5 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -9,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@huddle/ui/dialog";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { updateLocalizationAction } from "@/features/user/actions";

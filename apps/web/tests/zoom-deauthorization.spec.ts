@@ -1,7 +1,7 @@
 import { createHmac } from "node:crypto";
+import { prisma } from "@huddle/database";
 import type { APIRequestContext } from "@playwright/test";
 import { expect, test } from "@playwright/test";
-import { prisma } from "@huddle/database";
 import { createUserInDb } from "./test-utils";
 
 const runId = Date.now().toString(36);

@@ -1,6 +1,5 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { Button } from "@huddle/ui/button";
 import { useDialog } from "@huddle/ui/dialog";
 import {
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
 import { toast } from "@huddle/ui/sonner";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { MoreHorizontalIcon, ShieldIcon, UserIcon, XIcon } from "lucide-react";
 import {

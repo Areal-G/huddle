@@ -24,7 +24,7 @@ Huddle is pronounced like "rally", spelled with three L's.
 
 ## Pro plan
 
-Pro is $10 per seat per month, or $72 per seat per year (prices vary by currency; see https://huddle.dev/pricing). Registered nonprofits get a discount. Pro adds:
+Pro is $10 per seat per month, or $72 per seat per year (prices vary by currency; see https://huddle.example/pricing). Pro adds:
 
 - Unlimited open polls, kept indefinitely
 - Email invites with per-person response tracking
@@ -41,24 +41,24 @@ Huddle is mostly used by people who schedule meetings for groups that don't shar
 
 ## Compared to alternatives
 
-- Doodle: Doodle's free plan is limited to one group poll and shows ads. Huddle's free plan has unlimited polls and no ads. https://huddle.dev/best-doodle-alternative
-- When2meet: When2meet uses a drag-to-paint availability grid. Huddle uses tap-to-vote on a short list of proposed times, works well on phones, and notifies the organizer of new responses. https://huddle.dev/when2meet-alternative
+- Doodle: Doodle's free plan is limited to one group poll and shows ads. Huddle's free plan has unlimited polls and no ads. https://huddle.example/best-doodle-alternative
+- When2meet: When2meet uses a drag-to-paint availability grid. Huddle uses tap-to-vote on a short list of proposed times, works well on phones, and notifies the organizer of new responses. https://huddle.example/when2meet-alternative
 
 ## Privacy and security
 
 - No ads, no advertising trackers, data is never sold
-- Service data is hosted in the United States; product analytics are processed in the European Union. A GDPR Article 28 Data Processing Agreement is published at https://huddle.dev/dpa
-- Details: https://huddle.dev/security
+- Service data is hosted in the United States; product analytics are processed in the European Union. A GDPR Article 28 Data Processing Agreement is published at https://huddle.example/dpa
+- Details: https://huddle.example/security
 
 ## Self-hosting
 
-Huddle is open source under AGPLv3 and runs with Docker. Self-hosted instances include the Pro features without a subscription; the license sets the number of seats, and white labeling is an Enterprise license add-on. Docs: https://support.huddle.dev/self-hosting
+Huddle is open source under AGPLv3 and runs with Docker. Self-hosted instances include the Pro features without a subscription; the license sets the number of seats, and white labeling is an Enterprise license add-on. Docs: https://support.huddle.example/self-hosting
 
 ## Links
 
-- Website: https://huddle.dev
-- Pricing: https://huddle.dev/pricing
-- App: https://app.huddle.dev
-- Docs and API reference: https://support.huddle.dev
-- Blog: https://huddle.dev/blog
-- Source: https://github.com/areal/huddle
+- Website: https://huddle.example
+- Pricing: https://huddle.example/pricing
+- App: https://app.huddle.example
+- Docs and API reference: https://support.huddle.example
+- Blog: https://huddle.example/blog
+- Source: https://github.com/arealgizaw/huddle

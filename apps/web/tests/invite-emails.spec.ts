@@ -1,5 +1,3 @@
-import type { APIRequestContext } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import {
   captureOne,
@@ -7,6 +5,8 @@ import {
   getAttachmentText,
   getMessages,
 } from "@huddle/test-helpers";
+import type { APIRequestContext } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { createSpaceInDb, createUserInDb, loginWithEmail } from "./test-utils";
 
 /**
@@ -19,10 +19,10 @@ import { createSpaceInDb, createUserInDb, loginWithEmail } from "./test-utils";
 
 const CRON_SECRET = process.env.CRON_SECRET;
 const EVENT_ID = "invite-email-event";
-const EVENT_UID = "invite-email-event@huddle.dev";
+const EVENT_UID = "invite-email-event@huddle.example";
 const POLL_ID = "invite-email-poll";
 const TITLE = "Invite Email Test Event";
-const HOST_EMAIL = "invite-email-host@huddle.dev";
+const HOST_EMAIL = "invite-email-host@huddle.example";
 const QUEUED_INVITE_UID = "invite-email-queued";
 
 const YEAR = new Date().getFullYear() + 1;
@@ -280,7 +280,7 @@ test.describe("Queued invite emails", () => {
 
 test.describe("Booking a poll", () => {
   const BOOKING_POLL_ID = "invite-email-booking-poll";
-  const BOOKING_HOST_EMAIL = "invite-email-booking-host@huddle.dev";
+  const BOOKING_HOST_EMAIL = "invite-email-booking-host@huddle.example";
   const ALICE = "invite-booking-alice@example.com";
   const BOB = "invite-booking-bob@example.com";
 

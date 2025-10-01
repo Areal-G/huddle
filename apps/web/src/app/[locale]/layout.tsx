@@ -9,7 +9,6 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import type React from "react";
 import { Suspense } from "react";
-import { PostHogSessionInit } from "@/app/[locale]/components/posthog-init";
 import type { Params } from "@/app/[locale]/types";
 import { RouterLoadingBar } from "@/components/router-loading-indicator";
 import { SkipNavLink } from "@/components/skip-nav-link";
@@ -98,9 +97,7 @@ export default async function Root({
                       <SkipNavLink />
                       <TimeZoneSync>
                         <TooltipProvider>
-                          <Suspense>
-                            <PostHogSessionInit>{children}</PostHogSessionInit>
-                          </Suspense>
+                          <Suspense>{children}</Suspense>
                         </TooltipProvider>
                       </TimeZoneSync>
                     </LazyMotion>

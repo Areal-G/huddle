@@ -3,12 +3,13 @@ import "server-only";
 import { shortUrl } from "@huddle/utils/absolute-url";
 import { notFound, redirect } from "next/navigation";
 import { cache } from "react";
-import { listPollActivity } from "@/features/activity/data";
+import { listPollActivity, listSpaceActivity } from "@/features/activity/data";
 import { loadConferencingOptions } from "@/features/conferencing/loaders";
 import {
   canUserManagePoll,
   getPoll,
   getPollAvailability,
+  getPollDashboard,
   getPollDetails,
   getPollResults,
   getPollStatusCounts,
@@ -49,6 +50,26 @@ export const loadPolls = cache(
 export const loadPollStatusCounts = cache(async () => {
   const scope = await loadActiveSpaceContentScope();
   return getPollStatusCounts({ scope });
+});
+
+/**
+ * Open polls, response counts and the invite response rate for the home
+ * dashboard. The scope read awaits the session, so the clock read below is
+ * request bound.
+ */
+export const loadPollDashboard = cache(async () => {
+  const scope = await loadActiveSpaceContentScope();
+  return getPollDashboard({ scope, now: new Date() });
+});
+
+/** Recent responses, comments and poll milestones for the home dashboard. */
+export const loadSpaceActivity = cache(async () => {
+  const scope = await loadActiveSpaceContentScope();
+  return listSpaceActivity({
+    spaceId: scope.spaceId,
+    createdBy: scope.createdBy,
+    limit: 8,
+  });
 });
 
 export const loadPoll = cache(async (pollId: string) => {

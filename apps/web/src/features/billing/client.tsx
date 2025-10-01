@@ -2,7 +2,6 @@
 
 import type { PricesByCurrency } from "@huddle/billing";
 import { CURRENCY_COOKIE_NAME } from "@huddle/billing/pricing";
-import { posthog } from "@huddle/posthog/client";
 import Cookies from "js-cookie";
 import React from "react";
 import { create } from "zustand";
@@ -88,12 +87,6 @@ export const usePayWallStore = create<PayWallStore>((set, get) => ({
   trigger: null,
   pricing: null,
   prime: (trigger) => {
-    posthog?.capture("trigger paywall", {
-      from: trigger.from,
-      setting: trigger.setting,
-      action: trigger.action,
-      poll_id: trigger.pollId,
-    });
     set({ trigger });
   },
   show: (trigger) => {

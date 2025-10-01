@@ -1,6 +1,5 @@
 import type { WideEvent } from "@huddle/logger";
 import { createWideEvent, logger } from "@huddle/logger";
-import * as Sentry from "@sentry/nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { env } from "@/env";
@@ -15,6 +14,7 @@ import {
   verifyZoomWebhookSignature,
 } from "@/features/conferencing/utils";
 import { runtime } from "@/lib/effect/runtime";
+import * as errorReporting from "@/lib/error-reporting";
 
 async function handleZoomEvent(req: NextRequest, event: WideEvent) {
   const secretToken = env.ZOOM_WEBHOOK_SECRET_TOKEN;
@@ -107,7 +107,7 @@ export async function POST(req: NextRequest) {
     response = await handleZoomEvent(req, event);
   } catch (error) {
     // A 500 makes Zoom retry, so a failed delete is not lost.
-    Sentry.captureException(error);
+    errorReporting.captureException(error);
     event.errorType = error instanceof Error ? error.name : "UnknownError";
     event.errorMessage = error instanceof Error ? error.message : undefined;
     response = NextResponse.json({ error: "Internal error" }, { status: 500 });

@@ -153,7 +153,7 @@
   "connectGoogleCalendar": "Kalendarz Google",
   "connectMicrosoftCalendar": "Kalendarz Microsoft",
   "contactSupport": "Skontaktuj się ze wsparciem",
-  "contactSupportEmail": "Lub napisz do nas na <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Lub napisz do nas na <0>{email}</0>",
   "content": "Zawartość",
   "continue": "Kontynuuj",
   "continueToCheckout": "Przejdź do kasy",

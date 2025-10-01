@@ -1,7 +1,7 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { Button } from "@huddle/ui/button";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { Trans } from "@/i18n/client";
 import { makeMeAdminAction } from "./actions";

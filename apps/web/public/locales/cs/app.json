@@ -177,7 +177,7 @@
   "connectGoogleCalendar": "Kalendář Google",
   "connectMicrosoftCalendar": "Kalendář Microsoft",
   "contactSupport": "Kontaktujte podporu",
-  "contactSupportEmail": "Nebo napište e-mail na <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Nebo napište e-mail na <0>{email}</0>",
   "content": "Obsah",
   "continue": "Pokračovat",
   "continueToCheckout": "Pokračovat k pokladně",

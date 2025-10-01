@@ -431,7 +431,8 @@ export const pollOrganizerSchema = z
     name: z.string().meta({ example: "John Doe" }),
     email: z.email().meta({ example: "organizer@example.com" }),
     image: z.string().nullable().meta({
-      example: "https://cdn.huddle.dev/avatars/cm3f7d1qa0000t2k9c6b8h4jr.jpg",
+      example:
+        "https://cdn.huddle.example/avatars/cm3f7d1qa0000t2k9c6b8h4jr.jpg",
     }),
   })
   .meta({ id: "PollOrganizer" });
@@ -491,10 +492,10 @@ const pollSchema = z
     options: z.array(pollOptionSchema),
     adminUrl: z
       .string()
-      .meta({ example: "https://app.huddle.dev/poll/Xk3pQ9vLm2Ab" }),
+      .meta({ example: "https://app.huddle.example/poll/Xk3pQ9vLm2Ab" }),
     inviteUrl: z
       .string()
-      .meta({ example: "https://huddle.dev/invite/Xk3pQ9vLm2Ab" }),
+      .meta({ example: "https://huddle.example/invite/Xk3pQ9vLm2Ab" }),
   })
   .meta({ id: "Poll" });
 

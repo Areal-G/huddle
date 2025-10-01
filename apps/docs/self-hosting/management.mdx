@@ -4,7 +4,7 @@ title: Management
 description: Operate a self-hosted Huddle instance with the Huddle CLI.
 ---
 
-The **Huddle CLI** (`huddle.sh`) is the single entry point for day-to-day operations on a self-hosted instance. It ships with the [self-hosted stack](https://github.com/areal/huddle-selfhosted) and should be run from the stack directory (e.g. `/opt/huddle` for installer-based setups).
+The **Huddle CLI** (`huddle.sh`) is the single entry point for day-to-day operations on a self-hosted instance. It ships with the [self-hosted stack](https://github.com/arealgizaw/huddle-selfhosted) and should be run from the stack directory (e.g. `/opt/huddle` for installer-based setups).
 
 ## Commands
 
@@ -35,7 +35,7 @@ After editing `.env`, apply changes with:
 
 This pulls the latest Docker images and recreates containers. Your data and configuration are preserved.
 
-By default the stack tracks the `areal/huddle:4` tag, so `update` will bring you the latest compatible `4.x` release. To pin to a specific version or follow a different major, set `HUDDLE_IMAGE` in `.env` (see [Configuration](/self-hosting/configuration#advanced)).
+By default the stack tracks the `arealgizaw/huddle:4` tag, so `update` will bring you the latest compatible `4.x` release. To pin to a specific version or follow a different major, set `HUDDLE_IMAGE` in `.env` (see [Configuration](/self-hosting/configuration#advanced)).
 
 <Warning>
   Do not edit `docker-compose.yml` or other stack files. `./huddle.sh update` expects these files unchanged and will overwrite local edits. Only `.env` is safe to modify.

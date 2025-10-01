@@ -1,6 +1,6 @@
-import { test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { deleteAllMessages, loginWithEmail } from "@huddle/test-helpers";
+import { test } from "@playwright/test";
 import dayjs from "dayjs";
 import { customAlphabet } from "nanoid";
 import { screenshotPath } from "./helpers";
@@ -121,7 +121,7 @@ test.afterAll(async () => {
 });
 
 test("poll admin", async ({ page }) => {
-  await loginWithEmail(page, { email: "dev@huddle.dev" });
+  await loginWithEmail(page, { email: "demo@example.com" });
   await page.goto(`/poll/${pollId}`);
   await page.waitForLoadState("networkidle");
   await page.screenshot({

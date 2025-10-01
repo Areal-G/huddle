@@ -1,5 +1,5 @@
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
+import { expect, test } from "@playwright/test";
 
 const email = "password-sign-up@example.com";
 

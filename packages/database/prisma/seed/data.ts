@@ -24,33 +24,33 @@ function d(offsetDays: number, hour = 0, minute = 0): string {
 export const users = [
   {
     id: "user-1",
-    name: "Dev User",
-    email: "dev@huddle.dev",
+    name: "Alex Morgan",
+    email: "demo@example.com",
     timeZone: "America/New_York",
     weekStart: 1,
   },
   {
     id: "user-2",
     name: "Sarah Chen",
-    email: "sarah@huddle.dev",
+    email: "sarah@example.com",
     timeZone: "America/Los_Angeles",
   },
   {
     id: "user-3",
     name: "Michael Torres",
-    email: "michael@huddle.dev",
+    email: "michael@example.com",
     timeZone: "Europe/London",
   },
   {
     id: "user-4",
     name: "Emily Nakamura",
-    email: "emily@huddle.dev",
+    email: "emily@example.com",
     timeZone: "Asia/Tokyo",
   },
   {
     id: "user-5",
     name: "James Okonkwo",
-    email: "james@huddle.dev",
+    email: "james@example.com",
     timeZone: "America/Chicago",
   },
 ] as const;
@@ -64,7 +64,7 @@ export const spaces: Array<{
   tier: SpaceTier;
 }> = [
   { id: "space-1", name: "Personal", ownerId: "user-1", tier: "hobby" },
-  { id: "space-2", name: "Acme Inc", ownerId: "user-1", tier: "pro" },
+  { id: "space-2", name: "Northwind Studio", ownerId: "user-1", tier: "pro" },
 ];
 
 export const spaceMembers: Array<{
@@ -177,7 +177,7 @@ const personalPolls: PollDef[] = [
         votes: ["yes", "no", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "ifNeedBe"],
       },
@@ -197,7 +197,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "no", "yes"],
       },
@@ -219,7 +219,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "yes", "no"],
       },
@@ -272,7 +272,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "yes"],
       },
@@ -307,7 +307,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "no", "yes"],
       },
@@ -346,7 +346,7 @@ const personalPolls: PollDef[] = [
       },
       {
         content: "Wednesday works best for most people it seems.",
-        authorName: "Dev User",
+        authorName: "Alex Morgan",
         userId: "user-1",
       },
     ],
@@ -367,7 +367,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "ifNeedBe"],
       },
@@ -388,7 +388,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "no"],
       },
@@ -420,7 +420,7 @@ const personalPolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "yes", "yes"],
       },
@@ -479,9 +479,9 @@ const personalPolls: PollDef[] = [
   },
 ];
 
-// ── Acme Inc polls ───────────────────────────────────────────────────────────
+// ── Northwind Studio polls ───────────────────────────────────────────────────────────
 
-const acmePolls: PollDef[] = [
+const northwindPolls: PollDef[] = [
   {
     title: "Q2 Kickoff Meeting",
     description:
@@ -499,34 +499,34 @@ const acmePolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "yes", "no"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "no", "yes", "yes"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         note: "The last slot clashes with our release window but I can shuffle things if needed.",
         votes: ["yes", "yes", "no", "ifNeedBe"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         note: "I'm out Monday but flexible otherwise. Can join remotely if needed.",
         votes: ["no", "yes", "yes", "yes"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         votes: ["yes", "ifNeedBe", "yes", "no"],
       },
     ],
@@ -555,23 +555,23 @@ const acmePolls: PollDef[] = [
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "ifNeedBe", "no"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         votes: ["no", "yes", "yes"],
       },
       {
         name: "Andrea Walsh",
-        email: "andrea.w@acme.co",
+        email: "andrea.w@northwind.example",
         note: "I'm at a client site on the last day, either afternoon slot works for me.",
         votes: ["yes", "yes", "no"],
       },
@@ -595,32 +595,32 @@ const acmePolls: PollDef[] = [
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["yes", "yes", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["no", "yes", "yes"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         note: "The 4pm slot overlaps with a meeting I can't move.",
         votes: ["yes", "no", "yes"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         note: "I'm on support rotation the first day, the later date is safest for me.",
         votes: ["ifNeedBe", "no", "yes"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         votes: ["no", "no", "yes"],
       },
     ],
@@ -643,26 +643,26 @@ const acmePolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "no", "yes", "yes", "ifNeedBe"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "no", "yes", "no"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["no", "yes", "yes", "no", "yes"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         note: "I fly out midweek so the earlier sessions suit me much better.",
         votes: ["yes", "ifNeedBe", "yes", "no", "no"],
       },
@@ -683,38 +683,38 @@ const acmePolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "yes", "no"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "no", "yes"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["yes", "no", "yes", "yes"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         note: "If we pick the last date I may need to leave early for a flight.",
         votes: ["no", "yes", "yes", "ifNeedBe"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         votes: ["yes", "yes", "ifNeedBe", "no"],
       },
       {
         name: "Raj Gupta",
-        email: "raj.g@acme.co",
+        email: "raj.g@northwind.example",
         note: "Any date except the second works, I have a wedding that day.",
         votes: ["yes", "no", "yes", "yes"],
       },
@@ -746,14 +746,14 @@ const acmePolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "ifNeedBe"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         note: "The first slot lands right after another sync, the later two are better.",
         votes: ["no", "yes", "yes"],
       },
@@ -778,30 +778,30 @@ const acmePolls: PollDef[] = [
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["yes", "yes", "yes", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "ifNeedBe", "no"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         note: "The earlier slots land at a rough hour in Tokyo, the later two are doable.",
         votes: ["no", "no", "yes", "yes"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         votes: ["yes", "yes", "no", "no"],
       },
       {
         name: "Ana Costa",
-        email: "ana.costa@acme.co",
+        email: "ana.costa@northwind.example",
         note: "I do the school pickup, so the last slot doesn't work for me.",
         votes: ["ifNeedBe", "yes", "yes", "no"],
       },
@@ -824,31 +824,31 @@ const acmePolls: PollDef[] = [
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "no", "ifNeedBe"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         note: "I'm on leave the last day, the first two are wide open for me.",
         votes: ["yes", "yes", "no"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         votes: ["no", "yes", "yes"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         note: "I can move a review on the second day if that's the one that wins.",
         votes: ["yes", "ifNeedBe", "yes"],
       },
@@ -871,31 +871,31 @@ const acmePolls: PollDef[] = [
     ],
     participants: [
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "yes", "yes", "ifNeedBe"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["no", "yes", "yes", "yes"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["yes", "no", "yes", "no"],
       },
       {
         name: "Carla Mendez",
-        email: "carla.m@acme.co",
+        email: "carla.m@northwind.example",
         note: "Finance close runs into the first date, later gives us time to finish the slides.",
         votes: ["ifNeedBe", "yes", "no", "yes"],
       },
       {
         name: "Owen Bradley",
-        email: "owen.b@acme.co",
+        email: "owen.b@northwind.example",
         note: "I'm at a conference for the last two dates, earlier works much better.",
         votes: ["yes", "yes", "no", "no"],
       },
@@ -919,36 +919,36 @@ const acmePolls: PollDef[] = [
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         votes: ["yes", "yes", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "no", "yes"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "no"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["no", "yes", "yes"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         note: "I'm out of office the week of the last option.",
         votes: ["yes", "ifNeedBe", "no"],
       },
       {
         name: "Derek Hoffman",
-        email: "derek.h@acme.co",
+        email: "derek.h@northwind.example",
         note: "I have a standing call over the first slot but could join late if needed.",
         votes: ["ifNeedBe", "yes", "yes"],
       },
@@ -986,24 +986,24 @@ const acmePolls: PollDef[] = [
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "yes", "no"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
-        email: "dev@huddle.dev",
+        email: "demo@example.com",
         votes: ["yes", "no", "yes", "yes"],
       },
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         votes: ["no", "yes", "no", "yes"],
       },
       {
         name: "Lena Novak",
-        email: "lena.n@acme.co",
+        email: "lena.n@northwind.example",
         note: "I'm out on the third day, and I'd need to move a workshop for the last one.",
         votes: ["yes", "yes", "no", "ifNeedBe"],
       },
@@ -1026,41 +1026,41 @@ const acmePolls: PollDef[] = [
       {
         name: "Emily Nakamura",
         userId: "user-4",
-        email: "emily@huddle.dev",
+        email: "emily@example.com",
         votes: ["yes", "yes", "yes", "yes"],
       },
       {
-        name: "Dev User",
+        name: "Alex Morgan",
         userId: "user-1",
         votes: ["yes", "no", "yes", "ifNeedBe"],
       },
       {
         name: "Sarah Chen",
         userId: "user-2",
-        email: "sarah@huddle.dev",
+        email: "sarah@example.com",
         votes: ["yes", "yes", "no", "yes"],
       },
       {
         name: "Michael Torres",
         userId: "user-3",
-        email: "michael@huddle.dev",
+        email: "michael@example.com",
         votes: ["no", "yes", "yes", "yes"],
       },
       {
         name: "James Okonkwo",
         userId: "user-5",
-        email: "james@huddle.dev",
+        email: "james@example.com",
         votes: ["yes", "ifNeedBe", "yes", "no"],
       },
       {
         name: "Raj Gupta",
-        email: "raj.g@acme.co",
+        email: "raj.g@northwind.example",
         note: "I'll be booking December travel soon, so an early decision helps me.",
         votes: ["yes", "yes", "no", "yes"],
       },
       {
         name: "Ana Costa",
-        email: "ana.costa@acme.co",
+        email: "ana.costa@northwind.example",
         note: "I might be traveling the first weekend but will know closer to the date.",
         votes: ["ifNeedBe", "yes", "yes", "yes"],
       },
@@ -1076,7 +1076,7 @@ const acmePolls: PollDef[] = [
   },
 ];
 
-export const polls: PollDef[] = [...personalPolls, ...acmePolls];
+export const polls: PollDef[] = [...personalPolls, ...northwindPolls];
 
 // ─── Event Types ─────────────────────────────────────────────────────────────
 
@@ -1125,7 +1125,7 @@ export const eventTypes: EventTypeDef[] = [
     },
   },
 
-  // ── Acme Inc (space-2) ───────────────────────────────────────────────────
+  // ── Northwind Studio (space-2) ───────────────────────────────────────────────────
   {
     id: "et-3",
     spaceId: "space-2",
@@ -1163,7 +1163,7 @@ export const eventTypes: EventTypeDef[] = [
     description: "Drop-in time for engineering questions.",
     location: {
       type: "in_person",
-      address: "Acme HQ, Conference Room B",
+      address: "Northwind HQ, Conference Room B",
     },
   },
   {
@@ -1317,7 +1317,7 @@ export const scheduledEvents: ScheduledEventDef[] = [
     ],
   },
 
-  // ── Acme Inc events ────────────────────────────────────────────────────────
+  // ── Northwind Studio events ────────────────────────────────────────────────────────
   {
     title: "Sprint 14 Retrospective",
     description: "Reflecting on what went well and what to improve.",
@@ -1331,29 +1331,29 @@ export const scheduledEvents: ScheduledEventDef[] = [
     spaceId: "space-2",
     invites: [
       {
-        inviteeName: "Dev User",
-        inviteeEmail: "dev@huddle.dev",
+        inviteeName: "Alex Morgan",
+        inviteeEmail: "demo@example.com",
         inviteeId: "user-1",
         inviteeTimeZone: "America/New_York",
         status: "accepted",
       },
       {
         inviteeName: "Sarah Chen",
-        inviteeEmail: "sarah@huddle.dev",
+        inviteeEmail: "sarah@example.com",
         inviteeId: "user-2",
         inviteeTimeZone: "America/Los_Angeles",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         inviteeTimeZone: "Asia/Tokyo",
         status: "declined",
       },
       {
         inviteeName: "James Okonkwo",
-        inviteeEmail: "james@huddle.dev",
+        inviteeEmail: "james@example.com",
         inviteeId: "user-5",
         inviteeTimeZone: "America/Chicago",
         status: "accepted",
@@ -1373,15 +1373,15 @@ export const scheduledEvents: ScheduledEventDef[] = [
     spaceId: "space-2",
     invites: [
       {
-        inviteeName: "Dev User",
-        inviteeEmail: "dev@huddle.dev",
+        inviteeName: "Alex Morgan",
+        inviteeEmail: "demo@example.com",
         inviteeId: "user-1",
         inviteeTimeZone: "America/New_York",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         inviteeTimeZone: "Asia/Tokyo",
         status: "accepted",
@@ -1402,21 +1402,21 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Sarah Chen",
-        inviteeEmail: "sarah@huddle.dev",
+        inviteeEmail: "sarah@example.com",
         inviteeId: "user-2",
         inviteeTimeZone: "America/Los_Angeles",
         status: "accepted",
       },
       {
         inviteeName: "Michael Torres",
-        inviteeEmail: "michael@huddle.dev",
+        inviteeEmail: "michael@example.com",
         inviteeId: "user-3",
         inviteeTimeZone: "Europe/London",
         status: "accepted",
       },
       {
         inviteeName: "James Okonkwo",
-        inviteeEmail: "james@huddle.dev",
+        inviteeEmail: "james@example.com",
         inviteeId: "user-5",
         inviteeTimeZone: "America/Chicago",
         status: "tentative",
@@ -1435,14 +1435,14 @@ export const scheduledEvents: ScheduledEventDef[] = [
     spaceId: "space-2",
     invites: [
       {
-        inviteeName: "Dev User",
-        inviteeEmail: "dev@huddle.dev",
+        inviteeName: "Alex Morgan",
+        inviteeEmail: "demo@example.com",
         inviteeId: "user-1",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         status: "accepted",
       },
@@ -1461,26 +1461,26 @@ export const scheduledEvents: ScheduledEventDef[] = [
     spaceId: "space-2",
     invites: [
       {
-        inviteeName: "Dev User",
-        inviteeEmail: "dev@huddle.dev",
+        inviteeName: "Alex Morgan",
+        inviteeEmail: "demo@example.com",
         inviteeId: "user-1",
         status: "accepted",
       },
       {
         inviteeName: "Sarah Chen",
-        inviteeEmail: "sarah@huddle.dev",
+        inviteeEmail: "sarah@example.com",
         inviteeId: "user-2",
         status: "accepted",
       },
       {
         inviteeName: "Michael Torres",
-        inviteeEmail: "michael@huddle.dev",
+        inviteeEmail: "michael@example.com",
         inviteeId: "user-3",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         status: "tentative",
       },
@@ -1500,25 +1500,25 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Sarah Chen",
-        inviteeEmail: "sarah@huddle.dev",
+        inviteeEmail: "sarah@example.com",
         inviteeId: "user-2",
         status: "accepted",
       },
       {
         inviteeName: "Michael Torres",
-        inviteeEmail: "michael@huddle.dev",
+        inviteeEmail: "michael@example.com",
         inviteeId: "user-3",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         status: "accepted",
       },
       {
         inviteeName: "James Okonkwo",
-        inviteeEmail: "james@huddle.dev",
+        inviteeEmail: "james@example.com",
         inviteeId: "user-5",
         status: "accepted",
       },
@@ -1538,26 +1538,26 @@ export const scheduledEvents: ScheduledEventDef[] = [
     spaceId: "space-2",
     invites: [
       {
-        inviteeName: "Dev User",
-        inviteeEmail: "dev@huddle.dev",
+        inviteeName: "Alex Morgan",
+        inviteeEmail: "demo@example.com",
         inviteeId: "user-1",
         status: "accepted",
       },
       {
         inviteeName: "Michael Torres",
-        inviteeEmail: "michael@huddle.dev",
+        inviteeEmail: "michael@example.com",
         inviteeId: "user-3",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         status: "accepted",
       },
       {
         inviteeName: "James Okonkwo",
-        inviteeEmail: "james@huddle.dev",
+        inviteeEmail: "james@example.com",
         inviteeId: "user-5",
         status: "tentative",
       },
@@ -1575,25 +1575,25 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Sarah Chen",
-        inviteeEmail: "sarah@huddle.dev",
+        inviteeEmail: "sarah@example.com",
         inviteeId: "user-2",
         status: "accepted",
       },
       {
         inviteeName: "Michael Torres",
-        inviteeEmail: "michael@huddle.dev",
+        inviteeEmail: "michael@example.com",
         inviteeId: "user-3",
         status: "accepted",
       },
       {
         inviteeName: "Emily Nakamura",
-        inviteeEmail: "emily@huddle.dev",
+        inviteeEmail: "emily@example.com",
         inviteeId: "user-4",
         status: "accepted",
       },
       {
         inviteeName: "James Okonkwo",
-        inviteeEmail: "james@huddle.dev",
+        inviteeEmail: "james@example.com",
         inviteeId: "user-5",
         status: "pending",
       },
@@ -1614,26 +1614,26 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Sarah Chen",
-        inviteeEmail: "sarah@huddle.dev",
+        inviteeEmail: "sarah@example.com",
         inviteeId: "user-2",
         inviteeTimeZone: "America/Los_Angeles",
         status: "accepted",
       },
       {
         inviteeName: "Michael Torres",
-        inviteeEmail: "michael@huddle.dev",
+        inviteeEmail: "michael@example.com",
         inviteeId: "user-3",
         inviteeTimeZone: "Europe/London",
         status: "accepted",
       },
       {
         inviteeName: "Carla Mendez",
-        inviteeEmail: "carla.m@acme.co",
+        inviteeEmail: "carla.m@northwind.example",
         status: "accepted",
       },
       {
         inviteeName: "Owen Bradley",
-        inviteeEmail: "owen.b@acme.co",
+        inviteeEmail: "owen.b@northwind.example",
         status: "accepted",
       },
     ],

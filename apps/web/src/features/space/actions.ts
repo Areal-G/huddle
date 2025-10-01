@@ -29,7 +29,6 @@ import {
   updateSpaceShowBrandingSchema,
 } from "@/features/space/schema";
 import { AppError } from "@/lib/errors/app-error";
-import { identifyGroup, track } from "@/lib/posthog";
 import {
   authActionClient,
   createRateLimitMiddleware,
@@ -82,16 +81,6 @@ export const setActiveSpaceAction = authActionClient
     }
 
     refresh();
-
-    track(ctx.user, {
-      event: "space_set_active",
-      properties: {
-        space_id: parsedInput.spaceId,
-      },
-      groups: {
-        space: parsedInput.spaceId,
-      },
-    });
   });
 
 export const createSpaceAction = authActionClient
@@ -102,27 +91,6 @@ export const createSpaceAction = authActionClient
     const space = await createSpace({
       name: parsedInput.name,
       ownerId: ctx.user.id,
-    });
-
-    identifyGroup({
-      groupType: "space",
-      groupKey: space.id,
-      properties: {
-        name: space.name,
-        member_count: 1,
-        seat_count: 1,
-        tier: space.tier,
-      },
-    });
-
-    track(ctx.user, {
-      event: "space_create",
-      properties: {
-        space_name: space.name,
-      },
-      groups: {
-        space: space.id,
-      },
     });
 
     refresh();
@@ -165,16 +133,6 @@ export const deleteSpaceAction = authActionClient
 
     await deleteSpace({ spaceId: space.id });
 
-    track(ctx.user, {
-      event: "space_delete",
-      properties: {
-        space_id: space.id,
-      },
-      groups: {
-        space: space.id,
-      },
-    });
-
     refresh();
   });
 
@@ -205,26 +163,6 @@ export const updateSpaceAction = authActionClient
       spaceId: space.id,
       name: parsedInput.name,
       primaryColor: parsedInput.primaryColor,
-    });
-
-    if (parsedInput.name) {
-      identifyGroup({
-        groupType: "space",
-        groupKey: space.id,
-        properties: {
-          name: parsedInput.name,
-        },
-      });
-    }
-
-    track(ctx.user, {
-      event: "space_update",
-      properties: {
-        space_name: parsedInput.name,
-      },
-      groups: {
-        space: space.id,
-      },
     });
 
     refresh();
@@ -258,24 +196,6 @@ export const updateSpaceShowBrandingAction = authActionClient
       showBranding: parsedInput.showBranding,
     });
 
-    identifyGroup({
-      groupType: "space",
-      groupKey: space.id,
-      properties: {
-        custom_branding: parsedInput.showBranding,
-      },
-    });
-
-    track(ctx.user, {
-      event: "space_update_show_branding",
-      properties: {
-        showBranding: parsedInput.showBranding,
-      },
-      groups: {
-        space: space.id,
-      },
-    });
-
     refresh();
   });
 
@@ -307,24 +227,6 @@ export const updateSpaceHideAttributionAction = authActionClient
       hideAttribution: parsedInput.hideAttribution,
     });
 
-    identifyGroup({
-      groupType: "space",
-      groupKey: space.id,
-      properties: {
-        hide_attribution: parsedInput.hideAttribution,
-      },
-    });
-
-    track(ctx.user, {
-      event: "space_update_hide_attribution",
-      properties: {
-        hide_attribution: parsedInput.hideAttribution,
-      },
-      groups: {
-        space: space.id,
-      },
-    });
-
     refresh();
   });
 
@@ -353,24 +255,6 @@ export const updateSpaceSharedAction = authActionClient
     await updateSpaceShared({
       spaceId: space.id,
       shared: parsedInput.shared,
-    });
-
-    identifyGroup({
-      groupType: "space",
-      groupKey: space.id,
-      properties: {
-        shared: parsedInput.shared,
-      },
-    });
-
-    track(ctx.user, {
-      event: "space_update_shared",
-      properties: {
-        shared: parsedInput.shared,
-      },
-      groups: {
-        space: space.id,
-      },
     });
 
     refresh();

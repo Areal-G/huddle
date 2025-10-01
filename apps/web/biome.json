@@ -14,10 +14,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -48,10 +44,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -86,10 +78,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -124,10 +112,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -162,10 +146,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -188,7 +168,6 @@
       "includes": [
         "src/app/api/legacy/**",
         "src/app/api/status/**",
-        "src/app/api/updates/**",
         "src/app/api/private/**",
         "src/app/api/middleware/**"
       ],
@@ -201,10 +180,6 @@
                 "paths": {
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -235,10 +210,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -270,10 +241,6 @@
                 "paths": {
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -316,10 +283,6 @@
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -373,10 +336,6 @@
                 "paths": {
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -406,10 +365,6 @@
                 "paths": {
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -449,10 +404,6 @@
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "next/headers": "The DAL core trusts its input: data.ts and mutations.ts take explicit parameters and never read the request. Session and request facing reads belong in loaders.ts, writes resolve their actor in actions.ts.",
                   "next/navigation": "The DAL core trusts its input: data.ts and mutations.ts take explicit parameters and never redirect. Page semantics (redirects) belong in loaders.ts or the route.",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 },
                 "patterns": [
@@ -487,10 +438,6 @@
                 "paths": {
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  },
                   "next/link": "Import { Link } from \"@/components/link\" instead: it defaults prefetch to false so viewport prefetches do not bill a server render per visible link. Sidebar nav uses HoverPrefetchLink."
                 }
               }
@@ -585,11 +532,7 @@
                 "paths": {
                   "dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
                   "@/lib/dayjs": "Use the formatters in `@/lib/datetime` for display. dayjs is only allowed in files on the migration allowlist (see overrides in biome.json).",
-                  "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json).",
-                  "@/lib/posthog": {
-                    "message": "User-attributed analytics events must go through track() from @/lib/posthog so guest person-profile handling cannot be forgotten at capture sites. The raw client is reserved for non-capture APIs (feature flags, identity merge) in allowlisted files (see overrides in apps/web/biome.json).",
-                    "importNames": ["posthog"]
-                  }
+                  "@huddle/database": "Database access is confined to the DAL: only features/**/data.ts and features/**/mutations.ts may import @huddle/database. Existing violations are on the migration allowlist (see overrides in apps/web/biome.json)."
                 },
                 "patterns": [
                   {

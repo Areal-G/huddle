@@ -24,4 +24,4 @@ export const API_RATE_LIMIT_PER_DAY = 5000;
  * by `scripts/generate-openapi.ts`. v1 has no in-app docs page.
  */
 export const getApiDocsPath = () =>
-  "https://support.huddle.dev/api-reference/introduction";
+  "https://support.huddle.example/api-reference/introduction";

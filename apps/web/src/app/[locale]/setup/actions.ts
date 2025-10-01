@@ -8,10 +8,8 @@ import { adoptOrphanedPolls } from "@/features/poll/mutations";
 import { getOwnedSpace } from "@/features/space/data";
 import { createSpace } from "@/features/space/mutations";
 import { industrySchema } from "@/features/space/schema";
-import { inferIndustry } from "@/features/space/utils";
 import { jobTitleSchema } from "@/features/user/schema";
 import authLib from "@/lib/auth";
-import { identifyGroup, track } from "@/lib/posthog";
 import { authActionClient } from "@/lib/safe-action/server";
 
 const setupSpaceSchema = z.discriminatedUnion("spaceType", [
@@ -92,59 +90,11 @@ export const setupSpaceAction = authActionClient
       spaceId: space.id,
     });
 
-    identifyGroup({
-      distinctId: ctx.user.id,
-      groupType: "space",
-      groupKey: space.id,
-      properties: {
-        type: parsedInput.spaceType,
-        name,
-        tier: space.tier,
-        member_count: 1,
-        seat_count: 1,
-        industry,
-      },
-    });
-
     if (industry) {
       // Re-run the classifier here rather than trusting an "inferred" value
       // posted by the form: the pair is what makes classifier accuracy
       // queryable, so that half has to be the server's own guess.
-      track(ctx.user, {
-        event: "space:industry_set",
-        properties: {
-          inferred_industry: inferIndustry({
-            email: ctx.user.email,
-            organizationName: name,
-          }),
-          final_industry: industry,
-        },
-        groups: {
-          space: space.id,
-        },
-      });
     }
-
-    track(ctx.user, {
-      event: "space_setup",
-      properties: {
-        space_type: parsedInput.spaceType,
-        // The register event $sets these from the user row at creation
-        // time, which for OTP signups is an empty name and no timezone.
-        // The form updates both right before this action runs, so patch
-        // the person profile here.
-        $set: {
-          name: ctx.user.name,
-          timeZone: ctx.user.timeZone ?? undefined,
-          // Person property, so the segment can be joined against anything
-          // the user does later — not just this event.
-          ...(jobTitle ? { job_title: jobTitle } : {}),
-        },
-      },
-      groups: {
-        space: space.id,
-      },
-    });
 
     refresh();
   });

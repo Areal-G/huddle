@@ -153,7 +153,7 @@
   "connectGoogleCalendar": "Google Kalender",
   "connectMicrosoftCalendar": "Microsoft Kalender",
   "contactSupport": "Kontakt kundestøtte",
-  "contactSupportEmail": "Eller send e-post til <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Eller send e-post til <0>{email}</0>",
   "content": "Innhold",
   "continue": "Fortsett",
   "continueToCheckout": "Gå til kassen",

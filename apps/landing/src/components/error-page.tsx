@@ -34,7 +34,7 @@ const ErrorPage: React.FunctionComponent<ComponentProps> = ({
           <LinkBase href="/" className={buttonVariants({ variant: "primary" })}>
             {t("goToHome")}
           </LinkBase>
-          <a href="https://support.huddle.dev" className={buttonVariants()}>
+          <a href="https://support.huddle.example" className={buttonVariants()}>
             {t("support")}
           </a>
         </div>

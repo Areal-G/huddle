@@ -101,7 +101,7 @@ export const HowItWorks = async ({ locale }: { locale: string }) => {
         </SectionDescription>
         <a
           className="inline-flex items-center gap-1.5 font-medium text-gray-800 text-sm hover:text-gray-600"
-          href="https://support.huddle.dev/workflow/create"
+          href="https://support.huddle.example/workflow/create"
         >
           <Trans
             t={t}

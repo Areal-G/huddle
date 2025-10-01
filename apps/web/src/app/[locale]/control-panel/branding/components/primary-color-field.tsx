@@ -1,8 +1,8 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { parseColor } from "@huddle/ui/color-picker";
 import { toast } from "@huddle/ui/sonner";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { ColorPickerWithSaveButton } from "@/components/color-picker-with-save-button";

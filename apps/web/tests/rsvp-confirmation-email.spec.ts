@@ -1,5 +1,3 @@
-import type { Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import {
   captureOne,
@@ -7,6 +5,8 @@ import {
   getAttachmentText,
   getMessages,
 } from "@huddle/test-helpers";
+import type { Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 
 /**
  * The public event page sends the invitee a confirmation email after they
@@ -15,7 +15,7 @@ import {
  * lands in mailpit, plus the invite row the action wrote.
  */
 
-const HOST_EMAIL = "rsvp-email-host@huddle.dev";
+const HOST_EMAIL = "rsvp-email-host@huddle.example";
 const EVENT_ID = "rsvp-email-event";
 const EVENT_UID = "rsvp-email-event-uid";
 const EVENT_TITLE = "RSVP Email Test Event";

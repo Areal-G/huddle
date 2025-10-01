@@ -13,7 +13,7 @@ export const reviewRequestEmailDelayMs = 60 * 60_000;
 export const reviewSites = {
   trustpilot: {
     name: "Trustpilot",
-    url: "https://www.trustpilot.com/evaluate/huddle.dev",
+    url: "https://www.trustpilot.com/evaluate/huddle.example",
   },
   capterra: {
     name: "Capterra",

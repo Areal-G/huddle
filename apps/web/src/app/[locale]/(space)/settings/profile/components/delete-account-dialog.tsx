@@ -1,5 +1,4 @@
 "use client";
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { passwordManagerIgnoreProps } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -15,6 +14,7 @@ import {
 } from "@huddle/ui/dialog";
 import { Form, FormField, FormItem, FormMessage } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { ACCOUNT_DELETION_GRACE_DAYS } from "@/features/user/account-deletion/constants";

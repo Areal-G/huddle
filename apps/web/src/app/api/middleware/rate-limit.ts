@@ -1,10 +1,10 @@
-import * as Sentry from "@sentry/nextjs";
 import type { Context } from "hono";
 import { createMiddleware } from "hono/factory";
 import {
   API_RATE_LIMIT_PER_DAY,
   API_RATE_LIMIT_PER_MINUTE,
 } from "@/features/api-keys/constants";
+import * as errorReporting from "@/lib/error-reporting";
 import { isFeatureEnabled } from "@/lib/feature-flags/server";
 import { redis } from "@/lib/kv";
 import { apiError } from "./api-error";
@@ -220,11 +220,14 @@ function reportStoreError(
     return;
   }
   lastStoreErrorReportAt.set(failure.reason, now);
-  Sentry.captureException(new RateLimitStoreError(failure.reason, { cause }), {
-    tags: { rateLimiterError: failure.reason },
-    fingerprint: ["rate-limit-store", failure.reason],
-    extra: { spaceId },
-  });
+  errorReporting.captureException(
+    new RateLimitStoreError(failure.reason, { cause }),
+    {
+      tags: { rateLimiterError: failure.reason },
+      fingerprint: ["rate-limit-store", failure.reason],
+      extra: { spaceId },
+    },
+  );
 }
 
 function serviceUnavailable(

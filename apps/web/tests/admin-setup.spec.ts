@@ -1,9 +1,9 @@
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { deleteAllMessages } from "@huddle/test-helpers";
+import { expect, test } from "@playwright/test";
 import { createUserInDb, loginWithEmail } from "./test-utils";
 
-const INITIAL_ADMIN_TEST_EMAIL = "initial.admin@huddle.dev";
+const INITIAL_ADMIN_TEST_EMAIL = "initial.admin@huddle.example";
 const REGULAR_USER_EMAIL = "user@example.com";
 const SUBSEQUENT_ADMIN_EMAIL = "admin2@example.com";
 const OTHER_USER_EMAIL = "other.user@example.com";

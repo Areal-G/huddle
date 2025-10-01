@@ -1,8 +1,9 @@
 // apps/web/tests/email-invites.spec.ts
-import type { Browser, Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
+
 import { prisma } from "@huddle/database";
 import { captureOne, deleteAllMessages } from "@huddle/test-helpers";
+import type { Browser, Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { InvitePage } from "./invite-page";
 import { NewPollPage } from "./new-poll-page";
 import {
@@ -17,10 +18,10 @@ import {
  * emailed link keeps granting the invitee edit access to their response.
  */
 
-const PRO_HOST = "email-invites-pro@huddle.dev";
-const FREE_HOST = "email-invites-free@huddle.dev";
-const CLEAN_URL_HOST = "email-invites-clean-url@huddle.dev";
-const INVITEE = "email-invitee@huddle.dev";
+const PRO_HOST = "email-invites-pro@huddle.example";
+const FREE_HOST = "email-invites-free@huddle.example";
+const CLEAN_URL_HOST = "email-invites-clean-url@huddle.example";
+const INVITEE = "email-invitee@huddle.example";
 const POLL_TITLE = "Email Invites Poll";
 
 test.describe.configure({ mode: "serial" });

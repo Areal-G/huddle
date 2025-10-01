@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { buttonVariants } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -19,7 +18,6 @@ import { LoginLink } from "@/components/login-link";
 import { primePayWall, usePayWallStore } from "@/features/billing/client";
 import { PayWallDialog } from "@/features/billing/components/pay-wall-dialog";
 import { PLAN_NAMES } from "@/features/billing/constants";
-import type { OpenPollLimitSource } from "@/features/poll/limit/client";
 import { useOpenPollLimitStore } from "@/features/poll/limit/client";
 import { OpenPollUsageBar } from "@/features/poll/limit/components/open-poll-usage-bar";
 import type { OpenPollUsage } from "@/features/poll/limit/types";
@@ -60,35 +58,17 @@ export function OpenPollLimitDialog() {
       }}
     >
       <DialogContent size="lg" showCloseButton={dismissible}>
-        {content ? (
-          <OpenPollLimitContent source={content.source} usage={content.usage} />
-        ) : null}
+        {content ? <OpenPollLimitContent usage={content.usage} /> : null}
       </DialogContent>
     </Dialog>
   );
 }
 
-function OpenPollLimitContent({
-  source,
-  usage: data,
-}: {
-  source: OpenPollLimitSource;
-  usage: OpenPollUsage;
-}) {
+function OpenPollLimitContent({ usage: data }: { usage: OpenPollUsage }) {
   // The pay wall nests here so it stacks above this dialog and this dialog
   // is still there when the pay wall closes.
   const payWall = useDialog();
   const payWallPricing = usePayWallStore((state) => state.pricing);
-
-  const eventProperties = React.useMemo(
-    () => ({
-      tier: data.tier,
-      open_count: data.openCount,
-      limit: data.limit,
-      source,
-    }),
-    [data, source],
-  );
 
   if (data.limit === null) {
     return null;
@@ -121,23 +101,13 @@ function OpenPollLimitContent({
       <OpenPollUsageBar openCount={data.openCount} limit={data.limit} />
       <DialogFooter>
         {data.tier !== "guest" ? (
-          <Link
-            href="/polls"
-            className={buttonVariants()}
-            onClick={() => {
-              posthog?.capture("poll_limit:go_to_polls_click", eventProperties);
-            }}
-          >
+          <Link href="/polls" className={buttonVariants()}>
             <Trans i18nKey="goToPolls" defaults="Go to polls" />
           </Link>
         ) : null}
         <OpenPollLimitActions
           usage={data}
-          onRegisterClick={() => {
-            posthog?.capture("poll_limit:register_click", eventProperties);
-          }}
           onUpgradeClick={() => {
-            posthog?.capture("poll_limit:upgrade_click", eventProperties);
             primePayWall({ from: "poll-limit" });
             payWall.trigger();
           }}
@@ -154,19 +124,14 @@ function OpenPollLimitContent({
 
 function OpenPollLimitActions({
   usage,
-  onRegisterClick,
   onUpgradeClick,
 }: {
   usage: OpenPollUsage;
-  onRegisterClick: () => void;
   onUpgradeClick: () => void;
 }) {
   if (usage.tier === "guest") {
     return (
-      <LoginLink
-        className={buttonVariants({ variant: "primary" })}
-        onClick={onRegisterClick}
-      >
+      <LoginLink className={buttonVariants({ variant: "primary" })}>
         <Trans i18nKey="logInOrSignUp" defaults="Log in or sign up" />
       </LoginLink>
     );

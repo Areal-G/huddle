@@ -11,6 +11,10 @@ const boldFont = fs.readFileSync(
   path.join(process.cwd(), "public/static/fonts/inter-bold.ttf"),
 );
 
+const logoSrc = `data:image/svg+xml;base64,${fs
+  .readFileSync(path.join(process.cwd(), "public/static/images/logo-color.svg"))
+  .toString("base64")}`;
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const title = searchParams.get("title");
@@ -32,11 +36,7 @@ export async function GET(req: NextRequest) {
         <div tw="mb-16 flex justify-between">
           <div tw="flex justify-between items-center w-full">
             {/** biome-ignore lint/performance/noImgElement: it's ok to use img here */}
-            <img
-              alt="Huddle"
-              src="https://huddle.dev/static/images/logo-color.svg"
-              height={64}
-            />
+            <img alt="Huddle" src={logoSrc} height={64} />
             <div tw="flex text-gray-800 text-3xl tracking-tight font-semibold">
               <span tw="bg-gray-200 px-6 py-3 rounded-full">Blog</span>
             </div>

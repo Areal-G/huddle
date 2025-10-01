@@ -34,7 +34,6 @@ import {
 import { getLocale } from "@/i18n/server/get-locale";
 import { runtime } from "@/lib/effect/runtime";
 import { AppError } from "@/lib/errors/app-error";
-import { flushPostHog, track, trackSystemEvent } from "@/lib/posthog";
 import { createRateLimitGuard } from "@/lib/rate-limit";
 import {
   anyUserActionClient,
@@ -144,15 +143,6 @@ async function sendNewResponseNotificationEmail({
         { pollId, reason: result.reason },
         "Skipped new response notification email",
       );
-      trackSystemEvent({
-        event: "poll_notification:email_skip",
-        properties: {
-          poll_id: pollId,
-          type: "poll.response.submitted",
-          reason: result.reason,
-        },
-      });
-      await flushPostHog();
       return;
     }
 
@@ -214,7 +204,7 @@ export const addParticipantAction = anyUserActionClient
       return result;
     }
 
-    const { participant, poll, editToken, viaInvite, totalResponses } = result;
+    const { participant, poll, editToken } = result;
 
     if (email) {
       after(async () => {
@@ -259,38 +249,6 @@ export const addParticipantAction = anyUserActionClient
       }),
     );
 
-    const voteCounts = votes.reduce(
-      (acc, { type }) => {
-        acc[type] += 1;
-        return acc;
-      },
-      { yes: 0, ifNeedBe: 0, no: 0 },
-    );
-
-    track(ctx.user, {
-      event: "poll_response_submit",
-      properties: {
-        participant_id: participant.id,
-        // plain properties, not groups: guest events are personless and
-        // PostHog drops group associations without person processing
-        poll_id: pollId,
-        space_id: poll.space?.id,
-        tier: poll.space?.tier,
-        has_email: !!email,
-        via_invite: viaInvite,
-        has_note: !!participant.note,
-        note_length: participant.note?.length,
-        total_responses: totalResponses,
-        // Whether the tentative option is offered at all, so the counts
-        // below can be read against the polls that actually had it.
-        allow_tentative_votes: poll.allowTentativeVotes,
-        yes_count: voteCounts.yes,
-        if_need_be_count: voteCounts.ifNeedBe,
-        no_count: voteCounts.no,
-      },
-      groups: { poll: pollId },
-    });
-
     return { ok: true as const, participant: { id: participant.id } };
   });
 
@@ -319,13 +277,6 @@ export const updateParticipantVotesAction = optionalUserActionClient
       actorUserId: actor?.id,
       votes,
     });
-
-    if (result.ok && actor) {
-      track(actor, {
-        event: "poll_response_update",
-        groups: { poll: participant.pollId },
-      });
-    }
 
     return result;
   });
@@ -379,14 +330,6 @@ export const deleteParticipantAction = optionalUserActionClient
       pollId: participant.pollId,
       actorUserId: actor?.id,
     });
-
-    if (result.ok && actor) {
-      track(actor, {
-        event: "poll_response_delete",
-        properties: { participant_id: participant.id },
-        groups: { poll: participant.pollId },
-      });
-    }
 
     return result;
   });

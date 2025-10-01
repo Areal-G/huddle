@@ -4,7 +4,7 @@ import { cookieDomainSchema } from "./cookie-domain";
 
 describe("cookieDomainSchema", () => {
   it.each([
-    ".huddle.dev",
+    ".huddle.example",
     "huddle.example.com",
     ".huddle.example.com",
     "example.com",
@@ -55,7 +55,7 @@ describe("cookieDomainSchema", () => {
 
   // Dotted domains under an unlisted TLD (intranet setups) stay valid.
   it("accepts a dotted intranet domain", () => {
-    expect(cookieDomainSchema.safeParse(".huddle.devrp.internal").success).toBe(
+    expect(cookieDomainSchema.safeParse(".huddle.corp.internal").success).toBe(
       true,
     );
   });

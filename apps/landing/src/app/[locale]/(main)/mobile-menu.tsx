@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { buttonVariants, cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import { MenuIcon, XIcon } from "lucide-react";
@@ -125,21 +124,10 @@ export const MobileMenu = ({
               size: "lg",
               className: "w-full",
             })}
-            onClick={() => {
-              posthog.capture("landing:login_click", {
-                cta: "mobile_menu_login",
-                ref: getRefSlug(pathname),
-              });
-            }}
           >
             {loginLabel}
           </Link>
-          <CtaButton
-            size="lg"
-            className="w-full"
-            captureEvent="landing:mobile_menu_cta_click"
-            cta="mobile_menu"
-          >
+          <CtaButton size="lg" className="w-full" cta="mobile_menu">
             {ctaLabel}
           </CtaButton>
         </div>

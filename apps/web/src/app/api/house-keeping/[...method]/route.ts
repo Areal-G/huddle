@@ -22,11 +22,6 @@ import {
 import { deliverWebhooks } from "@/features/webhook/mutations";
 import { WebhookSender } from "@/features/webhook/service";
 import { runtime } from "@/lib/effect/runtime";
-import {
-  deletePostHogPerson,
-  flushPostHog,
-  trackSystemEvent,
-} from "@/lib/posthog";
 
 const logger = createLogger("api/house-keeping");
 
@@ -109,7 +104,7 @@ const REMOVE_DELETED_USERS_MAX_PER_RUN = 500;
 // Reaper for accounts whose scheduled deletion passed the recovery window.
 // Composed here because it spans features: external stores go first — Stripe
 // (defensive subscription cancel, then the customer object; invoices are
-// lawfully retained by Stripe) and PostHog — so a failure there leaves the
+// lawfully retained by Stripe) — so a failure there leaves the
 // user row in place for the next run to retry.
 async function removeDeletedUsers() {
   const cutoff = getAccountDeletionCutoff();
@@ -138,13 +133,10 @@ async function removeDeletedUsers() {
           await deleteStripeCustomer({ customerId: user.customerId });
         }
 
-        await deletePostHogPerson({ distinctId: user.id });
-
         await hardDeleteUser({ userId: user.id });
 
         // Personless by design — the person this event is about was just
         // erased, so it must not create or attach to a profile.
-        trackSystemEvent({ event: "account_deletion_complete" });
 
         deletedUsers++;
       } catch (error) {
@@ -169,8 +161,6 @@ async function removeDeletedUsers() {
 
 app.get("/remove-deleted-users", async (c) => {
   const deletedUsers = await removeDeletedUsers();
-
-  await flushPostHog();
 
   logger.info(
     { task: "remove-deleted-users", deletedUsers },
@@ -238,7 +228,6 @@ app.get("/send-queued-emails", async (c) => {
   const summary = await runQueuedEmailDelivery({});
 
   // Some handlers capture events, such as the review request send.
-  await flushPostHog();
 
   // Runs every minute and most runs find nothing.
   if (summary.attempted > 0 || summary.abandoned > 0 || summary.purged > 0) {

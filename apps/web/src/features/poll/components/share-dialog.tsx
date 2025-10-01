@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import {
   Dialog,
   DialogContent,
@@ -11,25 +10,16 @@ import {
 } from "@huddle/ui/dialog";
 import { Separator } from "@huddle/ui/separator";
 import type React from "react";
-import { useIsFree } from "@/features/billing/client";
 import { InviteByEmail } from "@/features/poll/components/invite-by-email";
 import { InviteLinkRow } from "@/features/poll/components/invite-link-row";
 import type { PollStatus } from "@/features/poll/schema";
 import { Trans } from "@/i18n/client";
 
-type ShareSource = "poll_created" | "manual" | "empty_state";
-
-/** Dialog state for SharePollDialog whose `open` records how it was opened. */
-export function useSharePollDialog(pollId: string) {
+/** Dialog state for SharePollDialog. */
+export function useSharePollDialog() {
   const dialog = useDialog();
-  const isFree = useIsFree();
 
-  const open = (source: ShareSource) => {
-    posthog?.capture("poll_share:dialog_open", {
-      poll_id: pollId,
-      tier: isFree ? "free" : "pro",
-      source,
-    });
+  const open = () => {
     dialog.trigger();
   };
 
@@ -60,7 +50,7 @@ export function SharePollDialog({
             />
           </DialogDescription>
         </DialogHeader>
-        <InviteLinkRow pollId={pollId} inviteLink={inviteLink} />
+        <InviteLinkRow inviteLink={inviteLink} />
         <Separator />
         <InviteByEmail pollId={pollId} pollStatus={pollStatus} />
       </DialogContent>

@@ -1,11 +1,10 @@
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
-
 import { deleteAllMessages } from "@huddle/test-helpers";
+import { expect, test } from "@playwright/test";
 import { createUserInDb, loginWithEmail } from "./test-utils";
 
-const CONTROL_PANEL_NON_ADMIN_EMAIL = "cp-non-admin@huddle.dev";
-const CONTROL_PANEL_ADMIN_EMAIL = "cp-admin@huddle.dev";
+const CONTROL_PANEL_NON_ADMIN_EMAIL = "cp-non-admin@huddle.example";
+const CONTROL_PANEL_ADMIN_EMAIL = "cp-admin@huddle.example";
 
 test.describe
   .serial("Control Panel Access (/control-panel)", () => {

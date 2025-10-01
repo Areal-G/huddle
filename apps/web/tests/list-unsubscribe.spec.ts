@@ -1,11 +1,11 @@
-import type { Browser } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import {
   captureOne,
   deleteAllMessages,
   getMessageHeaders,
 } from "@huddle/test-helpers";
+import type { Browser } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { load } from "cheerio";
 import { InvitePage } from "./invite-page";
 import { NewPollPage } from "./new-poll-page";
@@ -16,7 +16,7 @@ import { createUserInDb, loginWithEmail } from "./test-utils";
  * a tokenized link. Both mute the poll for the owner without a session.
  */
 
-const OWNER_EMAIL = "list-unsubscribe-owner@huddle.dev";
+const OWNER_EMAIL = "list-unsubscribe-owner@huddle.example";
 const POLL_TITLE = "List Unsubscribe Poll";
 
 test.describe.configure({ mode: "serial" });

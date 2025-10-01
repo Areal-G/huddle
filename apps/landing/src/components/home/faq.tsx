@@ -138,7 +138,7 @@ export async function FaqSection({
               <a
                 key="support"
                 className="text-gray-800 underline underline-offset-2 hover:text-gray-600"
-                href="mailto:support@huddle.dev"
+                href="mailto:support@huddle.example"
               >
                 Email us
               </a>,

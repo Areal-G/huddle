@@ -5,9 +5,9 @@ import path from "node:path";
 // The committed spec is the production reference: the `servers` entry must
 // point at the cloud app whatever machine runs this. Both must be set before
 // the route module loads, so the import below is dynamic.
-process.env.API_BASE_URL = "https://api.huddle.dev";
-process.env.NEXT_PUBLIC_BASE_URL = "https://app.huddle.dev";
-process.env.NEXT_PUBLIC_SHORT_BASE_URL = "https://huddle.dev";
+process.env.API_BASE_URL = "https://api.huddle.example";
+process.env.NEXT_PUBLIC_BASE_URL = "https://app.huddle.example";
+process.env.NEXT_PUBLIC_SHORT_BASE_URL = "https://huddle.example";
 process.env.SKIP_ENV_VALIDATION = "1";
 // The wide event middleware logs the spec request; keep stdout to the result.
 process.env.LOG_LEVEL = "silent";

@@ -2,8 +2,7 @@
 
 import { buttonVariants } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
-import * as Sentry from "@sentry/nextjs";
-import { GithubIcon, HomeIcon, LifeBuoyIcon, PlusIcon } from "lucide-react";
+import { HomeIcon, PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { ErrorPage, ErrorPageLinkItem } from "@/components/error-page";
@@ -12,7 +11,7 @@ import { DefaultLogo } from "@/features/branding/components/default-logo";
 import { Trans } from "@/i18n/client";
 import { signOut } from "@/lib/auth-client";
 import { reloadOnceForChunkError } from "@/lib/chunk-recovery";
-import { githubRepoUrl } from "@/lib/constants";
+import * as errorReporting from "@/lib/error-reporting";
 import { INVALID_SESSION } from "@/lib/errors/invalid-session-error";
 
 export default function LocaleErrorBoundary({
@@ -28,7 +27,7 @@ export default function LocaleErrorBoundary({
 
   React.useEffect(() => {
     if (!isInvalidSession) {
-      Sentry.captureException(error);
+      errorReporting.captureException(error);
       reloadOnceForChunkError(error);
     }
   }, [error, isInvalidSession]);
@@ -113,28 +112,6 @@ export default function LocaleErrorBoundary({
           <Trans
             i18nKey="errorLinkCreatePollDescription"
             defaults="Start scheduling a new meeting."
-          />
-        }
-      />
-      <ErrorPageLinkItem
-        href="https://support.huddle.dev"
-        icon={<LifeBuoyIcon className="size-4 text-muted-foreground" />}
-        title={<Trans i18nKey="errorLinkSupport" defaults="Support" />}
-        description={
-          <Trans
-            i18nKey="errorLinkSupportDescription"
-            defaults="Browse our help articles and FAQs."
-          />
-        }
-      />
-      <ErrorPageLinkItem
-        href={githubRepoUrl}
-        icon={<GithubIcon className="size-4 text-muted-foreground" />}
-        title={<Trans i18nKey="errorLinkGithub" defaults="GitHub" />}
-        description={
-          <Trans
-            i18nKey="errorLinkGithubDescription"
-            defaults="Report an issue or check for updates."
           />
         }
       />

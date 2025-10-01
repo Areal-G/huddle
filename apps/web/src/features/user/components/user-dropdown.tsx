@@ -120,7 +120,7 @@ export const UserDropdown = ({ className }: { className?: string }) => {
           render={
             <Link
               target="_blank"
-              href="https://support.huddle.dev"
+              href="https://support.huddle.example"
               className="flex items-center gap-x-2"
             />
           }

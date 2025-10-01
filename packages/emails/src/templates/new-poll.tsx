@@ -91,8 +91,8 @@ async function NewPollEmail({
 NewPollEmail.PreviewProps = {
   title: "Untitled Poll",
   name: "John Doe",
-  adminLink: "https://huddle.dev",
-  participantLink: "https://huddle.dev/invite/abc123",
+  adminLink: "https://huddle.example",
+  participantLink: "https://huddle.example/invite/abc123",
   locale: "en",
   chrome: previewChrome,
 } as NewPollEmailProps;

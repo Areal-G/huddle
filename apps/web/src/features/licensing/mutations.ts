@@ -74,7 +74,7 @@ export class LicenseManager {
   authToken?: string;
 
   constructor({
-    apiUrl = "https://licensing.huddle.dev/api/licensing/v1",
+    apiUrl = "https://licensing.huddle.example/api/licensing/v1",
     authToken,
   }: {
     apiUrl?: string;
@@ -247,7 +247,7 @@ export async function createLicenseCheckoutSession({
         },
       ],
       mode: "payment",
-      success_url: "https://huddle.dev/licensing/thank-you",
+      success_url: "https://huddle.example/licensing/thank-you",
       allow_promotion_codes: true,
       billing_address_collection: "required",
       tax_id_collection: {

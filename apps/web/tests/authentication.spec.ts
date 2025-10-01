@@ -1,10 +1,10 @@
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import {
   deleteAllMessages,
   getCode,
   getPasswordResetLink,
 } from "@huddle/test-helpers";
+import { expect, test } from "@playwright/test";
 import { RegisterPage } from "./register-page";
 import { createUserInDb, loginWithEmail } from "./test-utils";
 

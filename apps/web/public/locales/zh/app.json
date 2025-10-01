@@ -153,7 +153,7 @@
   "connectGoogleCalendar": "Google 日历",
   "connectMicrosoftCalendar": "Microsoft 日历",
   "contactSupport": "联系支持",
-  "contactSupportEmail": "或发送邮件至 <0>support@huddle.dev</0>",
+  "contactSupportEmail": "或发送邮件至 <0>{email}</0>",
   "content": "内容",
   "continue": "下一步",
   "continueToCheckout": "继续结账",

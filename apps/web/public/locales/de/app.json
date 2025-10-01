@@ -214,7 +214,7 @@
   "connectGoogleCalendar": "Google Kalender",
   "connectMicrosoftCalendar": "Microsoft Kalender",
   "contactSupport": "Support kontaktieren",
-  "contactSupportEmail": "Oder schreibe uns an <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Oder schreibe uns an <0>{email}</0>",
   "content": "Inhalt",
   "continue": "Weiter",
   "continueToCheckout": "Weiter zur Kasse",

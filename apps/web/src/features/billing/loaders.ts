@@ -29,7 +29,8 @@ import { isFeatureEnabled } from "@/lib/feature-flags/server";
  * degrades to the built in prices rather than the layout failing.
  */
 export const loadPayWallPricing = cache(async () => {
-  if (!isBillingEnabled) {
+  // Without a Stripe key (local demo) the pay wall uses its built in prices.
+  if (!isBillingEnabled || !process.env.STRIPE_SECRET_KEY) {
     return null;
   }
   try {
@@ -79,10 +80,12 @@ export const loadSubscriptionOverview = cache(async () => {
   }
 
   let pricing: PricingData | null = null;
-  try {
-    pricing = await getProPrices();
-  } catch (error) {
-    console.error("Failed to load Pro pricing", error);
+  if (process.env.STRIPE_SECRET_KEY) {
+    try {
+      pricing = await getProPrices();
+    } catch (error) {
+      console.error("Failed to load Pro pricing", error);
+    }
   }
 
   const earlySupporter = isEarlySupporter({

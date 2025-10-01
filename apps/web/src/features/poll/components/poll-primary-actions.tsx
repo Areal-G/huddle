@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import { useDialog } from "@huddle/ui/dialog";
 import { CalendarCheck2Icon, Share2Icon } from "lucide-react";
@@ -80,7 +79,7 @@ function MobileActionBar({ canFinalize, onShare, onFinalize }: ActionBarProps) {
  */
 export function PollPrimaryActions() {
   const poll = usePoll();
-  const share = useSharePollDialog(poll.id);
+  const share = useSharePollDialog();
   const finalizeDialog = useDialog();
   const sharePollFlash = useFlash(SHARE_POLL_FLASH_KEY);
   const canFinalize = poll.status === "open" || poll.status === "closed";
@@ -92,14 +91,13 @@ export function PollPrimaryActions() {
   // biome-ignore lint/correctness/useExhaustiveDependencies: runs once per flash arrival
   React.useEffect(() => {
     if (sharePollFlash !== poll.id) return;
-    share.open("poll_created");
+    share.open();
   }, [sharePollFlash]);
 
   const actionBarProps: ActionBarProps = {
     canFinalize,
-    onShare: () => share.open("manual"),
+    onShare: () => share.open(),
     onFinalize: () => {
-      posthog?.capture("poll_finalize:dialog_open");
       finalizeDialog.trigger();
     },
   };

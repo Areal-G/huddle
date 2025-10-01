@@ -72,6 +72,14 @@ export const env = createEnv({
      */
     ALLOWED_EMAILS: z.string().optional(),
     EMAIL_LOGIN_ENABLED: z.enum(["true", "false"]).default("true"),
+    /**
+     * Demo login: shows a "Try the demo" button on /login that signs the
+     * visitor in as the seeded demo user (see scripts/setup-demo-account.ts).
+     * @default "false"
+     */
+    DEMO_LOGIN_ENABLED: z.enum(["true", "false"]).default("false"),
+    DEMO_EMAIL: z.email().optional(),
+    DEMO_PASSWORD: z.string().min(8).optional(),
     REGISTRATION_ENABLED: z.enum(["true", "false"]).default("true"),
     /**
      * Email addresses for support and no-reply emails.
@@ -209,7 +217,7 @@ export const env = createEnv({
      */
     TURNSTILE_SECRET_KEY: z.string().optional(),
     /**
-     * Base URL of the Huddle cloud API (e.g. https://api.huddle.dev).
+     * Base URL of the Huddle cloud API (e.g. https://api.huddle.example).
      * On the cloud deployment it names the host that serves `/v1` without
      * the app's `/api` prefix (see the rewrite in next.config.ts) and is
      * the `servers` entry of the OpenAPI document. The self-hosted Docker
@@ -226,9 +234,6 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_BASE_URL: z.url(),
-    NEXT_PUBLIC_POSTHOG_API_KEY: z.string().optional(),
-    NEXT_PUBLIC_POSTHOG_API_HOST: z.url().optional(),
-    NEXT_PUBLIC_POSTHOG_UI_HOST: z.url().optional(),
     NEXT_PUBLIC_SELF_HOSTED: z.enum(["true", "false"]).optional(),
     /**
      * Cloudflare Turnstile site key for bot protection on registration.
@@ -250,7 +255,7 @@ export const env = createEnv({
     NEXT_PUBLIC_SHORT_BASE_URL: z.url().optional(),
     /**
      * Domain to attach to server-set cookies (auth session, locale).
-     * Set to a parent domain prefixed with a leading dot (e.g. `.huddle.dev`)
+     * Set to a parent domain prefixed with a leading dot (e.g. `.huddle.example`)
      * to make these cookies readable across subdomains. When unset, cookies
      * stay scoped to the exact request host. Must be a registrable DNS
      * domain: browsers ignore the Domain attribute for localhost, dotless
@@ -287,6 +292,9 @@ export const env = createEnv({
     SMTP_DEBUG: process.env.SMTP_DEBUG,
     ALLOWED_EMAILS: process.env.ALLOWED_EMAILS,
     EMAIL_LOGIN_ENABLED: process.env.EMAIL_LOGIN_ENABLED,
+    DEMO_LOGIN_ENABLED: process.env.DEMO_LOGIN_ENABLED,
+    DEMO_EMAIL: process.env.DEMO_EMAIL,
+    DEMO_PASSWORD: process.env.DEMO_PASSWORD,
     REGISTRATION_ENABLED: process.env.REGISTRATION_ENABLED,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
@@ -300,9 +308,6 @@ export const env = createEnv({
     NEXT_PUBLIC_BASE_URL:
       process.env.NEXT_PUBLIC_BASE_URL ??
       (vercelUrl ? `https://${vercelUrl}` : undefined),
-    NEXT_PUBLIC_POSTHOG_API_KEY: process.env.NEXT_PUBLIC_POSTHOG_API_KEY,
-    NEXT_PUBLIC_POSTHOG_API_HOST: process.env.NEXT_PUBLIC_POSTHOG_API_HOST,
-    NEXT_PUBLIC_POSTHOG_UI_HOST: process.env.NEXT_PUBLIC_POSTHOG_UI_HOST,
     NEXT_PUBLIC_SELF_HOSTED: process.env.NEXT_PUBLIC_SELF_HOSTED,
     SUPPORT_EMAIL: process.env.SUPPORT_EMAIL,
     NOREPLY_EMAIL: process.env.NOREPLY_EMAIL,

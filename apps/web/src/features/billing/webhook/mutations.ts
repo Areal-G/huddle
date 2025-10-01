@@ -5,14 +5,12 @@ import type { Prisma } from "@huddle/database";
 import { prisma } from "@huddle/database";
 import { sendRawEmail } from "@huddle/emails";
 import { sendLicenseKeyEmail } from "@huddle/emails/templates/license-key";
-import * as Sentry from "@sentry/nextjs";
 import { Effect } from "effect";
 import { getInstanceBranding } from "@/emails/branding";
 import { env } from "@/env";
 import { subscriptionFeedbackEmailDelayMs } from "@/features/billing/constants";
 import { getSubscriptionFeedbackRecipient } from "@/features/billing/data";
 import {
-  cancellationReasonSchema,
   customerMetadataSchema,
   subscriptionMetadataSchema,
 } from "@/features/billing/schema";
@@ -31,7 +29,7 @@ import {
 import { licenseManager } from "@/features/licensing/mutations";
 import { licenseCheckoutMetadataSchema } from "@/features/licensing/schema";
 import { spaceExists } from "@/features/space/data";
-import { identifyGroup, posthog } from "@/lib/posthog";
+import * as errorReporting from "@/lib/error-reporting";
 
 async function getExpandedSubscription(subscriptionId: string) {
   return getStripe().subscriptions.retrieve(subscriptionId, {
@@ -87,32 +85,6 @@ async function queueSubscriptionFeedbackEmail(
       sendAfter: new Date(Date.now() + subscriptionFeedbackEmailDelayMs),
     });
   }
-}
-
-function captureSubscriptionCreate({
-  userId,
-  spaceId,
-  interval,
-  tier,
-}: {
-  userId: string;
-  spaceId: string;
-  interval: string;
-  tier: string;
-}) {
-  posthog()?.capture({
-    distinctId: userId,
-    event: "subscription_create",
-    properties: {
-      interval,
-      $set: {
-        tier,
-      },
-    },
-    groups: {
-      space: spaceId,
-    },
-  });
 }
 
 async function createOrUpdatePaymentMethod(
@@ -185,26 +157,12 @@ async function onCheckoutSessionCompleted(event: Stripe.Event) {
 
     await sendLicenseKeyEmail({
       to: email,
-      from: { name: "Luke from Huddle", address: env.SUPPORT_EMAIL },
+      from: { name: env.NOREPLY_EMAIL_NAME, address: env.SUPPORT_EMAIL },
       branding: await getInstanceBranding(),
       props: {
         licenseKey: license.data.key,
         seats,
         tier: licenseType,
-      },
-    });
-
-    posthog()?.capture({
-      distinctId: email,
-      event: "license_purchase",
-      properties: {
-        licenseType,
-        seats,
-        version,
-        stripeEventId: event.id,
-        $set: {
-          tier: licenseType,
-        },
       },
     });
   }
@@ -219,17 +177,21 @@ async function onCheckoutSessionExpired(event: Stripe.Event) {
   const userId = session.metadata?.userId;
 
   if (!userId) {
-    Sentry.captureMessage("No user ID found in Checkout Session metadata");
+    errorReporting.captureMessage(
+      "No user ID found in Checkout Session metadata",
+    );
     return;
   }
 
   // Do nothing if the Checkout Session has no email or recovery URL
   if (!email || !recoveryUrl) {
-    Sentry.captureMessage("No email or recovery URL found in Checkout Session");
+    errorReporting.captureMessage(
+      "No email or recovery URL found in Checkout Session",
+    );
     return;
   }
 
-  // TODO (Areal) [2025-08-04]: We may want to send the user an email to users who do not complete checkout
+  // TODO [2025-08-04]: We may want to send the user an email to users who do not complete checkout
 }
 
 async function onCustomerCreated(event: Stripe.Event) {
@@ -310,7 +272,7 @@ async function onCustomerSubscriptionCreated(event: Stripe.Event) {
   const subscriptionItemId = subscriptionItem.id;
   const quantity = subscriptionItem.quantity ?? 1;
 
-  const tier = await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx) => {
     await tx.subscription.upsert({
       where: { id: subscription.id },
       create: {
@@ -365,19 +327,6 @@ async function onCustomerSubscriptionCreated(event: Stripe.Event) {
 
     return syncSpaceTier(tx, spaceId);
   });
-
-  identifyGroup({
-    groupType: "space",
-    groupKey: spaceId,
-    properties: {
-      seat_count: quantity,
-      tier,
-    },
-  });
-
-  if (activated) {
-    captureSubscriptionCreate({ userId, spaceId, interval, tier });
-  }
 }
 
 async function onCustomerSubscriptionDeleted(event: Stripe.Event) {
@@ -402,7 +351,7 @@ async function onCustomerSubscriptionDeleted(event: Stripe.Event) {
     throw new Error("Invalid subscription metadata");
   }
 
-  const { userId, spaceId } = res.data;
+  const { spaceId } = res.data;
 
   // Cascade-deleted with its owner — nothing to sync, and failing would
   // make Stripe retry the event
@@ -410,7 +359,7 @@ async function onCustomerSubscriptionDeleted(event: Stripe.Event) {
     return;
   }
 
-  const tier = await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx) => {
     // updateMany so a missing row (e.g. already cascade-deleted with the user
     // or space) doesn't abort the transaction before the tier sync runs
     await tx.subscription.updateMany({
@@ -424,56 +373,6 @@ async function onCustomerSubscriptionDeleted(event: Stripe.Event) {
     });
 
     return syncSpaceTier(tx, spaceId);
-  });
-
-  identifyGroup({
-    groupType: "space",
-    groupKey: spaceId,
-    properties: {
-      tier,
-    },
-  });
-
-  // Analytics only: malformed price data must not make Stripe retry an event
-  // whose cleanup has already run.
-  let details: {
-    interval: string | null;
-    amount: number | null;
-    currency: string | null;
-  };
-  try {
-    details = getSubscriptionDetails(subscription);
-  } catch {
-    details = { interval: null, amount: null, currency: null };
-  }
-  const cancelReason = cancellationReasonSchema.safeParse(
-    subscription.metadata.cancelReason,
-  );
-  const endedAt = subscription.ended_at ?? event.created;
-
-  posthog()?.capture({
-    distinctId: userId,
-    event: "subscription_cancel",
-    properties: {
-      // null when cancelled outside the app: dunning, the account deletion
-      // reaper, or the Stripe dashboard.
-      reason: cancelReason.success ? cancelReason.data : null,
-      comment: subscription.cancellation_details?.comment ?? null,
-      stripe_feedback: subscription.cancellation_details?.feedback ?? null,
-      // cancellation_requested, payment_failed or payment_disputed
-      stripe_reason: subscription.cancellation_details?.reason ?? null,
-      tenure_days: Math.floor((endedAt - subscription.start_date) / 86400),
-      interval: details.interval,
-      amount: details.amount,
-      currency: details.currency,
-      seats: subscription.items.data[0]?.quantity ?? null,
-      $set: {
-        tier,
-      },
-    },
-    groups: {
-      space: spaceId,
-    },
   });
 }
 
@@ -521,7 +420,7 @@ async function onCustomerSubscriptionUpdated(event: Stripe.Event) {
   const quantity = subscriptionItem.quantity ?? 1;
 
   // Update the subscription in the database
-  const tier = await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx) => {
     await tx.subscription.upsert({
       where: {
         id: subscription.id,
@@ -571,34 +470,6 @@ async function onCustomerSubscriptionUpdated(event: Stripe.Event) {
 
     return syncSpaceTier(tx, spaceId);
   });
-
-  identifyGroup({
-    groupType: "space",
-    groupKey: spaceId,
-    properties: {
-      seat_count: quantity,
-      tier,
-    },
-  });
-
-  posthog()?.capture({
-    distinctId: userId,
-    event: "subscription_update",
-    properties: {
-      interval,
-      quantity,
-      $set: {
-        tier,
-      },
-    },
-    groups: {
-      space: spaceId,
-    },
-  });
-
-  if (activated) {
-    captureSubscriptionCreate({ userId, spaceId, interval, tier });
-  }
 }
 
 async function onPaymentMethodAttached(event: Stripe.Event) {
@@ -730,14 +601,14 @@ export const sendSubscriptionFeedbackEmail = Effect.fn(
     try: () =>
       sendRawEmail({
         to: user.email,
-        from: { name: "Luke from Huddle", address: env.SUPPORT_EMAIL },
+        from: { name: env.NOREPLY_EMAIL_NAME, address: env.SUPPORT_EMAIL },
         subject: "Thanks for subscribing to Huddle Pro",
         text: [
           "Hey there,",
           "Thanks so much for subscribing to Huddle Pro! I really appreciate your support.",
           "I'd love to learn more about how you're using Huddle. What kind of events are you scheduling? Are there any features you wish Huddle had?",
           "Just hit reply and let me know. I read every response and it helps shape what we build next.",
-          "Luke\nFounder, Huddle",
+          "The team",
         ].join("\n\n"),
       }),
     catch: failWith("Failed to send the subscription feedback email"),

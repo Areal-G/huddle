@@ -1,8 +1,8 @@
 import { randomUUID } from "node:crypto";
-import type { Browser, Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { deleteAllMessages, getMessages } from "@huddle/test-helpers";
+import type { Browser, Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import dayjs from "dayjs";
 import {
   createUserInDb,
@@ -117,7 +117,7 @@ async function createEvent({
   return prisma.scheduledEvent.create({
     data: {
       id,
-      uid: `${id}@huddle.dev`,
+      uid: `${id}@huddle.example`,
       userId,
       spaceId,
       title: `Event ${id}`,

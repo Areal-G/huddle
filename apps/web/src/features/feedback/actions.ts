@@ -13,7 +13,6 @@ export const submitFeedbackAction = authActionClient
   .inputSchema(feedbackSchema)
   .action(async ({ ctx, parsedInput }) => {
     await submitFeedback({
-      userId: ctx.user.id,
       userName: ctx.user.name,
       userEmail: ctx.user.email,
       content: parsedInput.content,

@@ -19,7 +19,6 @@ vi.mock("@huddle/emails/templates/password-added", () => ({
 vi.mock("@/emails/branding", () => ({
   getInstanceBranding: vi.fn().mockResolvedValue({}),
 }));
-vi.mock("@/lib/posthog", () => ({ track: vi.fn() }));
 vi.mock("@/i18n/server/get-locale", () => ({
   getLocale: vi.fn().mockResolvedValue("en"),
 }));

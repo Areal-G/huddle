@@ -87,8 +87,8 @@ import {
 const faqLinkClassName =
   "text-gray-800 underline underline-offset-2 hover:text-gray-600";
 
-const apiDocsUrl = "https://support.huddle.dev/api-reference/introduction";
-const webhooksDocsUrl = "https://support.huddle.dev/api-reference/webhooks";
+const apiDocsUrl = "https://support.huddle.example/api-reference/introduction";
+const webhooksDocsUrl = "https://support.huddle.example/api-reference/webhooks";
 
 export default async function Page(props: {
   params: Promise<{ locale: string }>;
@@ -209,6 +209,7 @@ export default async function Page(props: {
                     cta: "pricing_free",
                   })}
                   className={buttonVariants({
+                    shape: "rounded",
                     className: "w-full",
                   })}
                 >
@@ -311,6 +312,7 @@ export default async function Page(props: {
                   })}
                   className={buttonVariants({
                     variant: "primary",
+                    shape: "rounded",
                     className: "w-full",
                   })}
                 >
@@ -1128,7 +1130,7 @@ export default async function Page(props: {
                 <a
                   key="docs"
                   className={faqLinkClassName}
-                  href="https://support.huddle.dev/self-hosting/installation/docker"
+                  href="https://support.huddle.example/self-hosting/installation/docker"
                 />,
               ]}
             />

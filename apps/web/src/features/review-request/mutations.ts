@@ -12,7 +12,6 @@ import {
   QueuedEmailSkipped,
 } from "@/features/email-queue/service";
 import { isFeatureEnabled } from "@/lib/feature-flags/server";
-import { track } from "@/lib/posthog";
 import { reviewRequestEmailDelayMs, reviewSites } from "./constants";
 import { countFinalizedPolls, getReviewRequestRecipient } from "./data";
 import {
@@ -58,7 +57,7 @@ async function queueReviewRequestOrThrow({
     return;
   }
 
-  const queued = await prisma.$transaction(async (tx) => {
+  await prisma.$transaction(async (tx) => {
     // Conditional on the column being unset, so two finalizations racing
     // each other still ask only once.
     const { count } = await tx.user.updateMany({
@@ -77,19 +76,6 @@ async function queueReviewRequestOrThrow({
     });
     return true;
   });
-
-  if (queued) {
-    track(
-      { id: userId, isGuest: false },
-      {
-        event: "review_request:email_queue",
-        properties: {
-          finalized_poll_count: finalizedPollCount,
-          participant_count: participantCount,
-        },
-      },
-    );
-  }
 }
 
 const failWith = (message: string) => () => new QueuedEmailFailed({ message });
@@ -140,13 +126,5 @@ export const sendReviewRequest = Effect.fn("reviewRequest.sendReviewRequest")(
     if (!sent) {
       return yield* new QueuedEmailFailed({ message: "Transport failed" });
     }
-
-    track(
-      { id: subjectId, isGuest: false },
-      {
-        event: "review_request:email_send",
-        properties: { destination: site },
-      },
-    );
   },
 );

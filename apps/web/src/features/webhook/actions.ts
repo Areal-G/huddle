@@ -5,7 +5,6 @@ import { refresh } from "next/cache";
 import { getActiveSpaceForUser } from "@/features/space/data";
 import { loadOptionalUser } from "@/features/user/loaders";
 import { AppError } from "@/lib/errors/app-error";
-import { track } from "@/lib/posthog";
 import {
   authActionClient,
   createRateLimitMiddleware,
@@ -58,7 +57,7 @@ async function requireWebhookAccess() {
 export const createWebhookAction = authActionClient
   .metadata({ actionName: "create_webhook" })
   .inputSchema(createWebhookInputSchema)
-  .action(async ({ ctx, parsedInput }) => {
+  .action(async ({ parsedInput }) => {
     const { space } = await requireWebhookAccess();
 
     const result = await createWebhook({
@@ -66,15 +65,6 @@ export const createWebhookAction = authActionClient
       url: parsedInput.url,
       events: parsedInput.events,
     });
-
-    if (result.ok) {
-      track(ctx.user, {
-        event: "developer:webhook_create",
-        groups: {
-          space: space.id,
-        },
-      });
-    }
 
     refresh();
 
@@ -84,7 +74,7 @@ export const createWebhookAction = authActionClient
 export const setWebhookEnabledAction = authActionClient
   .metadata({ actionName: "set_webhook_enabled" })
   .inputSchema(setWebhookEnabledSchema)
-  .action(async ({ ctx, parsedInput }) => {
+  .action(async ({ parsedInput }) => {
     const { space } = await requireWebhookAccess();
 
     await setWebhookEnabled({
@@ -93,34 +83,18 @@ export const setWebhookEnabledAction = authActionClient
       enabled: parsedInput.enabled,
     });
 
-    track(ctx.user, {
-      event: parsedInput.enabled
-        ? "developer:webhook_enable"
-        : "developer:webhook_disable",
-      groups: {
-        space: space.id,
-      },
-    });
-
     refresh();
   });
 
 export const deleteWebhookAction = authActionClient
   .metadata({ actionName: "delete_webhook" })
   .inputSchema(deleteWebhookSchema)
-  .action(async ({ ctx, parsedInput }) => {
+  .action(async ({ parsedInput }) => {
     const { space } = await requireWebhookAccess();
 
     await deleteWebhook({
       spaceId: space.id,
       webhookId: parsedInput.webhookId,
-    });
-
-    track(ctx.user, {
-      event: "developer:webhook_delete",
-      groups: {
-        space: space.id,
-      },
     });
 
     refresh();
@@ -133,20 +107,12 @@ export const sendWebhookTestEventAction = authActionClient
   .metadata({ actionName: "send_webhook_test_event" })
   .inputSchema(sendWebhookTestEventSchema)
   .use(createRateLimitMiddleware({ requests: 10, duration: "1 m", by: "user" }))
-  .action(async ({ ctx, parsedInput }) => {
+  .action(async ({ parsedInput }) => {
     const { space } = await requireWebhookAccess();
 
     const result = await sendWebhookTestEvent({
       spaceId: space.id,
       webhookId: parsedInput.webhookId,
-    });
-
-    track(ctx.user, {
-      event: "developer:webhook_test_send",
-      properties: { ok: result.ok, status: result.status },
-      groups: {
-        space: space.id,
-      },
     });
 
     refresh();

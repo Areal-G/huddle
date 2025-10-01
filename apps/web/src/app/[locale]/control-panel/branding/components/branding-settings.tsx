@@ -58,7 +58,7 @@ async function StorageNotConfiguredAlert() {
       </AlertDescription>
       <AlertAction>
         <a
-          href="https://support.huddle.dev/self-hosting/configuration#external-object-storage"
+          href="https://support.huddle.example/self-hosting/configuration#external-object-storage"
           target="_blank"
           className="underline"
           rel="noreferrer"
@@ -130,7 +130,7 @@ export async function BrandingSettings() {
           </AlertDescription>
           <AlertAction>
             <a
-              href="https://support.huddle.dev/self-hosting/white-labeling"
+              href="https://support.huddle.example/self-hosting/white-labeling"
               target="_blank"
               className="underline"
               rel="noreferrer"

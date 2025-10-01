@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { buttonVariants, cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -64,21 +63,9 @@ export function OpenPollUsageMeter({ usage }: { usage: OpenPollUsage }) {
     return null;
   }
 
-  const eventProperties = {
-    tier: usage.tier,
-    open_count: usage.openCount,
-    limit: usage.limit,
-    source: "meter",
-  };
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        render={<Button variant="ghost" />}
-        onClick={() => {
-          posthog?.capture("poll_limit:meter_click", eventProperties);
-        }}
-      >
+      <PopoverTrigger render={<Button variant="ghost" />}>
         <UsageDonut
           value={usage.openCount / usage.limit}
           isAtLimit={isAtOpenPollLimit(usage)}
@@ -127,9 +114,6 @@ export function OpenPollUsageMeter({ usage }: { usage: OpenPollUsage }) {
         {usage.tier === "guest" ? (
           <LoginLink
             className={cn(buttonVariants({ size: "sm" }), "self-start")}
-            onClick={() => {
-              posthog?.capture("poll_limit:register_click", eventProperties);
-            }}
           >
             <Trans i18nKey="createAnAccount" defaults="Create an account" />
           </LoginLink>
@@ -138,7 +122,6 @@ export function OpenPollUsageMeter({ usage }: { usage: OpenPollUsage }) {
             size="sm"
             className="self-start"
             onClick={() => {
-              posthog?.capture("poll_limit:upgrade_click", eventProperties);
               setOpen(false);
               showPayWall({ from: "poll-limit-meter" });
             }}

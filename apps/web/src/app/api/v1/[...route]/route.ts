@@ -8,7 +8,6 @@ import {
   resolver,
   validator,
 } from "hono-openapi";
-import { after } from "next/server";
 import { getAvailableConferencingProviders } from "@/features/conferencing/constants";
 import { getConnectedConferencingProviders } from "@/features/conferencing/data";
 import type { PollConferencing } from "@/features/conferencing/schema";
@@ -34,7 +33,6 @@ import {
   parseStartTime,
 } from "@/lib/datetime/slot-generator";
 import { isMaintenanceModeEnabled } from "@/lib/maintenance";
-import { flushPostHog, identifyGroup, track } from "@/lib/posthog";
 import { apiError, validationHook } from "../../middleware/api-error";
 import { spaceApiKeyAuth } from "../../middleware/api-key";
 import { toOpenApiSchema } from "../../middleware/openapi";
@@ -68,7 +66,7 @@ type Env = {
   };
 };
 
-// The public URL has no `/api` prefix (https://api.huddle.dev/v1/...), which
+// The public URL has no `/api` prefix (https://api.huddle.example/v1/...), which
 // is also what a standalone API deployment would serve, so Hono mounts at
 // `/v1`. See `handler` below for how the app host's `/api/v1` reaches it.
 const app = new Hono<Env>().basePath("/v1");
@@ -540,58 +538,6 @@ app.post(
       );
     }
 
-    const trackPollCreated = (poll: Awaited<ReturnType<typeof createPoll>>) => {
-      const kind = poll.options.some((o) => o.duration > 0) ? "time" : "date";
-
-      identifyGroup({
-        groupType: "poll",
-        groupKey: poll.id,
-        properties: {
-          name: poll.title,
-          status: poll.status,
-          kind,
-          created_at: poll.createdAt,
-          comment_count: 0,
-          option_count: poll.options.length,
-          has_location: !!poll.location,
-          has_description: !!poll.description,
-          timeZone: poll.timeZone,
-          muted: false,
-        },
-      });
-
-      track(
-        { id: organizerUserId, isGuest: false },
-        {
-          event: "poll_create",
-          properties: {
-            title: poll.title,
-            kind,
-            source: "api",
-            apiVersion: "v1",
-            optionCount: poll.options.length,
-            hasLocation: !!poll.location,
-            hasConferencing: !!poll.conferencing,
-            conferencingProvider: poll.conferencing?.provider ?? null,
-            hasDescription: !!poll.description,
-            timeZone: poll.timeZone,
-            requireParticipantEmail: input.requireEmail,
-            hideParticipants: input.hideParticipants,
-            hideScores: input.hideScores,
-            disableComments: poll.disableComments,
-            allowTentativeVotes: poll.allowTentativeVotes,
-            isGuest: false,
-          },
-          groups: {
-            poll: poll.id,
-            space: spaceId,
-          },
-        },
-      );
-
-      after(() => flushPostHog());
-    };
-
     if (input.kind === "date") {
       const dates = [...new Set(input.options.map((option) => option.date))];
       if (dates.length > MAX_POLL_OPTIONS) {
@@ -623,8 +569,6 @@ app.post(
         options,
         spaceId,
       });
-
-      trackPollCreated(poll);
 
       return c.json(pollResponseSchema.parse(toPollResponseBody(poll)), 201);
     }
@@ -695,8 +639,6 @@ app.post(
       options,
       spaceId,
     });
-
-    trackPollCreated(poll);
 
     return c.json(pollResponseSchema.parse(toPollResponseBody(poll)), 201);
   },

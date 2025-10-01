@@ -21,11 +21,16 @@ const nextConfig: NextConfig = {
   // Serves /_next/static from a CDN-cached host to keep the immutable
   // bundles off Vercel's bandwidth bill. Unset outside production.
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX,
+  // Loads chunks from that host as CORS requests instead of opaque no-cors
+  // ones. Since the move, WebKit has kept broken cached copies of the opaque
+  // chunks, which stops the page from hydrating. The asset host must send
+  // Access-Control-Allow-Origin on every response, or no browser will run
+  // the scripts.
+  crossOrigin: process.env.NEXT_PUBLIC_ASSET_PREFIX ? "anonymous" : undefined,
   transpilePackages: [
     "@huddle/ui",
     "@huddle/tailwind-config",
     "@huddle/utils",
-    "@huddle/posthog",
     "next-mdx-remote",
   ],
   webpack(config) {
@@ -60,23 +65,6 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // RFC 9116 legacy location
-      {
-        source: "/security.txt",
-        destination: "/.well-known/security.txt",
-        permanent: true,
-      },
-      {
-        source: "/support",
-        destination: "https://support.huddle.dev",
-        permanent: true,
-      },
-      // Ad-Blockers block the DigitalOcean logo, when we use our referral link
-      {
-        source: "/partners/digitalocean",
-        destination: "https://m.do.co/c/f91efc9c9e50",
-        permanent: true,
-      },
       {
         source: "/p/:path*",
         destination: createAppUrl("/p/:path*"),

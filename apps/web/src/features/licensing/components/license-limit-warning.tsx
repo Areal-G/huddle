@@ -36,9 +36,9 @@ export async function LicenseLimitWarning() {
           a: (
             <Link
               prefetch={false}
-              href="https://support.huddle.dev/self-hosting/licensing"
+              href="https://support.huddle.example/self-hosting/licensing"
               target="_blank"
-              className="text-link"
+              className="text-link-inherit"
               rel="noopener noreferrer"
             />
           ),

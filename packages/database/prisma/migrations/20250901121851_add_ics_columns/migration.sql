@@ -3,7 +3,7 @@ ALTER TABLE "scheduled_events" ADD COLUMN "sequence" INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE "scheduled_events" ADD COLUMN "uid" TEXT;
 
 -- Step 2: Populate uid column for existing rows
-UPDATE "scheduled_events" SET "uid" = "id" || '@huddle.dev' WHERE "uid" IS NULL;
+UPDATE "scheduled_events" SET "uid" = "id" || '@huddle.example' WHERE "uid" IS NULL;
 
 -- Step 3: Make uid column non-nullable and add unique constraint
 ALTER TABLE "scheduled_events" ALTER COLUMN "uid" SET NOT NULL;

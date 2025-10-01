@@ -40,12 +40,7 @@ import {
   OpenPollLimitError,
 } from "@/features/poll/limit/mutations";
 import { MAX_POLL_DESCRIPTION_LENGTH } from "@/features/poll/schema";
-import {
-  getChosenOptionRank,
-  getFinalizePlanGate,
-  getFinalizeTiming,
-  summarizeNotifySelection,
-} from "@/features/poll/utils";
+import { getFinalizePlanGate } from "@/features/poll/utils";
 import { queueReviewRequest } from "@/features/review-request/mutations";
 import { formatEventDateTime } from "@/features/scheduled-event/utils";
 import { getActiveSpaceForUser } from "@/features/space/data";
@@ -61,7 +56,6 @@ import {
 } from "@/lib/datetime/wall-time";
 import { runtime } from "@/lib/effect/runtime";
 import { AppError } from "@/lib/errors/app-error";
-import { identifyGroup, track } from "@/lib/posthog";
 import { createIcsEvent } from "@/lib/utils/ics";
 import {
   createGuestIpRateLimitMiddleware,
@@ -240,17 +234,6 @@ export const polls = router({
         },
       });
 
-      if (moderation.verdict !== "safe") {
-        track(ctx.user, {
-          event: "flagged_content",
-          properties: {
-            action: "create_poll",
-            verdict: moderation.verdict,
-            reason: moderation.reason,
-          },
-        });
-      }
-
       if (moderation.verdict === "flagged") {
         return {
           ok: false as const,
@@ -395,48 +378,6 @@ export const polls = router({
         }
       }
 
-      identifyGroup({
-        groupType: "poll",
-        groupKey: poll.id,
-        properties: {
-          name: poll.title,
-          status: poll.status,
-          created_at: poll.createdAt,
-          comment_count: 0,
-          option_count: poll.options.length,
-          has_location: !!location,
-          has_description: !!description,
-          timezone: input.timeZone,
-          muted: poll.muted,
-          kind,
-        },
-      });
-
-      track(ctx.user, {
-        event: "poll_create",
-        properties: {
-          title: poll.title,
-          kind,
-          source: "web",
-          optionCount: poll.options.length,
-          hasLocation: !!location,
-          hasConferencing: !!conferencing,
-          conferencingProvider: conferencing?.provider ?? null,
-          hasDescription: !!description,
-          timezone: input.timeZone,
-          disableComments: poll.disableComments,
-          allowTentativeVotes: poll.allowTentativeVotes,
-          hideParticipants: poll.hideParticipants,
-          hideScores: poll.hideScores,
-          requireParticipantEmail: poll.requireParticipantEmail,
-          isGuest: ctx.user.isGuest,
-        },
-        groups: {
-          poll: poll.id,
-          ...(poll.spaceId ? { space: poll.spaceId } : {}),
-        },
-      });
-
       return { ok: true as const, data: { id: poll.id } };
     }),
   modify: possiblyPublicProcedure
@@ -529,17 +470,6 @@ export const polls = router({
               : "",
         },
       });
-
-      if (moderation.verdict !== "safe") {
-        track(ctx.user, {
-          event: "flagged_content",
-          properties: {
-            action: "update_poll",
-            verdict: moderation.verdict,
-            reason: moderation.reason,
-          },
-        });
-      }
 
       if (moderation.verdict === "flagged") {
         return {
@@ -850,82 +780,6 @@ export const polls = router({
         });
       }
 
-      identifyGroup({
-        groupType: "poll",
-        groupKey: pollId,
-        properties: {
-          name: updatedPoll.title,
-          status: updatedPoll.status,
-          kind: updatedPoll.kind,
-          created_at: updatedPoll.createdAt,
-          comment_count: updatedPoll._count.comments,
-          option_count: updatedPoll._count.options,
-          has_location: !!updatedPoll.location,
-          has_description: !!updatedPoll.description,
-          timezone: updatedPoll.timeZone,
-          muted: updatedPoll.muted,
-        },
-      });
-
-      // Track specific poll update events based on what was changed
-      const hasDetailsUpdate =
-        input.title !== undefined ||
-        input.location !== undefined ||
-        input.description !== undefined;
-      const hasOptionsUpdate =
-        (input.optionsToDelete && input.optionsToDelete.length > 0) ||
-        (input.optionsToAdd && input.optionsToAdd.length > 0);
-      const hasSettingsUpdate =
-        input.timeZone !== undefined ||
-        input.hideParticipants !== undefined ||
-        input.disableComments !== undefined ||
-        input.allowTentativeVotes !== undefined ||
-        input.hideScores !== undefined ||
-        input.requireParticipantEmail !== undefined;
-
-      if (hasDetailsUpdate) {
-        track(ctx.user, {
-          event: "poll_update_details",
-          properties: {
-            title: updatedPoll.title,
-            has_location: !!updatedPoll.location,
-            has_description: !!updatedPoll.description,
-            is_guest: ctx.user.isGuest,
-          },
-          groups: {
-            poll: pollId,
-          },
-        });
-      }
-
-      if (hasOptionsUpdate) {
-        track(ctx.user, {
-          event: "poll_update_options",
-          properties: {
-            option_count: updatedPoll._count.options,
-          },
-          groups: {
-            poll: pollId,
-          },
-        });
-      }
-
-      if (hasSettingsUpdate) {
-        track(ctx.user, {
-          event: "poll_update_settings",
-          properties: {
-            disable_comments: !!updatedPoll.disableComments,
-            allow_tentative_votes: !!updatedPoll.allowTentativeVotes,
-            hide_participants: !!updatedPoll.hideParticipants,
-            hide_scores: !!updatedPoll.hideScores,
-            require_participant_email: !!updatedPoll.requireParticipantEmail,
-          },
-          groups: {
-            poll: pollId,
-          },
-        });
-      }
-
       return { ok: true as const };
     }),
   markAsDeleted: possiblyPublicProcedure
@@ -966,12 +820,6 @@ export const polls = router({
       });
 
       // Track poll deletion analytics
-      track(ctx.user, {
-        event: "poll_delete",
-        groups: {
-          poll: pollId,
-        },
-      });
     }),
   // END LEGACY ROUTES
   get: publicProcedure
@@ -1224,7 +1072,7 @@ export const polls = router({
       }
 
       const eventId = nanoid();
-      const uid = `${eventId}@huddle.dev`;
+      const uid = `${eventId}@huddle.example`;
 
       // A second booking would mint a second meeting and orphan the first
       // event, so a poll is booked once.
@@ -1267,10 +1115,6 @@ export const polls = router({
         end: eventTimes.end,
         timeZone: eventTimes.timeZone,
       });
-
-      const attendees = poll.participants.filter((p) =>
-        p.votes.some((v) => v.optionId === input.optionId && v.type !== "no"),
-      );
 
       // The calendar entry carries the join link the same way the event API
       // does: as the location when there is no place, and in the description.
@@ -1380,7 +1224,7 @@ export const polls = router({
         const event = await tx.scheduledEvent.create({
           data: {
             id: eventId,
-            uid: `${eventId}@huddle.dev`,
+            uid: `${eventId}@huddle.example`,
             start: eventTimes.start,
             end: eventTimes.end,
             title: poll.title,
@@ -1496,47 +1340,6 @@ export const polls = router({
 
         scheduleQueuedEmailDelivery({ batchId: scheduledEvent.id });
 
-        const ownerId = poll.user.id;
-        const ownerEmail = poll.user.email.trim().toLowerCase();
-        track(ctx.user, {
-          event: "poll_schedule",
-          properties: {
-            attendee_count: attendees.length,
-            days_since_created: Math.trunc(
-              (Date.now() - poll.createdAt.getTime()) / 86_400_000,
-            ),
-            participant_count: poll.participants.length,
-            notify_budget_skipped_count: budget.skipped,
-            ...summarizeNotifySelection({
-              participants: poll.participants,
-              optionId: input.optionId,
-              notifyParticipantIds: input.notifyParticipantIds,
-            }),
-            ...getChosenOptionRank({
-              options: poll.options,
-              participants: poll.participants,
-              optionId: input.optionId,
-            }),
-            ...getFinalizeTiming({
-              start: eventTimes.start,
-              end: eventTimes.end,
-              allDay: eventTimes.allDay,
-              timeZone: eventTimes.timeZone,
-              now: new Date(),
-            }),
-            host_is_participant: poll.participants.some(
-              (p) =>
-                p.userId === ownerId ||
-                p.email?.trim().toLowerCase() === ownerEmail,
-            ),
-            conferencing_type: conferencing?.provider ?? "none",
-            has_location: Boolean(poll.location),
-          },
-          groups: {
-            poll: poll.id,
-          },
-        });
-
         await queueReviewRequest({
           userId: ctx.user.id,
           participantCount: poll.participants.length,
@@ -1650,13 +1453,6 @@ export const polls = router({
         };
       }
 
-      track(ctx.user, {
-        event: "poll_reopen",
-        groups: {
-          poll: input.pollId,
-        },
-      });
-
       return { ok: true as const };
     }),
   close: possiblyPublicProcedure
@@ -1707,13 +1503,6 @@ export const polls = router({
           },
         ]);
         scheduleWebhookDispatch({ pollId: input.pollId });
-      });
-
-      track(ctx.user, {
-        event: "poll_close",
-        groups: {
-          poll: input.pollId,
-        },
       });
     }),
   duplicate: spaceProcedure

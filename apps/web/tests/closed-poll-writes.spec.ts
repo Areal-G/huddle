@@ -1,6 +1,6 @@
+import { prisma } from "@huddle/database";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
-import { prisma } from "@huddle/database";
 import { NewPollPage } from "./new-poll-page";
 import type { PollPage } from "./poll-page";
 

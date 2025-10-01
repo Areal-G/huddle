@@ -1,9 +1,9 @@
+import { prisma } from "@huddle/database";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
-import { prisma } from "@huddle/database";
 import { createTestPoll, createUserInDb } from "./test-utils";
 
-const HOST_EMAIL = "space-branding-host@huddle.dev";
+const HOST_EMAIL = "space-branding-host@huddle.example";
 const POLL_ID = "space-branding-poll";
 const STORED_COLOR = "#dc2626";
 

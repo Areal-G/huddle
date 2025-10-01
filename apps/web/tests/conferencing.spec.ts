@@ -1,7 +1,7 @@
-import type { Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { encrypt } from "@huddle/utils/encryption";
+import type { Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { NewPollPage } from "./new-poll-page";
 import {
   createUserInDb,

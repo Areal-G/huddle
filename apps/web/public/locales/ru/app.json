@@ -161,7 +161,7 @@
   "connectGoogleCalendar": "Календарь Google",
   "connectMicrosoftCalendar": "Календарь Microsoft",
   "contactSupport": "Связаться с поддержкой",
-  "contactSupportEmail": "Или напишите нам на <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Или напишите нам на <0>{email}</0>",
   "content": "Содержание",
   "continue": "Далее",
   "continueToCheckout": "Перейти к оформлению",

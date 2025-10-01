@@ -37,9 +37,9 @@ describe("summarizeStaticAssets", () => {
       summarizeStaticAssets([
         {
           ...entry,
-          name: "https://static.huddle.dev/_next/static/immutable/chunks/2j4m7ciojig3r.js",
+          name: "https://static.huddle.example/_next/static/immutable/chunks/2j4m7ciojig3r.js",
         },
-        { ...entry, name: "https://b.huddle.dev/decide" },
+        { ...entry, name: "https://b.huddle.example/decide" },
       ]),
     ).toEqual([
       {
@@ -60,12 +60,12 @@ describe("summarizeStaticAssets", () => {
 describe("staticAssetUrls", () => {
   it("keeps each Next static asset once", () => {
     const chunk =
-      "https://static.huddle.dev/_next/static/immutable/chunks/2dixsi-13gzup.js";
+      "https://static.huddle.example/_next/static/immutable/chunks/2dixsi-13gzup.js";
     expect(
       staticAssetUrls([
         { name: chunk },
         { name: chunk },
-        { name: "https://b.huddle.dev/decide" },
+        { name: "https://b.huddle.example/decide" },
       ]),
     ).toEqual([chunk]);
   });
@@ -75,7 +75,7 @@ describe("reloadOnceForChunkError", () => {
   const reload = vi.fn();
   const fetch = vi.fn();
   const chunk =
-    "https://static.huddle.dev/_next/static/immutable/chunks/2dixsi-13gzup.js";
+    "https://static.huddle.example/_next/static/immutable/chunks/2dixsi-13gzup.js";
 
   beforeEach(() => {
     vi.useFakeTimers();
@@ -90,19 +90,39 @@ describe("reloadOnceForChunkError", () => {
   afterEach(() => {
     vi.useRealTimers();
     vi.unstubAllGlobals();
+    vi.unstubAllEnvs();
     vi.restoreAllMocks();
     reload.mockReset();
     fetch.mockReset();
   });
 
   it("refetches static assets past the cache before reloading", async () => {
+    vi.stubEnv("NEXT_PUBLIC_ASSET_PREFIX", "");
     reloadOnceForChunkError(factoryError);
     await vi.runAllTimersAsync();
     expect(fetch).toHaveBeenCalledWith(
       chunk,
-      expect.objectContaining({ cache: "reload", mode: "no-cors" }),
+      expect.objectContaining({
+        cache: "reload",
+        mode: "no-cors",
+        credentials: "include",
+      }),
     );
     expect(reload).toHaveBeenCalledTimes(1);
+  });
+
+  it("refetches in CORS mode when chunks come from an asset host", async () => {
+    vi.stubEnv("NEXT_PUBLIC_ASSET_PREFIX", "https://static.huddle.example");
+    reloadOnceForChunkError(factoryError);
+    await vi.runAllTimersAsync();
+    expect(fetch).toHaveBeenCalledWith(
+      chunk,
+      expect.objectContaining({
+        cache: "reload",
+        mode: "cors",
+        credentials: "same-origin",
+      }),
+    );
   });
 
   it("still reloads when a refetch fails", async () => {

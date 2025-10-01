@@ -15,7 +15,7 @@ async function createAndExpireCheckout() {
     success_url: "http://localhost:3000/success",
     cancel_url: "http://localhost:3000/cancel",
     mode: "subscription",
-    customer_email: "dev@huddle.dev",
+    customer_email: "demo@example.com",
     line_items: [
       {
         price: pricingData.monthly.id,

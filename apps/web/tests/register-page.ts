@@ -1,7 +1,6 @@
+import { getCode } from "@huddle/test-helpers";
 import type { Page } from "@playwright/test";
 import { expect } from "@playwright/test";
-
-import { getCode } from "@huddle/test-helpers";
 
 /**
  * Registration happens through the combined login flow: an email that

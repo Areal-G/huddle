@@ -9,7 +9,7 @@ import {
   spaces,
   subscriptions,
   users,
-} from "./seed/data";
+} from "./seed/demo";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -202,15 +202,32 @@ async function main() {
     });
     activityCount += history.activities.length;
 
-    // Comments
+    // Comments land a few minutes after their author responded, or spread
+    // through the poll's life when the author never voted, so the activity
+    // feed interleaves them with responses instead of stacking them at seed
+    // time.
+    const commentCreatedAt = (authorName: string, index: number) => {
+      const responder = poll.participants.findIndex(
+        (part) => part.name === authorName,
+      );
+      const base =
+        responder >= 0
+          ? history.participantCreatedAt[responder]?.getTime()
+          : undefined;
+      const at =
+        (base ?? history.createdAt.getTime() + (index + 1) * 3 * 3_600_000) +
+        (index + 1) * 7 * 60_000;
+      return new Date(Math.min(at, Date.now() - 60_000));
+    };
     if (poll.comments?.length) {
       await prisma.comment.createMany({
-        data: poll.comments.map((c) => ({
+        data: poll.comments.map((c, i) => ({
           id: nextId(),
           pollId,
           content: c.content,
           authorName: c.authorName,
           userId: c.userId,
+          createdAt: commentCreatedAt(c.authorName, i),
         })),
       });
       commentCount += poll.comments.length;

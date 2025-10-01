@@ -204,11 +204,11 @@ function TableControls({
 // poll pages don't provide
 function EmptyStateShareButton() {
   const poll = usePoll();
-  const { dialog, open } = useSharePollDialog(poll.id);
+  const { dialog, open } = useSharePollDialog();
 
   return (
     <>
-      <Button {...dialog.triggerProps} onClick={() => open("empty_state")}>
+      <Button {...dialog.triggerProps} onClick={() => open()}>
         <Share2Icon data-icon="inline-start" />
         <Trans i18nKey="share" defaults="Share" />
       </Button>

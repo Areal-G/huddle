@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
+import { expect, test } from "@playwright/test";
 import { sealData } from "iron-session";
 import { createTestPoll, createUserInDb } from "./test-utils";
 
@@ -9,7 +9,7 @@ import { createTestPoll, createUserInDb } from "./test-utils";
  * to a seal of the guest's user id. Those links stay valid.
  */
 
-const GUEST_EMAIL = "legacy-edit-link-guest@huddle.dev";
+const GUEST_EMAIL = "legacy-edit-link-guest@huddle.example";
 const POLL_ID = "legacy-edit-link-poll";
 
 async function cleanup() {

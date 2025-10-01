@@ -4,7 +4,7 @@ title: Corporate Networks
 description: Run Huddle behind a corporate proxy or TLS-intercepting firewall.
 ---
 
-Corporate networks often restrict outbound traffic in two ways: all egress must pass through an explicit proxy, and/or outbound TLS is intercepted and re-signed with an internal root certificate authority that Node.js does not trust. Either one breaks Huddle's outbound HTTPS requests. [License activation](/self-hosting/licensing), which connects to `licensing.huddle.dev` on port 443, is usually where you notice it first, but any outbound call is affected. Some networks require both fixes below together.
+Corporate networks often restrict outbound traffic in two ways: all egress must pass through an explicit proxy, and/or outbound TLS is intercepted and re-signed with an internal root certificate authority that Node.js does not trust. Either one breaks Huddle's outbound HTTPS requests. [License activation](/self-hosting/licensing), which connects to `licensing.huddle.example` on port 443, is usually where you notice it first, but any outbound call is affected. Some networks require both fixes below together.
 
 If your server can reach the internet directly and your network does not intercept TLS, none of this applies and you can skip this page.
 
@@ -14,8 +14,8 @@ Huddle makes outbound requests to these hosts, all over HTTPS on port 443. If yo
 
 | Host | Purpose | When blocked |
 |:-----|:--------|:-------------|
-| `licensing.huddle.dev` | License activation and refresh | Activation fails with an error in the Control Panel |
-| `api.huddle.dev` | Hourly update check: sends the running version and an anonymous instance identifier, receives the latest release and any security advisories affecting your version | Fails silently. The version tile shows no status and you are not told about security updates, so watch the [releases page](https://github.com/areal/huddle/releases) instead |
+| `licensing.huddle.example` | License activation and refresh | Activation fails with an error in the Control Panel |
+| `api.huddle.example` | Hourly update check: sends the running version and an anonymous instance identifier, receives the latest release and any security advisories affecting your version | Fails silently. The version tile shows no status and you are not told about security updates, so watch the [releases page](https://github.com/arealgizaw/huddle/releases) instead |
 
 Pulling images with `./huddle.sh update` reaches Docker Hub (`registry-1.docker.io` and `auth.docker.io`), which is governed by Docker's own proxy settings rather than the variables below.
 
@@ -83,7 +83,7 @@ openssl x509 -inform DER -in ca.crt -out ca.pem
 As a fallback, you can export a certificate from the chain the proxy presents. Run this **from the affected server**:
 
 ```sh
-openssl s_client -showcerts -connect licensing.huddle.dev:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca.pem
+openssl s_client -showcerts -connect licensing.huddle.example:443 </dev/null 2>/dev/null | openssl x509 -outform PEM > ca.pem
 ```
 
 Note that `openssl` does not read the proxy environment variables. On a network with no direct egress, add `-proxy proxy.internal.example.com:8080` to the command so the connection goes through your proxy.
@@ -94,7 +94,7 @@ Two caveats: this writes only the leaf certificate, so it stops working when the
 openssl x509 -in ca.pem -noout -subject
 ```
 
-If the subject names your organisation instead of `licensing.huddle.dev`, TLS interception is confirmed.
+If the subject names your organisation instead of `licensing.huddle.example`, TLS interception is confirmed.
 
 ## Diagnosing failures
 

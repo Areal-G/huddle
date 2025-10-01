@@ -162,9 +162,9 @@ NewParticipantEmail.PreviewProps = {
   note: "I can only make it after 2pm on Tuesday.\nLooking forward to it!",
   canReply: true,
   title: "Untitled Poll",
-  pollUrl: "https://huddle.dev",
-  unsubscribeUrl: "https://huddle.dev",
-  disableNotificationsUrl: "https://huddle.dev",
+  pollUrl: "https://huddle.example",
+  unsubscribeUrl: "https://huddle.example",
+  disableNotificationsUrl: "https://huddle.example",
   locale: "en",
   chrome: previewChrome,
 } as NewParticipantEmailProps;

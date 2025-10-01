@@ -17,7 +17,7 @@ export default async function LicensingThankYouPage(props: {
       <div className="relative z-10 mx-auto w-full max-w-2xl space-y-6">
         <div className="py-4">
           <LinkBase className="inline-block rounded-sm" href="/">
-            <Image src="/logo.svg" width={150} height={30} alt="huddle.dev" />
+            <Image src="/logo.svg" width={150} height={30} alt="Huddle" />
           </LinkBase>
         </div>
         <div className="space-y-4">
@@ -57,7 +57,7 @@ export default async function LicensingThankYouPage(props: {
             <li>
               <a
                 className="text-link"
-                href="https://support.huddle.dev/self-hosting/installation/docker"
+                href="https://support.huddle.example/self-hosting/installation/docker"
               >
                 <Trans
                   t={t}
@@ -69,7 +69,7 @@ export default async function LicensingThankYouPage(props: {
             <li>
               <a
                 className="text-link"
-                href="https://support.huddle.dev/self-hosting/licensing#activating-your-license"
+                href="https://support.huddle.example/self-hosting/licensing#activating-your-license"
               >
                 <Trans
                   t={t}
@@ -86,16 +86,16 @@ export default async function LicensingThankYouPage(props: {
             <Trans
               t={t}
               i18nKey="licensingThankYouSupportPrompt"
-              defaults="Need help or have questions? Visit our <0>self-hosted docs</0> or email us at <1>support@huddle.dev</1>."
+              defaults="Need help or have questions? Visit our <0>self-hosted docs</0> or email us at <1>support@huddle.example</1>."
               components={[
                 <a
                   key="self-hosted-docs"
-                  href="https://support.huddle.dev"
+                  href="https://support.huddle.example"
                   className="underline"
                 />,
                 <a
                   key="contact-us"
-                  href="mailto:support@huddle.dev"
+                  href="mailto:support@huddle.example"
                   className="select-all underline"
                 />,
               ]}

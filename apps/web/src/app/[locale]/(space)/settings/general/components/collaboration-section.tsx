@@ -1,6 +1,5 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { cn } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -12,6 +11,7 @@ import {
 } from "@huddle/ui/field";
 import { toast } from "@huddle/ui/sonner";
 import { Switch } from "@huddle/ui/switch";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { UsersIcon } from "lucide-react";
 import React from "react";

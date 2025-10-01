@@ -9,7 +9,7 @@
   "rewrites": [
     {
       "source": "/poll/:path*",
-      "destination": "https://app.huddle.dev/invite/:path*"
+      "destination": "https://app.huddle.example/invite/:path*"
     }
   ]
 }

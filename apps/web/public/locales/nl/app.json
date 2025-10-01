@@ -209,7 +209,7 @@
   "connectGoogleCalendar": "Google Agenda",
   "connectMicrosoftCalendar": "Microsoft Agenda",
   "contactSupport": "Contact met Support",
-  "contactSupportEmail": "Of mail ons op <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Of mail ons op <0>{email}</0>",
   "content": "Inhoud",
   "continue": "Doorgaan",
   "continueToCheckout": "Verder naar afrekenen",

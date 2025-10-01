@@ -1,7 +1,7 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { cn } from "@huddle/ui";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { ImageUploadControl } from "@/components/image-upload";
 import { LOGO_VIEWBOX } from "@/features/branding/constants";

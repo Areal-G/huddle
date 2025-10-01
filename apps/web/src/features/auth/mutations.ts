@@ -1,13 +1,8 @@
 import "server-only";
 import { prisma } from "@huddle/database";
 import { createLogger } from "@huddle/logger";
-import * as Sentry from "@sentry/nextjs";
-import {
-  countAdoptableOpenPolls,
-  reportAdoptionOverLimit,
-} from "@/features/poll/limit/mutations";
 import { effectiveSpaceMemberWhere } from "@/features/space/member/utils";
-import { posthog } from "@/lib/posthog";
+import * as errorReporting from "@/lib/error-reporting";
 
 const logger = createLogger("auth/merge-user");
 
@@ -30,7 +25,6 @@ export const linkAnonymousUser = async (
   anonymousUserId: string,
 ) => {
   let spaceId: string | undefined;
-  let adoptedOpenCount = 0;
 
   try {
     // Claim event registrations made with the account's own email. A
@@ -59,12 +53,6 @@ export const linkAnonymousUser = async (
         { userId: authenticatedUserId },
         "User has no effective space; migrating guest content without a space",
       );
-    }
-
-    if (spaceId) {
-      adoptedOpenCount = await countAdoptableOpenPolls({
-        userId: anonymousUserId,
-      });
     }
 
     // A batch, not an interactive transaction: the interactive form's 5s
@@ -131,29 +119,8 @@ export const linkAnonymousUser = async (
       }),
     ]);
   } catch (error) {
-    Sentry.captureException(error);
+    errorReporting.captureException(error);
     return { merged: false };
-  }
-
-  try {
-    // Without a space, setup adopts the polls later and reports then.
-    if (spaceId) {
-      await reportAdoptionOverLimit({
-        userId: authenticatedUserId,
-        spaceId,
-        adoptedOpenCount,
-        source: "login",
-      });
-    }
-
-    // Merge user identities in PostHog
-    posthog()?.capture({
-      distinctId: authenticatedUserId,
-      event: "$merge_dangerously",
-      properties: { alias: anonymousUserId },
-    });
-  } catch (error) {
-    Sentry.captureException(error);
   }
 
   return { merged: true };

@@ -1,6 +1,5 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -14,6 +13,7 @@ import {
   useDialog,
 } from "@huddle/ui/dialog";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@huddle/ui/tooltip";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { XIcon } from "lucide-react";
 import { useTransition } from "react";

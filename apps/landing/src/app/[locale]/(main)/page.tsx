@@ -39,19 +39,15 @@ export default async function Page(props: {
               "@type": "Organization",
               "@id": absoluteUrl("/#organization"),
               name: "Huddle",
-              legalName: "Stack Snap Ltd",
+              legalName: "Your Company",
               url: absoluteUrl(),
               logo: absoluteUrl("/logo.png"),
-              sameAs: [
-                "https://github.com/areal/huddle",
-                "https://x.com/huddleco",
-                "https://www.linkedin.com/company/huddle",
-              ],
+              sameAs: ["https://github.com/arealgizaw/huddle"],
             },
             {
               "@type": "SoftwareApplication",
               name: "Huddle",
-              url: "https://app.huddle.dev",
+              url: "https://app.huddle.example",
               applicationCategory: "BusinessApplication",
               operatingSystem: "Web",
               description: t("subheading", {

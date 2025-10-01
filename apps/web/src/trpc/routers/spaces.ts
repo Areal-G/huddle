@@ -1,7 +1,6 @@
 import { prisma } from "@huddle/database";
 import { TRPCError } from "@trpc/server";
 import * as z from "zod";
-import { identifyGroup, track } from "@/lib/posthog";
 import { privateProcedure, router, spaceProcedure } from "../trpc";
 
 export const spaces = router({
@@ -53,28 +52,6 @@ export const spaces = router({
         where: { id: userSpaces[0].id },
         data: { lastSelectedAt: new Date() },
       });
-    });
-
-    const memberCount = await prisma.spaceMember.count({
-      where: { spaceId: ctx.space.id },
-    });
-
-    identifyGroup({
-      groupType: "space",
-      groupKey: ctx.space.id,
-      properties: {
-        member_count: memberCount,
-      },
-    });
-
-    track(ctx.user, {
-      event: "space_member_leave",
-      properties: {
-        member_count: memberCount,
-      },
-      groups: {
-        space: ctx.space.id,
-      },
     });
   }),
 
@@ -139,28 +116,6 @@ export const spaces = router({
           where: { id: userSpaces[0].id },
           data: { lastSelectedAt: new Date() },
         });
-      });
-
-      const memberCount = await prisma.spaceMember.count({
-        where: { spaceId: input.spaceId },
-      });
-
-      identifyGroup({
-        groupType: "space",
-        groupKey: input.spaceId,
-        properties: {
-          member_count: memberCount,
-        },
-      });
-
-      track(ctx.user, {
-        event: "space_member_leave",
-        properties: {
-          member_count: memberCount,
-        },
-        groups: {
-          space: input.spaceId,
-        },
       });
     }),
 });

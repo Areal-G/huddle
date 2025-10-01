@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -61,12 +60,6 @@ export function CreateEventTypeDialog({ open, onOpenChange }: DialogProps) {
       );
       return;
     }
-    posthog?.capture("event_type_creation:form_submit", {
-      duration_minutes: input.duration,
-      location_type: input.location?.type ?? "none",
-      has_max_attendees: input.capacity !== null,
-      has_description: input.description !== null,
-    });
     handleOpenChange(false);
   });
 

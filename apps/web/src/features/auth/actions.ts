@@ -12,7 +12,6 @@ import { getLocale } from "@/i18n/server/get-locale";
 import authLib from "@/lib/auth";
 import { AppError } from "@/lib/errors/app-error";
 import { isFeatureEnabled } from "@/lib/feature-flags/server";
-import { track } from "@/lib/posthog";
 import {
   authActionClient,
   createRateLimitMiddleware,
@@ -43,8 +42,6 @@ export async function setPasswordForUser({
     body: { newPassword: password },
     headers: await headers(),
   });
-
-  track({ id: user.id, isGuest: false }, { event: "password_set" });
 
   const locale = user.locale ?? (await getLocale());
   const branding = await getInstanceBranding();

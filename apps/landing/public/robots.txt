@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /api
 Disallow: /locales
 Allow: /api/og-image
-Sitemap: https://huddle.dev/sitemap.xml
+Sitemap: https://huddle.example/sitemap.xml

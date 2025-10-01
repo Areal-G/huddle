@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
 import { Alert, AlertDescription } from "@huddle/ui/alert";
 import { Button } from "@huddle/ui/button";
@@ -327,11 +326,6 @@ function VoteShortcut({
       aria-pressed={pressed}
       className="inline-flex h-7 items-center gap-1.5 rounded-full border border-input border-dashed pr-3 pl-2 text-muted-foreground text-sm outline-none transition-colors hover:border-solid hover:bg-foreground/3 hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 aria-pressed:border-foreground/15 aria-pressed:border-solid aria-pressed:bg-foreground/6 aria-pressed:text-foreground aria-pressed:hover:border-foreground/25 aria-pressed:hover:bg-foreground/10"
       onClick={() => {
-        posthog?.capture("poll_finalize:vote_shortcut_click", {
-          vote_type: voteType === "ifNeedBe" ? "if_need_be" : voteType,
-          selected: !pressed,
-          count: ids.length,
-        });
         onChange(toggleIds({ selectedIds, ids, checked: !pressed }));
       }}
     >
@@ -394,9 +388,6 @@ function NotifyStep({
           indeterminate={!allSelected && someSelected}
           disabled={notifiableIds.length === 0}
           onCheckedChange={(checked) => {
-            posthog?.capture("poll_finalize:select_all_click", {
-              selected: checked,
-            });
             onChange(new Set(checked ? notifiableIds : []));
           }}
         />
@@ -591,7 +582,6 @@ function FinalizeWizard({
   const option = options.find((o) => o.id === optionId);
   const [skippedNotifications, setSkippedNotifications] = React.useState(0);
   const goTo = (next: Step) => {
-    posthog?.capture("poll_finalize:step_view", { step: next });
     onStepChange(next);
   };
 
@@ -758,9 +748,6 @@ function FinalizeWizard({
 export function FinalizePollDialog(props: DialogProps) {
   const [step, setStep] = React.useState<Step>("date");
   const onOpenChange = (open: boolean) => {
-    if (!open && step !== "done") {
-      posthog?.capture("poll_finalize:dialog_dismiss", { step });
-    }
     props.onOpenChange?.(open);
   };
   return (

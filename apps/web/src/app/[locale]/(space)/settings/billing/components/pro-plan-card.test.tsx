@@ -6,9 +6,6 @@ import { ProPlanCard } from "./pro-plan-card";
 
 // The card pulls in server actions and client-only hooks that aren't relevant
 // to the rendering under test, so stub them out.
-vi.mock("@huddle/posthog/client", () => ({
-  posthog: { capture: vi.fn() },
-}));
 
 vi.mock("@/features/billing/actions", () => ({
   switchToYearlyAction: vi.fn(),

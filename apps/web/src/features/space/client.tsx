@@ -1,7 +1,7 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { toast } from "@huddle/ui/sonner";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import type { PayWallTrigger } from "@/features/billing/client";

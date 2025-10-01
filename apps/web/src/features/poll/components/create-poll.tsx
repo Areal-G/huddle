@@ -288,7 +288,7 @@ export const CreatePoll = ({
                     label: t("learnMore", { defaultValue: "Learn more" }),
                     onClick: () => {
                       window.open(
-                        "https://support.huddle.dev/guide/content-moderation",
+                        "https://support.huddle.example/guide/content-moderation",
                         "_blank",
                       );
                     },

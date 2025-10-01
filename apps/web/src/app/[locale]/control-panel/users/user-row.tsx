@@ -1,5 +1,4 @@
 "use client";
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { cn } from "@huddle/ui";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
@@ -16,6 +15,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@huddle/ui/dropdown-menu";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import {
   BanIcon,

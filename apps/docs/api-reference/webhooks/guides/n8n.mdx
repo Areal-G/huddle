@@ -67,10 +67,10 @@ This guide builds a workflow that receives a Huddle event, checks that it really
     The event carries the poll's id and nothing else about it, so add an **HTTP Request** node:
 
     - **Method** `GET`
-    - **URL** `https://api.huddle.dev/v1/polls/{{ $json.data.poll.id }}`
+    - **URL** `https://api.huddle.example/v1/polls/{{ $json.data.poll.id }}`
     - **Authentication** `Generic Credential Type` → `Bearer Auth`, with a credential holding your Huddle API key from **Settings → API keys**
 
-    For a `poll.participant.*` event, fetch the participant the same way: `https://api.huddle.dev/v1/polls/{{ $json.data.poll.id }}/participants/{{ $json.data.participant.id }}` returns their name, email and availability.
+    For a `poll.participant.*` event, fetch the participant the same way: `https://api.huddle.example/v1/polls/{{ $json.data.poll.id }}/participants/{{ $json.data.participant.id }}` returns their name, email and availability.
 
     From here the poll and the participant are ordinary items: post to Slack, write a row to a sheet, or update your own system.
   </Step>

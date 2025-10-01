@@ -1,6 +1,5 @@
-import type { Page } from "@playwright/test";
-
 import { getCode } from "@huddle/test-helpers";
+import type { Page } from "@playwright/test";
 
 export class LoginPage {
   constructor(private readonly page: Page) {}

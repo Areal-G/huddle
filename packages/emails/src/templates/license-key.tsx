@@ -139,7 +139,7 @@ async function LicenseKeyEmail({
                   <Link
                     color={chrome.primaryColor}
                     className="text-link"
-                    href="https://support.huddle.dev/self-hosting/licensing#activating-your-license"
+                    href="https://support.huddle.example/self-hosting/licensing#activating-your-license"
                   />
                 ),
               }}

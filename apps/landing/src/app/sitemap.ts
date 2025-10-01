@@ -1,7 +1,6 @@
 import { absoluteUrl } from "@huddle/utils/absolute-url";
 import type { MetadataRoute } from "next";
 import { getAlternateLanguages } from "@/lib/alternates";
-import { getAllPosts } from "@/lib/api";
 
 const seoPages = [
   "/best-doodle-alternative",
@@ -15,8 +14,6 @@ const seoPages = [
 ];
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = getAllPosts(["slug", "date", "updated"]);
-
   return [
     {
       url: absoluteUrl(),
@@ -44,35 +41,6 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: {
         languages: getAlternateLanguages(path),
       },
-    })),
-    {
-      url: absoluteUrl("/press-kit"),
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.5,
-      alternates: {
-        languages: getAlternateLanguages("/press-kit"),
-      },
-    },
-    {
-      url: absoluteUrl("/security"),
-      changeFrequency: "monthly",
-      priority: 0.5,
-    },
-    {
-      url: absoluteUrl("/blog"),
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-      alternates: {
-        languages: getAlternateLanguages("/blog"),
-      },
-    },
-    ...posts.map((post) => ({
-      url: absoluteUrl(`/blog/${post.slug}`),
-      lastModified: new Date(post.updated ?? post.date),
-      changeFrequency: "yearly" as const,
-      priority: 0.7,
     })),
   ];
 }

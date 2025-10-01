@@ -45,19 +45,13 @@ export default async function Root(props: {
               <Image
                 src="/logo.svg"
                 fill
-                alt="huddle.dev"
+                alt="Huddle"
                 className="object-contain"
               />
             </LinkBase>
             <nav className="hidden items-center gap-2 lg:flex">
               <NavLink href="/pricing">
                 <Trans t={t} i18nKey="pricing" />
-              </NavLink>
-              <NavLink href="/blog">
-                <Trans t={t} i18nKey="blog" />
-              </NavLink>
-              <NavLink href="https://support.huddle.dev">
-                <Trans t={t} i18nKey="support" />
               </NavLink>
             </nav>
           </div>
@@ -66,11 +60,7 @@ export default async function Root(props: {
               <div className="hidden sm:block">
                 <LoginButton />
               </div>
-              <CtaButton
-                size="default"
-                captureEvent="landing:header_cta_click"
-                cta="header"
-              >
+              <CtaButton size="default" cta="header">
                 <Trans
                   t={t}
                   ns="home"
@@ -81,11 +71,7 @@ export default async function Root(props: {
             </div>
             <div className="flex items-center justify-center lg:hidden">
               <MobileMenu
-                links={[
-                  { href: "/pricing", label: t("pricing") },
-                  { href: "/blog", label: t("blog") },
-                  { href: "https://support.huddle.dev", label: t("support") },
-                ]}
+                links={[{ href: "/pricing", label: t("pricing") }]}
                 menuLabel={t("menu", { defaultValue: "Menu" })}
                 closeLabel={t("close", { defaultValue: "Close" })}
                 loginLabel={t("login", { defaultValue: "Login" })}

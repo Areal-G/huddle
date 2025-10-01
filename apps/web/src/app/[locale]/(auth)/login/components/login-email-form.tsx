@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { Button } from "@huddle/ui/button";
 import {
   Form,
@@ -11,6 +10,7 @@ import {
   FormMessage,
 } from "@huddle/ui/form";
 import { Input } from "@huddle/ui/input";
+import type { TurnstileInstance } from "@marsidev/react-turnstile";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";

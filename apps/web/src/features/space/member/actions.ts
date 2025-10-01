@@ -22,7 +22,6 @@ import {
 import { getDeviceTimeZone } from "@/lib/datetime/server";
 import { normalizeTimeZone } from "@/lib/datetime/utils";
 import { AppError } from "@/lib/errors/app-error";
-import { identifyGroup, track } from "@/lib/posthog";
 import { authActionClient } from "@/lib/safe-action/server";
 
 async function requireActiveSpace(user: { id: string }) {
@@ -72,18 +71,6 @@ export const inviteMemberAction = authActionClient
       },
     });
 
-    if (result.ok && result.code === "INVITE_SENT") {
-      track(ctx.user, {
-        event: "space_member_invite",
-        properties: {
-          role: parsedInput.role,
-        },
-        groups: {
-          space: space.id,
-        },
-      });
-    }
-
     return result;
   });
 
@@ -97,26 +84,6 @@ export const acceptInviteAction = authActionClient
       spaceId: parsedInput.spaceId,
       user: { id: ctx.user.id, email: ctx.user.email },
     });
-
-    if (result.ok) {
-      identifyGroup({
-        groupType: "space",
-        groupKey: parsedInput.spaceId,
-        properties: {
-          member_count: result.memberCount,
-        },
-      });
-
-      track(ctx.user, {
-        event: "space_member_join",
-        properties: {
-          member_count: result.memberCount,
-        },
-        groups: {
-          space: parsedInput.spaceId,
-        },
-      });
-    }
 
     return result;
   });
@@ -221,28 +188,6 @@ export const removeMemberAction = authActionClient
     if (!result.ok) {
       return result;
     }
-
-    const { removedUserId, memberCount } = result;
-
-    identifyGroup({
-      groupType: "space",
-      groupKey: member.spaceId,
-      properties: {
-        member_count: memberCount,
-      },
-    });
-
-    track(ctx.user, {
-      event: "space_member_remove",
-      properties: {
-        member_count: memberCount,
-        deleted_member_user_id: removedUserId,
-        content_outcome: "delete" in content ? "delete" : "reassign",
-      },
-      groups: {
-        space: member.spaceId,
-      },
-    });
 
     return result;
   });

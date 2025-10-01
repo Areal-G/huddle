@@ -5,7 +5,6 @@ import {
   isDisplayedCurrency,
   pricingData,
 } from "@huddle/billing/pricing";
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -436,17 +435,6 @@ export function PayWallDialog({
                     currency={
                       isDisplayedCurrency(currency) ? currency : undefined
                     }
-                    onClick={() => {
-                      posthog?.capture("paywall:upgrade_button_click", {
-                        from: trigger?.from,
-                        setting: trigger?.setting,
-                        action: trigger?.action,
-                        poll_id: trigger?.pollId,
-                        plan: selectedPlan,
-                        interval: isAnnual ? "year" : "month",
-                        currency,
-                      });
-                    }}
                   >
                     <Trans
                       i18nKey="continueToCheckout"

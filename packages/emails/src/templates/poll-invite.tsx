@@ -78,7 +78,7 @@ async function PollInviteEmail({
 PollInviteEmail.PreviewProps = {
   hostName: "Jessie Smith",
   pollTitle: "Team offsite dates",
-  inviteUrl: "https://huddle.dev/invite/abc123?invite=token",
+  inviteUrl: "https://huddle.example/invite/abc123?invite=token",
   locale: "en",
   chrome: previewChrome,
 } as PollInviteEmailProps;

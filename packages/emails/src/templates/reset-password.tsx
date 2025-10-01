@@ -92,7 +92,7 @@ async function ResetPasswordEmail({
 }
 
 ResetPasswordEmail.PreviewProps = {
-  resetLink: "https://huddle.dev",
+  resetLink: "https://huddle.example",
   locale: "en",
   chrome: previewChrome,
 } as ResetPasswordEmailProps;

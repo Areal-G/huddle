@@ -10,7 +10,6 @@ import {
   unsubscribeWithTokenSchema,
   updateNotificationPreferenceSchema,
 } from "@/features/notifications/schema";
-import { track } from "@/lib/posthog";
 import { actionClient, authActionClient } from "@/lib/safe-action/server";
 
 export const updateNotificationPreferenceAction = authActionClient
@@ -23,14 +22,6 @@ export const updateNotificationPreferenceAction = authActionClient
       enabled: parsedInput.enabled,
     });
 
-    track(ctx.user, {
-      event: "notification_preference_update",
-      properties: {
-        eventType: parsedInput.eventType,
-        enabled: parsedInput.enabled,
-      },
-    });
-
     refresh();
   });
 
@@ -40,21 +31,6 @@ export const unsubscribeWithTokenAction = actionClient
   .inputSchema(unsubscribeWithTokenSchema)
   .action(async ({ parsedInput }) => {
     const result = await unsubscribeWithToken({ token: parsedInput.token });
-
-    if (result.ok) {
-      track(
-        { id: result.target.userId, isGuest: false },
-        {
-          event: "poll_notification:mute_update",
-          properties: {
-            poll_id: result.target.pollId,
-            muted: true,
-            source: "unsubscribe_page",
-          },
-          groups: { poll: result.target.pollId },
-        },
-      );
-    }
 
     refresh();
 

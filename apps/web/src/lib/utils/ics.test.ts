@@ -2,7 +2,7 @@ import { createIcsEvent } from "./ics";
 
 describe("createIcsEvent", () => {
   const baseOptions = {
-    uid: "test-uid-123@huddle.dev",
+    uid: "test-uid-123@huddle.example",
     title: "Test Event",
     start: new Date("2024-03-15T10:30:00Z"), // 10:30 UTC
     end: new Date("2024-03-15T11:30:00Z"), // 11:30 UTC
@@ -150,7 +150,7 @@ describe("createIcsEvent", () => {
       });
 
       expect(result.error).toBeFalsy();
-      expect(result.value).toContain("UID:test-uid-123@huddle.dev");
+      expect(result.value).toContain("UID:test-uid-123@huddle.example");
       expect(result.value).toContain("SUMMARY:Test Event");
       expect(result.value).toContain("DESCRIPTION:Test Description");
       expect(result.value).toContain("LOCATION:Test Location");
@@ -164,7 +164,7 @@ describe("createIcsEvent", () => {
 
     it("should handle optional properties gracefully", () => {
       const result = createIcsEvent({
-        uid: "minimal@huddle.dev",
+        uid: "minimal@huddle.example",
         title: "Minimal Event",
         start: new Date("2024-03-15T10:00:00Z"),
         end: new Date("2024-03-15T11:00:00Z"),
@@ -172,13 +172,13 @@ describe("createIcsEvent", () => {
       });
 
       expect(result.error).toBeFalsy();
-      expect(result.value).toContain("UID:minimal@huddle.dev");
+      expect(result.value).toContain("UID:minimal@huddle.example");
       expect(result.value).toContain("SUMMARY:Minimal Event");
     });
 
     it("should set default values correctly", () => {
       const result = createIcsEvent({
-        uid: "defaults@huddle.dev",
+        uid: "defaults@huddle.example",
         title: "Default Event",
         start: new Date("2024-03-15T10:00:00Z"),
         end: new Date("2024-03-15T11:00:00Z"),

@@ -30,7 +30,10 @@ export default function NotFound() {
               <a href="/" className={buttonVariants({ variant: "primary" })}>
                 Go to home
               </a>
-              <a href="https://support.huddle.dev" className={buttonVariants()}>
+              <a
+                href="https://support.huddle.example"
+                className={buttonVariants()}
+              >
                 Support
               </a>
             </div>

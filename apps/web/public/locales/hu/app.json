@@ -210,7 +210,7 @@
   "connectGoogleCalendar": "Google Naptár",
   "connectMicrosoftCalendar": "Microsoft Naptár",
   "contactSupport": "Ügyféltámogatás",
-  "contactSupportEmail": "Vagy írj nekünk a <0>support@huddle.dev</0> címre",
+  "contactSupportEmail": "Vagy írj nekünk a <0>{email}</0> címre",
   "content": "Tartalom",
   "continue": "Tovább",
   "continueToCheckout": "Tovább a fizetéshez",

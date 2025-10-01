@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { Card, CardContent, CardTitle } from "@huddle/ui/card";
 import {
   Field,
@@ -224,9 +223,6 @@ export const PollSettingsForm = ({
                   checked={!!field.value}
                   onCheckedChange={(checked) => {
                     field.onChange(checked);
-                    posthog?.capture("poll_settings:comments_toggle_click", {
-                      enabled: checked,
-                    });
                   }}
                 />
               </Field>
@@ -301,9 +297,6 @@ export const PollSettingsForm = ({
                         }
                         const allowTentativeVotes = value === "yesIfNeedBeNo";
                         field.onChange(allowTentativeVotes);
-                        posthog?.capture("poll_settings:vote_options_change", {
-                          allow_tentative_votes: allowTentativeVotes,
-                        });
                       }}
                     >
                       <SelectTrigger id="vote-options">

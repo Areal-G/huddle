@@ -145,8 +145,7 @@ export function createSpaceContentScope({
  * nothing matches: the field has no default, the user picks.
  *
  * The guess is only ever a prefill. What gets stored is what the user
- * confirms, and both values are reported to PostHog so the classifier's
- * accuracy stays measurable.
+ * confirms.
  */
 export function inferIndustry({
   email,

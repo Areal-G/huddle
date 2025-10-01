@@ -135,11 +135,7 @@
           },
           {
             "group": "How to Contribute",
-            "pages": [
-              "contribute/donations",
-              "contribute/translations",
-              "contribute/documentation"
-            ]
+            "pages": ["contribute/translations", "contribute/documentation"]
           }
         ]
       }
@@ -148,7 +144,7 @@
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg",
-    "href": "https://huddle.dev"
+    "href": "https://huddle.example"
   },
   "background": {
     "color": {
@@ -160,22 +156,19 @@
     "links": [
       {
         "label": "Contact",
-        "href": "https://support.huddle.dev/contact/support"
+        "href": "https://support.huddle.example/contact/support"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Go to app",
-      "href": "https://app.huddle.dev"
+      "href": "https://app.huddle.example"
     }
   },
   "footer": {
     "socials": {
-      "twitter": "https://twitter.com/huddleco",
-      "linkedin": "https://www.linkedin.com/company/huddle/",
-      "github": "https://github.com/areal/huddle",
-      "discord": "https://discord.com/invite/uzg4ZcHbuM",
-      "website": "https://huddle.dev/"
+      "github": "https://github.com/arealgizaw/huddle",
+      "website": "https://huddle.example/"
     }
   },
   "redirects": [

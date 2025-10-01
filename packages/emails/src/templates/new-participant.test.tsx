@@ -6,9 +6,9 @@ import NewParticipantEmail from "./new-participant";
 const baseProps = {
   title: "Team Meeting",
   participantName: "Jane Doe",
-  pollUrl: "https://huddle.dev/poll/abc",
-  unsubscribeUrl: "https://huddle.dev/unsubscribe/token",
-  disableNotificationsUrl: "https://huddle.dev/settings",
+  pollUrl: "https://huddle.example/poll/abc",
+  unsubscribeUrl: "https://huddle.example/unsubscribe/token",
+  disableNotificationsUrl: "https://huddle.example/settings",
   chrome: previewChrome,
 };
 
@@ -38,8 +38,8 @@ describe("NewParticipantEmail", () => {
 
   it("links both footer actions", async () => {
     const html = await renderEmail();
-    expect(html).toContain('href="https://huddle.dev/unsubscribe/token"');
-    expect(html).toContain('href="https://huddle.dev/settings"');
+    expect(html).toContain('href="https://huddle.example/unsubscribe/token"');
+    expect(html).toContain('href="https://huddle.example/settings"');
   });
 
   it("shows reply guidance only when a reply address exists", async () => {

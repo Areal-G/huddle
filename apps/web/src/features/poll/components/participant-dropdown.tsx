@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import {
   Dialog,
@@ -35,7 +34,6 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { useMount } from "react-use";
 import * as z from "zod";
-import { usePoll } from "@/features/poll/client";
 import {
   useDeleteParticipant,
   useEditToken,
@@ -145,7 +143,6 @@ const CopyEditLinkMenuItem = ({
   editUrl: string;
   participantName: string;
 }) => {
-  const poll = usePoll();
   const { t } = useTranslation();
 
   const copyEditLink = () => {
@@ -163,9 +160,6 @@ const CopyEditLinkMenuItem = ({
         name: participantName,
       }),
     );
-    posthog?.capture("poll_page:participant_edit_link_copy", {
-      poll_id: poll.id,
-    });
   };
 
   return (

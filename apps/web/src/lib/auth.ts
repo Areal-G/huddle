@@ -25,11 +25,7 @@ import { cache } from "react";
 import { getInstanceBranding } from "@/emails/branding";
 import { env } from "@/env";
 import { linkAnonymousUser } from "@/features/auth/mutations";
-import {
-  emailDomain,
-  isEmailBlocked,
-  isTemporaryEmail,
-} from "@/features/auth/utils";
+import { isEmailBlocked, isTemporaryEmail } from "@/features/auth/utils";
 import { getStripe } from "@/features/billing/service";
 import { isRegistrationOpen } from "@/features/instance-settings/data";
 import { getUserLocaleByEmail } from "@/features/user/data";
@@ -37,12 +33,6 @@ import type { UserDTO } from "@/features/user/schema";
 import { jobTitleFieldSchema } from "@/features/user/schema";
 import { getTranslation } from "@/i18n/server";
 import { getLocale } from "@/i18n/server/get-locale";
-import {
-  CTA_COOKIE_NAME,
-  parseCtaParam,
-  parseRefParam,
-  REF_COOKIE_NAME,
-} from "@/lib/acquisition";
 import {
   LAST_LOGIN_METHOD_COOKIE_NAME,
   SESSION_TTL_SECONDS,
@@ -54,7 +44,6 @@ import {
   LOCALE_COOKIE_OPTIONS,
 } from "@/lib/locale/constants";
 import { isMicrosoftEmailVerified } from "@/lib/oauth/microsoft-claims";
-import { track } from "@/lib/posthog";
 import { getValueByPath } from "@/lib/utils/get-value-by-path";
 
 const kv = redis;
@@ -178,10 +167,6 @@ export const authLib = betterAuth({
         props: { resetLink: url },
       });
     },
-    onPasswordReset: async ({ user }) => {
-      // Guests have no credentials, so this is always an identified user.
-      track({ id: user.id, isGuest: false }, { event: "password_reset" });
-    },
   },
   emailVerification: {
     autoSignInAfterVerification: true,
@@ -193,7 +178,7 @@ export const authLib = betterAuth({
   plugins: [
     admin(),
     anonymous({
-      emailDomainName: "huddle.dev",
+      emailDomainName: "huddle.example",
       generateName: async () => {
         const { t } = await getTranslation();
         return t("guest");
@@ -530,16 +515,6 @@ export const authLib = betterAuth({
             // properties are immutable and outlive the person, so only the
             // domain relationship is recorded here; the address itself lives
             // on the person profile, which erasure removes.
-            track(
-              { id: session.user.id, isGuest: false },
-              {
-                event: "account_email_change_request",
-                properties: {
-                  domain_changed:
-                    emailDomain(session.user.email) !== emailDomain(newEmail),
-                },
-              },
-            );
             return;
           }
 
@@ -560,18 +535,6 @@ export const authLib = betterAuth({
               );
             }
           }
-
-          track(
-            { id: session.user.id, isGuest: false },
-            {
-              event: "account_email_change_complete",
-              properties: {
-                $set: {
-                  email: newEmail,
-                },
-              },
-            },
-          );
         } catch (error) {
           logger.error({ error }, "Failed to run email change side effects");
         }
@@ -619,46 +582,13 @@ export const authLib = betterAuth({
             message: "email not verified",
           });
         },
-        after: async (user, ctx) => {
-          if (user.isAnonymous) {
-            return;
-          }
-          const ref = parseRefParam(ctx?.getCookie(REF_COOKIE_NAME));
-          const cta = parseCtaParam(ctx?.getCookie(CTA_COOKIE_NAME));
-          // No space is created here — /setup owns space creation, and the
-          // active-space gate keeps redirecting there until it happens.
-          track(
-            { id: user.id, isGuest: false },
-            {
-              event: "register",
-              properties: {
-                method: user.lastLoginMethod,
-                ref,
-                cta,
-                $set: {
-                  name: user.name,
-                  email: user.email,
-                  tier: "hobby",
-                  timeZone: user.timeZone ?? undefined,
-                  locale: user.locale ?? undefined,
-                },
-                ...((ref || cta) && {
-                  $set_once: {
-                    ...(ref && { initial_ref: ref }),
-                    ...(cta && { initial_cta: cta }),
-                  },
-                }),
-              },
-            },
-          );
-        },
       },
     },
     session: {
       create: {
         after: async (session) => {
           after(async () => {
-            const user = await prisma.user
+            await prisma.user
               .update({
                 where: { id: session.userId },
                 data: { lastSeenAt: new Date() },
@@ -671,17 +601,6 @@ export const authLib = betterAuth({
                 );
                 return null;
               });
-
-            // Anonymous users shouldn't trigger login events or create person profiles.
-            if (user && !user.isAnonymous) {
-              track(
-                { id: session.userId, isGuest: false },
-                {
-                  event: "login",
-                  properties: { method: user.lastLoginMethod },
-                },
-              );
-            }
           });
         },
       },

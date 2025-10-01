@@ -1,8 +1,8 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { toast } from "@huddle/ui/sonner";
 import { Switch } from "@huddle/ui/switch";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useTranslation } from "@/i18n/client";

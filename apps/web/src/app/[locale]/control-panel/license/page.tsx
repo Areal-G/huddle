@@ -177,7 +177,7 @@ export default async function LicensePage() {
                   </p>
                   <p className="mt-4 text-sm">
                     <a
-                      href="https://support.huddle.dev/self-hosting/white-labeling"
+                      href="https://support.huddle.example/self-hosting/white-labeling"
                       target="_blank"
                       rel="noreferrer"
                       className="text-link"
@@ -207,7 +207,7 @@ export default async function LicensePage() {
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://support.huddle.dev/self-hosting/licensing"
+                href="https://support.huddle.example/self-hosting/licensing"
                 className={buttonVariants()}
               >
                 <ShoppingBagIcon data-icon="inline-start" />

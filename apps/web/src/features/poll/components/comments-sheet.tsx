@@ -89,8 +89,6 @@ function NewCommentForm({ onSubmitted }: { onSubmitted: () => void }) {
     return "";
   }, [user, participants]);
 
-  const pollId = poll.id;
-
   const { register, reset, control, handleSubmit, formState, watch } =
     useForm<CommentForm>({
       defaultValues: {
@@ -138,7 +136,7 @@ function NewCommentForm({ onSubmitted }: { onSubmitted: () => void }) {
         const result = await addComment.execute({
           authorName,
           content,
-          pollId,
+          pollId: poll.id,
         });
         if (!result.ok) {
           toast.error(getCommentErrorMessage(result.reason));
@@ -234,8 +232,6 @@ function CommentsSheetInner({ className }: { className?: string }) {
   const { t } = useTranslation();
   const poll = usePoll();
   const dialog = useDialog();
-
-  const pollId = poll.id;
 
   const comments = useComments();
 

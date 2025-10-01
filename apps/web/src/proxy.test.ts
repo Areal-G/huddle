@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { proxy } from "./proxy";
 
 const request = (method: string, path: string) =>
-  new NextRequest(new URL(path, "https://app.huddle.dev"), { method });
+  new NextRequest(new URL(path, "https://app.huddle.example"), { method });
 
 describe("proxy", () => {
   it.each([

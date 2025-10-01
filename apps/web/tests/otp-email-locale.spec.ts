@@ -1,6 +1,6 @@
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { captureOne, deleteAllMessages } from "@huddle/test-helpers";
+import { expect, test } from "@playwright/test";
 import { createUserInDb } from "./test-utils";
 
 const unknownEmail = "otp-locale-unknown@example.com";

@@ -1,6 +1,5 @@
 import { cn } from "@huddle/ui";
 import type * as React from "react";
-import { CaptureOnView } from "@/components/home/capture-on-view";
 import { CtaButton } from "@/components/home/cta-button";
 import { handwritten } from "@/fonts/handwritten";
 
@@ -16,7 +15,7 @@ export function Cta({
   hint: React.ReactNode;
 }) {
   return (
-    <CaptureOnView event="landing:final_cta_view">
+    <div>
       <div className="text-center">
         <h2 className="mx-auto max-w-[700px] text-balance font-medium text-2xl text-gray-800 leading-tight tracking-tight sm:text-4xl">
           {title}
@@ -26,7 +25,7 @@ export function Cta({
         </p>
       </div>
       <div className="mt-8 flex flex-col items-center gap-4">
-        <CtaButton size="lg" captureEvent="landing:final_cta_click" cta="final">
+        <CtaButton size="lg" cta="final">
           {buttonLabel}
         </CtaButton>
         <p
@@ -39,6 +38,6 @@ export function Cta({
           {hint}
         </p>
       </div>
-    </CaptureOnView>
+    </div>
   );
 }

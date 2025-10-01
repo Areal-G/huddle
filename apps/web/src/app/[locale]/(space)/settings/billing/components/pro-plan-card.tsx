@@ -1,12 +1,11 @@
 "use client";
 
-import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { formatMinorUnitAmount } from "@huddle/billing/pricing";
-import { posthog } from "@huddle/posthog/client";
 import { Badge } from "@huddle/ui/badge";
 import { Button } from "@huddle/ui/button";
 import { DialogTrigger, useDialog } from "@huddle/ui/dialog";
 import { toast } from "@huddle/ui/sonner";
+import { mutationOptions } from "@next-safe-action/adapter-tanstack-query";
 import { useMutation } from "@tanstack/react-query";
 import { TriangleAlertIcon } from "lucide-react";
 import {
@@ -214,7 +213,6 @@ export function ProPlanCard({
                 <Button
                   loading={switchToYearlyMutation.isPending}
                   onClick={() => {
-                    posthog?.capture("space_billing:change_plan_click");
                     switchToYearlyMutation.mutate();
                   }}
                 >
@@ -235,17 +233,7 @@ export function ProPlanCard({
                 </Button>
               ) : null}
               <ManageSeatsDialog usedSeats={usedSeats} currentSeats={seats}>
-                <DialogTrigger
-                  render={
-                    <Button
-                      onClick={() => {
-                        posthog?.capture(
-                          "space_billing:manage_seats_button_click",
-                        );
-                      }}
-                    />
-                  }
-                >
+                <DialogTrigger render={<Button />}>
                   <Trans i18nKey="manageSeats" defaults="Manage seats" />
                 </DialogTrigger>
               </ManageSeatsDialog>
@@ -279,15 +267,7 @@ export function ProPlanCard({
           <CancelPlanDialog {...cancelPlanDialog.dialogProps} periodEnd={date}>
             <DialogTrigger
               render={
-                <Button
-                  variant="ghost"
-                  className="text-muted-foreground"
-                  onClick={() => {
-                    posthog?.capture("space_billing:cancel_plan_click", {
-                      interval,
-                    });
-                  }}
-                />
+                <Button variant="ghost" className="text-muted-foreground" />
               }
             >
               <Trans i18nKey="cancelPlan" defaults="Cancel plan" />

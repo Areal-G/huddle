@@ -1,11 +1,10 @@
 import type { Stripe } from "@huddle/billing";
-import * as Sentry from "@sentry/nextjs";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { getStripe } from "@/features/billing/service";
 import { handleStripeWebhookEvent } from "@/features/billing/webhook/mutations";
 import { isSelfHosted } from "@/lib/constants";
-import { withPostHog } from "@/lib/posthog";
+import * as errorReporting from "@/lib/error-reporting";
 
 const handler = async (request: NextRequest) => {
   if (isSelfHosted) {
@@ -20,7 +19,9 @@ const handler = async (request: NextRequest) => {
   const stripeSigningSecret = process.env.STRIPE_SIGNING_SECRET;
 
   if (!stripeSigningSecret) {
-    Sentry.captureException(new Error("STRIPE_SIGNING_SECRET is not set"));
+    errorReporting.captureException(
+      new Error("STRIPE_SIGNING_SECRET is not set"),
+    );
     return NextResponse.json(
       { error: "STRIPE_SIGNING_SECRET is not set" },
       { status: 500 },
@@ -32,7 +33,7 @@ const handler = async (request: NextRequest) => {
   try {
     event = getStripe().webhooks.constructEvent(body, sig, stripeSigningSecret);
   } catch (err) {
-    Sentry.captureException(err);
+    errorReporting.captureException(err);
     return NextResponse.json(
       { error: "Webhook Error: Failed to construct event" },
       { status: 400 },
@@ -43,13 +44,15 @@ const handler = async (request: NextRequest) => {
     const { handled } = await handleStripeWebhookEvent(event);
 
     if (!handled) {
-      Sentry.captureException(new Error(`Unhandled event type: ${event.type}`));
+      errorReporting.captureException(
+        new Error(`Unhandled event type: ${event.type}`),
+      );
       return NextResponse.json({ received: true, ignored: true });
     }
 
     return NextResponse.json({ received: true });
   } catch (err) {
-    Sentry.captureException(err);
+    errorReporting.captureException(err);
     return NextResponse.json(
       {
         error: `Webhook Error: ${err instanceof Error ? err.message : "Unknown error"}`,
@@ -59,4 +62,4 @@ const handler = async (request: NextRequest) => {
   }
 };
 
-export const POST = withPostHog(handler);
+export const POST = handler;

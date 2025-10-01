@@ -11,7 +11,6 @@ import { banUserForAbuse } from "@/features/moderation/mutations";
 import { getUser, getUserDeletionDetails } from "@/features/user/data";
 import { hardDeleteUser } from "@/features/user/mutations";
 import { AppError } from "@/lib/errors/app-error";
-import { deletePostHogPerson } from "@/lib/posthog";
 import { adminActionClient } from "@/lib/safe-action/server";
 
 // Route-private because deleting a user spans features: the app layer may
@@ -43,14 +42,12 @@ export const deleteUserAction = adminActionClient
     }
 
     // Same external-store cleanup as the account deletion reaper so Stripe
-    // and PostHog records don't outlive the account.
+    // records don't outlive the account.
     await cancelUserSubscriptions({ userId });
 
     if (user.customerId) {
       await deleteStripeCustomer({ customerId: user.customerId });
     }
-
-    await deletePostHogPerson({ distinctId: userId });
 
     await hardDeleteUser({ userId });
 

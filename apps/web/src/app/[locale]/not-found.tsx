@@ -1,15 +1,14 @@
 import { buttonVariants } from "@huddle/ui";
-import { GithubIcon, HomeIcon, LifeBuoyIcon, PlusIcon } from "lucide-react";
+import { HomeIcon, PlusIcon } from "lucide-react";
 import { ErrorPage, ErrorPageLinkItem } from "@/components/error-page";
 import { InstanceFooterLinks } from "@/components/instance-footer-links";
 import { Link } from "@/components/link";
 import { DefaultLogo } from "@/features/branding/components/default-logo";
 import { loadFooterLinks } from "@/features/instance-settings/loaders";
 import { getTranslation } from "@/i18n/server";
-import { githubRepoUrl } from "@/lib/constants";
 
 export default async function NotFoundPage() {
-  // TODO (Areal) [2023-11-03]: not-found doesn't have access to params right now
+  // TODO [2023-11-03]: not-found doesn't have access to params right now
   // See: https://github.com/vercel/next.js/discussions/43179
   const [{ t }, footerLinks] = await Promise.all([
     getTranslation("en"),
@@ -53,22 +52,6 @@ export default async function NotFoundPage() {
         title={t("errorLinkCreatePoll", { defaultValue: "Create a poll" })}
         description={t("errorLinkCreatePollDescription", {
           defaultValue: "Start scheduling a new meeting.",
-        })}
-      />
-      <ErrorPageLinkItem
-        href="https://support.huddle.dev"
-        icon={<LifeBuoyIcon className="size-4 text-muted-foreground" />}
-        title={t("errorLinkSupport", { defaultValue: "Support" })}
-        description={t("errorLinkSupportDescription", {
-          defaultValue: "Browse our help articles and FAQs.",
-        })}
-      />
-      <ErrorPageLinkItem
-        href={githubRepoUrl}
-        icon={<GithubIcon className="size-4 text-muted-foreground" />}
-        title={t("errorLinkGithub", { defaultValue: "GitHub" })}
-        description={t("errorLinkGithubDescription", {
-          defaultValue: "Report an issue or check for updates.",
         })}
       />
     </ErrorPage>

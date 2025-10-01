@@ -1,7 +1,7 @@
 import type { NextRequest, NextResponse } from "next/server";
 
 // Landing CTAs append ?ref=<page-slug> because cross-domain referrers don't
-// survive the hop from huddle.dev to the app. The proxy persists the slug in a
+// survive the hop from huddle.example to the app. The proxy persists the slug in a
 // cookie so it is still available when registration completes requests later
 // (signup spans redirects and, for OAuth, a round trip to the provider).
 export const REF_COOKIE_NAME = "huddle_ref";

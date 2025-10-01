@@ -1,6 +1,6 @@
+import { prisma } from "@huddle/database";
 import type { BrowserContext, Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
-import { prisma } from "@huddle/database";
 
 /**
  * Cross-timezone rendering guarantees for the poll invite page and the
@@ -18,7 +18,7 @@ import { prisma } from "@huddle/database";
 const ZONE_A = "Asia/Kathmandu";
 const ZONE_B = "America/St_Johns";
 
-const HOST_EMAIL = "cross-tz-host@huddle.dev";
+const HOST_EMAIL = "cross-tz-host@huddle.example";
 
 const ZONED_POLL_ID = "cross-tz-zoned-poll";
 const FLOATING_POLL_ID = "cross-tz-floating-poll";

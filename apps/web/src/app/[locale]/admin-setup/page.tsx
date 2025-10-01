@@ -73,7 +73,7 @@ export default async function AdminSetupPage() {
               <a
                 target="_blank"
                 rel="noreferrer"
-                href="https://support.huddle.dev/self-hosting/control-panel"
+                href="https://support.huddle.example/self-hosting/control-panel"
                 className={buttonVariants({ variant: "primary" })}
               >
                 <Trans i18nKey="learnMore" defaults="Learn more" />

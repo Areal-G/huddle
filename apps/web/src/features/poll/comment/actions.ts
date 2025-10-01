@@ -16,7 +16,6 @@ import {
 } from "@/features/poll/comment/schema";
 import { hasPollAdminAccess } from "@/features/poll/data";
 import { AppError } from "@/lib/errors/app-error";
-import { flushPostHog, track, trackSystemEvent } from "@/lib/posthog";
 import {
   anyUserActionClient,
   createRateLimitMiddleware,
@@ -49,15 +48,6 @@ async function sendNewCommentNotificationEmail({
         { pollId, reason: result.reason },
         "Skipped new comment notification email",
       );
-      trackSystemEvent({
-        event: "poll_notification:email_skip",
-        properties: {
-          poll_id: pollId,
-          type: "poll.comment.added",
-          reason: result.reason,
-        },
-      });
-      await flushPostHog();
       return;
     }
 
@@ -121,12 +111,6 @@ export const addCommentAction = anyUserActionClient
       }),
     );
 
-    track(ctx.user, {
-      event: "poll_comment_add",
-      properties: { is_guest: ctx.user.isGuest },
-      groups: { poll: pollId },
-    });
-
     return { ok: true as const, comment: { id: comment.id } };
   });
 
@@ -152,11 +136,6 @@ export const deleteCommentAction = anyUserActionClient
     }
 
     await deleteComment({ commentId });
-
-    track(ctx.user, {
-      event: "poll_comment_delete",
-      groups: { poll: comment.pollId },
-    });
 
     return { ok: true as const };
   });

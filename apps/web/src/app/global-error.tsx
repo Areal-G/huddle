@@ -1,9 +1,9 @@
 "use client";
 
-import * as Sentry from "@sentry/nextjs";
 import NextError from "next/error";
 import { useEffect } from "react";
 import { reloadOnceForChunkError } from "@/lib/chunk-recovery";
+import * as errorReporting from "@/lib/error-reporting";
 
 export default function GlobalError({
   error,
@@ -13,7 +13,7 @@ export default function GlobalError({
   reset: () => void;
 }) {
   useEffect(() => {
-    Sentry.captureException(error);
+    errorReporting.captureException(error);
     reloadOnceForChunkError(error);
   }, [error]);
 

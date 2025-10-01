@@ -13,13 +13,13 @@ export default async function TermsOfUse() {
     <Section>
       <LegalPageLayout title="Terms of use" lastUpdated="2026-09-29">
         <p>
-          This website and the Huddle software and services are operated by
-          Stack Snap Ltd. References to &quot;we&quot;, &quot;us&quot; or
-          &quot;our&quot; refer to Stack Snap Ltd.
+          This website and the Huddle software and services are operated by Your
+          Company. References to &quot;we&quot;, &quot;us&quot; or
+          &quot;our&quot; refer to Your Company.
         </p>
         <p>
           We provide you with this website and the Huddle software, including
-          the hosted service at huddle.dev and any self‑hosted enterprise
+          the hosted service at huddle.example and any self‑hosted enterprise
           editions, subject to your acceptance of these Terms of Use
           (&quot;Terms&quot;).
         </p>
@@ -35,11 +35,11 @@ export default async function TermsOfUse() {
         <p>1.1 These Terms apply to:</p>
         <ul>
           <li>
-            Your use of the <strong>website</strong> at huddle.dev.
+            Your use of the <strong>website</strong> at huddle.example.
           </li>
           <li>
-            Your use of the <strong>hosted Huddle service</strong> at huddle.dev
-            (if you create an account).
+            Your use of the <strong>hosted Huddle service</strong> at
+            huddle.example (if you create an account).
           </li>
           <li>
             Where explicitly stated, your use of{" "}
@@ -115,7 +115,7 @@ export default async function TermsOfUse() {
         <h2>4. Links to third‑party websites</h2>
         <p>
           This website may contain links to third‑party websites that are not
-          owned or controlled by Stack Snap Ltd. We have no control over, and
+          owned or controlled by Your Company. We have no control over, and
           assume no responsibility for, the content, privacy policies, or
           practices of any third‑party websites.
         </p>
@@ -127,13 +127,13 @@ export default async function TermsOfUse() {
           This section applies <strong>only</strong> to customers who have
           purchased a separate self‑hosted or enterprise license from us (for
           example, a &quot;Huddle v4 Enterprise License&quot;). It does{" "}
-          <strong>not</strong> apply to users of the hosted service at huddle.dev
-          unless expressly agreed in writing.
+          <strong>not</strong> apply to users of the hosted service at
+          huddle.example unless expressly agreed in writing.
         </p>
 
         <h3>5.1 License grant</h3>
         <p>
-          Subject to your timely payment of all applicable fees, Stack Snap Ltd.
+          Subject to your timely payment of all applicable fees, Your Company.
           grants you a non‑exclusive, non‑transferable, non‑sublicensable
           license to install and run the Huddle v4 software on your own
           infrastructure for use by your organization.
@@ -208,9 +208,8 @@ export default async function TermsOfUse() {
         <h2>6. Data protection</h2>
         <p>
           6.1 Where we process personal data on your behalf in providing the
-          hosted Huddle service, we do so as a processor under our{" "}
-          <LinkBase href="/dpa">Data Processing Agreement</LinkBase>, which is
-          incorporated into these Terms by reference and forms part of them.
+          hosted Huddle service, we do so as a processor, on your documented
+          instructions.
         </p>
         <p>
           6.2 Our processing of personal data for our own purposes as a
@@ -247,14 +246,6 @@ export default async function TermsOfUse() {
           </li>
           <li>otherwise, £100.</li>
         </ul>
-        <p>
-          7.4 Liability arising under our{" "}
-          <LinkBase href="/dpa">Data Processing Agreement</LinkBase> is governed
-          by section 10 of the Data Processing Agreement. Any amount we pay
-          under these Terms counts towards the limit in section 10 of the Data
-          Processing Agreement, and any amount we pay under the Data Processing
-          Agreement counts towards the limit in section 7.3.
-        </p>
 
         <hr />
 
@@ -275,12 +266,12 @@ export default async function TermsOfUse() {
         </p>
         <p>
           <strong>Email:</strong>{" "}
-          <a href="mailto:support@huddle.dev">support@huddle.dev</a>
+          <a href="mailto:support@huddle.example">support@huddle.example</a>
         </p>
         <p>
           <strong>Post:</strong>
           <br />
-          Stack Snap Ltd.
+          Your Company.
           <br />
           The Gallery
           <br />

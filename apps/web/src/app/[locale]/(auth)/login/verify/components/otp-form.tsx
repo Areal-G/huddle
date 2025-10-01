@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import {
   Form,
@@ -58,11 +57,6 @@ export function OTPForm({
           });
 
     if (res.error) {
-      posthog?.capture("login:otp_verify_error", {
-        error_code: res.error.code ?? "UNKNOWN",
-        status: res.error.status,
-      });
-
       switch (res.error.code) {
         case "INVALID_OTP":
           form.setError("otp", {

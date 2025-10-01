@@ -888,3 +888,134 @@ export async function listPollComments({
     orderBy: [{ createdAt: "asc" }],
   });
 }
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+type OptionTally = {
+  option: { id: string; startTime: Date; duration: number };
+  yes: number;
+  ifNeedBe: number;
+  no: number;
+};
+
+/**
+ * The home dashboard's poll summary: the most recently active open polls with
+ * their leading option and voters, plus week-over-week response counts and
+ * the invite response rate. `now` is passed in so the read stays
+ * parameterized and testable.
+ */
+export async function getPollDashboard({
+  scope,
+  now,
+  limit = 6,
+}: {
+  scope: SpaceContentScope;
+  now: Date;
+  limit?: number;
+}) {
+  const pollWhere = {
+    spaceId: scope.spaceId,
+    deletedAt: null,
+    ...(scope.createdBy && { userId: scope.createdBy }),
+  } satisfies Prisma.PollWhereInput;
+  const weekAgo = new Date(now.getTime() - 7 * DAY_MS);
+  const twoWeeksAgo = new Date(now.getTime() - 14 * DAY_MS);
+
+  const [
+    polls,
+    responsesThisWeek,
+    responsesLastWeek,
+    pollsCreatedThisWeek,
+    invitesSent,
+    invitesAnswered,
+  ] = await Promise.all([
+    prisma.poll.findMany({
+      where: { ...pollWhere, status: "open" },
+      select: {
+        id: true,
+        title: true,
+        createdAt: true,
+        deadline: true,
+        timeZone: true,
+        options: {
+          select: { id: true, startTime: true, duration: true },
+          orderBy: { startTime: "asc" },
+        },
+        participants: {
+          select: { id: true, name: true, user: { select: { image: true } } },
+          orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+        },
+        votes: { select: { optionId: true, type: true } },
+      },
+      orderBy: [{ updatedAt: "desc" }, { id: "desc" }],
+      take: limit,
+    }),
+    prisma.participant.count({
+      where: { poll: pollWhere, createdAt: { gte: weekAgo } },
+    }),
+    prisma.participant.count({
+      where: { poll: pollWhere, createdAt: { gte: twoWeeksAgo, lt: weekAgo } },
+    }),
+    prisma.poll.count({ where: { ...pollWhere, createdAt: { gte: weekAgo } } }),
+    prisma.pollInvite.count({ where: { poll: pollWhere, revokedAt: null } }),
+    prisma.pollInvite.count({
+      where: { poll: pollWhere, revokedAt: null, participantId: { not: null } },
+    }),
+  ]);
+
+  return {
+    responsesThisWeek,
+    responsesLastWeek,
+    pollsCreatedThisWeek,
+    invitesSent,
+    invitesAnswered,
+    polls: polls.map((poll) => {
+      const tallies = new Map<string, OptionTally>(
+        poll.options.map((option) => [
+          option.id,
+          { option, yes: 0, ifNeedBe: 0, no: 0 },
+        ]),
+      );
+      for (const vote of poll.votes) {
+        const tally = tallies.get(vote.optionId);
+        if (tally) tally[vote.type] += 1;
+      }
+      // The option most people can make, preferring firm yeses on a tie
+      let leading: OptionTally | null = null;
+      for (const tally of tallies.values()) {
+        if (
+          !leading ||
+          tally.yes + tally.ifNeedBe > leading.yes + leading.ifNeedBe ||
+          (tally.yes + tally.ifNeedBe === leading.yes + leading.ifNeedBe &&
+            tally.yes > leading.yes)
+        ) {
+          leading = tally;
+        }
+      }
+      return {
+        id: poll.id,
+        title: poll.title,
+        createdAt: poll.createdAt,
+        deadline: poll.deadline,
+        timeZone: poll.timeZone,
+        optionCount: poll.options.length,
+        participantCount: poll.participants.length,
+        participants: poll.participants.slice(0, 5).map((participant) => ({
+          id: participant.id,
+          name: participant.name,
+          image: participant.user?.image ?? null,
+        })),
+        leadingOption:
+          leading && leading.yes + leading.ifNeedBe > 0
+            ? {
+                start: leading.option.startTime,
+                duration: leading.option.duration,
+                yes: leading.yes,
+                ifNeedBe: leading.ifNeedBe,
+                no: leading.no,
+              }
+            : null,
+      };
+    }),
+  };
+}

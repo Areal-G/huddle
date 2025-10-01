@@ -144,9 +144,9 @@ NewCommentEmail.PreviewProps = {
   authorName: "Someone",
   content:
     "Hi everyone! I can make most of these times work, but Tuesday afternoon would be best for me.\nLooking forward to it!",
-  pollUrl: "https://huddle.dev",
-  unsubscribeUrl: "https://huddle.dev",
-  disableNotificationsUrl: "https://huddle.dev",
+  pollUrl: "https://huddle.example",
+  unsubscribeUrl: "https://huddle.example",
+  disableNotificationsUrl: "https://huddle.example",
   locale: "en",
   chrome: previewChrome,
 } as NewCommentEmailProps;

@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { VoteType } from "@huddle/database";
-import { posthog } from "@huddle/posthog/client";
 import { buttonVariants, cn, passwordManagerIgnoreProps } from "@huddle/ui";
 import { Button } from "@huddle/ui/button";
 import {
@@ -227,24 +226,7 @@ export const NewParticipantForm = (props: NewParticipantModalProps) => {
                 defaults="Need to schedule something yourself?"
               />
             </p>
-            <Link
-              href="/new"
-              className={buttonVariants({ variant: "link" })}
-              onClick={() => {
-                posthog?.capture(
-                  "new_participant_dialog:create_poll_button_click",
-                  {
-                    pollId,
-                    spaceId: poll?.spaceId,
-                    tier: poll?.space?.tier,
-                    $groups: {
-                      poll: pollId,
-                      ...(poll?.spaceId ? { space: poll.spaceId } : {}),
-                    },
-                  },
-                );
-              }}
-            >
+            <Link href="/new" className={buttonVariants({ variant: "link" })}>
               <Trans
                 i18nKey="newParticipantDialogCreatePoll"
                 defaults="Create your own poll"
@@ -415,18 +397,6 @@ export const NewParticipantForm = (props: NewParticipantModalProps) => {
               disabled={formState.isSubmitting}
               onClick={() => {
                 setShowNote(true);
-                posthog?.capture(
-                  "new_participant_dialog:add_note_button_click",
-                  {
-                    pollId,
-                    spaceId: poll?.spaceId,
-                    tier: poll?.space?.tier,
-                    $groups: {
-                      poll: pollId,
-                      ...(poll?.spaceId ? { space: poll.spaceId } : {}),
-                    },
-                  },
-                );
               }}
             >
               <PlusIcon data-icon="inline-start" />

@@ -11,7 +11,6 @@ import {
 import { getActiveSpaceForUser } from "@/features/space/data";
 import { loadOptionalUser } from "@/features/user/loaders";
 import { AppError } from "@/lib/errors/app-error";
-import { track } from "@/lib/posthog";
 import { authActionClient } from "@/lib/safe-action/server";
 
 // The UI never offers these actions to users without API access, so a
@@ -48,22 +47,13 @@ async function requireApiAccess() {
 export const createApiKeyAction = authActionClient
   .metadata({ actionName: "create_api_key" })
   .inputSchema(createApiKeySchema)
-  .action(async ({ ctx, parsedInput }) => {
+  .action(async ({ parsedInput }) => {
     const { space } = await requireApiAccess();
 
     const result = await createApiKey({
       spaceId: space.id,
       name: parsedInput.name,
     });
-
-    if (result.ok) {
-      track(ctx.user, {
-        event: "developer:api_key_create",
-        groups: {
-          space: space.id,
-        },
-      });
-    }
 
     refresh();
 
@@ -73,17 +63,10 @@ export const createApiKeyAction = authActionClient
 export const revokeApiKeyAction = authActionClient
   .metadata({ actionName: "revoke_api_key" })
   .inputSchema(revokeApiKeySchema)
-  .action(async ({ ctx, parsedInput }) => {
+  .action(async ({ parsedInput }) => {
     const { space } = await requireApiAccess();
 
     await revokeApiKey({ spaceId: space.id, id: parsedInput.id });
-
-    track(ctx.user, {
-      event: "developer:api_key_revoke",
-      groups: {
-        space: space.id,
-      },
-    });
 
     refresh();
   });

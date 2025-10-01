@@ -115,7 +115,7 @@ export async function EventSidebar({
           in the card. */}
       {hideAttribution ? null : (
         <div className="mt-6 flex justify-center">
-          <PoweredByLink pollId={poll.id} spaceId={poll.spaceId} />
+          <PoweredByLink />
         </div>
       )}
     </div>

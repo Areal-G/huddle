@@ -4,4 +4,3 @@ apps/web/.env
 apps/landing/.env
 packages/database/.env
 packages/billing/.env
-packages/posthog/.env

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://api.huddle.dev"
+      "url": "https://api.huddle.example"
     }
   ],
   "components": {
@@ -215,11 +215,11 @@
           },
           "adminUrl": {
             "type": "string",
-            "example": "https://app.huddle.dev/poll/Xk3pQ9vLm2Ab"
+            "example": "https://app.huddle.example/poll/Xk3pQ9vLm2Ab"
           },
           "inviteUrl": {
             "type": "string",
-            "example": "https://huddle.dev/invite/Xk3pQ9vLm2Ab"
+            "example": "https://huddle.example/invite/Xk3pQ9vLm2Ab"
           }
         },
         "required": [
@@ -288,7 +288,7 @@
                 "type": "null"
               }
             ],
-            "example": "https://cdn.huddle.dev/avatars/cm3f7d1qa0000t2k9c6b8h4jr.jpg"
+            "example": "https://cdn.huddle.example/avatars/cm3f7d1qa0000t2k9c6b8h4jr.jpg"
           }
         },
         "required": [

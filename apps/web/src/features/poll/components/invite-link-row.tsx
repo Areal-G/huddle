@@ -1,6 +1,5 @@
 "use client";
 
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import copy from "copy-to-clipboard";
 import { CheckIcon, CopyIcon, LinkIcon } from "lucide-react";
@@ -11,13 +10,7 @@ import { Trans, useTranslation } from "@/i18n/client";
  * The invite link with its copy action. The URL is shown because hosts have
  * learned to look for something that looks like a link.
  */
-export function InviteLinkRow({
-  pollId,
-  inviteLink,
-}: {
-  pollId: string;
-  inviteLink: string;
-}) {
+export function InviteLinkRow({ inviteLink }: { inviteLink: string }) {
   const { t } = useTranslation();
   const [didCopy, setDidCopy] = React.useState(false);
 
@@ -28,7 +21,6 @@ export function InviteLinkRow({
       return;
     }
     setDidCopy(true);
-    posthog?.capture("poll_share:invite_link_copy", { poll_id: pollId });
   };
 
   React.useEffect(() => {

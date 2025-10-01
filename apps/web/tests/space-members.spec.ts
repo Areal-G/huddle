@@ -1,7 +1,7 @@
-import type { Page } from "@playwright/test";
-import { expect, test } from "@playwright/test";
 import { prisma } from "@huddle/database";
 import { getSpaceInviteLink } from "@huddle/test-helpers";
+import type { Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import {
   createUserInDb,
   loginWithEmail,

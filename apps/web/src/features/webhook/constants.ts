@@ -51,7 +51,7 @@ export const MAX_CONSECUTIVE_FAILURES = 20;
  * verify a signature. Same home as the API reference.
  */
 export const getWebhookDocsPath = () =>
-  "https://support.huddle.dev/api-reference/webhooks";
+  "https://support.huddle.example/api-reference/webhooks";
 
 /**
  * The payload contract deliveries are built against, sent both in the body

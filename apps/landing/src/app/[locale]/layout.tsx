@@ -1,9 +1,7 @@
 import "./globals.css";
 
 import languages from "@huddle/languages";
-import { PostHogInit } from "@huddle/posthog/client";
 import { cn } from "@huddle/ui";
-import { Analytics } from "@vercel/analytics/react";
 import { domAnimation, LazyMotion } from "motion/react";
 import type { Metadata, Viewport } from "next";
 import { cacheLife } from "next/cache";
@@ -43,8 +41,7 @@ export default async function Root(props: {
       <body>
         <LazyMotion features={domAnimation}>
           <I18nProvider locale={i18n.resolvedLanguage} resources={translations}>
-            <PostHogInit>{children}</PostHogInit>
-            <Analytics />
+            {children}
           </I18nProvider>
         </LazyMotion>
       </body>

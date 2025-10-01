@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { posthog } from "@huddle/posthog/client";
 import { Button } from "@huddle/ui/button";
 import type { DialogProps } from "@huddle/ui/dialog";
 import {
@@ -89,13 +88,6 @@ function EditEventTypeForm({
       );
       return;
     }
-    posthog?.capture("event_type_edit:form_submit", {
-      event_type_id: eventType.id,
-      duration_minutes: input.duration,
-      location_type: input.location?.type ?? "none",
-      has_max_attendees: input.capacity !== null,
-      has_description: input.description !== null,
-    });
     onSaved();
   });
 

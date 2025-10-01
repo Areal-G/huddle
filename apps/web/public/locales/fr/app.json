@@ -210,7 +210,7 @@
   "connectGoogleCalendar": "Google Agenda",
   "connectMicrosoftCalendar": "Calendrier Microsoft",
   "contactSupport": "Contacter le support",
-  "contactSupportEmail": "Ou envoyez-nous un e-mail à <0>support@huddle.dev</0>",
+  "contactSupportEmail": "Ou envoyez-nous un e-mail à <0>{email}</0>",
   "content": "Contenu",
   "continue": "Continuer",
   "continueToCheckout": "Passer au paiement",

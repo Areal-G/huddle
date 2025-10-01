@@ -1,12 +1,11 @@
 import { createWideEvent, logger } from "@huddle/logger";
-import * as Sentry from "@sentry/nextjs";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 import { ipAddress } from "@vercel/functions";
 import type { NextRequest } from "next/server";
 import { getLocale } from "@/i18n/server/get-locale";
 import { getSession } from "@/lib/auth";
-import { withPostHog } from "@/lib/posthog";
+import * as errorReporting from "@/lib/error-reporting";
 import type { TRPCContext } from "@/trpc/context";
 import { appRouter } from "@/trpc/routers";
 
@@ -59,7 +58,7 @@ const handler = async (req: NextRequest) => {
         event.errorType = "TRPCError";
 
         if (statusCode >= 500 && error.code !== "SERVICE_UNAVAILABLE") {
-          Sentry.captureException(error);
+          errorReporting.captureException(error);
         }
       },
     });
@@ -86,6 +85,4 @@ const handler = async (req: NextRequest) => {
   }
 };
 
-const handlerWithPostHog = withPostHog(handler);
-
-export { handlerWithPostHog as GET, handlerWithPostHog as POST };
+export { handler as GET, handler as POST };
