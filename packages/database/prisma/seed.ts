@@ -1,4 +1,5 @@
 import { PrismaPg } from "@prisma/adapter-pg";
+import { hashPassword } from "better-auth/crypto";
 import { PrismaClient } from "../generated/prisma/client";
 import { buildPollHistory, generateAccessToken } from "./seed/activity";
 import {
@@ -9,7 +10,7 @@ import {
   spaces,
   subscriptions,
   users,
-} from "./seed/demo";
+} from "./seed/sample";
 
 const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL,
@@ -21,18 +22,54 @@ function nextId() {
   return `seed-${(++idCounter).toString().padStart(4, "0")}`;
 }
 
-class DatabaseNotEmptyError extends Error {}
+// The sample workspace belongs to user-1, who signs in with these credentials.
+const OWNER_ID = "user-1";
+const owner = {
+  email: (process.env.SEED_OWNER_EMAIL || "alex@example.com").toLowerCase(),
+  password: process.env.SEED_OWNER_PASSWORD || "huddle-local-password",
+};
+
+class SeedRefusedError extends Error {}
+
+// Empties every table so the seed can run again. The migration history and
+// the instance settings row (created by a migration) are configuration, not
+// sample data, so they stay.
+async function clearDatabase() {
+  const tables = await prisma.$queryRaw<Array<{ tablename: string }>>`
+    SELECT tablename FROM pg_tables
+    WHERE schemaname = current_schema()
+      AND tablename NOT IN ('_prisma_migrations', 'instance_settings')`;
+  if (tables.length === 0) {
+    return;
+  }
+  const names = tables.map(({ tablename }) => `"${tablename}"`).join(", ");
+  await prisma.$executeRawUnsafe(`TRUNCATE TABLE ${names} CASCADE`);
+}
 
 async function main() {
-  if (await prisma.user.findFirst({ select: { id: true } })) {
-    throw new DatabaseNotEmptyError(
-      "The database already has data. Run `pnpm db:reset` to reset and seed it.",
+  if (process.env.NODE_ENV === "production") {
+    throw new SeedRefusedError(
+      "Refusing to seed with NODE_ENV=production: seeding replaces all data.",
     );
   }
 
-  // 1. Users
-  await prisma.user.createMany({ data: users.map((u) => ({ ...u })) });
-  console.info(`✓ ${users.length} users`);
+  await clearDatabase();
+
+  // 1. Users, and a password login for the owner
+  await prisma.user.createMany({
+    data: users.map((u) =>
+      u.id === OWNER_ID ? { ...u, email: owner.email, emailVerified: true } : u,
+    ),
+  });
+  await prisma.account.create({
+    data: {
+      userId: OWNER_ID,
+      provider: "credential",
+      providerAccountId: OWNER_ID,
+      password: await hashPassword(owner.password),
+    },
+  });
+  console.info(`✓ ${users.length} users (sign in as ${owner.email})`);
 
   // 2. Spaces
   await prisma.space.createMany({ data: spaces });
@@ -84,7 +121,8 @@ async function main() {
             uid: inviteId,
             scheduledEventId: eventId,
             inviteeName: inv.inviteeName,
-            inviteeEmail: inv.inviteeEmail,
+            inviteeEmail:
+              inv.inviteeId === OWNER_ID ? owner.email : inv.inviteeEmail,
             inviteeTimeZone: inv.inviteeTimeZone,
             inviteeId: inv.inviteeId,
             status: inv.status,
@@ -258,7 +296,7 @@ async function main() {
 
 main()
   .catch((e) => {
-    console.error(e instanceof DatabaseNotEmptyError ? e.message : e);
+    console.error(e instanceof SeedRefusedError ? e.message : e);
     process.exitCode = 1;
   })
   .finally(async () => {

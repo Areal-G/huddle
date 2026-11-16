@@ -29,7 +29,7 @@ import { isFeatureEnabled } from "@/lib/feature-flags/server";
  * degrades to the built in prices rather than the layout failing.
  */
 export const loadPayWallPricing = cache(async () => {
-  // Without a Stripe key (local demo) the pay wall uses its built in prices.
+  // Without a Stripe key (local development) the pay wall uses its built in prices.
   if (!isBillingEnabled || !process.env.STRIPE_SECRET_KEY) {
     return null;
   }

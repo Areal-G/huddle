@@ -22,7 +22,6 @@ import {
 } from "../components/auth-page";
 import { AuthErrors } from "./components/auth-errors";
 import { LoginWithEmailForm } from "./components/login-email-form";
-import { TryDemoButton } from "./components/try-demo-button";
 
 async function loadData() {
   const [isRegistrationEnabled, { t, i18n }, cookieStore] = await Promise.all([
@@ -134,12 +133,6 @@ export default async function LoginPage(props: {
         </AuthPageDescription>
       </AuthPageHeader>
       <AuthPageContent>
-        {env.DEMO_LOGIN_ENABLED === "true" ? (
-          <>
-            <TryDemoButton />
-            <OrDivider />
-          </>
-        ) : null}
         {isEmailLoginEnabled && (
           <LoginWithEmailForm
             isRegistrationEnabled={isRegistrationEnabled}

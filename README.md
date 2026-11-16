@@ -12,7 +12,7 @@ Propose a few times, share one link, and let everyone vote with no account neede
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Prisma_7-4169e1?logo=postgresql&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06b6d4?logo=tailwindcss&logoColor=white)
 ![Tests](https://img.shields.io/badge/tests-Vitest_%2B_Playwright-6e9f18)
-![Demo](https://img.shields.io/badge/demo-guest_login-4f46e5)
+[![Live demo](https://img.shields.io/badge/demo-live-4f46e5)](https://huddle.arealjagema.com)
 
 [Features](#features) · [Design](#design) · [Screenshots](#screenshots) · [Tech stack](#tech-stack) · [Getting started](#getting-started)
 
@@ -29,11 +29,9 @@ Huddle replaces the "what time works for everyone?" email thread. An organizer p
 
 It is a production-grade Next.js monorepo (web app, landing site, docs, email templates) that runs as a hosted SaaS with Stripe billing or self-hosted from a single Docker image.
 
-## Try the demo
+## Live demo
 
-Run it locally (see [Getting started](#getting-started)), open `/login` and click **Try the demo**. You land in the *Northwind Studio* workspace as Alex Morgan, with 27 polls, 160+ participants, 580 votes, comments and 18 scheduled events, all dated relative to today.
-
-The button only renders when `DEMO_LOGIN_ENABLED=true`, and the sign-in runs in a server action, so the demo password never reaches the browser. To see the invitee side, open any poll's share link in a private window.
+A hosted demo runs at **[huddle.arealjagema.com](https://huddle.arealjagema.com)**. To explore the same sample data locally, run `npm run seed` (see [Getting started](#getting-started)) and sign in as the seed owner. You land in the *Northwind Studio* workspace as Alex Morgan, with 27 polls, 160+ participants, 580 votes, comments and 18 scheduled events, all dated relative to today. To see the invitee side, open any poll's share link in a private window.
 
 ## Features
 
@@ -112,7 +110,7 @@ The UI is built from a shared component library (`packages/ui`) on Base UI primi
     <td width="50%"><img src="readme/billing.png" alt="Billing"><br><sub><b>Billing</b>: plan, seats and renewal (cloud mode)</sub></td>
   </tr>
   <tr>
-    <td width="50%"><img src="readme/login.png" alt="Login"><br><sub><b>Login</b> with the demo button and a live product preview</sub></td>
+    <td width="50%"><img src="readme/login.png" alt="Login"><br><sub><b>Login</b> with a live product preview</sub></td>
     <td width="50%"><img src="readme/login-dark.png" alt="Login in dark mode"><br><sub><b>Login</b> in dark mode</sub></td>
   </tr>
 </table>
@@ -224,11 +222,11 @@ pnpm install
 ### 2. Configure
 
 ```bash
-cp apps/web/.env.sample apps/web/.env
-cp packages/database/.env.sample packages/database/.env
+cp apps/web/.env.example apps/web/.env
+cp packages/database/.env.example packages/database/.env
 ```
 
-Set `SECRET_PASSWORD` (`openssl rand -hex 32`). The samples already point at the services from `docker-compose.dev.yml`.
+Set `SECRET_PASSWORD` (`openssl rand -hex 32`). The examples already point at the services from `docker-compose.dev.yml`.
 
 <details>
 <summary><b>Environment variables</b></summary>
@@ -242,14 +240,14 @@ Set `SECRET_PASSWORD` (`openssl rand -hex 32`). The samples already point at the
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PWD`, `SMTP_SECURE` | For email | SMTP transport (Mailpit locally) |
 | `EMAIL_PROVIDER` | No | `smtp` (default) or `ses` |
 | `NEXT_PUBLIC_SELF_HOSTED` | No | `true` disables billing and paywalls |
-| `DEMO_LOGIN_ENABLED`, `DEMO_EMAIL`, `DEMO_PASSWORD` | No | Show the **Try the demo** button and sign in as the seeded user |
 | `KV_REST_API_URL`, `KV_REST_API_TOKEN` | No | Upstash-compatible Redis for rate limiting |
 | `S3_BUCKET_NAME`, `S3_ENDPOINT`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_REGION` | No | Object storage for uploads |
 | `GOOGLE_CLIENT_ID`/`_SECRET`, `MICROSOFT_CLIENT_ID`/`_SECRET`, `OIDC_*` | No | Social and SSO sign-in |
 | `CONFERENCING_PROVIDERS`, `ZOOM_*`, `WEBEX_*` | No | Video-conferencing integrations |
 | `APP_NAME`, `PRIMARY_COLOR`, `LOGO_URL` | No | White-label the instance |
+| `SEED_OWNER_EMAIL`, `SEED_OWNER_PASSWORD` | No | Sign-in for the seeded sample workspace (in `packages/database/.env`) |
 
-The full, validated list lives in `apps/web/src/env.ts`.
+Every variable is listed with a short comment in the `.env.example` files, and the validated list lives in `apps/web/src/env.ts`.
 
 </details>
 
@@ -259,11 +257,10 @@ The full, validated list lives in `apps/web/src/env.ts`.
 pnpm docker:up
 pnpm db:generate
 pnpm db:deploy
-pnpm db:seed
-pnpm --filter @huddle/web demo:setup
+npm run seed
 ```
 
-`docker:up` starts Postgres (port 5450), Redis, a Redis REST proxy, Garage (S3) and Mailpit (UI on `http://localhost:8025`). `demo:setup` gives the seeded demo user a verified email and the `DEMO_PASSWORD` from `.env`.
+`docker:up` starts Postgres (port 5450), Redis, a Redis REST proxy, Garage (S3) and Mailpit (UI on `http://localhost:8025`). `npm run seed` replaces all data with the sample workspace (it refuses to run with `NODE_ENV=production`) and can be rerun at any time. The owner signs in with `SEED_OWNER_EMAIL` / `SEED_OWNER_PASSWORD` from `packages/database/.env`, by default `alex@example.com` / `huddle-local-password`.
 
 ### 4. Run
 
@@ -277,7 +274,7 @@ pnpm dev
 pnpm --filter @huddle/web exec next dev -p 3000
 ```
 
-Open `/login`, click **Try the demo**, and you should see the home dashboard above with seven open polls.
+Open `/login`, sign in as the seed owner (enter the email, then the password), and you should see the home dashboard above with seven open polls.
 
 <details>
 <summary><b>Scripts</b></summary>
@@ -288,7 +285,8 @@ Open `/login`, click **Try the demo**, and you should see the home dashboard abo
 | `pnpm dev:landing` / `pnpm dev:emails` / `pnpm docs:dev` | Landing site, email previews, docs |
 | `pnpm build` | Production build of the web app |
 | `pnpm docker:up` / `pnpm docker:down` | Start / remove local services |
-| `pnpm db:deploy` / `pnpm db:migrate` / `pnpm db:seed` / `pnpm db:reset` | Apply migrations, create a migration, seed, reset and reseed |
+| `pnpm db:deploy` / `pnpm db:migrate` / `pnpm db:reset` | Apply migrations, create a migration, reset the schema and reseed |
+| `npm run seed` (or `pnpm db:seed`) | Replace all data with the sample workspace |
 | `pnpm type-check` | TypeScript across the workspace |
 | `pnpm check` / `pnpm lint` | Biome formatting + lint, Oxlint |
 | `pnpm check:structure` | Feature file vocabulary and dependency cycles |
@@ -315,7 +313,7 @@ apps/
 ├── landing/               # marketing site
 └── docs/                  # Mintlify docs, incl. self-hosting guide
 packages/
-├── database/              # Prisma schema (split per model), migrations, seed + demo data
+├── database/              # Prisma schema (split per model), migrations, sample-data seed
 ├── ui/                    # Base UI + Tailwind component library
 ├── emails/                # React Email templates
 ├── billing/               # Stripe integration

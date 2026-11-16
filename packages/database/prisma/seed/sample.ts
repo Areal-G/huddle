@@ -1,5 +1,5 @@
-// Extra demo content layered on top of data.ts, so the workspace the
-// "Try the demo" button opens (Northwind Studio) looks lived in: more polls
+// Extra sample content layered on top of data.ts, so the workspace the seed
+// owner lands in (Northwind Studio) looks lived in: more polls
 // with fuller turnout, finalized and past events, and a sixth member.
 // Dates are relative to today (see `d`), so the data never goes stale.
 import type { VoteType } from "../../generated/prisma/client";
@@ -36,7 +36,7 @@ export const users = [
 
 export const spaceMembers = [
   ...baseSpaceMembers.map((member) =>
-    // The demo user lands in the team space, not the near-empty personal one.
+    // The seed owner lands in the team space, not the near-empty personal one.
     member.id === "sm-2"
       ? { ...member, lastSelectedAt: new Date() }
       : member.id === "sm-1"
@@ -63,7 +63,7 @@ const Y: VoteType = "yes";
 const M: VoteType = "ifNeedBe";
 const N: VoteType = "no";
 
-const demoPolls: PollDef[] = [
+const extraPolls: PollDef[] = [
   {
     title: "Atlas launch review",
     description:
@@ -517,12 +517,12 @@ function padParticipants(poll: PollDef, index: number): PollDef {
 
 export const polls: PollDef[] = [
   ...basePolls.map(padParticipants),
-  ...demoPolls,
+  ...extraPolls,
 ];
 
 // ─── Extra events ────────────────────────────────────────────────────────────
 
-const demoEvents: ScheduledEventDef[] = [
+const extraEvents: ScheduledEventDef[] = [
   {
     id: "event-brightline-kickoff",
     title: "Client kickoff: Brightline Health",
@@ -644,5 +644,5 @@ const demoEvents: ScheduledEventDef[] = [
 
 export const scheduledEvents: ScheduledEventDef[] = [
   ...baseScheduledEvents,
-  ...demoEvents,
+  ...extraEvents,
 ];

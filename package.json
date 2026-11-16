@@ -17,6 +17,7 @@
     "db:migrate": "pnpm --filter @huddle/database exec prisma migrate dev",
     "db:reset": "pnpm --filter @huddle/database exec prisma migrate reset && pnpm db:seed",
     "db:seed": "pnpm --filter @huddle/database exec prisma db seed",
+    "seed": "pnpm db:seed",
     "db:push": "pnpm --filter @huddle/database exec prisma db push",
     "db:format": "pnpm --filter @huddle/database exec prisma format",
     "proxy:start": "portless proxy start",

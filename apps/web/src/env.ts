@@ -72,14 +72,6 @@ export const env = createEnv({
      */
     ALLOWED_EMAILS: z.string().optional(),
     EMAIL_LOGIN_ENABLED: z.enum(["true", "false"]).default("true"),
-    /**
-     * Demo login: shows a "Try the demo" button on /login that signs the
-     * visitor in as the seeded demo user (see scripts/setup-demo-account.ts).
-     * @default "false"
-     */
-    DEMO_LOGIN_ENABLED: z.enum(["true", "false"]).default("false"),
-    DEMO_EMAIL: z.email().optional(),
-    DEMO_PASSWORD: z.string().min(8).optional(),
     REGISTRATION_ENABLED: z.enum(["true", "false"]).default("true"),
     /**
      * Email addresses for support and no-reply emails.
@@ -292,9 +284,6 @@ export const env = createEnv({
     SMTP_DEBUG: process.env.SMTP_DEBUG,
     ALLOWED_EMAILS: process.env.ALLOWED_EMAILS,
     EMAIL_LOGIN_ENABLED: process.env.EMAIL_LOGIN_ENABLED,
-    DEMO_LOGIN_ENABLED: process.env.DEMO_LOGIN_ENABLED,
-    DEMO_EMAIL: process.env.DEMO_EMAIL,
-    DEMO_PASSWORD: process.env.DEMO_PASSWORD,
     REGISTRATION_ENABLED: process.env.REGISTRATION_ENABLED,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,

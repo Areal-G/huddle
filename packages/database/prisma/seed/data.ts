@@ -25,7 +25,7 @@ export const users = [
   {
     id: "user-1",
     name: "Alex Morgan",
-    email: "demo@example.com",
+    email: "alex@example.com",
     timeZone: "America/New_York",
     weekStart: 1,
   },
@@ -992,7 +992,7 @@ const northwindPolls: PollDef[] = [
       {
         name: "Alex Morgan",
         userId: "user-1",
-        email: "demo@example.com",
+        email: "alex@example.com",
         votes: ["yes", "no", "yes", "yes"],
       },
       {
@@ -1332,7 +1332,7 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Alex Morgan",
-        inviteeEmail: "demo@example.com",
+        inviteeEmail: "alex@example.com",
         inviteeId: "user-1",
         inviteeTimeZone: "America/New_York",
         status: "accepted",
@@ -1374,7 +1374,7 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Alex Morgan",
-        inviteeEmail: "demo@example.com",
+        inviteeEmail: "alex@example.com",
         inviteeId: "user-1",
         inviteeTimeZone: "America/New_York",
         status: "accepted",
@@ -1436,7 +1436,7 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Alex Morgan",
-        inviteeEmail: "demo@example.com",
+        inviteeEmail: "alex@example.com",
         inviteeId: "user-1",
         status: "accepted",
       },
@@ -1462,7 +1462,7 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Alex Morgan",
-        inviteeEmail: "demo@example.com",
+        inviteeEmail: "alex@example.com",
         inviteeId: "user-1",
         status: "accepted",
       },
@@ -1539,7 +1539,7 @@ export const scheduledEvents: ScheduledEventDef[] = [
     invites: [
       {
         inviteeName: "Alex Morgan",
-        inviteeEmail: "demo@example.com",
+        inviteeEmail: "alex@example.com",
         inviteeId: "user-1",
         status: "accepted",
       },

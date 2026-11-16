@@ -7,7 +7,7 @@ test.beforeAll(async () => {
 });
 
 test("dashboard", async ({ page }) => {
-  await loginWithEmail(page, { email: "demo@example.com" });
+  await loginWithEmail(page, { email: "alex@example.com" });
   await page.goto("/");
   await page.waitForLoadState("networkidle");
   await page.screenshot({ path: screenshotPath("dashboard"), fullPage: true });

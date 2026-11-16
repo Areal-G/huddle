@@ -24,6 +24,7 @@
     "@huddle/tsconfig": "workspace:*",
     "@types/node": "^24.1.0",
     "@types/pg": "^8.11.0",
+    "better-auth": "1.6.30",
     "prisma": "^7.8.0",
     "tsx": "^4.6.2"
   }

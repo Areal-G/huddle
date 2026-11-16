@@ -81,7 +81,7 @@ test.afterAll(async () => {
 
 test("spaces and poll admin screenshots", async ({ page }) => {
   await deleteAllMessages();
-  await loginWithEmail(page, { email: "demo@example.com" });
+  await loginWithEmail(page, { email: "alex@example.com" });
 
   await page.goto("/settings/members");
   await page.waitForLoadState("networkidle");

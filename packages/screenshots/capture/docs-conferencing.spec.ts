@@ -212,7 +212,7 @@ for (const config of providers) {
     await clearConnections();
     await page.setViewportSize({ width: 1280, height: 900 });
     await deleteAllMessages();
-    await loginWithEmail(page, { email: "demo@example.com" });
+    await loginWithEmail(page, { email: "alex@example.com" });
 
     await page.goto("/settings/conferencing");
     await settle(page);
