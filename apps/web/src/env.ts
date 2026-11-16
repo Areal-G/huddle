@@ -18,7 +18,6 @@ export const env = createEnv({
    * Will throw if you access these variables on the client.
    */
   server: {
-    DATABASE_URL: z.url(),
     NODE_ENV: z
       .enum(["development", "production", "test"])
       .default("development"),
@@ -72,19 +71,15 @@ export const env = createEnv({
      */
     ALLOWED_EMAILS: z.string().optional(),
     EMAIL_LOGIN_ENABLED: z.enum(["true", "false"]).default("true"),
-    /**
-     * Demo login: shows a "Try the demo" button on /login that signs the
-     * visitor in as the seeded demo user (see scripts/setup-demo-account.ts).
-     * @default "false"
-     */
-    DEMO_LOGIN_ENABLED: z.enum(["true", "false"]).default("false"),
-    DEMO_EMAIL: z.email().optional(),
-    DEMO_PASSWORD: z.string().min(8).optional(),
-    REGISTRATION_ENABLED: z.enum(["true", "false"]).default("true"),
+    // The demo signs visitors in to the seeded account; it creates no others.
+    REGISTRATION_ENABLED: z.enum(["true", "false"]).default("false"),
     /**
      * Email addresses for support and no-reply emails.
      */
-    SUPPORT_EMAIL: z.email(),
+    // The demo runs with no environment but SECRET_PASSWORD. With
+    // SUPPORT_EMAIL unset the email package skips every send, so the demo
+    // needs no mail server; the default only fills the support links.
+    SUPPORT_EMAIL: z.email().default("support@huddle.example"),
     NOREPLY_EMAIL: z.email().optional(),
     NOREPLY_EMAIL_NAME: z.string().default("Huddle"),
 
@@ -270,7 +265,6 @@ export const env = createEnv({
    * You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     SECRET_PASSWORD: process.env.SECRET_PASSWORD,
     OIDC_NAME: process.env.OIDC_NAME,
@@ -292,9 +286,6 @@ export const env = createEnv({
     SMTP_DEBUG: process.env.SMTP_DEBUG,
     ALLOWED_EMAILS: process.env.ALLOWED_EMAILS,
     EMAIL_LOGIN_ENABLED: process.env.EMAIL_LOGIN_ENABLED,
-    DEMO_LOGIN_ENABLED: process.env.DEMO_LOGIN_ENABLED,
-    DEMO_EMAIL: process.env.DEMO_EMAIL,
-    DEMO_PASSWORD: process.env.DEMO_PASSWORD,
     REGISTRATION_ENABLED: process.env.REGISTRATION_ENABLED,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,

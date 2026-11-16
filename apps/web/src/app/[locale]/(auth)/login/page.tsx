@@ -134,12 +134,8 @@ export default async function LoginPage(props: {
         </AuthPageDescription>
       </AuthPageHeader>
       <AuthPageContent>
-        {env.DEMO_LOGIN_ENABLED === "true" ? (
-          <>
-            <TryDemoButton />
-            <OrDivider />
-          </>
-        ) : null}
+        <TryDemoButton />
+        <OrDivider />
         {isEmailLoginEnabled && (
           <LoginWithEmailForm
             isRegistrationEnabled={isRegistrationEnabled}

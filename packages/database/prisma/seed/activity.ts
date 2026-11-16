@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { createHash } from "node:crypto";
 import type { Prisma } from "../../generated/prisma/client";
 import type { PollDef } from "./data";
 
@@ -8,8 +8,10 @@ import type { PollDef } from "./data";
 // random stream, so reseeding produces the same history relative to today.
 
 // 32 alphanumeric characters, the floor on Participant.token and PollInvite.token.
-export function generateAccessToken() {
-  return randomUUID().replace(/-/g, "");
+// Derived from the row id rather than random: every instance of the in-memory
+// demo seeds its own copy, and a link handed out by one must open on the rest.
+export function accessTokenFor(id: string) {
+  return createHash("sha256").update(id).digest("hex").slice(0, 32);
 }
 
 const MINUTE = 60_000;
@@ -119,11 +121,12 @@ export function buildPollHistory({
       }
       const respondedAt = responseTimes[i] ?? invitedAt;
       responseTimes[i] = Math.max(respondedAt, invitedAt + 5 * MINUTE);
+      const id = nextId();
       invites.push({
-        id: nextId(),
+        id,
         email: participant.email,
         // A response made through an invite takes the invite's token.
-        token: participantTokens[i] ?? generateAccessToken(),
+        token: participantTokens[i] ?? accessTokenFor(id),
         participantId: participantIds[i],
         openedAt: new Date((responseTimes[i] ?? invitedAt) - 4 * MINUTE),
         createdAt: new Date(invitedAt),
@@ -144,10 +147,11 @@ export function buildPollHistory({
       );
       for (const email of available.slice(0, pendingCount)) {
         const opened = random() < 0.5;
+        const id = nextId();
         invites.push({
-          id: nextId(),
+          id,
           email,
-          token: generateAccessToken(),
+          token: accessTokenFor(id),
           openedAt: opened
             ? new Date(between(invitedAt + HOUR, end))
             : undefined,

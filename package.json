@@ -13,7 +13,7 @@
     "build:test": "turbo build:test",
     "docs:dev": "turbo dev --filter=@huddle/docs...",
     "db:deploy": "pnpm --filter @huddle/database exec prisma migrate deploy",
-    "db:generate": "pnpm --filter @huddle/database exec prisma generate",
+    "db:generate": "pnpm --filter @huddle/database db:generate",
     "db:migrate": "pnpm --filter @huddle/database exec prisma migrate dev",
     "db:reset": "pnpm --filter @huddle/database exec prisma migrate reset && pnpm db:seed",
     "db:seed": "pnpm --filter @huddle/database exec prisma db seed",

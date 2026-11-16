@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
   output:
     process.env.NEXT_PUBLIC_SELF_HOSTED === "true" ? "standalone" : undefined,
   productionBrowserSourceMaps: true,
+  // PGlite reads its WebAssembly and data files from its own package at
+  // runtime, which only works when it is loaded from node_modules.
+  serverExternalPackages: ["@electric-sql/pglite"],
   transpilePackages: [
     "@huddle/database",
     "@huddle/ui",

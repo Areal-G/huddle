@@ -1,0 +1,252 @@
+import type { PrismaClient } from "../../generated/prisma/client";
+import { accessTokenFor, buildPollHistory } from "./activity";
+import {
+  eventTypes,
+  polls,
+  scheduledEvents,
+  spaceMembers,
+  spaces,
+  subscriptions,
+  users,
+} from "./demo";
+
+export class DatabaseNotEmptyError extends Error {}
+
+/**
+ * Fills an empty database with the demo workspace. Ids count up from the
+ * start of each run and every token and uid derives from an id, so all runs
+ * produce identical ids.
+ */
+export async function seedDatabase(prisma: PrismaClient) {
+  if (await prisma.user.findFirst({ select: { id: true } })) {
+    throw new DatabaseNotEmptyError(
+      "The database already has data. Run `pnpm db:reset` to reset and seed it.",
+    );
+  }
+
+  let idCounter = 0;
+  const nextId = () => `seed-${(++idCounter).toString().padStart(4, "0")}`;
+
+  // 1. Users
+  await prisma.user.createMany({ data: users.map((u) => ({ ...u })) });
+  console.info(`✓ ${users.length} users`);
+
+  // 2. Spaces
+  await prisma.space.createMany({ data: spaces });
+  console.info(`✓ ${spaces.length} spaces`);
+
+  // 3. Space members
+  await prisma.spaceMember.createMany({ data: spaceMembers });
+  console.info(`✓ ${spaceMembers.length} space members`);
+
+  // 4. Subscriptions
+  await prisma.subscription.createMany({
+    data: subscriptions.map((sub) => ({
+      ...sub,
+      periodStart: new Date(sub.periodStart),
+      periodEnd: new Date(sub.periodEnd),
+    })),
+  });
+  console.info(`✓ ${subscriptions.length} subscriptions`);
+
+  // 5. Scheduled events + invites
+  let inviteCount = 0;
+  for (const evt of scheduledEvents) {
+    const eventId = evt.id ?? nextId();
+    const uid = `${eventId}@huddle.example`;
+
+    await prisma.scheduledEvent.create({
+      data: {
+        id: eventId,
+        uid,
+        title: evt.title,
+        description: evt.description,
+        location: evt.location,
+        status: evt.status,
+        timeZone: evt.timeZone,
+        start: new Date(evt.start),
+        end: new Date(evt.end),
+        allDay: evt.allDay,
+        userId: evt.userId,
+        spaceId: evt.spaceId,
+      },
+    });
+
+    if (evt.invites?.length) {
+      await prisma.scheduledEventInvite.createMany({
+        data: evt.invites.map((inv) => {
+          const inviteId = nextId();
+          return {
+            id: inviteId,
+            uid: inviteId,
+            scheduledEventId: eventId,
+            inviteeName: inv.inviteeName,
+            inviteeEmail: inv.inviteeEmail,
+            inviteeTimeZone: inv.inviteeTimeZone,
+            inviteeId: inv.inviteeId,
+            status: inv.status,
+          };
+        }),
+      });
+      inviteCount += evt.invites.length;
+    }
+  }
+  console.info(
+    `✓ ${scheduledEvents.length} scheduled events, ${inviteCount} invites`,
+  );
+
+  // 6. Polls + options + participants + votes + comments
+  let optionCount = 0;
+  let participantCount = 0;
+  let voteCount = 0;
+  let commentCount = 0;
+  let pollInviteCount = 0;
+  let activityCount = 0;
+
+  for (const [pollIndex, poll] of polls.entries()) {
+    const pollId = nextId();
+    const optionIds = poll.options.map(() => nextId());
+    const participantIds = poll.participants.map(() => nextId());
+    const participantTokens = participantIds.map(accessTokenFor);
+    const history = buildPollHistory({
+      index: pollIndex,
+      poll,
+      optionIds,
+      participantIds,
+      participantTokens,
+      nextId,
+    });
+
+    const kind = poll.options.some((opt) => opt.duration > 0) ? "time" : "date";
+
+    await prisma.poll.create({
+      data: {
+        id: pollId,
+        title: poll.title,
+        description: poll.description,
+        location: poll.location,
+        status: poll.status,
+        closedReason: poll.closedReason,
+        timeZone: poll.timeZone,
+        deadline: poll.deadline ? new Date(poll.deadline) : undefined,
+        userId: poll.userId,
+        spaceId: poll.spaceId,
+        scheduledEventId: poll.scheduledEventId,
+        hideParticipants: poll.hideParticipants,
+        hideScores: poll.hideScores,
+        disableComments: poll.disableComments ?? !poll.comments?.length,
+        requireParticipantEmail: poll.requireParticipantEmail,
+        kind,
+        createdAt: history.createdAt,
+      },
+    });
+
+    // Options
+    await prisma.option.createMany({
+      data: poll.options.map((opt, i) => ({
+        id: optionIds[i],
+        pollId,
+        startTime: new Date(opt.startTime),
+        duration: opt.duration,
+      })),
+    });
+    optionCount += poll.options.length;
+
+    // Participants + votes
+    for (const [participantIndex, part] of poll.participants.entries()) {
+      const participantId = participantIds[participantIndex];
+      await prisma.participant.create({
+        data: {
+          id: participantId,
+          pollId,
+          name: part.name,
+          email: part.email,
+          note: part.note,
+          userId: part.userId,
+          token: participantTokens[participantIndex],
+          createdAt: history.participantCreatedAt[participantIndex],
+        },
+      });
+      participantCount++;
+
+      // Votes — one per option
+      await prisma.vote.createMany({
+        data: part.votes.map((voteType, i) => ({
+          id: nextId(),
+          pollId,
+          participantId,
+          optionId: optionIds[i],
+          type: voteType,
+        })),
+      });
+      voteCount += part.votes.length;
+    }
+
+    // Invites + activity history
+    await prisma.pollInvite.createMany({
+      data: history.invites.map((invite) => ({ ...invite, pollId })),
+    });
+    pollInviteCount += history.invites.length;
+
+    await prisma.pollActivity.createMany({
+      data: history.activities.map((activity) => ({
+        id: nextId(),
+        pollId,
+        ...activity,
+      })),
+    });
+    activityCount += history.activities.length;
+
+    // Comments land a few minutes after their author responded, or spread
+    // through the poll's life when the author never voted, so the activity
+    // feed interleaves them with responses instead of stacking them at seed
+    // time.
+    const commentCreatedAt = (authorName: string, index: number) => {
+      const responder = poll.participants.findIndex(
+        (part) => part.name === authorName,
+      );
+      const base =
+        responder >= 0
+          ? history.participantCreatedAt[responder]?.getTime()
+          : undefined;
+      const at =
+        (base ?? history.createdAt.getTime() + (index + 1) * 3 * 3_600_000) +
+        (index + 1) * 7 * 60_000;
+      return new Date(Math.min(at, Date.now() - 60_000));
+    };
+    if (poll.comments?.length) {
+      await prisma.comment.createMany({
+        data: poll.comments.map((c, i) => ({
+          id: nextId(),
+          pollId,
+          content: c.content,
+          authorName: c.authorName,
+          userId: c.userId,
+          createdAt: commentCreatedAt(c.authorName, i),
+        })),
+      });
+      commentCount += poll.comments.length;
+    }
+  }
+
+  console.info(
+    `✓ ${polls.length} polls, ${optionCount} options, ${participantCount} participants, ${voteCount} votes, ${commentCount} comments, ${pollInviteCount} invites, ${activityCount} activity entries`,
+  );
+
+  // 7. Event types
+  const now = Date.now();
+  await prisma.eventType.createMany({
+    data: eventTypes.map((et, i) => ({
+      id: et.id,
+      spaceId: et.spaceId,
+      hostId: et.hostId,
+      name: et.name,
+      duration: et.duration,
+      capacity: et.capacity,
+      description: et.description,
+      location: et.location ?? undefined,
+      updatedAt: new Date(now - i * 60_000),
+    })),
+  });
+  console.info(`✓ ${eventTypes.length} event types`);
+}

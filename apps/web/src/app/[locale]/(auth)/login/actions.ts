@@ -1,7 +1,7 @@
 "use server";
 
+import { demoAccount } from "@huddle/database/demo-account";
 import { cookies, headers } from "next/headers";
-import { env } from "@/env";
 import { authLib } from "@/lib/auth";
 
 export async function setVerificationEmail(email: string) {
@@ -16,21 +16,13 @@ export async function setVerificationEmail(email: string) {
 }
 
 /**
- * Signs the visitor in as the seeded demo account. Only available when
- * DEMO_LOGIN_ENABLED=true; the demo password never leaves the server.
+ * Signs the visitor in as the seeded demo account; the demo password never
+ * leaves the server.
  */
 export async function signInAsDemo() {
-  if (
-    env.DEMO_LOGIN_ENABLED !== "true" ||
-    !env.DEMO_EMAIL ||
-    !env.DEMO_PASSWORD
-  ) {
-    return { ok: false as const };
-  }
-
   try {
     await authLib.api.signInEmail({
-      body: { email: env.DEMO_EMAIL, password: env.DEMO_PASSWORD },
+      body: { email: demoAccount.email, password: demoAccount.password },
       headers: await headers(),
     });
   } catch {

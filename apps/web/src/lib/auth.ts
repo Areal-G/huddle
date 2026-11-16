@@ -627,9 +627,12 @@ export const authLib = betterAuth({
   session: {
     expiresIn: SESSION_TTL_SECONDS,
     updateAge: 60 * 60 * 24, // 1 day
+    // Every demo instance keeps its own in-memory database, so a session row
+    // exists only on the instance that signed the visitor in. The signed
+    // cookie cache carries the session to the others for its whole life.
     cookieCache: {
       enabled: true,
-      maxAge: 5 * 60, // 5 minutes
+      maxAge: SESSION_TTL_SECONDS,
     },
   },
   advanced: env.NEXT_PUBLIC_COOKIE_DOMAIN

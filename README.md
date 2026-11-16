@@ -23,6 +23,8 @@ Propose a few times, share one link, and let everyone vote with no account neede
   <img alt="Huddle home dashboard on desktop with the public voting page on mobile" src="readme/hero-light.png">
 </picture>
 
+> **This is the `demo` branch**: the portfolio build behind [huddle.arealjagema.com](https://huddle.arealjagema.com). It runs the web app with no database or external services: an in-memory Postgres (PGlite) is built from the real migrations and seeded on startup, writes last only as long as the server instance, and email is switched off. The full app lives on [`main`](../../tree/main).
+
 ## Overview
 
 Huddle replaces the "what time works for everyone?" email thread. An organizer proposes dates or time slots, invitees mark each one *yes*, *if need be* or *no* from a public link, and the organizer finalizes the winner and sends calendar invites. Teams get shared **spaces** with members, roles and a home dashboard that tracks open polls, response rates and upcoming events.
@@ -31,9 +33,9 @@ It is a production-grade Next.js monorepo (web app, landing site, docs, email te
 
 ## Try the demo
 
-Run it locally (see [Getting started](#getting-started)), open `/login` and click **Try the demo**. You land in the *Northwind Studio* workspace as Alex Morgan, with 27 polls, 160+ participants, 580 votes, comments and 18 scheduled events, all dated relative to today.
+Open [huddle.arealjagema.com](https://huddle.arealjagema.com) or run this branch locally, open `/login` and click **Try the demo**. You land in the *Northwind Studio* workspace as Alex Morgan, with 27 polls, 160+ participants, 580 votes, comments and 18 scheduled events, all dated relative to today.
 
-The button only renders when `DEMO_LOGIN_ENABLED=true`, and the sign-in runs in a server action, so the demo password never reaches the browser. To see the invitee side, open any poll's share link in a private window.
+The sign-in runs in a server action, so the demo password never reaches the browser. To see the invitee side, open any poll's share link in a private window.
 
 ## Features
 
@@ -208,6 +210,8 @@ export const setPollMutedAction = authActionClient
 
 ## Getting started
 
+On this branch the steps below are optional: `pnpm install`, then `SECRET_PASSWORD=<32+ characters> NEXT_PUBLIC_BASE_URL=http://localhost:3000 pnpm build` and `SECRET_PASSWORD=<same> pnpm start` run the demo with no services at all. The live demo deploys this branch to Vercel (root directory `apps/web`; `apps/web/vercel.json` holds the build command): set `SECRET_PASSWORD` and `NEXT_PUBLIC_BASE_URL` on the project. The demo has no database to migrate and runs no scheduled jobs.
+
 ### Prerequisites
 
 - Node.js 24 and pnpm 12 (`corepack enable` picks up the pinned version from `package.json`)
@@ -242,7 +246,6 @@ Set `SECRET_PASSWORD` (`openssl rand -hex 32`). The samples already point at the
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PWD`, `SMTP_SECURE` | For email | SMTP transport (Mailpit locally) |
 | `EMAIL_PROVIDER` | No | `smtp` (default) or `ses` |
 | `NEXT_PUBLIC_SELF_HOSTED` | No | `true` disables billing and paywalls |
-| `DEMO_LOGIN_ENABLED`, `DEMO_EMAIL`, `DEMO_PASSWORD` | No | Show the **Try the demo** button and sign in as the seeded user |
 | `KV_REST_API_URL`, `KV_REST_API_TOKEN` | No | Upstash-compatible Redis for rate limiting |
 | `S3_BUCKET_NAME`, `S3_ENDPOINT`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_REGION` | No | Object storage for uploads |
 | `GOOGLE_CLIENT_ID`/`_SECRET`, `MICROSOFT_CLIENT_ID`/`_SECRET`, `OIDC_*` | No | Social and SSO sign-in |
@@ -260,10 +263,9 @@ pnpm docker:up
 pnpm db:generate
 pnpm db:deploy
 pnpm db:seed
-pnpm --filter @huddle/web demo:setup
 ```
 
-`docker:up` starts Postgres (port 5450), Redis, a Redis REST proxy, Garage (S3) and Mailpit (UI on `http://localhost:8025`). `demo:setup` gives the seeded demo user a verified email and the `DEMO_PASSWORD` from `.env`.
+`docker:up` starts Postgres (port 5450), Redis, a Redis REST proxy, Garage (S3) and Mailpit (UI on `http://localhost:8025`).
 
 ### 4. Run
 
