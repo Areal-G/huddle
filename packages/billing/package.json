@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "@huddle/tsconfig": "workspace:*",
-    "vitest": "^4.1.11"
+    "vitest": "^5.1.0"
   }
 }

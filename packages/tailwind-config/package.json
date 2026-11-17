@@ -8,11 +8,11 @@
     "./postcss": "./postcss.config.mjs"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "@tailwindcss/typography": "^0.5.19",
-    "postcss": "^8.5.31",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@tailwindcss/typography": "^0.5.20",
+    "postcss": "^8.5.33",
     "tailwind-scrollbar": "^4.0.2",
-    "tailwindcss": "^4.1.18",
+    "tailwindcss": "^4.3.5",
     "tailwindcss-animate": "^1.0.7"
   }
 }

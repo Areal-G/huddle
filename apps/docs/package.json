@@ -10,6 +10,6 @@
     "@huddle/tsconfig": "workspace:*"
   },
   "dependencies": {
-    "mint": "^4.2.1095"
+    "mint": "^4.3.37"
   }
 }

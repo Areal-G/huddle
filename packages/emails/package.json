@@ -14,30 +14,30 @@
     "./locales/*": "./locales/en/*.json"
   },
   "dependencies": {
-    "@aws-sdk/client-sesv2": "^3.1155.0",
-    "@aws-sdk/credential-provider-node": "^3.972.88",
+    "@aws-sdk/client-sesv2": "^3.1169.0",
+    "@aws-sdk/credential-provider-node": "^3.972.97",
     "@huddle/logger": "workspace:*",
     "@huddle/utils": "workspace:*",
     "@react-email/components": "^1.0.12",
-    "@react-email/render": "^2.0.9",
-    "i18next": "^26.3.0",
-    "i18next-icu": "^2.4.3",
-    "i18next-resources-to-backend": "^1.2.1",
-    "nodemailer": "^10.2.0",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "react-i18next": "^17.0.8"
+    "@react-email/render": "^2.3.1",
+    "i18next": "^27.1.2",
+    "i18next-icu": "^2.7.0",
+    "i18next-resources-to-backend": "^1.2.4",
+    "nodemailer": "^10.6.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-i18next": "^18.0.1"
   },
   "devDependencies": {
     "@huddle/tailwind-config": "workspace:*",
     "@huddle/tsconfig": "workspace:*",
-    "@react-email/ui": "^6.9.3",
-    "@types/react": "19.2.13",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^5.0.0",
-    "i18next-cli": "^1.58.1",
+    "@react-email/ui": "^6.11.13",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "i18next-cli": "^1.88.0",
     "jsdom": "^26.1.0",
-    "react-email": "^6.9.3",
-    "vitest": "^4.1.11"
+    "react-email": "^6.11.13",
+    "vitest": "^5.1.0"
   }
 }
