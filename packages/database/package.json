@@ -15,17 +15,17 @@
     ".": "./src/client.ts"
   },
   "dependencies": {
-    "@prisma/adapter-pg": "^7.8.0",
-    "@prisma/client": "^7.8.0",
-    "@vercel/functions": "^3.3.6",
-    "pg": "^8.17.1"
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "@vercel/functions": "^3.11.3",
+    "pg": "^8.23.1"
   },
   "devDependencies": {
     "@huddle/tsconfig": "workspace:*",
-    "@types/node": "^24.1.0",
-    "@types/pg": "^8.11.0",
-    "better-auth": "1.6.30",
-    "prisma": "^7.8.0",
-    "tsx": "^4.6.2"
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
+    "better-auth": "1.6.34",
+    "prisma": "^7.10.1",
+    "tsx": "^4.23.15"
   }
 }
